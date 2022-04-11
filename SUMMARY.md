@@ -10,8 +10,8 @@
 
 * [Connectors](the-basics/connectors.md)
 * [Requests](the-basics/requests/README.md)
+  * [Sending Data](the-basics/requests/attaching-data.md)
   * [Query Parameters](the-basics/requests/query-parameters.md)
-  * [Attaching Data](the-basics/requests/attaching-data.md)
 * [Sending Requests](the-basics/sending-requests/README.md)
   * [SDK-style Connectors](the-basics/sending-requests/sdk-style-connectors.md)
 * [Responses](the-basics/responses/README.md)
