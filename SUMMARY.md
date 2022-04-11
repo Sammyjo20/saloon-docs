@@ -15,6 +15,7 @@
 * [Plugins](the-basics/plugins.md)
 * [Sending Requests](the-basics/sending-requests/README.md)
   * [SDK-style Connectors](the-basics/sending-requests/sdk-style-connectors.md)
+* [Authentication](the-basics/authentication.md)
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
 * [Testing / Faking Responses](the-basics/testing-faking-responses/README.md)
