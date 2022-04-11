@@ -11,9 +11,9 @@ description: >-
 
 ### Introduction
 
-Building API integrations can be difficult. Once you have found the right API client to use, there's often lots of boilerplate configuration to remember and decision fatigue can settle in quickly. You will often find yourself creating your own abstractions or repeating code. Saloon offers a fluent framework for building your next API integration or PHP SDK. Saloon's syntax is object-oriented, standardised and easy to understand.
+Building API integrations can be difficult. Once you have found the right API client to use, there's often lots of boilerplate configuration to remember and decision fatigue can settle in quickly. You may have even found yourself abstracting your API integrations into actions or service classes to avoid repeating yourself. Saloon offers a fluent framework for building your next API integration or PHP SDK. Saloon's syntax is object-oriented, standardised and easy to understand.
 
-If you're using Laravel, there's a dedicated Laravel package with pre-written commands and a more advanced mocking toolbelt.
+If you're using Laravel, there's also a dedicated Laravel package with pre-written commands and a more advanced mocking toolbelt.
 
 ### Features
 
