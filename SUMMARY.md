@@ -17,13 +17,13 @@
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
 
-## 🤝 The Good Stuff
+## 👏 Next Steps
 
-* [Authentication](the-good-stuff/authentication.md)
-* [Plugins](the-good-stuff/plugins.md)
-* [Testing / Faking Responses](the-good-stuff/testing-faking-responses/README.md)
-  * [Laravel](the-good-stuff/testing-faking-responses/laravel.md)
-  * [Non-Laravel / PHP](the-good-stuff/testing-faking-responses/non-laravel-php.md)
+* [Authentication](next-steps/authentication.md)
+* [Plugins](next-steps/plugins.md)
+* [Testing / Faking Responses](next-steps/testing-faking-responses/README.md)
+  * [Laravel](next-steps/testing-faking-responses/laravel.md)
+  * [Non-Laravel / PHP](next-steps/testing-faking-responses/non-laravel-php.md)
 
 ## 🧪 Advanced
 

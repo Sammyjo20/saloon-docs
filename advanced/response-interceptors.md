@@ -25,7 +25,7 @@ class CreateForgeServerRequest extends SaloonRequest
 ```
 
 {% hint style="info" %}
-This interceptor example is a plugin pre-built into Saloon, have a look at the [**AlwaysThrowsOnErrors** plugin](../the-good-stuff/plugins.md#available-plugins)
+This interceptor example is a plugin pre-built into Saloon, have a look at the [**AlwaysThrowsOnErrors** plugin](../next-steps/plugins.md#available-plugins)
 {% endhint %}
 
 ### Macroable

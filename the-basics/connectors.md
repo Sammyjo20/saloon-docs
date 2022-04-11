@@ -50,7 +50,7 @@ class ForgeConnector extends SaloonConnector
 ```
 
 {% hint style="info" %}
-Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](../the-good-stuff/plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
+Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](../next-steps/plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
 {% endhint %}
 
 ### Available Methods
