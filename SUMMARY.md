@@ -32,3 +32,4 @@
 * [Podcast](finish/podcast.md)
 * [View Code On GitHub](https://github.com/sammyjo20/saloon)
 * [About Me](https://github.com/sammyjo20)
+* [Update Docs](https://github.com/Sammyjo20/saloon-docs)
