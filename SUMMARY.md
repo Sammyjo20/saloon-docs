@@ -2,9 +2,9 @@
 
 * [🚪 Saloon](README.md)
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-* [Getting Started](quick-start/getting-started.md)
+* [Installation](getting-started/getting-started.md)
 
 ## 🤠 The Basics
 
