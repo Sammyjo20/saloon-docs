@@ -188,7 +188,7 @@ $response = $request->send();
 
 #### Default authenticator
 
-You can also provide a default authenticator to use if one is not provided. On your connector or your request, add the `defaultAuth` method and pass in the instance of your custom authenticator.
+You can also provide a default authenticator to use if one is not provided. On your connector or your request, add the `defaultAuth` method and return an instance of your custom authenticator.
 
 ```php
 class ForgeConnector extends SaloonConnector
