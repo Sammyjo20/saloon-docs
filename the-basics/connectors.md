@@ -1,6 +1,6 @@
 # Connectors
 
-Saloon Connectors are classes that house the basic requirements of an API. Within a connector, you can define the Base URL of the API, default headers, default config and add reusable Saloon Plugins which can add extra headers, config, handlers and more. You should have a separate connector for each API integration.
+Saloon Connectors are classes that define the basic requirements of an API. Within a connector, you provide the Base URL of the API, default headers, default config and add reusable Saloon Plugins. You should create a separate connector for each API integration.
 
 {% hint style="info" %}
 If you are using Laravel, you can use the **php artisan saloon:connector** Artisan command to create a connector.
