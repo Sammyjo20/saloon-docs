@@ -12,15 +12,18 @@
 * [Requests](the-basics/requests/README.md)
   * [Query Parameters](the-basics/requests/query-parameters.md)
   * [Attaching Data](the-basics/requests/attaching-data.md)
-* [Plugins](the-basics/plugins.md)
 * [Sending Requests](the-basics/sending-requests/README.md)
   * [SDK-style Connectors](the-basics/sending-requests/sdk-style-connectors.md)
-* [Authentication](the-basics/authentication.md)
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
-* [Testing / Faking Responses](the-basics/testing-faking-responses/README.md)
-  * [Laravel](the-basics/testing-faking-responses/laravel.md)
-  * [Non-Laravel / PHP](the-basics/testing-faking-responses/non-laravel-php.md)
+
+## 🤝 The Good Stuff
+
+* [Authentication](the-good-stuff/authentication.md)
+* [Plugins](the-good-stuff/plugins.md)
+* [Testing / Faking Responses](the-good-stuff/testing-faking-responses/README.md)
+  * [Laravel](the-good-stuff/testing-faking-responses/laravel.md)
+  * [Non-Laravel / PHP](the-good-stuff/testing-faking-responses/non-laravel-php.md)
 
 ## 🧪 Advanced
 

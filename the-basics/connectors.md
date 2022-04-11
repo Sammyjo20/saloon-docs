@@ -24,7 +24,7 @@ class ForgeConnector extends SaloonConnector
 }
 ```
 
-### Example with headers and config&#x20;
+### Example with headers and config
 
 Connectors can also define default headers and default Guzzle options.
 
@@ -50,7 +50,7 @@ class ForgeConnector extends SaloonConnector
 ```
 
 {% hint style="info" %}
-Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
+Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](../the-good-stuff/plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
 {% endhint %}
 
 ### Available Methods
@@ -87,7 +87,7 @@ If provided, this method can be used to add extra functionality to the connector
 
 ### Constructors
 
-If your connector has a constructor inside with specific data, you should consider sending requests through the connector rather than the request. [Click here to read more.](sending-requests/#sending-requests-using-your-connector)&#x20;
+If your connector has a constructor inside with specific data, you should consider sending requests through the connector rather than the request. [Click here to read more.](sending-requests/#sending-requests-using-your-connector)
 
 Alternatively, you can overwrite the connector that a request uses, by using the **setConnector()** method on the request before calling the **send()** method.
 

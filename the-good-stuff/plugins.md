@@ -86,7 +86,7 @@ Do not use this on any production API. Disabling SSL verification means hackers 
 
 #### CastsToDto
 
-This allows you to specify a DTO that a request should cast to. [Click here to read more about DTO casting.](responses/data-transfer-objects.md)
+This allows you to specify a DTO that a request should cast to. [Click here to read more about DTO casting.](../the-basics/responses/data-transfer-objects.md)
 
 ### Building your own plugins
 
@@ -120,5 +120,5 @@ trait WithTransactionID
 
 Plugins will inherit all of the available methods from the connector or request it is added to, including the ability to add [response interceptors](../advanced/response-interceptors.md) and [handlers](../advanced/handlers-middleware.md).
 
-* [Connector Methods](connectors.md#available-methods)
-* [Request Methods](requests/#available-methods)
+* [Connector Methods](../the-basics/connectors.md#available-methods)
+* [Request Methods](../the-basics/requests/#available-methods)
