@@ -1,13 +1,12 @@
 ---
 description: >-
-  A PHP package that helps you write beautiful API integrations. It introduces a
-  standardised, fluent syntax to communicate with third party services and has
-  out of the box support for Laravel.
+  A PHP package that allows you to write your API integrations or SDKs in a
+  beautiful, standardised syntax.
 ---
 
 # 🚪 Saloon
 
-![](.gitbook/assets/FJFXPeaXEAAihla.jpg)
+![Making a request, sending it and retrieving the JSON data as an associated array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
 
 ### Introduction
 
