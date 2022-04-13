@@ -1,6 +1,6 @@
 # Handlers / Middleware
 
-If you need to modify the underlying Guzzle request/response right before it is sent, you can use handlers. This is an incredibly useful feature in Guzzle to add functionality to connectors or requests. Handlers are also useful for adding community built middleware like caching middleware.
+If you need to modify the underlying Guzzle request/response right before it is sent, you can use handlers. This is an incredibly useful feature that Guzzle provides to view/modify the request before it is sent.
 
 To add a handler or middleware, simply use the `addHandler` method in your plugin or `boot` method on your connector/request.
 
