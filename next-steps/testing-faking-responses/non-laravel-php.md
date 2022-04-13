@@ -137,3 +137,29 @@ $mockClient->assertSent(function (SaloonRequest $request, SaloonResponse $respon
     && $request->serverId === 123456;
 });
 ```
+
+### Mocking Exceptions
+
+Your test may require you to mock exceptions like Guzzle's RequestException or even your own exceptions that might get thrown. To mock an exception, chain the `throw` method after you have defined your mock response.
+
+```php
+<?php
+
+$mockClient = new MockClient([
+    MockResponse::make(['name' => 'Sam'], 200)->throw(new MyException('Something bad!'))
+]);
+ 
+// ...
+```
+
+If you would like to test one of the Guzzle exceptions like RequestException, it will expect you to pass in a PSR-7 request as one of the arguments. For these exceptions, provide a closure and Saloon will fulfil the closure with the PSR-7 request.
+
+```php
+<?php
+
+use GuzzleHttp\Exception\ConnectException;
+
+$mockClient = new MockClient([
+    MockResponse::make()->throw(fn ($guzzleRequest) => new ConnectException('Unable to connect!', $guzzleRequest))
+]);
+```
