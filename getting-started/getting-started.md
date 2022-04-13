@@ -2,8 +2,10 @@
 
 To get started with Saloon, you will need to install it through Composer. If you are using Laravel, Saloon comes with a useful wrapper package that provides you with Artisan commands and extra mocking functionality.
 
+If you are building an SDK or a package with Saloon, it's recommended that you use the Non-Laravel version.
+
 {% tabs %}
-{% tab title="PHP / Package Development" %}
+{% tab title="Non-Laravel / PHP Installation" %}
 #### Non-Laravel / PHP Installation
 
 ```bash
