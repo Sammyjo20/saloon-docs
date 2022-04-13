@@ -2,11 +2,11 @@
 
 There are several ways to authenticate with an API, most of the time it happens in headers and or in request data. Saloon has a couple of built-in authentication methods, but you can also create your own authenticators for advanced authentication. You can also provide defaults for authentication if you require it.
 
-If you are using one API key across all your requests, then you can probably just use the defaultHeaders and defaultConfig. This authentication is recommended if you have different API keys that need to be specified before the request is sent. 
+If you are using one API key across all your requests, then you can probably just use the defaultHeaders and defaultConfig. This authentication is recommended if you have different API keys that need to be specified before the request is sent.
 
 ### Token Authentication
 
-Token Authentication is used if the API expects an _Authorization ****_ header. For example:
+Token Authentication is used if the API expects an _Authorization \*\*\*\*_ header. For example:
 
 ```http
 "Authorization": "Bearer my-authentication-token"
@@ -36,6 +36,8 @@ If you would like to provide a default, then add the **defaultAuth** method to y
 
 ```php
 <?php
+
+use Sammyjo20\Saloon\Http\Auth\TokenAuthenticator;
 
 class GetForgeServerRequest extends SaloonRequest
 {
@@ -75,6 +77,8 @@ If you would like to provide a default, then add the **defaultAuth** method to y
 ```php
 <?php
 
+use Sammyjo20\Saloon\Http\Auth\BasicAuthenticator;
+
 class GetForgeServerRequest extends SaloonRequest
 {
     // ...
@@ -112,6 +116,8 @@ If you would like to provide a default, then add the **defaultAuth** method to y
 
 ```php
 <?php
+
+use Sammyjo20\Saloon\Http\Auth\DigestAuthenticator;
 
 class GetForgeServerRequest extends SaloonRequest
 {
@@ -165,7 +171,7 @@ class CustomAuthenticator implements AuthenticatorInterface
 
 #### Using your authenticator
 
-After you have created your authenticator, to apply it to your requests or connector, you can use the `withAuth` method. You can even use it on the underlying connector if you are making multiple requests that should be authenticated with the same authenticator.
+After you have created your authenticator, to apply it to your requests or connector, you can use the `withAuth` method. You can even use it on the underlying connector if you are making multiple requests that should be authenticated with the same connector.
 
 ```php
 <?php
@@ -183,14 +189,13 @@ $response = $request->send();
 $connector = new ForgeConnector;
 $connector->withAuth(new CustomAuthenticator($user->forge_api_key));
 
-$request = $connector->request(new GetForgeServerRequest(...));
-
-$response = $request->send();
+$requestA = $connector->request(new GetForgeServerRequest(...));
+$requestB = $connector->request(new CreateForgeServerRequest(...));
 ```
 
 #### Default authenticator
 
-You can also provide a default authenticator to use if one is not provided. On your connector or your request, add the `defaultAuth` method and return an instance of your custom authenticator.
+You can also provide a default authenticator to use if one is not provided. On your connector or your request, just add the `defaultAuth` method and return an instance of your custom authenticator.
 
 ```php
 class ForgeConnector extends SaloonConnector
