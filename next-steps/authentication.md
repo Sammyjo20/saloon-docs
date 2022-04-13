@@ -1,8 +1,8 @@
 # Authentication
 
-There are several ways to authenticate with an API, most of the time it happens in headers and/or in request data. Saloon has a couple of built-in authentication methods, but you can also create your own authenticators for advanced authentication. You can also provide defaults for authentication if you require it.
+There are several ways to authenticate with an API, most of the time it happens in headers and/or in request data. Saloon has a couple of common built-in authentication methods to help you with authentication, but you can also create your own authenticators for advanced authentication. You can also provide defaults for authentication if you require it.
 
-If you are using one API key across all your requests, then you can probably just use the defaultHeaders and defaultConfig. This authentication is recommended if you have different API keys that need to be specified before the request is sent.
+If you are using one API key across all your requests, then you can also use the **defaultHeaders** and **defaultConfig** methods. This authentication is recommended if you need to authenticate on a per-request/connector basis.
 
 ### Token Authentication
 
