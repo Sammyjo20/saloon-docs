@@ -9,7 +9,7 @@ The **MockResponse** class is used to create fake responses Saloon understands. 
 ```php
 use Sammyjo20\Saloon\Http\MockResponse;
 
-new MockResponse(['name' => 'Sam'], 200, $headers, $config),
+MockResponse::make(['name' => 'Sam'], 200, $headers, $config);
 ```
 
 You can also create a **MockResponse** class from an existing request.
@@ -29,9 +29,9 @@ use Sammyjo20\SaloonLaravel\Facades\Saloon;
 use Sammyjo20\Saloon\Http\MockResponse;
 
 Saloon::fake([
-    new MockResponse(['name' => 'Sam'], 200),
-    new MockResponse(['name' => 'Alex'], 200),
-    new MockResponse(['error' => 'Server Unavailable'], 500),
+    MockResponse::make(['name' => 'Sam'], 200),
+    MockResponse::make(['name' => 'Alex'], 200),
+    MockResponse::make(['error' => 'Server Unavailable'], 500),
 ]);
 
 (new GetForgeServerRequest)->send() // Will return with `['name' => 'Sam']` and status `200`
@@ -48,8 +48,8 @@ use Sammyjo20\SaloonLaravel\Facades\Saloon;
 use Sammyjo20\Saloon\Http\MockResponse;
 
 Saloon::fake([
-    ForgeConnector::class => new MockResponse(['name' => 'Sam'], 200),
-    OtherServiceConnector::class => new MockResponse(['name' => 'Alex'], 200),
+    ForgeConnector::class => MockResponse::make(['name' => 'Sam'], 200),
+    OtherServiceConnector::class => MockResponse::make(['name' => 'Alex'], 200),
 ]);
 
 (new GetForgeServerRequest)->send() // Will return with `['name' => 'Sam']` and status `200`
@@ -66,8 +66,8 @@ use Sammyjo20\SaloonLaravel\Facades\Saloon;
 use Sammyjo20\Saloon\Http\MockResponse;
 
 Saloon::fake([
-    GetForgeServerRequest::class => new MockResponse(['name' => 'Sam'], 200),
-    OtherServiceRequest::class => new MockResponse(['name' => 'Alex'], 200),
+    GetForgeServerRequest::class => MockResponse::make(['name' => 'Sam'], 200),
+    OtherServiceRequest::class => MockResponse::make(['name' => 'Alex'], 200),
 ]);
 
 (new GetForgeServerRequest)->send() // Will return with `['name' => 'Sam']` and status `200`
@@ -83,10 +83,10 @@ use Sammyjo20\SaloonLaravel\Facades\Saloon;
 use Sammyjo20\Saloon\Http\MockResponse;
 
 Saloon::fake([
-    'forge.laravel.com/api/*' => new MockResponse(['name' => 'Sam'], 200),
-    'samcarre.dev/*' => new MockResponse(['name' => 'Alex'], 200),
-    'samcarre.dev/exact' => new MockResponse(['name' => 'Taylor'], 200), // Exact requests
-    '*' => new MockResponse(['name' => 'Wildcard'], 200), // Any other requests
+    'forge.laravel.com/api/*' => MockResponse::make(['name' => 'Sam'], 200),
+    'samcarre.dev/*' => MockResponse::make(['name' => 'Alex'], 200),
+    'samcarre.dev/exact' => MockResponse::make(['name' => 'Taylor'], 200), // Exact requests
+    '*' => MockResponse::make(['name' => 'Wildcard'], 200), // Any other requests
 ]);
 
 (new GetForgeServerRequest)->send() // Will return with `['name' => 'Sam']` and status `200`
