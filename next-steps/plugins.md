@@ -1,8 +1,10 @@
 # Plugins
 
-Saloon comes with a powerful plugin pattern that allows you to add functionality to your connectors and requests in the form of traits. Saloon has a number of useful plugins that you can add to quickly bolt-in extra functionality like request debugging, but you can also build your own.
+Saloon comes with a powerful plugin pattern that allows you to add functionality to your connectors and requests in the form of traits. Saloon has a number of useful plugins that you can make changes to your requests like headers, config or data.
 
-### Installing Plugins
+Plugins can be added to a connector to be used on every request or can be added to an individual request.
+
+### Using Plugins
 
 Plugins are really easy to install. They are PHP traits that can be added to either the connector or the request.
 
@@ -88,13 +90,11 @@ Do not use this on any production API. Disabling SSL verification means hackers 
 
 This allows you to specify a DTO that a request should cast to. [Click here to read more about DTO casting.](../the-basics/responses/data-transfer-objects.md)
 
-### Building your own plugins
+### Creating your own plugins
 
 If you would like to add your own plugins, for example, if you want to install a Guzzle middleware package or if you would like to apply a specific header to your requests, you can do this really easily.&#x20;
 
-Firstly, create a trait in your application. Let's create a **WithTransactionID** trait. Saloon will look for a specialically-named function. While Saloon is building your request, it will run this method.
-
-The method name should start with "boot" followed by the name of the trait.
+Firstly, create a trait in your application. Let's create a **WithTransactionID** plugin. Saloon will look for a "boot" function and will execute it during the request lifecycle. The "boot" function should be the name of the class, prefixed with the word "boot".
 
 {% hint style="info" %}
 If you are using Laravel, you can use the **php artisan saloon:plugin** Artisan command to create a plugin.
@@ -109,7 +109,7 @@ trait WithTransactionID
 {
     public function bootWithTransactionID(SaloonRequest $request)
     {
-        $this->mergeHeaders([
+        $request->mergeHeaders([
             'X-Transaction-ID' => '123-YeeHaw-456'
         ]);
     }
