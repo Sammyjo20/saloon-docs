@@ -1,6 +1,6 @@
 # Requests
 
-Saloon Requests are where you define each method of the API you want to call.&#x20;
+Saloon Requests are reusable classes that define each request of the API you want to make. They contain the request's method, as well as any default headers, or data that should be used.
 
 {% hint style="info" %}
 If you are using Laravel, you can use the **php artisan saloon:request** Artisan command to create a request.
@@ -8,7 +8,7 @@ If you are using Laravel, you can use the **php artisan saloon:request** Artisan
 
 ### Example Request
 
-Here is an example of a Saloon Request. Now we have our **ForgeConnector**, let's create a request that fetches a server's details from the API.
+Here is an example of a Saloon Request. Now we have our **ForgeConnector**, let's create a request that fetches a server's details from the API. We must specify the method and the connector that is used to make the request. After that, we can specify the endpoint. We can also create a constructor on the class that accepts any data the request needs to be built, like an ID.
 
 ```php
 <?php
@@ -19,9 +19,9 @@ use Sammyjo20\Saloon\Http\SaloonRequest;
 
 class GetForgeServerRequest extends SaloonRequest
 {
-    protected ?string $method = Saloon::GET;
-
     protected ?string $connector = ForgeConnector::class;
+
+    protected ?string $method = Saloon::GET;
 
     public function defineEndpoint(): string
     {
