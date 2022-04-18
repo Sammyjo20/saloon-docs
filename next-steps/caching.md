@@ -106,3 +106,34 @@ protected function cacheKey(SaloonRequest $request, array $headers): string
     return 'my-custom-key';
 }
 ```
+
+### Disable Caching
+
+Sometimes you may wish to disable the caching on a per-request basis for debugging or to bypass caching. You can do this by using the `disableCaching` method on the request.
+
+```php
+<?php
+
+$request = new GetForgeServerRequest(serverId: '123456');
+$request->disableCaching();
+
+// Send request, will always skip caching.
+```
+
+### Response
+
+Saloon will respond with a Saloon response (or your custom response if defined) when retrieving a cached response. To check if a response has been cached, you can use the `isCached()` method.
+
+```php
+<?php
+
+$request = new GetForgeServerRequest(serverId: '123456');
+$response = $request->send();
+
+$response->isCached(); // False on the first request.
+
+$requestTwo = new GetForgeServerRequest(serverId: '123456');
+$responseTwo = $requestTwo->send();
+
+$responseTwo->isCached(); // True on the second request
+```
