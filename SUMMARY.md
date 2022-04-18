@@ -21,6 +21,7 @@
 
 * [Authentication](next-steps/authentication.md)
 * [Plugins](next-steps/plugins.md)
+* [Caching](next-steps/caching.md)
 * [Testing / Faking Responses](next-steps/testing-faking-responses/README.md)
   * [Non-Laravel / PHP](next-steps/testing-faking-responses/non-laravel-php.md)
   * [Laravel](next-steps/testing-faking-responses/laravel.md)
