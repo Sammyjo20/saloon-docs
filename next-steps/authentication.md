@@ -6,7 +6,7 @@ If you are using one API key across all your requests, then you can also use the
 
 ### Token Authentication
 
-Token Authentication is used if the API expects an _Authorization \*\*\*\*_ header. For example:
+Token Authentication is used if the API expects an _Authorization_ header. For example:
 
 ```http
 "Authorization": "Bearer my-authentication-token"
