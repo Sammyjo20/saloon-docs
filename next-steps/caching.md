@@ -138,6 +138,6 @@ $responseTwo = $requestTwo->send();
 $responseTwo->isCached(); // True on the second request
 ```
 
-### Code
+### Source Code
 
 [Interested in the source code of this plugin? Click here.](https://github.com/Sammyjo20/saloon-cache-plugin)
