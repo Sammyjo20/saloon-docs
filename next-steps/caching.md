@@ -29,7 +29,7 @@ class GetForgeServerRequest extends SaloonRequest
 
     // ...
     
-    public function cacheDriver(): CacheDriver
+    public function cacheDriver(): DriverInterface
     {
         //
     }
@@ -59,7 +59,7 @@ Allows you to define a Flysystem storage driver that will be used to store the c
 use League\Flysystem\Filesystem;
 use Sammyjo20\SaloonCachePlugin\Drivers\FlysystemDriver;
 
-public function cacheDriver(): CacheDriver
+public function cacheDriver(): DriverInterface
 {
     return new FlysystemDriver(new Filesystem(...));
 }
@@ -75,7 +75,7 @@ Allows you to define a Laravel Cache store like database/redis. This should only
 use Illuminate\Support\Facades\Cache;
 use Sammyjo20\SaloonCachePlugin\Drivers\LaravelCacheDriver;
 
-public function cacheDriver(): CacheDriver
+public function cacheDriver(): DriverInterface
 {
     return new LaravelCacheDriver(Cache::store('database'));
 }
@@ -90,10 +90,28 @@ Allows you to use any PSR-16 compatible cache.
 
 use Sammyjo20\SaloonCachePlugin\Drivers\SimpleCacheDriver;
 
-public function cacheDriver(): CacheDriver
+public function cacheDriver(): DriverInterface
 {
     return new SimpleCacheDriver(new ArrayCache(...));
 }
+```
+
+### Response
+
+Saloon will respond with a Saloon response (or your custom response if defined) when retrieving a cached response. To check if a response has been cached, you can use the `isCached()` method.
+
+```php
+<?php
+
+$request = new GetForgeServerRequest(serverId: '123456');
+$response = $request->send();
+
+$response->isCached(); // False on the first request.
+
+$requestTwo = new GetForgeServerRequest(serverId: '123456');
+$responseTwo = $requestTwo->send();
+
+$responseTwo->isCached(); // True on the second request
 ```
 
 ### Custom Cache Keys
@@ -120,22 +138,17 @@ $request->disableCaching();
 // Send request, will always skip caching.
 ```
 
-### Response
+### Invalidating Cache
 
-Saloon will respond with a Saloon response (or your custom response if defined) when retrieving a cached response. To check if a response has been cached, you can use the `isCached()` method.
+You may want to make a request and purge the existing cache before making the request. You can use the `invalidateCache` method on the request before sending the request and Saloon will delete any existing cache for that request.
 
 ```php
 <?php
 
 $request = new GetForgeServerRequest(serverId: '123456');
-$response = $request->send();
+$request->invalidateCache();
 
-$response->isCached(); // False on the first request.
-
-$requestTwo = new GetForgeServerRequest(serverId: '123456');
-$responseTwo = $requestTwo->send();
-
-$responseTwo->isCached(); // True on the second request
+// Send request, will delete any existing cache.
 ```
 
 ### Source Code
