@@ -1,6 +1,10 @@
 # SDK-style Connectors
 
-If you would like to use your connector like it's an SDK, where each request is their own method on the connector, Saloon makes this easy. Start by registering your requests in the **$requests** array on your connector.
+Saloon is a great tool to build SDKs. While you can build your own SDK patterns with Saloon, it also provides a simple framework for building SDKs rapidly.
+
+### Individual Requests
+
+If you define a \`$requests\` array property on your connector. You can specify individual requests that will be converted into "magic" methods.
 
 ```php
 <?php
@@ -11,7 +15,7 @@ use App\Http\Saloon\Requests\GetForgeServerRequest;
 class ForgeConnector extends SaloonConnector
 {
     protected array $requests = [
-        GetForgeServerRequest::class,
+        GetForgeServerRequest::class, // $connector->getForgeServerRequest()
     ];
 
     // ...
@@ -62,3 +66,100 @@ class ForgeConnector extends SaloonConnector
     // ...
 }
 ```
+
+### Request Collections
+
+Often you will have many requests in an SDK, each separated into its own groups. Saloon also makes this easy with two ways of doing it. You can either define an array of requests in the \`$requests\` property on the connector, or you can create a **RequestCollection** class for unlimited customization and method-hinting.
+
+#### Custom Request Collections
+
+You can build custom request collections that will be returned automatically through magic methods. This is great if you would like to separate your SDK into different group, like a "servers" group and a "sites" group in the example of Laravel Forge.
+
+To get started, create a class and extend the base \`RequestCollection\` abstract class. Server collections will be given an instance of the connector which you can access.
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\RequestCollection;
+
+class ServerCollection extends RequestCollection
+{
+    public function all(): array
+    {
+        // You can access $this->connector to make requests...
+        
+        $request = $this->connector->request(new GetForgeServersRequest);
+        $response = $request->send();
+        
+        return $response->json();
+    }
+    
+    // ... Your other methods...
+}
+```
+
+{% hint style="success" %}
+The base **RequestCollection** class contains a constructor which sets the current instance of the request.
+{% endhint %}
+
+After you have created the class, specify the collection in your \`$requests\` array on your connector.
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonConnector;
+use App\Http\Saloon\Requests\GetForgeServerRequest;
+
+class ForgeConnector extends SaloonConnector
+{
+    protected array $requests = [
+        'servers' => ServerCollection::class,
+    ];
+}
+```
+
+Now you will be able to access the server collection with:
+
+
+
+#### Anonymous Request Collections
+
+{% hint style="warning" %}
+Anonymous request collections can be handy, but it will be difficult to define IDE-friendly type-hints for the methods inside of a collection. It is recommended to use the custom request collections.
+{% endhint %}
+
+To create a request collection, just define a nested array keyed with the name of the group. Saloon will automatically create a magic-method that will return the request.&#x20;
+
+```php
+<?php
+
+$forgeConnector = new ForgeConnector();
+
+$forgeConnector->servers()->get(); // Will return GetForgeServerRequest
+
+// You can even use static methods!
+
+$forgeConnector::servers()->get();
+```
+
+Here is how you define it:
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonConnector;
+use App\Http\Saloon\Requests\GetForgeServerRequest;
+
+class ForgeConnector extends SaloonConnector
+{
+    protected array $requests = [
+        'servers' => [
+            'get' => GetForgeServerRequest::class,
+        ],
+    ];
+}
+```
+
+{% hint style="success" %}
+You must provide a key to the array to define the name of the collection.
+{% endhint %}
