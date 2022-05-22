@@ -12,8 +12,7 @@
 * [Requests](the-basics/requests/README.md)
   * [Sending Data](the-basics/requests/attaching-data.md)
   * [Query Parameters](the-basics/requests/query-parameters.md)
-* [Sending Requests](the-basics/sending-requests/README.md)
-  * [SDK-style Connectors](the-basics/sending-requests/sdk-style-connectors.md)
+* [Sending Requests](the-basics/sending-requests.md)
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
 
@@ -25,6 +24,7 @@
 * [Testing / Mocking Responses](next-steps/testing-faking-responses/README.md)
   * [Non-Laravel / PHP](next-steps/testing-faking-responses/non-laravel-php.md)
   * [Laravel](next-steps/testing-faking-responses/laravel.md)
+* [Building SDKs with Saloon](next-steps/sdk-style-connectors.md)
 
 ## 🧪 Advanced
 
