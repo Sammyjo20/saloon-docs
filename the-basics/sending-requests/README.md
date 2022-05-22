@@ -33,9 +33,9 @@ $response = $request->send();
 $connector->send(new GetForgeServerRequest(serverId: '123456'));
 ```
 
-### Using method-style access to send a request on the connector
+### Sending requests inside an SDK
 
-[Click here to read more](sdk-style-connectors.md)
+Saloon offers a great framework for building SDKs. [Click here to read more](sdk-style-connectors.md)
 
 ### Modifying the request before it is sent
 
