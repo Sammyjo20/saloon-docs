@@ -49,6 +49,10 @@ $response->throw(); // Will throw SaloonRequestException if the request fails.
 $data = $response->json();
 ```
 
+### Casting to Data Transfer Objects (DTOs)
+
+You may wish to cast the data you receive in an API response to a data transfer object (DTO). Saloon has a built-in plugin that makes this easy. [Click here to read more about casting to DTOs.](data-transfer-objects.md)
+
 ### Custom Responses
 
 Sometimes you may want to use your own response class. This is is useful if you would like to add your own methods or overwrite Saloon's response methods.&#x20;
@@ -102,7 +106,3 @@ class GetForgeServerRequest extends SaloonRequest
 {% hint style="warning" %}
 Your custom response must extend **SaloonResponse.**
 {% endhint %}
-
-### Casting to Data Transfer Objects (DTOs)
-
-You may wish to cast the data you receive in an API response to a data transfer object (DTO). Saloon has a built-in plugin that makes this easy. [Click here to read more about casting to DTOs.](data-transfer-objects.md)
