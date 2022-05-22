@@ -35,7 +35,7 @@ $connector->send(new GetForgeServerRequest(serverId: '123456'));
 
 ### Using method-style access to send a request on the connector
 
-[Click here to read more](../next-steps/sdk-style-connectors.md)
+[Click here to read more](sdk-style-connectors.md)
 
 ### Modifying the request before it is sent
 
@@ -78,5 +78,5 @@ $response = $request->send();
 ```
 
 {% hint style="info" %}
-The **addData, setData** and **mergeData** methods will not do anything unless you [attach a form data trait](requests/attaching-data.md).
+The **addData, setData** and **mergeData** methods will not do anything unless you [attach a form data trait](../requests/attaching-data.md).
 {% endhint %}

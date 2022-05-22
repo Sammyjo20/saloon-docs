@@ -1,4 +1,4 @@
-# SDK-style Connectors
+# Building SDKs with Saloon
 
 Saloon is a great tool to build SDKs. While you can build your own SDK patterns with Saloon, it also provides a simple framework for building SDKs rapidly.
 
@@ -99,7 +99,7 @@ class ServerCollection extends RequestCollection
 ```
 
 {% hint style="success" %}
-The base **RequestCollection** class contains a constructor which sets the current instance of the request.
+The base **RequestCollection** class contains a constructor which provides the class with the connector instance.
 {% endhint %}
 
 After you have created the class, specify the collection in your \`$requests\` array on your connector.
