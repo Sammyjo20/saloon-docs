@@ -15,16 +15,16 @@
 * [Sending Requests](the-basics/sending-requests/README.md)
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
+* [Building SDKs](the-basics/sdk-style-connectors.md)
 
 ## 👏 Next Steps
 
 * [Authentication](next-steps/authentication.md)
 * [Plugins](next-steps/plugins.md)
 * [Caching](next-steps/caching.md)
-* [Testing / Mocking Responses](next-steps/testing-faking-responses/README.md)
+* [Mocking Responses](next-steps/testing-faking-responses/README.md)
   * [Non-Laravel / PHP](next-steps/testing-faking-responses/non-laravel-php.md)
   * [Laravel](next-steps/testing-faking-responses/laravel.md)
-* [Building SDKs with Saloon](the-basics/sending-requests/sdk-style-connectors.md)
 
 ## 🧪 Advanced
 

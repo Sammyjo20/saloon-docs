@@ -35,7 +35,7 @@ $connector->send(new GetForgeServerRequest(serverId: '123456'));
 
 ### Sending requests inside an SDK
 
-Saloon offers a great framework for building SDKs. [Click here to read more](sdk-style-connectors.md)
+Saloon offers a great framework for building SDKs. [Click here to read more](../sdk-style-connectors.md)
 
 ### Modifying the request before it is sent
 
