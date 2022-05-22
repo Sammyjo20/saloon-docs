@@ -22,7 +22,7 @@ class ForgeConnector extends SaloonConnector
 }
 ```
 
-After that, Saloon will create a method for the request based on its name in camelCase. For example, our registered **GetForgeServerRequest** class will now have a method for it on the connector called `getForgeServerRequest`. When you call this method, Saloon will instantiate the **GetForgeServerRequest** class. Now we can send our request using the connector!
+Saloon will create a method for the request based on its name in camelCase. For example, our registered **GetForgeServerRequest** class will now have a method for it on the connector called `getForgeServerRequest`. When you call this method, Saloon will instantiate the **GetForgeServerRequest** class. Now we can send our request using the connector!
 
 ```php
 <?php
@@ -69,13 +69,13 @@ class ForgeConnector extends SaloonConnector
 
 ### Request Collections
 
-Often you will have many requests in an SDK, each separated into its own groups. Saloon also makes this easy with two ways of doing it. You can either define an array of requests in the \`$requests\` property on the connector, or you can create a **RequestCollection** class for unlimited customization and method-hinting.
+You will often have many requests in an SDK, each separated into its own groups. Saloon also makes this easy with two ways of doing it. You can either define an array of requests in the \`$requests\` property on the connector, or you can create a **RequestCollection** class for unlimited customization and method-hinting.
 
 #### Custom Request Collections
 
-You can build custom request collections that will be returned automatically through magic methods. This is great if you would like to separate your SDK into different group, like a "servers" group and a "sites" group in the example of Laravel Forge.
+You can build custom request collections that will be returned automatically through magic methods. This is great if you would like to separate your SDK into different groups, like a "servers" group and a "sites" group containing different requests.
 
-To get started, create a class and extend the base \`RequestCollection\` abstract class. Server collections will be given an instance of the connector which you can access.
+To get started, create a class and extend the base \`RequestCollection\` abstract class. Request collections will be given an instance of the connector which you can access.&#x20;
 
 ```php
 <?php
@@ -118,31 +118,13 @@ class ForgeConnector extends SaloonConnector
 }
 ```
 
-Now you will be able to access the server collection with:
-
-
-
 #### Anonymous Request Collections
 
 {% hint style="warning" %}
-Anonymous request collections can be handy, but it will be difficult to define IDE-friendly type-hints for the methods inside of a collection. It is recommended to use the custom request collections.
+Anonymous request collections can be handy, but it will be difficult to define IDE-friendly type-hints for the methods inside of a collection. It is recommended to use the custom request collections above.
 {% endhint %}
 
-To create a request collection, just define a nested array keyed with the name of the group. Saloon will automatically create a magic-method that will return the request.&#x20;
-
-```php
-<?php
-
-$forgeConnector = new ForgeConnector();
-
-$forgeConnector->servers()->get(); // Will return GetForgeServerRequest
-
-// You can even use static methods!
-
-$forgeConnector::servers()->get();
-```
-
-Here is how you define it:
+To create an aonymous request collection, just define a nested array keyed with the name of the group. Saloon will automatically create a magic-method that will return the request.&#x20;
 
 ```php
 <?php
@@ -163,3 +145,17 @@ class ForgeConnector extends SaloonConnector
 {% hint style="success" %}
 You must provide a key to the array to define the name of the collection.
 {% endhint %}
+
+After you have defined the group, you can access the group like below!
+
+```php
+<?php
+
+$forgeConnector = new ForgeConnector();
+
+$forgeConnector->servers()->get(); // Will return GetForgeServerRequest
+
+// You can even use static methods!
+
+$forgeConnector::servers()->get();
+```
