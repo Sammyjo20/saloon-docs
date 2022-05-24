@@ -1,4 +1,4 @@
-# Building SDKs with Saloon
+# Building SDKs
 
 Saloon is a great tool to build SDKs. While you can build your own SDK patterns with Saloon, it also provides a simple framework for building SDKs rapidly.
 
@@ -118,13 +118,25 @@ class ForgeConnector extends SaloonConnector
 }
 ```
 
+Now you can call the custom collection and methods inside of it!&#x20;
+
+```php
+<?php
+
+$forgeConnector->servers()->all(); // ServerCollection@all
+
+// You can even use static methods!
+
+ForgeConnector::servers()->all();
+```
+
 #### Anonymous Request Collections
 
 {% hint style="warning" %}
 Anonymous request collections can be handy, but it will be difficult to define IDE-friendly type-hints for the methods inside of a collection. It is recommended to use the custom request collections above.
 {% endhint %}
 
-To create an aonymous request collection, just define a nested array keyed with the name of the group. Saloon will automatically create a magic-method that will return the request.&#x20;
+To create an anonymous request collection, just define a nested array keyed with the name of the group. Saloon will automatically create a magic-method that will return the request.&#x20;
 
 ```php
 <?php
@@ -136,7 +148,7 @@ class ForgeConnector extends SaloonConnector
 {
     protected array $requests = [
         'servers' => [
-            'get' => GetForgeServerRequest::class,
+            'all' => GetForgeServerRequest::class,
         ],
     ];
 }
@@ -153,9 +165,9 @@ After you have defined the group, you can access the group like below!
 
 $forgeConnector = new ForgeConnector();
 
-$forgeConnector->servers()->get(); // Will return GetForgeServerRequest
+$forgeConnector->servers()->all(); // Will return GetForgeServerRequest
 
 // You can even use static methods!
 
-$forgeConnector::servers()->get();
+ForgeConnector::servers()->all();
 ```
