@@ -35,7 +35,7 @@ During runtime, you can also overwrite or add to the request's query parameters.
 ```php
 <?php
 
-$request = new GetForgeSerersRequest();
+$request = new GetForgeServersRequest();
 
 $request->setQuery(['sort' => $sort]);
 
