@@ -37,5 +37,6 @@
 * [Support](finish/support.md)
 * [Podcast](finish/podcast.md)
 * [View Code On GitHub](https://github.com/sammyjo20/saloon)
-* [About Me](https://github.com/sammyjo20)
 * [Update Docs](https://github.com/Sammyjo20/saloon-docs)
+* [Donate Coffee](https://ko-fi.com/sammyjo20)
+* [About Me](https://github.com/sammyjo20)
