@@ -294,6 +294,12 @@ $authConnector->oauthConfig()->setClientSecret($user->spotify_client_secret);
 $authorizationUrl = $authConnector->**getAuthorizationUrl(...);**
 ```
 
+### Real-world example
+
+If you would like to see an example integration using the OAuth2 methods mentioned above, see the following Laravel app.
+
+[https://github.com/Sammyjo20/saloon-spotify-example](https://github.com/Sammyjo20/saloon-spotify-example)
+
 ### Available Methods / API
 
 #### Connector
