@@ -28,6 +28,7 @@
 
 ## 🧪 Advanced
 
+* [OAuth2 Authentication](advanced/oauth2-authentication.md)
 * [Response Interceptors](advanced/response-interceptors.md)
 * [Handlers / Middleware](advanced/handlers-middleware.md)
 
