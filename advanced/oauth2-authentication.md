@@ -45,7 +45,7 @@ Let’s get started by preparing our Saloon connector ready to support the Autho
 #### 1. Add the AuthorizationCodeGrant trait to your connector
 
 {% hint style="warning" %}
-We strongly recommend that you create a new connector just for the OAauth2 flow.
+We strongly recommend that you create a new connector just for the OAuth2 flow.
 {% endhint %}
 
 ```php
