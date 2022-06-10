@@ -45,7 +45,7 @@ Let’s get started by preparing our Saloon connector ready to support the Autho
 #### 1. Add the AuthorizationCodeGrant trait to your connector
 
 {% hint style="warning" %}
-We strongly recommend that you create a new connector just for the OAauth2 flow.
+We strongly recommend that you create a new connector just for the OAuth2 flow.
 {% endhint %}
 
 ```php
@@ -173,6 +173,21 @@ $authenticator = $authConnector->getAccessTokens($code);
 The method will return an **AccessTokenAuthenticator**. This is a Saloon Authenticator that can be used to authenticate the rest of your requests. [Click here to read more about using authenticators.](../next-steps/authentication.md)
 {% endhint %}
 
+#### Verifying State
+
+As mentioned above, if you stored the state that was generated during creating an authorization url, you should pass this expected state alongside the state sent back by the API provider's OAuth2 server.
+
+```php
+<?php
+
+$authConnector = new SpotifyAuthConnector;
+
+// It will throw an exception if the state and expected state don't match,
+// but both must be present.
+
+$authenticator = $authConnector->getAccessTokens($code, $state, $expectedState);
+```
+
 ### Storing Authentication On Users
 
 You will likely need to store the authenticator securely against a user, like in an encrypted field in the database. You may serialise and unserialise the authenticator using the helper methods below.
@@ -190,7 +205,7 @@ $authenticator = AccessTokenAuthenticator::unserialize($serialized); // You can 
 ```
 
 {% hint style="info" %}
-If you are using Laravel Eloquent, you can use the **OAuthAuthenticatorCast** to automatically cast the authenticator for storing into your database.
+If you are using Laravel Eloquent, you can use the **EncryptedOAuthAuthenticatorCast / OAuthAuthenticatorCast** casts to automatically cast the authenticator for storing into your database.
 {% endhint %}
 
 ### Authenticate Your Requests
