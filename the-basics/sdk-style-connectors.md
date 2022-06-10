@@ -2,6 +2,10 @@
 
 Saloon is a great tool to build SDKs. While you can build your own SDK patterns with Saloon, it also provides a simple framework for building SDKs rapidly.
 
+{% hint style="info" %}
+If you would like to get up and running quickly, try out the official Saloon SDK template repository on GitHub. [https://github.com/Sammyjo20/saloon-sdk-template](https://github.com/Sammyjo20/saloon-sdk-template)
+{% endhint %}
+
 ### Individual Requests
 
 If you define a \`$requests\` array property on your connector. You can specify individual requests that will be converted into "magic" methods.
