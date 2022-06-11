@@ -117,8 +117,25 @@ class SpotifyAuthConnector extends SaloonConnector
 }
 ```
 
-{% hint style="info" %}
-If your OAuth2 config is dependant on a per-user/tenant basis, you can modify the config after you have instantiated the connector.
+#### Per-User/Tenant Config
+
+If your OAuth2 config is dependent on a per-user/tenant basis, you can modify the config after you have instantiated the connector.
+
+```php
+<?php
+
+$user = auth()->user(); // Your tenant/user.
+
+$authConnector = new SpotifyAuthConnector;
+
+// Overwrite the config just for this connector.
+
+$authConnector->oauthConfig()->setClientId($user->spotify_client_id);
+$authConnector->oauthConfig()->setClientSecret($user->spotify_client_secret);
+```
+
+{% hint style="warning" %}
+Make sure to use the **oauthConfig()** method instead of accessing the property directly since it will not be set during instantiation of your class.
 {% endhint %}
 
 ### Generating An Authorization URL
@@ -139,7 +156,9 @@ $authorizationUrl = $authConnector->getAuthorizationUrl($scopes, $state);
 
 #### Optional State
 
-To help prevent CSRF attacks, It’s highly recommended that you create a token in your authorization URL that you can confirm when the user redirects back to your application. This is known as state. If you do not provide state, Saloon will generate a 32 character alpha-numeric string for the state. You should generate the authorization URL first, then store the state securely. The application will return the state in your callback url which you can confirm. If you are using a framework like Laravel, you could store this state token in the user’s session.
+To help prevent CSRF attacks, It’s highly recommended that you create a token in your authorization URL that you can confirm when the user redirects back to your application. This is known as state. Saloon will generate a 32-character alpha-numeric string for the state if you do not provide your own state.
+
+You should generate the authorization URL first, then store the state securely. If you are using a framework like Laravel, you could store this state token in the user’s session.
 
 ```php
 <?php
@@ -306,7 +325,7 @@ $authConnector->oauthConfig()->setClientSecret($user->spotify_client_secret);
 
 // Continue like normal...
 
-$authorizationUrl = $authConnector->**getAuthorizationUrl(...);**
+$authorizationUrl = $authConnector->getAuthorizationUrl(...);
 ```
 
 ### Real-world example
@@ -347,7 +366,7 @@ If you would like to see an example integration using the OAuth2 methods mention
     If state has not been provided in the **getAuthorizationUrl()** method, this method will return the randomly generated state that was sent to the provider. You should store this in a secure location and use it to verify the flow was not tampered with.
 *   **getUser($accessTokenAuthenticator)**
 
-    This method can be used to retrieve the resource owner / user once you have successfully authenticated. **This may not work, depending on if the OAuth2 server/API provides it.**
+    This method can be used to retrieve the resource owner/user once you have successfully authenticated. **This may not work, depending on if the OAuth2 server/API provides it.**
 
 #### OAuth2 Config Methods
 
