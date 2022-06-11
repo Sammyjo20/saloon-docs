@@ -33,6 +33,23 @@ $response = $request->send();
 $connector->send(new GetForgeServerRequest(serverId: '123456'));
 ```
 
+#### Connector Constructors
+
+If your connector has a constructor inside with specific data, you should consider sending requests through the connector rather than the request. [Click here to read more.](./#sending-requests-using-your-connector)
+
+Alternatively, you can overwrite the connector that a request uses, by using the **setConnector()** method on the request before calling the **send()** method.
+
+```php
+<?php
+
+$connector = new ForgeConnector($apiKey);
+$request = new GetForgeServerRequest(serverId: '123456');
+
+$request->setConnector($connector);
+
+$request->send();
+```
+
 ### Sending requests inside an SDK
 
 Saloon offers a great framework for building SDKs. [Click here to read more](../sdk-style-connectors.md)

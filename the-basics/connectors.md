@@ -1,14 +1,16 @@
 # Connectors
 
-Connectors are classes that define the basic requirements of an API. Within a connector, you provide the Base URL of the API, default headers, default config and add reusable Saloon Plugins. You should create a separate connector for each API integration.
+Connectors are classes that register and store the requirements of a third-party API integration. Within a connector, you can define the base URL, default headers and default configuration. Connectors are only defined once and then requests use a connector to know the base requirements of an API without you having to repeat yourself in each request.
+
+### Getting Started
 
 {% hint style="info" %}
 If you are using Laravel, you can use the **php artisan saloon:connector** Artisan command to create a connector.
 {% endhint %}
 
-### Example Connector
+Firstly create a class in your application and extend the base **SaloonConnector** abstract class. Then extend the **defineBaseUrl** public function and define the base URL of the API. You do not have to worry about trailing slashes as Saloon will clean these up for you.
 
-Here is an example of a Saloon Connector. I have created one for the popular Laravel Forge service.
+This is an example of a connector for the Laravel Forge service. As you can see, I have defined the base URL. I have also registered some default headers and configuration options.&#x20;
 
 ```php
 <?php
@@ -21,29 +23,21 @@ class ForgeConnector extends SaloonConnector
     {
         return 'https://forge.laravel.com/api/v1';
     }
-}
-```
-
-### Example with headers and config
-
-Connectors can also define default headers and default Guzzle options.
-
-```php
-class ForgeConnector extends SaloonConnector
-{
-    // ...
     
     public function defaultHeaders(): array
     {
         return [
-            'Authorization' => 'Bearer ' . config('services.forge.key') // "config" is a built in Laravel function.
+            'Accept' => 'application/json',
+            'X-Custom-Header' => 'Hello',
         ];
     }
     
     public function defaultConfig(): array
     {
+       // Guzzle Config Options...
+    
         return [
-            'timeout' => 5,
+            'timeout' => 30,
         ];
     }
 }
@@ -84,20 +78,3 @@ Requires either the **hasJsonBody, HasFormParams** or **HasMultipartBody** trait
 #### boot($request)
 
 If provided, this method can be used to add extra functionality to the connector. You can use methods like `addHeader(), addConfig(), addHandler() and addResponseInterceptor()`. It is also a useful place to add conditional headers/configuration.
-
-### Constructors
-
-If your connector has a constructor inside with specific data, you should consider sending requests through the connector rather than the request. [Click here to read more.](sending-requests/#sending-requests-using-your-connector)
-
-Alternatively, you can overwrite the connector that a request uses, by using the **setConnector()** method on the request before calling the **send()** method.
-
-```php
-<?php
-
-$connector = new ForgeConnector($apiKey);
-$request = new GetForgeServerRequest(serverId: '123456');
-
-$request->setConnector($connector);
-
-$request->send();
-```
