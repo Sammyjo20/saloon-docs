@@ -163,3 +163,24 @@ $mockClient = new MockClient([
     MockResponse::make()->throw(fn ($guzzleRequest) => new ConnectException('Unable to connect!', $guzzleRequest))
 ]);
 ```
+
+### Using a mock client for all requests
+
+Sometimes you may want to use a mock client for all requests within a connector. This is especially needed for SDKs, where you need to pass data down into different methods. You can also use the \`withMockClient\` method on either your connector or your request, and it will mean you don't have to define it on every request's "send" method.
+
+```php
+<?php
+
+$forgeConnector = new ForgeConnector;
+
+$mockClient = new MockClient([
+    GetForgeUserRequest::class => MockResponse::make(['name' => 'Sam'], 200),
+]);
+
+$forgeConnector->withMockClient($mockClient);
+
+// Make as many requests as you like without having to pass in the mock client!
+
+$forgeConnector->send(new GetForgeUserRequest);
+$forgeConnector->send(new GetForgeUserRequest);
+```
