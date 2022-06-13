@@ -24,7 +24,7 @@ $authenticator = $authConnector->getAccessTokens($code, $state);
 // 3. Authenticate your requests!
 
 $request = new GetTracksRequest;
-$request->withAuth($authenticator);
+$request->authenticate($authenticator);
 $request->send(); // 🚀
 
 // 4. Refresh your access tokens...
