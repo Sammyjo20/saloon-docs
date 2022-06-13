@@ -166,7 +166,7 @@ $mockClient = new MockClient([
 
 ### Using a mock client for all requests
 
-Sometimes you may want to use a mock client for all requests within a connector. This is especially needed for SDKs, where you need to pass data down into different methods. You can also use the \`withMockClient\` method on either your connector or your request, and it will mean you don't have to define it on every request's "send" method.
+Sometimes you may want to use a mock client for all requests within a connector. This is especially needed for SDKs, where you need to pass data down into different methods. You can also use the `withMockClient` method on either your connector or your request, and it will mean you don't have to define it on every request's `send` method.
 
 ```php
 <?php
@@ -183,4 +183,20 @@ $forgeConnector->withMockClient($mockClient);
 
 $forgeConnector->send(new GetForgeUserRequest);
 $forgeConnector->send(new GetForgeUserRequest);
+```
+
+### Using closures for mocking
+
+Sometimes, you may need to return a custom mock response based on the request that is currently trying to be sent. With closure/callable mocking, you can do this! Just provide an anonymous function or an invokable class when defining the mock response, and you will get access to the current request before it is converted into a mock response. This is great if you have stored fixtures based on the request and need to load the fixture data up. Yes, this will work with all of the methods above of mocking the request.
+
+```php
+<?php
+
+$mockClient = new MockClient([
+    function (SaloonRequest $request): MockResponse {
+        // Write some custom logic here...
+    
+        return new MockResponse([...]);
+    },
+]);
 ```
