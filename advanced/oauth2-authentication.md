@@ -229,7 +229,7 @@ If you are using Laravel Eloquent, you can use the **EncryptedOAuthAuthenticator
 
 ### Authenticate Your Requests
 
-After you have created the access tokens above, you should have an **AccessTokenAuthenticator.** This class can be used to authenticate your other connectors/requests with the access token you have just received. Just use the **withAuth()** method on either your request or your connector.
+After you have created the access tokens above, you should have an **AccessTokenAuthenticator.** This class can be used to authenticate your other connectors/requests with the access token you have just received. Just use the **authenticate()** method on either your request or your connector.
 
 ```php
 <?php
@@ -239,13 +239,13 @@ $authConnector = new SpotifyAuthConnector;
 $authenticator = $authConnector->getAccessTokens($code);
 
 $request = new CurrentSongRequest;
-$request->withAuth($authenticator);
+$request->authenticate($authenticator);
 $response = $request->send();
 
 // Or you can authorize the whole connector
 
 $connector = new SpotifyApiConnector;
-$connector->withAuth($authenticator);
+$connector->authenticate($authenticator);
 
 // Make requests...
 ```
@@ -273,7 +273,7 @@ if ($authenticator->hasExpired() === true) {
 // Continue to make your request...
 
 $request = new CurrentSongRequest;
-$request->withAuth($authenticator);
+$request->authenticate($authenticator);
 $response = $request->send();
 ```
 
