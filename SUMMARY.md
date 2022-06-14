@@ -34,7 +34,7 @@
 
 ## ⭐ Finish
 
-* [Podcast](finish/podcast.md)
+* [Tutorials](finish/podcast.md)
 * [View Code On GitHub](https://github.com/sammyjo20/saloon)
 * [Update Docs](https://github.com/Sammyjo20/saloon-docs)
 * [About Me](https://github.com/sammyjo20)
