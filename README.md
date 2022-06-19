@@ -14,12 +14,6 @@ Saloon offers a fluent, object-oriented framework to build your next API integra
 
 If you need request faking for your tests, Saloon has it out of the box alongside many other useful tools like OAuth2 boilerplate and caching support. If you are using Laravel, there's also a dedicated Laravel package with artisan commands to help you build even faster.
 
-Building API integrations can be time consuming. After you have found an API client to use, you’re faced with lots of configuration to remember and it’s hard to repeat requests without copying and pasting, and then when you introduce patterns like OAuth2 everything gets complicated. You’ll often find yourself writing the same boilerplate code over and over again.&#x20;
-
-We’ve standardised the way we talk to APIs with PSR-7 and PSR-18 but we haven’t got a standard structure to build API integrations.
-
-Saloon aims to solve this.
-
 ### Features
 
 * Simple, easy to learn syntax that standardises the way you interact with APIs
