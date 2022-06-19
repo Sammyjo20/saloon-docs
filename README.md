@@ -28,3 +28,11 @@ If you need request faking for your tests, Saloon has it out of the box alongsid
 {% hint style="info" %}
 Like the sound of Saloon? Consider [giving it a star on Github](https://github.com/sammyjo20/saloon)!
 {% endhint %}
+
+### Why Saloon?
+
+Building API integrations can be time consuming. After you have found an API client to use, you’re faced with lots of configuration to remember and it’s hard to repeat requests without copying and pasting, and then when you introduce patterns like OAuth2 everything gets complicated. You’ll often find yourself writing the same boilerplate code over and over again.&#x20;
+
+We’ve standardised the way we talk to APIs with PSR-7 and PSR-18 but we haven’t got a standard structure to build API integrations.
+
+Saloon aims to solve this.
