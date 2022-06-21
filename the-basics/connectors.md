@@ -5,7 +5,7 @@ Connectors are classes that register and store the requirements of a third-party
 ### Getting Started
 
 {% hint style="info" %}
-If you are using Laravel, you can use the **php artisan saloon:connector** Artisan command to create a connector.
+If you are using Laravel, you can use the **php artisan saloon:connector YourCustomIntegrationName YourCustomConnectorName** Artisan command to create a connector.
 {% endhint %}
 
 Firstly create a class in your application and extend the base **SaloonConnector** abstract class. Then extend the **defineBaseUrl** public function and define the base URL of the API. You do not have to worry about trailing slashes as Saloon will clean these up for you.
