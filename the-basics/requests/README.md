@@ -36,7 +36,7 @@ class GetForgeServerRequest extends SaloonRequest
 
 ### Example with headers and config
 
-Requests can also have their own headers and config which will be merged in with the connector's default headers and config. However, the request can overwrite the connector's default headers or config.
+Requests can also have their own headers and config which will be merged in with the connector's default headers and config. However, the request can overwrite the connector's default headers or config. Saloon is built on top of Guzzle, so every config option that Guzzle provides is supported by Saloon.
 
 ```php
 class GetForgeServerRequest extends SaloonRequest

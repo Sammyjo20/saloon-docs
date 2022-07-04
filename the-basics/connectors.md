@@ -1,6 +1,6 @@
 # Connectors
 
-Connectors are classes that register and store the requirements of a third-party API integration. Within a connector, you can define the base URL, default headers and default configuration. Connectors are only defined once and then requests use a connector to know the base requirements of an API without you having to repeat yourself in each request.
+Connectors are classes that register and store the requirements of a third-party API integration. Within a connector, you can define the base URL, default headers and default configuration. Connectors are only defined once and then requests use a connector to know the base requirements of an API without you having to repeat yourself in each request. Saloon is built on top of Guzzle, so every config option that Guzzle provides is supported by Saloon.
 
 ### Getting Started
 
