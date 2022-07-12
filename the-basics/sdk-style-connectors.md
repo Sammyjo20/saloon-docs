@@ -99,7 +99,7 @@ When you have created the request, all that developers would need to do is run i
 ```php
 <?php
 
-use Sammyjo20\\TMDB\\TMDB;
+use Sammyjo20\TMDB\TMDB;
 
 $tmdb = new TMDB('my-api-token');
 
@@ -136,7 +136,7 @@ If you define a `$requests` array property on your connector. You can specify in
 ```php
 <?php
 
-use Sammyjo20\\Saloon\\Http\\SaloonConnector;
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
 class TMDB extends SaloonConnector
 {
@@ -167,7 +167,7 @@ You may want to use your own method names for requests on your connector. If you
 ```php
 <?php
 
-use Sammyjo20\\Saloon\\Http\\SaloonConnector;
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
 class TMDB extends SaloonConnector
 {
@@ -188,7 +188,7 @@ To get started, create a class and extend the base `RequestCollection` abstract 
 ```php
 <?php
 
-use Sammyjo20\\Saloon\\Http\\RequestCollection;
+use Sammyjo20\Saloon\Http\RequestCollection;
 
 class MoviesCollection extends RequestCollection
 {
@@ -198,7 +198,7 @@ class MoviesCollection extends RequestCollection
         
         $request = $this->connector->request(new GetPopularMovies($page));
         
-				return $request->send();
+	return $request->send();
     }
     
     // ... Your other methods...
@@ -212,7 +212,7 @@ After you have created the class, specify the collection in your `$requests` arr
 ```php
 <?php
 
-use Sammyjo20\\Saloon\\Http\\SaloonConnector;
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
 class TMDB extends SaloonConnector
 {
@@ -241,7 +241,7 @@ When using request collections and requests inside your SDK connector class, you
 ```php
 <?php
 
-use Sammyjo20\\Saloon\\Http\\SaloonConnector;
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
 /**
  * Define this in your doc-block.
