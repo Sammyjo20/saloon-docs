@@ -205,7 +205,9 @@ class MoviesCollection extends RequestCollection
 }
 ```
 
-(hint) The base **RequestCollection** class contains a constructor which provides the class with the connector instance.
+{% hint style="info" %}
+The base **RequestCollection** class contains a constructor which provides the class with the connector instance.
+{% endhint %}
 
 After you have created the class, specify the collection in your `$requests` array on your connector.
 
