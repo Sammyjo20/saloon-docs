@@ -8,7 +8,7 @@ Saloon has an official SDK template that you can clone straight from GitHub or d
 
 ### Getting Started
 
-To start building an SDK with Saloon, we recommend that you create your base SDK class and extend the **SaloonConnector** class. The **SaloonConnector** class \*\*\*\*allows you to configure the base URL, default headers, configuration and apply plugins. You can also configure request mocking really easily, so this will come in really handy when you want to write tests for the API without making real requests.
+To start building an SDK with Saloon, we recommend that you create your base SDK class and extend the **SaloonConnector** class. The **SaloonConnector** class allows you to configure the base URL, default headers, configuration and apply plugins. You can also configure request mocking really easily, so this will come in really handy when you want to write tests for the API without making real requests.
 
 #### Example SDK Connector
 
