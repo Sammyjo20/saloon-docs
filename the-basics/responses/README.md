@@ -21,6 +21,7 @@ Saloon requests will return with a **SaloonResponse** class that you can interac
 * onError(callable $callback)
 * toException()
 * throw()
+* xml()
 * getRequestOptions(): array
 * getGuzzleException(): ?RequestException
 * isCached(): bool
