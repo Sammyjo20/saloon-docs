@@ -117,6 +117,10 @@ This method will return you the instance of connector, which you can modify in r
 
 This method will return the full request URL including the connector's base URL.
 
+{% hint style="warning" %}
+The **getFullRequestUrl** method will not include query parameters. Saloon uses Guzzle's configuration options internally to apply query parameters, so they will not be visible for the URL.
+{% endhint %}
+
 #### \_\_call
 
 Any other methods will be proxied to the connector. This is useful if you need to use a method on the connector like `setApiKey`.
