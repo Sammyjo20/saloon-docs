@@ -3,7 +3,7 @@
 Saloon Requests are reusable classes that define each request of the API you want to make. They contain the request's method, as well as any default headers, or data that should be used.
 
 {% hint style="info" %}
-If you are using Laravel, you can use the **php artisan saloon:request** Artisan command to create a request.
+If you are using Laravel, you can use the **php artisan saloon:request YourCustomIntegrationName YourCustomRequestName** Artisan command to create a request.
 {% endhint %}
 
 ### Example Request
