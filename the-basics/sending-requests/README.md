@@ -24,7 +24,7 @@ This is useful if your connector has any constructor arguments. Just instantiate
 <?php
 
 $connector = new ForgeConnector($apiToken);
-$connector->request(new GetForgeServerRequest(serverId: '123456'));
+$request = $connector->request(new GetForgeServerRequest(serverId: '123456'));
 
 $response = $request->send();
 
