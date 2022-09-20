@@ -133,7 +133,7 @@ Saloon::assertSent(GetForgeServerRequest::class);
 Saloon::assertSent('/servers/*');
 
 Saloon::assertSent(function (SaloonRequest $request, SaloonResponse $response) {
-    return $request instanceof GetForgeServerRequest::class 
+    return $request instanceof GetForgeServerRequest 
     && $request->serverId === 123456;
 });
 ```
