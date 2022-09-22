@@ -121,4 +121,4 @@ trait WithTransactionID
 Plugins will inherit all of the available methods from the connector or request it is added to, including the ability to add [response interceptors](../advanced/response-interceptors.md) and [handlers](../advanced/handlers-middleware.md).
 
 * [Connector Methods](../the-basics/connectors.md#available-methods)
-* [Request Methods](../the-basics/requests/#available-methods)
+* [Request Methods](../the-basics/requests.md#available-methods)

@@ -72,7 +72,7 @@ If provided, this method should return an array of the query parameters for the 
 If provided, this method should return an array of the default form data for the connector to use in all of its requests.
 
 {% hint style="warning" %}
-Requires either the **hasJsonBody, HasFormParams** or **HasMultipartBody** traits. [Read more](requests/attaching-data.md). If you are sending XML data, [click here](requests/attaching-data.md#sending-xml).
+Requires either the **hasJsonBody, HasFormParams** or **HasMultipartBody** traits. [Read more](attaching-data.md). If you are sending XML data, [click here](attaching-data.md#sending-xml).
 {% endhint %}
 
 #### boot($request)

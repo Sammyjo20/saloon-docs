@@ -1,12 +1,12 @@
 # Sending Requests
 
-After you have created your request, it is ready to be sent off to the internet! 🚀&#x20;
+After you have created your request, it is ready to be sent off to the internet! 🚀
 
 There are three ways to send requests. You can use the request class directly, send requests through your connector, or you can register requests on your connector and use method-style access to send your requests.
 
 ### Sending requests using the request class
 
-Just instantiate your request class and use the `send()` method.&#x20;
+Just instantiate your request class and use the `send()` method.
 
 ```php
 <?php
@@ -18,7 +18,7 @@ $response = $request->send();
 
 ### Sending requests using the connector class
 
-This is useful if your connector has any constructor arguments. Just instantiate your connector class and use the `send()` method.&#x20;
+This is useful if your connector has any constructor arguments. Just instantiate your connector class and use the `send()` method.
 
 ```php
 <?php
@@ -95,5 +95,5 @@ $response = $request->send();
 ```
 
 {% hint style="info" %}
-The **addData, setData** and **mergeData** methods will not do anything unless you [attach a form data trait](../requests/attaching-data.md).
+The **addData, setData** and **mergeData** methods will not do anything unless you [attach a form data trait](../attaching-data.md).
 {% endhint %}

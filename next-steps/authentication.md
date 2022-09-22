@@ -212,3 +212,7 @@ class ForgeConnector extends SaloonConnector
 {% hint style="info" %}
 If you would like to throw an exception if auth is not provided, add the **RequiresAuth** trait to your connector or your request. If it is added to the connector, the trait's functionality will be applied to all requests.
 {% endhint %}
+
+### OAuth2 Authentication
+
+Some API providers require you to authenticate using an OAuth2 grant. Saloon has out-of-the-box boilerplate code written to help you get set up really quickly with OAuth2 APIs. [Click here to learn more.](../advanced/oauth2-authentication.md)

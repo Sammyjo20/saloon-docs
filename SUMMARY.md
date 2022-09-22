@@ -9,9 +9,9 @@
 ## 🤠 The Basics
 
 * [Connectors](the-basics/connectors.md)
-* [Requests](the-basics/requests/README.md)
-  * [Sending Data](the-basics/requests/attaching-data.md)
-  * [Query Parameters](the-basics/requests/query-parameters.md)
+* [Requests](the-basics/requests.md)
+* [Attaching Data](the-basics/attaching-data.md)
+* [Query Parameters](the-basics/query-parameters.md)
 * [Sending Requests](the-basics/sending-requests/README.md)
 * [Responses](the-basics/responses/README.md)
   * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
