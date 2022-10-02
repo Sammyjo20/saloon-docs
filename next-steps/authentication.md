@@ -83,7 +83,7 @@ class GetForgeServerRequest extends SaloonRequest
 {
     // ...
     
-    protected function defaultAuth(): ?AuthenticatorInterface
+    public function defaultAuth(): ?AuthenticatorInterface
     {
         return new BasicAuthenticator('username', 'password');
     }
