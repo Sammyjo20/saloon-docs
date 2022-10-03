@@ -43,7 +43,7 @@ class GetForgeServerRequest extends SaloonRequest
 {
     // ...
     
-    protected function defaultAuth(): ?AuthenticatorInterface
+    public function defaultAuth(): ?AuthenticatorInterface
     {
         return new TokenAuthenticator('username', 'password');
     }
@@ -123,7 +123,7 @@ class GetForgeServerRequest extends SaloonRequest
 {
     // ...
     
-    protected function defaultAuth(): ?AuthenticatorInterface
+    public function defaultAuth(): ?AuthenticatorInterface
     {
         return new DigestAuthenticator('username', 'password', 'digest');
     }
@@ -202,7 +202,7 @@ class ForgeConnector extends SaloonConnector
 {
     // ...
     
-    protected function defaultAuth(): ?AuthenticatorInterface
+    public function defaultAuth(): ?AuthenticatorInterface
     {
         return new CustomAuthenticator('generic-forge-api-key');
     }
