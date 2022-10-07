@@ -34,6 +34,7 @@
 
 ## ⭐ Finish
 
+* [Showcase](finish/showcase.md)
 * [Tutorials](finish/podcast.md)
 * [View Code On GitHub](https://github.com/sammyjo20/saloon)
 * [Update Docs](https://github.com/Sammyjo20/saloon-docs)
