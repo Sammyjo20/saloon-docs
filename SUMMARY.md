@@ -25,6 +25,7 @@
 * [Mocking Responses](next-steps/testing-faking-responses/README.md)
   * [Non-Laravel / PHP](next-steps/testing-faking-responses/non-laravel-php.md)
   * [Laravel](next-steps/testing-faking-responses/laravel.md)
+  * [Recording Requests](next-steps/testing-faking-responses/recording-requests.md)
 
 ## 🧪 Advanced
 
