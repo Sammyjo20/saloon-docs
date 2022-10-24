@@ -6,7 +6,7 @@ description: >-
 
 # 🚪 Saloon
 
-![Making a request, sending it and retrieving the JSON data as an associative array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
+![Making a request, sending it and retrieving the JSON data as an array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
 
 ### Introduction
 
