@@ -14,4 +14,4 @@ Here are some SDKs and packages built with Saloon 🤠
 
 {% embed url="https://github.com/SamuelMwangiW/linode" %}
 
-[https://github.com/kilianweisl/hellocash-php-sdk](https://github.com/kilianweisl/hellocash-php-sdk)
+{% embed url="https://github.com/kilianweisl/hellocash-php-sdk" %}
