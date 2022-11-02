@@ -1,130 +1,166 @@
 # Requests
 
-Saloon Requests are reusable classes that define each request of the API you want to make. They contain the request's method, as well as any default headers, or data that should be used.
+Saloon Requests are classes that store the information required to make a single request. Within a request you can define the connector, the HTTP Method (GET, POST, etc) and the endpoint that you would like to make a request. You can also define headers and query parameters.
+
+### Getting Started
+
+Create a class that is in a similar place to your connector. The class should extend the `SaloonRequest` abstract class. After that, create two properties. The first property should be the class name for your connector, the second should be the HTTP method.
+
+* `protected ?string $connector = LaravelForgeConnector::class`
+* `protected ?string $method = 'GET'`
+
+You should also extend the `defineEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be concatenated with the base URL that you have defined within your connector.
+
+See the example request. This request will GET all of the servers from the Laravel Forge API.
 
 {% hint style="info" %}
-If you are using Laravel, you can use the **php artisan saloon:request** Artisan command to create a request.
+If you are using Laravel, Use the artisan command to create a connector for you.
+
+**php artisan saloon:request \<Integration Name> \<Request Name>**
 {% endhint %}
-
-### Example Request
-
-Here is an example of a Saloon Request. Now we have our **ForgeConnector**, let's create a request that fetches a server's details from the API. We must specify the method and the connector that is used to make the request. After that, we can specify the endpoint. We can also create a constructor on the class that accepts any data the request needs to be built, like an ID.
 
 ```php
 <?php
 
-use App\Http\Saloon\Connectors\ForgeConnector;
-use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
+use App\Http\Integrations\LaravelForge\LaravelForgeConnector;
 
-class GetForgeServerRequest extends SaloonRequest
+class GetServersRequest extends SaloonRequest
 {
-    protected ?string $connector = ForgeConnector::class;
+    protected ?string $connector = LaravelForgeConnector::class;
 
-    protected ?string $method = Saloon::GET;
+    protected ?string $method = 'GET';
 
     public function defineEndpoint(): string
     {
-        return '/servers/' . $this->serverId;
+        return '/servers';
     }
-    
-    public function __construct(
-        public string $serverId
-    ){}
 }
 ```
 
-### Example with headers and config
+### Default Headers and Query Parameters
 
-Requests can also have their own headers and config which will be merged in with the connector's default headers and config. However, the request can overwrite the connector's default headers or config. Saloon is built on top of Guzzle, so every config option that Guzzle provides is supported by Saloon.
+Some requests require specific headers or query parameters to be sent. To define default headers on your request, you can extend the `defaultHeaders` method. This method expects a keyed array to be returned. You may use an array in the value of a header for multiple header values. These headers will be merged with the connector’s headers.
 
 ```php
-class GetForgeServerRequest extends SaloonRequest
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonRequest;
+use App\Http\Integrations\LaravelForge\LaravelForgeConnector;
+
+class GetServersRequest extends SaloonRequest
 {
-     // ...
-     
+    protected ?string $connector = LaravelForgeConnector::class;
+
+    protected ?string $method = 'GET';
+
+    public function defineEndpoint(): string
+    {
+        return '/servers';
+    }
+
     public function defaultHeaders(): array
     {
         return [
-            'X-Custom-Header' => 'Hello-World',
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Multiple-Values-Header' => ['Value1', 'Value2'], // Value1;Value2
         ];
+    }
+}
+```
+
+When you want to add query parameters to your request you can extend the `defaultQuery` method. This method expects a keyed array to be returned. These query parameters will be merged with the connector’s query parameters.
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonRequest;
+use App\Http\Integrations\LaravelForge\LaravelForgeConnector;
+
+class GetServersRequest extends SaloonRequest
+{
+    protected ?string $connector = LaravelForgeConnector::class;
+    
+    protected ?string $method = 'GET';
+    
+    public function defineEndpoint(): string
+    {
+        return '/servers';
+    }
+    
+    public function defaultQuery(): array
+    {
+        return [
+            'per_page' => 500, // ?per_page=500,
+            'page' => 1, // &page=1
+        ];
+    }
+}
+```
+
+### Default HTTP Client Config
+
+When creating a request, you may also want to define custom options to send to the HTTP Client. For example you may want to register a default timeout of 120 seconds on the request. Saloon uses Guzzle as the HTTP Client so you may use any of Guzzle’s options inside the. `defaultConfig` method. This method expects a keyed array to be returned. The configuration options will be merged with the connector’s config.
+
+[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonRequest;
+use App\Http\Integrations\LaravelForge\LaravelForgeConnector;
+
+class GetServersRequest extends SaloonRequest
+{
+    protected ?string $connector = LaravelForgeConnector::class;
+    
+    protected ?string $method = 'GET';
+    
+    public function defineEndpoint(): string
+    {
+        return '/servers';
     }
     
     public function defaultConfig(): array
     {
         return [
-            'allow_redirects' => true,
-            // Timeout will overwrite the connector's header.
-            'timeout' => 10
+            'timeout' => 120,
         ];
     }
 }
 ```
 
-{% hint style="info" %}
-Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](../../next-steps/plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
-{% endhint %}
+### Using Constructor Arguments
 
-### Properties
+You will often have variables that you want to pass into the request. You may add your own properties to your request class or use a constructor to provide variables into the request instance. Since the request is still a regular class you may customise it how you like.
 
-#### $method
-
-_Required_
-
-The HTTP method used in the request. For example GET, POST, PUT, DELETE.
-
-#### $connector
-
-_Required_
-
-The connector the request uses to know about the API.
-
-### Available Methods
-
-#### defineEndpoint()
-
-If defined, this method should return the endpoint of your API request. This is typically the endpoint that points to a resource of the API for example `/servers`. This can be omitted if the API you are using does not have any specific endpoints, like GraphQL APIs.
-
-#### defaultHeaders()
-
-If defined, this method should return an array of the headers that should be used on every request.
-
-#### defaultConfig()
-
-Similar to the `defaultHeaders()` method, if defined - this should return an array of any Guzzle configuration options you would like the request to use.
-
-#### defaultQuery()
-
-If provided, this method should return an array of the query parameters for the request to use.
-
-#### defaultData()
-
-If provided, this method should return an array of the default form data for the request to use.
-
-{% hint style="warning" %}
-Requires either the **hasJsonBody, HasFormParams** or **HasMultipartBody** traits. [Read more](attaching-data.md). If you are sending XML data, click here.
-{% endhint %}
-
-#### boot($request)
-
-If provided, this method can be used to add extra functionality to the request. You can use methods like `addHeader(), addConfig(), addHandler() and addResponseInterceptor()`. It is also a useful place to add conditional headers/configuration.
-
-#### getConnector
-
-This method will return you the instance of connector, which you can modify in runtime.
-
-#### getFullRequestUrl
-
-This method will return the full request URL including the connector's base URL.
-
-{% hint style="warning" %}
-The **getFullRequestUrl** method will not include query parameters. Saloon uses Guzzle's configuration options internally to apply query parameters, so they will not be visible for the URL.
-{% endhint %}
-
-#### \_\_call
-
-Any other methods will be proxied to the connector. This is useful if you need to use a method on the connector like `setApiKey`.
+For example, I want to create a request to retrieve an individual server by an ID. I will add a constructor to accept the server ID and I will concatenate the variable with the endpoint. This way I  can pass the ID into every instance of the request.
 
 ```php
-(new GetForgeServerRequest)->connectorMethod()->send();
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonRequest;
+use App\Http\Integrations\LaravelForge\LaravelForgeConnector;
+
+class GetServerRequest extends SaloonRequest
+{
+    protected ?string $connector = LaravelForgeConnector::class;
+
+    protected ?string $method = 'GET';
+
+    public function __construct(protected int $id)
+    {
+        //
+    }
+    
+    public function defineEndpoint(): string
+    {
+        return '/servers/' . $this->id;
+    }
+} 
+
+// 
+
+$request = new GetServerRequest(id: 12345);
 ```
