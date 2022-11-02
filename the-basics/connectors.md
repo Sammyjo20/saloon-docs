@@ -30,7 +30,7 @@ class LaravelForgeConnector extends SaloonConnector
 
 ### Default Headers and Query Parameters
 
-Most API integrations will have common headers that should be shared with every request, like the `Content-Type` or the `Accept` headers. Some API integrations may even have default query parameters to be applied to every request. Saloon allows you to define default arguments easily.
+Most API integrations will have common headers that should be shared with every request, like the `Content-Type` or the `Accept` headers. Some API integrations may even have default query parameters to be applied to every request. Saloon allows you to define default properties like these easily.
 
 To add default headers you can use the `defaultHeaders` method to your connector. This method expects a keyed array to be returned. You may use an array in the value of a header for multiple header values.
 
