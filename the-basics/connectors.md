@@ -1,80 +1,108 @@
 # Connectors
 
-Connectors are classes that register and store the requirements of a third-party API integration. Within a connector, you can define the base URL, default headers and default configuration. Connectors are only defined once and then requests use a connector to know the base requirements of an API without you having to repeat yourself in each request. Saloon is built on top of Guzzle, so every config option that Guzzle provides is supported by Saloon.
+Connectors are classes that encapsulate the default attributes of an API integration. At the minimum, a connector expects a Base URL to be defined. You can also register default properties that would be shared with all your requests like headers or HTTP client config.
 
 ### Getting Started
 
+We firstly recommend creating a directory for your API integrations. Once you have a chosen directory, create a class that extends the `SaloonConnector` abstract class. After that, just extend the `defineBaseUrl` function.
+
+See the example connector for Laravel Forge, an API for server management.
+
 {% hint style="info" %}
-If you are using Laravel, you can use the **php artisan saloon:connector** Artisan command to create a connector.
+If you are using Laravel, Use the artisan command to create a connector for you.
+
+**php artisan saloon:connector \<Integration Name> \<Connector Name>**
 {% endhint %}
-
-Firstly create a class in your application and extend the base **SaloonConnector** abstract class. Then extend the **defineBaseUrl** public function and define the base URL of the API. You do not have to worry about trailing slashes as Saloon will clean these up for you.
-
-This is an example of a connector for the Laravel Forge service. As you can see, I have defined the base URL. I have also registered some default headers and configuration options.&#x20;
 
 ```php
 <?php
 
 use Sammyjo20\Saloon\Http\SaloonConnector;
 
-class ForgeConnector extends SaloonConnector
+class LaravelForgeConnector extends SaloonConnector
 {
     public function defineBaseUrl(): string
     {
         return 'https://forge.laravel.com/api/v1';
     }
-    
+}
+```
+
+### Default Headers and Query Parameters
+
+Most API integrations will have common headers that should be shared with every request, like the `Content-Type` or the `Accept` headers. Some API integrations may even have default query parameters to be applied to every request. Saloon allows you to define default arguments easily.
+
+To add default headers you can use the `defaultHeaders` method to your connector. This method expects a keyed array to be returned. You may use an array in the value of a header for multiple header values.
+
+```php
+<?php
+
+use Sammyjo20\Saloon\Http\SaloonConnector;
+
+class LaravelForgeConnector extends SaloonConnector
+{
+    public function defineBaseUrl(): string
+    {
+        return 'https://forge.laravel.com/api/v1';
+    }
+
     public function defaultHeaders(): array
     {
         return [
+            'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'X-Custom-Header' => 'Hello',
-        ];
-    }
-    
-    public function defaultConfig(): array
-    {
-       // Guzzle Config Options...
-    
-        return [
-            'timeout' => 30,
+            'Multiple-Values-Header' => ['Value1', 'Value2'], // Value1;Value2
         ];
     }
 }
 ```
 
-{% hint style="info" %}
-Saloon provides many pre-written plugins to save you from manually defining headers and config variables for common use cases. [Read more about plugins here](../next-steps/plugins.md). Alternatively, to see the full list of Guzzle config options, [click here](https://docs.guzzlephp.org/en/stable/request-options.html).
-{% endhint %}
+You may also add a `defaultQuery` method to your connector to specify default query parameters to be used on every request. This method expects a keyed array to be returned.
 
-### Available Methods
+```php
+<?php
 
-#### defineBaseUrl()
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
-_Required_
+class LaravelForgeConnector extends SaloonConnector
+{
+    public function defineBaseUrl(): string
+    {
+        return 'https://forge.laravel.com/api/v1';
+    }
 
-This method should return the base URL of the API. This is typically the hostname of the API and any suffix like `/api/v1`.
+    public function defaultQuery(): array
+    {
+        return [
+            'per_page' => 500, // ?per_page=500
+        ];
+    }
+}
+```
 
-#### defaultHeaders()
+### Default HTTP Client Configuration
 
-If defined, this method should return an array of the headers that should be used on every request the connector makes.
+When creating a connector, you may also want to define custom options to send to the HTTP Client. For example you may want to register a default timeout of 60 seconds for every request. Saloon uses Guzzle as the HTTP Client so you may use any of Guzzle’s options inside the. `defaultConfig` method. This method expects a keyed array to be returned.
 
-#### defaultConfig()
+[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
 
-Similar to the `defaultHeaders()` method, if defined - this should return an array of any Guzzle configuration options you would like the connector to use in all of its requests.
+```php
+<?php
 
-#### defaultQuery()
+use Sammyjo20\Saloon\Http\SaloonConnector;
 
-If provided, this method should return an array of the query parameters for the connector to use in all of its requests.
+class LaravelForgeConnector extends SaloonConnector
+{
+    public function defineBaseUrl(): string
+    {
+        return 'https://forge.laravel.com/api/v1';
+    }
 
-#### defaultData()
-
-If provided, this method should return an array of the default form data for the connector to use in all of its requests.
-
-{% hint style="warning" %}
-Requires either the **hasJsonBody, HasFormParams** or **HasMultipartBody** traits. [Read more](attaching-data.md). If you are sending XML data, [click here](attaching-data.md#sending-xml).
-{% endhint %}
-
-#### boot($request)
-
-If provided, this method can be used to add extra functionality to the connector. You can use methods like `addHeader(), addConfig(), addHandler() and addResponseInterceptor()`. It is also a useful place to add conditional headers/configuration.
+    public function defaultConfig(): array
+    {
+        return [
+            'timeout' => 60,
+        ];
+    }
+}
+```
