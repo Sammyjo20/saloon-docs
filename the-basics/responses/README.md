@@ -10,6 +10,7 @@ Saloon requests will return with a **SaloonResponse** class that you can interac
 * object(): object
 * collect(): Collection
 * dto(): object
+* dom(): Crawler (Requires [symfony/dom-crawler](https://packagist.org/packages/symfony/dom-crawler))
 * header($header): string
 * headers(): array
 * status(): int
