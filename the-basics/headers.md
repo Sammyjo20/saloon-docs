@@ -90,7 +90,7 @@ class GetServersRequest extends Request
 
 $request = new GetServersRequest('Sammyjo20');
 
-// X-Username: Sammyjo20p
+// X-Username: Sammyjo20
 ```
 {% endtab %}
 {% endtabs %}
