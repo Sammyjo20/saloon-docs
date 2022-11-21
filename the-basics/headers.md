@@ -1,6 +1,6 @@
 # 🤓 Headers
 
-Headers can be added by using the `headers()` method on either the connector or the request. When you add headers to a connector instance, every request sent through that connector will merge those headers with the request. When you add headers to a request instance, it will just be added to that one request class.
+Headers can be added by using the `headers()` method on either the connector or the request. When you add headers to a connector instance, every request sent through that connector will merge those headers with the request. When you add headers to a request instance, it will just be added to that one request instance.
 
 ### Default Headers
 
@@ -127,11 +127,11 @@ Merge arrays of headers.
 
 #### remove(string $key)
 
-Remove a given item by its key.
+Remove a given header by its key.
 
 #### get(string $key, mixed $default = null)
 
-Get a given item by its key or return the default.
+Get a given header by its key or return the default.
 
 #### all()
 
