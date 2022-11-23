@@ -1,6 +1,6 @@
 # Requests
 
-Saloon Requests are classes that store the information required to make a single request. Within a request you can define the connector, the HTTP Method (GET, POST, etc) and the endpoint that you would like to make a request. You can also define headers and query parameters.
+Saloon's requests are classes that store all the information required to make a request. Within a request, you can define the connector, the HTTP Method (GET, POST, etc.) and the endpoint that you would like to make a request. You can also define headers and query parameters. Traditionally, you would write your HTTP requests each time you need to, but this way, you can write a request class once and use it multiple times in your application.
 
 ### Getting Started
 
