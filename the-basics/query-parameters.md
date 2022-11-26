@@ -1,10 +1,10 @@
 # ❓ Query Parameters
 
-Like headers, query parameters can be added by using the `queryParameters()` method on either the connector or the request. When you add query parameters to a connector instance, every request sent through that connector will merge those parameters with the request. When you add query parameters to a request instance, it will just be added to that one request instance.
+Like headers, query parameters can be added by using the `query()` method on either the connector or the request. When you add query parameters to a connector instance, every request sent through that connector will merge those parameters with the request. When you add query parameters to a request instance, it will just be added to that one request instance.
 
 ### Default Query Parameters
 
-You may configure default query parameters on the connector or request using the protected `defaultQueryParameters` method.
+You may configure default query parameters on the connector or request using the protected `defaultQuery` method.
 
 {% tabs %}
 {% tab title="Request" %}
@@ -17,7 +17,7 @@ class GetServersRequest extends Request
 {
     // {...}
     
-    protected function defaultQueryParameters(): array
+    protected function defaultQuery(): array
     {
         return [
             'per_page' => 50,
@@ -37,7 +37,7 @@ class ForgeConnector extends Connector
 {
     // {...}
     
-    protected function defaultQueryParameters(): array
+    protected function defaultQuery(): array
     {
         return [
             'per_page' => 50,
@@ -77,7 +77,7 @@ class GetServersRequest extends Request
         $this->page = $page;
     }
     
-    protected function defaultQueryParameters(): array
+    protected function defaultQuery(): array
     {
         return [
             'per_page' => $this->perPage,
@@ -97,18 +97,18 @@ $request = new GetServersRequest(perPage: 50, page: 5);
 {% endtab %}
 {% endtabs %}
 
-### Using the queryParameters Method
+### Using the query Method
 
-Saloon also offers a handy query parameters API to manage them easily after a request instance has been created. Use the `queryParameters()` method on your request to manage them. Query parameters added to the request are prioritised more than the connector's query parameters. This is useful for changing them before a request is sent.
+Saloon also offers a handy query parameters API to manage them easily after a request instance has been created. Use the `query()` method on your request to manage them. Query parameters added to the request are prioritised more than the connector's query parameters. This is useful for changing them before a request is sent.
 
 ```php
 <?php
 
 $request = new GetServersRequest();
 
-$request->queryParameters()->add('page', 5);
+$request->query()->add('page', 5);
 
-$all = $request->queryParameters()->all();
+$all = $request->query()->all();
 
 // array: ['page' => 5]
 ```
