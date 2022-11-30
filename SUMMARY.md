@@ -22,6 +22,7 @@
 
 ## Digging Deepeer
 
+* [☝ Solo Requests](digging-deepeer/solo-requests.md)
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
 * [💂 Middleware](digging-deepeer/middleware.md)
@@ -29,12 +30,11 @@
 * [🔁 Caching Responses](digging-deepeer/caching-responses.md)
 * [🔏 OAuth2 Authentication](digging-deepeer/oauth2-authentication.md)
 * [🏁 Laravel Commands](digging-deepeer/laravel-commands.md)
-* [🌵 GraphQL](digging-deepeer/graphql.md)
+* [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
 * [🪐 Under The Hood](digging-deepeer/under-the-hood/README.md)
   * [The PendingRequest](digging-deepeer/under-the-hood/the-pendingrequest.md)
   * [Senders](digging-deepeer/under-the-hood/senders.md)
   * [PSR Support](digging-deepeer/under-the-hood/psr-support.md)
-* [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
 
 ## SDK Development
 
