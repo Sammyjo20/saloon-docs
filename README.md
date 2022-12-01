@@ -1,5 +1,5 @@
 ---
-description: Build awesome API integrations and SDKs for your Laravel or PHP app.
+description: Build awesome API integrations and SDKs for PHP application.
 ---
 
 # 🤠 Saloon
