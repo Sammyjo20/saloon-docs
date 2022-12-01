@@ -1,12 +1,10 @@
 ---
-description: >-
-  A Laravel / PHP package that helps you write beautiful API integrations and
-  SDKs.
+description: Build awesome API integrations and SDKs for your Laravel or PHP app.
 ---
 
 # 🤠 Saloon
 
-<figure><img src=".gitbook/assets/FJFXPeaXEAAihla.jpg" alt=""><figcaption><p>Sending a request and retrieving the JSON response as an array</p></figcaption></figure>
+<figure><img src=".gitbook/assets/carbon.png" alt=""><figcaption><p>Sending a request and retrieving the response</p></figcaption></figure>
 
 ### Introduction
 
