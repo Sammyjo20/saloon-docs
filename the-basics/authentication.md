@@ -130,3 +130,59 @@ $request->withTokenAuth($user->forge_api_key);
 ```
 {% endtab %}
 {% endtabs %}
+
+### Custom Authenticators
+
+Sometimes the API integration you are building requires multiple ways to authenticate, like a token and a certificate or perhaps authenticating an Oauth 2 API. When the built-in authentication is insufficient, You can build custom authenticators that can be transported between your application and Saloon's requests.
+
+{% tabs %}
+{% tab title="Definition" %}
+```php
+<?php
+
+use Saloon\Contracts\PendingRequest;
+use Saloon\Contracts\AuthenticatorInterface;
+
+class CustomAuthenticator implements AuthenticatorInterface
+{
+    public function __construct(
+        public string $apiKey,
+    ) {
+        //
+    }
+
+    public function set(PendingRequest $pendingRequest): void
+    {
+        $pendingRequest->headers()->add('X-API-Key', $this->apiKey);
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Usage (Connector)" %}
+```php
+<?php
+
+$connector = new ForgeConnector;
+$connector->authenticate(new CustomAuthenticator('my-api-key'));
+
+// When requests are sent with this connector, the X-API-KEY header is added.
+
+```
+{% endtab %}
+
+{% tab title="Usage (Request)" %}
+```php
+<?php
+
+$request = new GetServersRequest;
+$request->authenticate(new CustomAuthenticator('my-api-key'));
+
+// When the request is sent with this connector, the X-API-KEY header is added.
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+You may use custom authenticators in the same way as other authenticators, so you may use the `defaultAuth` method or even authenticate on the fly.
+{% endhint %}
