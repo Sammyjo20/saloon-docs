@@ -66,6 +66,7 @@ Sometimes you may use a single API key in your .env file/application config, and
 <?php
 
 use Saloon\Contracts\Authenticator;
+use Saloon\Http\Auth\TokenAuthenticator;
 
 class ForgeConnector extends Connector
 { 
@@ -92,6 +93,15 @@ $connector = new ForgeConnector;
 ```
 {% endtab %}
 {% endtabs %}
+
+#### Authenticator Classes
+
+| Method         | Class                                     |
+| -------------- | ----------------------------------------- |
+| withTokenAuth  | use Saloon\Http\Auth\TokenAuthenticator;  |
+| withBasicAuth  | use Saloon\Http\Auth\BasicAuthenticator;  |
+| withDigestAuth | use Saloon\Http\Auth\DigestAuthenticator; |
+| withQueryAuth  | use Saloon\Http\Auth\QueryAuthenticator;  |
 
 ### Authentication on the fly
 
