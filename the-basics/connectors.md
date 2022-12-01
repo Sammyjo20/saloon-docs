@@ -1,19 +1,19 @@
 # 🔌 Connectors
 
-Connectors are classes that encapsulate the default attributes of an API integration. At the minimum, a connector expects a Base URL to be defined. You can also register default properties that would be shared with all your requests, like headers or HTTP client config.
+Connectors are classes that hold the basic requirements of an API integration. Connectors communicate with the HTTP client (Sender). At the minimum, a connector expects a Base URL to be defined. You can also register default properties that would be shared with all your requests, like headers or HTTP client config.
 
-### Building an integration for just one request?
+### Are you building an integration for just one request?
 
-Saloon connectors are recommended if you building multiple requests. You may not need a connector if you build an API integration with only one request. If this is you, [read through the "Solo Request" section.](../digging-deepeer/solo-requests.md)
+Saloon connectors are recommended if you are building multiple requests. You may not need a connector if you make an API integration with only one request. If this is you, [read through the "Solo Request" section.](../digging-deepeer/solo-requests.md)
 
 ### Getting Started
 
-We first recommend creating a directory for your API integrations. Once you have a chosen directory, create a class that extends the `SaloonConnector` abstract class. After that, extend the `defineBaseUrl` function.
+We first recommend creating a directory for your API integrations. Once you have a chosen directory, create a class that extends the `Connector` abstract class. After that, extend the `resolveBaseUrl` function.
 
 See the example connector for Laravel Forge, an API for server management.
 
 {% hint style="info" %}
-Using Laravel? Use the artisan command to create a connector.
+Using Laravel? Use the artisan command to create a connector easily.
 
 **php artisan saloon:connector \<Integration Name> \<Connector Name>**
 {% endhint %}
@@ -25,7 +25,7 @@ use Sammyjo20\Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return 'https://forge.laravel.com/api/v1';
     }
@@ -45,12 +45,12 @@ use Sammyjo20\Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return 'https://forge.laravel.com/api/v1';
     }
 
-    public function defaultHeaders(): array
+    protected function defaultHeaders(): array
     {
         return [
             'Content-Type' => 'application/json',
@@ -70,12 +70,12 @@ use Sammyjo20\Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return 'https://forge.laravel.com/api/v1';
     }
 
-    public function defaultQuery(): array
+    protected function defaultQuery(): array
     {
         return [
             'per_page' => 500, // ?per_page=500
@@ -86,7 +86,7 @@ class ForgeConnector extends Connector
 
 ### Default HTTP Client Configuration
 
-You may want to define custom options to send to the HTTP Client when creating a connector. For example, you may want to register a default timeout of 60 seconds for every request. Saloon uses Guzzle as the HTTP Client, so you may use any of Guzzle’s options inside the `defaultConfig` method. This method expects a keyed array to be returned.
+You may want to define custom options to send to the HTTP Client when creating a connector. For example, you may want to register a default timeout of 60 seconds for every request. Saloon uses Guzzle as the default HTTP Client so you may use any of Guzzle’s options inside the `defaultConfig` method. This method expects a keyed array to be returned.
 
 [Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
 
@@ -97,7 +97,7 @@ use Sammyjo20\Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return 'https://forge.laravel.com/api/v1';
     }
