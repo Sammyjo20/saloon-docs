@@ -17,14 +17,13 @@
 * [📦 Request Body/Data](the-basics/request-body-data.md)
 * [🔐 Authentication](the-basics/authentication.md)
 * [🚀 Sending Requests](the-basics/sending-requests.md)
-* [📡 Responses](the-basics/responses/README.md)
-  * [Data Transfer Objects](the-basics/responses/data-transfer-objects.md)
+* [📡 Responses](the-basics/responses.md)
 
 ## Digging Deepeer
 
+* [☝ Solo Requests](digging-deepeer/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deepeer/concurrency-and-pools.md)
 * [💂 Middleware](digging-deepeer/middleware.md)
-* [☝ Solo Requests](digging-deepeer/solo-requests.md)
 * [🔁 Caching Responses](digging-deepeer/caching-responses.md)
 * [🔏 OAuth2 Authentication](digging-deepeer/oauth2-authentication.md)
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
