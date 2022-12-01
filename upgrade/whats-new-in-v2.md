@@ -6,16 +6,16 @@ Version two of Saloon is an upgrade in everything you already love in version on
 
 #### Namespace and class name changes
 
-Previously, Saloon had "Sammyjo20" in the namespace. This has now been removed so namespaces start with "Saloon". Many of the classes in Saloon had the word "Saloon" in, which has also been dropped for examplle the request and colllection.
+Previously, Saloon had "Sammyjo20" in the namespace. This has now been removed so namespaces start with "Saloon". Many of the classes in Saloon had the word "Saloon" in, which has also been dropped, for example, the request and collection.
 
 * SaloonRequest -> Request
 * SaloonConnector -> Connector
 
-#### Reducing the dependancy on Guzzle
+#### Reducing the dependency on Guzzle
 
-Previously, Saloon was highly dependant on Guzzle as the underlying HTTP Client that sent requests. While this on its own is not inherently _bad_ it meant that Saloon was very closely tied to Guzzle's versioning, support and breaking changes. Version two still requires Guzzle as its primary HTTP Client, but there have been many changes which decouples the library from Guzzle.&#x20;
+Previously, Saloon was highly dependent on Guzzle as the underlying HTTP Client that sent requests. While this on its own is not inherently _bad_ it meant that Saloon was very closely tied to Guzzle's versioning, support and breaking changes. Version two still requires Guzzle as its primary HTTP Client, but there have been many changes which decouple the library from Guzzle.&#x20;
 
-Saloon used to send a request through a class called the `RequestSender.` this class would build up all the request properties like headers, config and body and would pass it into the Guzzle client. From version two, Saloon now has a new `PendingRequest` class that is responsible for building up all the request properties. After a PendingRequest has been made, it is sent to a `Sender.` This approach means that in theory you could use any HTTP client you like with Saloon, so if the maintainers of Guzzle decided to drop the project entirely, Saloon wouldn't be left in the dark.
+Saloon used to send a request through a class called  `RequestSender.` this class would build up all the request properties like headers, config and body and would pass it into the Guzzle client. From version two, Saloon now has a new `PendingRequest` class that is responsible for building up all the request properties. After a PendingRequest has been made, it is sent to a `Sender.` This approach means that in theory you could use any HTTP client you like with Saloon, so if the maintainers of Guzzle decided to drop the project entirely, Saloon wouldn't be left in the dark.
 
 While Saloon still uses Guzzle for it's very useful PSR-compliant objects, in future versions of Saloon, it may not use Guzzle as a dependency. The work has already been completed to allow you to use any HTTP Client of your choice.
 
