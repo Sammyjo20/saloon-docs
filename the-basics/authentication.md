@@ -1,6 +1,10 @@
 # 🔐 Authentication
 
-There are several ways to authenticate with an API; most of the time, you are expected to provide a header or query parameter to authenticate. Saloon has built helpers for the most common authentication methods to help you, but you can also create custom authenticators for advanced authentication. You can also provide defaults for authentication if you require it.
+There are several ways to authenticate with an API; most of the time, you are expected to provide a header or query parameter to authenticate. Saloon has built helpers for the most common authentication methods to help you, but you can also create custom authenticators for advanced authentication. You can also provide defaults for authentication should you require it.
+
+{% hint style="info" %}
+While you may opt-in to Saloon's authentication classes, don't feel it's the only way to authenticate. Another good method of authentication is using the `defaultHeaders, defaultConfig` or `defaultQuery` on your connector/request.
+{% endhint %}
 
 ### Available Authentication Methods
 
