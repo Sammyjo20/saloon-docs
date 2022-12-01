@@ -141,9 +141,9 @@ Sometimes the API integration you are building requires multiple ways to authent
 <?php
 
 use Saloon\Contracts\PendingRequest;
-use Saloon\Contracts\AuthenticatorInterface;
+use Saloon\Contracts\Authenticator;
 
-class CustomAuthenticator implements AuthenticatorInterface
+class CustomAuthenticator implements Authenticator
 {
     public function __construct(
         public string $apiKey,
