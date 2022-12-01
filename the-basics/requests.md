@@ -1,17 +1,16 @@
 # ✉ Requests
 
-Saloon's requests are classes that store all the information required to make a request. Within a request, you can define the connector, the HTTP Method (GET, POST, etc.) and the endpoint that you would like to make a request. You can also define headers and query parameters. Traditionally, you would write your HTTP requests each time you need to, but this way, you can write a request class once and use it multiple times in your application.
+The Saloon request class stored the information of a single API request. Within a request, you can set the HTTP Method (GET, POST, etc.) and define the endpoint of that request. You don't have to include the base URL. You can also define headers, query parameters and HTTP client config. Traditionally, you would write your HTTP requests each time you need to, but this way, you can write a request class once and use it multiple times in your application.
 
 ### Getting Started
 
-Create a class that is in a similar place to your connector. The class should extend the `SaloonRequest` abstract class. After that, create two properties. The first property should be the class name for your connector; the second should be the HTTP method.
+Create a class that is in a similar place to your connector. The class should extend the `Request` abstract class. After that, overwrite the `method` property and set the HTTP verb/method your request needs.
 
-* `protected string $connector = ForgeConnector::class`
 * `protected string $method = 'GET'`
 
-You should also extend the `defineEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be concatenated with the base URL defined within your connector.
+After that, extend the `resolveEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be concatenated with the base URL defined within your connector.
 
-See the example request. This request will GET all of the servers from the Laravel Forge API.
+See the example request. This request will GET all of the servers from a Laravel Forge account.
 
 {% hint style="info" %}
 Using Laravel, Use the artisan command to create a connector.
@@ -27,11 +26,9 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
 {
-    protected string $connector = ForgeConnector::class;
-
     protected string $method = 'GET';
 
-    protected function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/servers';
     }
@@ -50,11 +47,9 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
 {
-    protected string $connector = ForgeConnector::class;
-
     protected string $method = 'GET';
 
-    protected function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/servers';
     }
@@ -80,11 +75,9 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
 {
-    protected string $connector = ForgeConnector::class;
-    
     protected string $method = 'GET';
-    
-    protected function defineEndpoint(): string
+
+    public function resolveEndpoint(): string
     {
         return '/servers';
     }
@@ -101,7 +94,7 @@ class GetServersRequest extends Request
 
 ### Default HTTP Client Config
 
-You may want to define custom options to send to the HTTP Client when creating a request. For example, you may want to register a default timeout of 120 seconds on the request. Saloon uses Guzzle as the HTTP Client so that you may use any of Guzzle’s options inside the. `defaultConfig` method. This method expects a keyed array to be returned. The configuration options will be merged with the connector’s config.
+You may want to define custom options to send to the HTTP Client when creating a request. For example, you may want to register a default timeout of 120 seconds on the request. Saloon uses Guzzle as the default HTTP client, so you may use any of Guzzle’s options inside the`defaultConfig` method. This method expects a keyed array to be returned. The configuration options will be merged with the connector’s config.
 
 [Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
 
@@ -113,11 +106,9 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
 {
-    protected string $connector = ForgeConnector::class;
-    
     protected string $method = 'GET';
-    
-    protected function defineEndpoint(): string
+
+    public function resolveEndpoint(): string
     {
         return '/servers';
     }
@@ -133,7 +124,7 @@ class GetServersRequest extends Request
 
 ### Using Constructor Arguments
 
-You will often have variables that you want to pass into the request. You may add properties to your request class or use a constructor to provide variables into the request instance. Since the request is still a regular class, you may customise it how you like.
+You will often have variables that you want to pass into the request. You may add properties to your request class and use a constructor to provide variables into the request instance. Since the request is still a regular class, you may customise it how you like.
 
 For example, I want to create a request to retrieve an individual server by an ID. I will add a constructor to accept the server ID and concatenate the variable with the endpoint. This way, I can pass the ID into every request instance.
 
@@ -145,13 +136,11 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServerRequest extends Request
 {
-    protected ?string $connector = ForgeConnector::class;
+    protected string $method = 'GET';
 
-    protected ?string $method = 'GET';
-
-    public funtion __construct(protected int $id)
+    public function resolveEndpoint(): string
     {
-        //
+        return '/servers';
     }
     
     protected function defineEndpoint(): string
