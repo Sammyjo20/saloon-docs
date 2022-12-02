@@ -67,3 +67,68 @@ $promise
 {% hint style="info" %}
 Saloon supports all the features Guzzle offers for asynchronous requests, including unwrapping promises and request pooling for high-performance API calls. [Click here to learn more.](../digging-deepeer/concurrency-and-pools.md)
 {% endhint %}
+
+### Sending requests without instantiating the connector
+
+With previous versions of Saloon, you could send a request directly without having to use a connector to send a request. While sending requests through the connector has many benefits, you may wish to add this feature with the `HasConnector` trait on your request.
+
+#### Adding the trait
+
+Once you have added the trait to your request, make sure to add the `connector` protected property and define your connector class. You may also extend the `resolveConnector` method if you need a more advanced solution.
+
+{% tabs %}
+{% tab title="Connector Property" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Sammyjo20\Saloon\Http\Request;
+use Saloon\Traits\Request\HasConnector;
+use App\Http\Integrations\LaravelForge\ForgeConnector;
+
+class GetServersRequest extends Request
+{
+<strong>    use HasConnector;
+</strong><strong>    
+</strong><strong>    protected string $connector = ForgeConnector::class;
+</strong>
+    protected string $method = 'GET';
+
+    public function resolveEndpoint(): string
+    {
+        return '/servers';
+    }
+}
+</code></pre>
+
+{% hint style="warning" %}
+When defining a connector with a property, you must not have any constructor properties on your connector.
+{% endhint %}
+{% endtab %}
+
+{% tab title="Using resolveConnector" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Sammyjo20\Saloon\Http\Request;
+use Saloon\Traits\Request\HasConnector;
+use App\Http\Integrations\LaravelForge\ForgeConnector;
+
+class GetServersRequest extends Request
+{
+<strong>    use HasConnector;
+</strong>
+    protected string $method = 'GET';
+    
+<strong>    protected function resolveConnector(): Connector
+</strong><strong>    {
+</strong><strong>        return new ForgeConnector;
+</strong><strong>    }
+</strong>
+    public function resolveEndpoint(): string
+    {
+        return '/servers';
+    }
+}
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+#### Ad
