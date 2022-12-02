@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-To start sending requests, instantiate your connector class and request class and use the `send` or `sendAsync` methods. When using the `send` method. you will receive a `Response` class, but when using `sendAsync` , you will receive an instance of `PromiseInterface`. Read more below to learn more about asynchronous requests.
+To start sending requests, instantiate your connector class and request class and use the `send` or `sendAsync` methods. When using the `send` method. you will receive a `Response` class.
 
 ```php
 <?php
@@ -43,6 +43,8 @@ $request->query()->add('page', 5);
 {% endtab %}
 {% endtabs %}
 
-* Sending requests normally
-* Through connectors
-* Using sendAsync
+### Asynchronous Requests
+
+Saloon supports asynchronous requests out of the box. Use the `sendAsync` method, and you will receive an instance of `PromiseInterface`. Saloon uses Guzzle's Promises library, which uses the A+ standard. [Click here to read more](https://github.com/guzzle/promises).
+
+&#x20;
