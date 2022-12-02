@@ -68,6 +68,22 @@ $promise
 Saloon supports all the features Guzzle offers for asynchronous requests, including unwrapping promises and request pooling for high-performance API calls. [Click here to learn more.](../digging-deepeer/concurrency-and-pools.md)
 {% endhint %}
 
+### Sending Solo Requests
+
+Please make sure to read the section on [solo requests](../digging-deepeer/solo-requests.md) first to configure your request. You can send solo requests directly. You have the following methods available on the solo request.
+
+* send(MockClient $mockClient = null)
+* sendAsync(MockClient $mockClient = null)
+* createPendingRequest
+* connector
+
+```php
+<?php
+
+$request = new GetServersRequest;
+$response = $request->send();
+```
+
 ### Sending requests without instantiating the connector
 
 With previous versions of Saloon, you could send a request directly without having to use a connector to send a request. While sending requests through the connector has many benefits, you may wish to add this feature with the `HasConnector` trait on your request.
@@ -130,5 +146,21 @@ class GetServersRequest extends Request
 </code></pre>
 {% endtab %}
 {% endtabs %}
+
+#### Sending requests
+
+Now you can use the following methods on your request.
+
+* send(MockClient $mockClient = null)
+* sendAsync(MockClient $mockClient = null)
+* createPendingRequest
+* connector
+
+```php
+<?php
+
+$request = new GetServersRequest;
+$response = $request->send();
+```
 
 #### Ad
