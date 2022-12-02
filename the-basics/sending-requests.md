@@ -39,6 +39,8 @@ $request = new GetServersRequest;
 
 $request->headers()->add('X-Custom-Header', 'Hello'!);
 $request->query()->add('page', 5);
+
+$response = $connector->send($request);
 ```
 {% endtab %}
 {% endtabs %}
@@ -47,4 +49,21 @@ $request->query()->add('page', 5);
 
 Saloon supports asynchronous requests out of the box. Use the `sendAsync` method, and you will receive an instance of `PromiseInterface`. Saloon uses Guzzle's Promises library, which uses the A+ standard. [Click here to read more](https://github.com/guzzle/promises).
 
-&#x20;
+```php
+<?php
+
+$connector = new ForgeConnector('api-token');
+$promise = $connector->send(new GetServersRequest);
+
+$promise
+   ->then(function (Response $response) {
+      // Handle Response
+   })
+   ->otherwise(function (RequestException $exception) {
+        // Handle Exception
+    });
+```
+
+{% hint style="info" %}
+Saloon supports all the features Guzzle offers for asynchronous requests, including unwrapping promises and request pooling for high-performance API calls. [Click here to learn more.](../digging-deepeer/concurrency-and-pools.md)
+{% endhint %}
