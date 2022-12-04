@@ -137,13 +137,8 @@ use App\Http\Integrations\LaravelForge\ForgeConnector;
 class GetServerRequest extends Request
 {
     protected string $method = 'GET';
-
-    public function resolveEndpoint(): string
-    {
-        return '/servers';
-    }
     
-    protected function defineEndpoint(): string
+    protected function resolveEndpoint(): string
     {
         return '/servers/' . $this->id;
     }
