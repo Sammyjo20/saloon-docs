@@ -18,6 +18,7 @@
 * [🔐 Authentication](the-basics/authentication.md)
 * [🚀 Sending Requests](the-basics/sending-requests.md)
 * [📡 Responses](the-basics/responses.md)
+* [🔥 Handling Failures](the-basics/handling-failures.md)
 
 ## Digging Deepeer
 
