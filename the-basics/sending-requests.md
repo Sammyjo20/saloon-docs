@@ -53,7 +53,7 @@ Saloon supports asynchronous requests out of the box. Use the `sendAsync` method
 <?php
 
 $connector = new ForgeConnector('api-token');
-$promise = $connector->send(new GetServersRequest);
+$promise = $connector->sendAsync(new GetServersRequest);
 
 $promise
    ->then(function (Response $response) {
