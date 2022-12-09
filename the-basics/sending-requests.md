@@ -12,6 +12,28 @@ $response = $connector->send(new GetServersRequest);
 
 ```
 
+### Sending requests in one line
+
+Reducing the number of lines in your code can help with readability. You can use the `make` static method on the connector or request to instantiate the object without using "new".
+
+{% tabs %}
+{% tab title="Connector" %}
+```php
+<?php
+
+ForgeConnector::make('api-token')->send(new GetServersRequest);
+```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+GetServersRequest::make($args)->send();
+```
+{% endtab %}
+{% endtabs %}
+
 You may also overwrite any headers, query parameters, HTTP client config and request body on the connector or request. Read through the sections above for all the methods on the request property methods.
 
 {% tabs %}
@@ -162,5 +184,3 @@ Now you can use the following methods on your request.
 $request = new GetServersRequest;
 $response = $request->send();
 ```
-
-#### Ad
