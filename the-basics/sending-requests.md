@@ -14,25 +14,15 @@ $response = $connector->send(new GetServersRequest);
 
 ### Sending requests in one line
 
-Reducing the number of lines in your code can help with readability. You can use the `make` static method on the connector or request to instantiate the object without using "new".
+Reducing the number of lines in your code can help with readability. You can use the `make` static method on the connector or request to instantiate the object without using "new". Note - this means you don't have a reusable connector instance.
 
-{% tabs %}
-{% tab title="Connector" %}
 ```php
 <?php
 
 ForgeConnector::make('api-token')->send(new GetServersRequest);
 ```
-{% endtab %}
 
-{% tab title="Request" %}
-```php
-<?php
-
-GetServersRequest::make($args)->send();
-```
-{% endtab %}
-{% endtabs %}
+### Request Properties
 
 You may also overwrite any headers, query parameters, HTTP client config and request body on the connector or request. Read through the sections above for all the methods on the request property methods.
 
@@ -112,7 +102,7 @@ With previous versions of Saloon, you could send a request directly without havi
 
 #### Adding the trait
 
-Once you have added the trait to your request, make sure to add the `connector` protected property and define your connector class. You may also extend the `resolveConnector` method if you need a more advanced solution.
+Once you have added the trait to your request, make sure to add the `connector` protected property and define your connector class. You may instead extend the `resolveConnector` method if you need a more advanced solution.
 
 {% tabs %}
 {% tab title="Connector Property" %}
