@@ -12,9 +12,9 @@ $response = $connector->send(new GetServersRequest);
 
 ```
 
-### Sending requests in one line
+#### One-liner for sending requests
 
-Reducing the number of lines in your code can help with readability. You can use the `make` static method on the connector or request to instantiate the object without using "new". Note - this means you don't have a reusable connector instance.
+You can use the `make` static method on the connector or request to instantiate the object without using "new". Note - this means you don't have a reusable connector instance.
 
 ```php
 <?php
