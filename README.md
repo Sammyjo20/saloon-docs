@@ -29,7 +29,7 @@ If you need request faking for your tests, Saloon has it out of the box alongsid
 * Scalable with lots of API integrations across many team members
 
 {% hint style="info" %}
-Like the sound of Saloon? Consider [giving it a star on Github](https://github.com/sammyjo20/saloon)!
+Are you a fan of Saloon? [Please star on Github!](https://github.com/sammyjo20/saloon)
 {% endhint %}
 
 ### Why Saloon?
