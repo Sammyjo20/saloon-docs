@@ -16,6 +16,10 @@ $body = $response->body();
 $decodedBody = $response->json();
 ```
 
+{% hint style="warning" %}
+By default, Saloon will not throw an exception if a synchronous request fails. [Refer to the handling failures section for handling errors.](handling-failures.md)
+{% endhint %}
+
 ### Available Methods
 
 | Method                      | Description                                                                                                                                                                                   |
@@ -52,7 +56,7 @@ $decodedBody = $response->json();
 
 ### Handling asynchronous responses
 
-When using concurrent requests/pooling or `sendAsync` , Saloon will respond with a `GuzzleHttp\Promise\PromiseInterface.` The result will be a `Response` a class described above.
+When using concurrent requests/pooling or `sendAsync` , Saloon will respond with a `GuzzleHttp\Promise\PromiseInterface.` The result will be a `Response` a class described above. When the request fails, Saloon will not use the `then` method but return an instance of `RequestException`in the `otherwise` block.
 
 ```php
 <?php
@@ -70,10 +74,6 @@ $promise
         // Handle failed request
     });
 ```
-
-{% hint style="warning" %}
-When the request fails, Saloon will not use the `then` method but return an instance of `RequestException`in the `otherwise` block.
-{% endhint %}
 
 ### Custom responses
 
