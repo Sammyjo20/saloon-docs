@@ -31,16 +31,8 @@
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
 * [🏁 Laravel Commands](digging-deepeer/laravel-commands.md)
-
-## SDK Development
-
-* [🔌 Building SDKs](sdk-development/building-sdks.md)
-* [🤝 SDK Template](sdk-development/sdk-template.md)
-
-## Testing
-
-* [🤿 Faking / Mock Responses](testing/faking-mock-responses.md)
-* [✅ MockClient Assertions](testing/mockclient-assertions.md)
+* [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
+* [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 
 ## Conclusion
 
