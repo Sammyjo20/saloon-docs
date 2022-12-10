@@ -4,6 +4,10 @@ description: Build awesome API integrations and SDKs for your PHP application.
 
 # 🤠 Saloon
 
+{% hint style="info" %}
+You are viewing the documentation for Saloon v2. If you are using version one, click here.
+{% endhint %}
+
 <figure><img src=".gitbook/assets/carbon.png" alt=""><figcaption><p>Sending a request and retrieving the response</p></figcaption></figure>
 
 ### Introduction
