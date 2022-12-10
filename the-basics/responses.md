@@ -1,10 +1,22 @@
 # 📡 Responses
 
-tDepending on how you sent your request (synchronous/asynchronous) you will either receive an instance of `Response` or a `PromiseInterface.`
+Depending on how you sent your request (synchronous/asynchronous) you will either receive an instance of `Response` or a `PromiseInterface.`
 
 ### Handling synchronous responses
 
-By default, Saloon will return an instance of `Saloon\Http\Responses\Response`. this is the default response and is used by the GuzzleSender. This response class contains many helpful methods for interacting with your HTTP response.
+By default, Saloon will return an instance of `Saloon\Contracts\Response`. this is the default response and is used by the GuzzleSender. This response class contains many helpful methods for interacting with your HTTP response.
+
+```php
+<?php
+
+$connector = new ForgeConnector('api-token');
+$response = $connector->send(new GetServersRequest);
+
+$body = $response->body();
+$decodedBody = $response->json();
+```
+
+### Available Methods
 
 | Method                      | Description                                                                                                                                                                                   |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -39,6 +51,29 @@ By default, Saloon will return an instance of `Saloon\Http\Responses\Response`. 
 | \_\_toString                | Returns the HTTP body as a string                                                                                                                                                             |
 
 ### Handling asynchronous responses
+
+When using concurrent requests/pooling or `sendAsync` , Saloon will respond with a `GuzzleHttp\Promise\PromiseInterface.` The result will be a `Response` a class described above.
+
+```php
+<?php
+
+use Saloon\Contracts\Response;
+
+$connector = new ForgeConnector('api-token');
+$promise = $connector->sendAsync(new GetServersRequest);
+
+$promise
+    ->then(function (Response $response) {
+        // Handle successful response
+    })
+    ->otherwise(function (RequestException|FatalRequestException $exception) {
+        // Handle failed request
+    });
+```
+
+{% hint style="warning" %}
+When the request fails, Saloon will not use the `then` method but return an instance of `RequestException`in the `otherwise` block.
+{% endhint %}
 
 ### Custom responses
 
