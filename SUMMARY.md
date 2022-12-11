@@ -7,9 +7,12 @@
 * [🎁 What's new in v2](upgrade/whats-new-in-v2.md)
 * [🌿 Upgrading from v1](upgrade/upgrading-from-v1.md)
 
+## Getting Started
+
+* [👋 Installation](getting-started/installation.md)
+
 ## The Basics
 
-* [🤝 Installation](the-basics/installation.md)
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
 * [🤓 Headers](the-basics/headers.md)
