@@ -98,7 +98,7 @@ use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    // ...
+    // {...}
     
 <strong>    protected string $response = CustomResponse::class;
 </strong>}
@@ -133,7 +133,7 @@ use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
-    // ...
+    // {...}
     
     public function resolveResponseClass(): string
     {
@@ -151,7 +151,7 @@ use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
-    // ...
+    // {...}
     
     public function resolveResponseClass(): string
     {
