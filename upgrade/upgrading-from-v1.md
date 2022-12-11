@@ -23,11 +23,9 @@ composer require sammyjo20/saloon ^2.0
 
 {% tab title="Laravel" %}
 ```bash
-composer remove sammyjo20/saloon-laravel
-
 composer require sammyjo20/saloon ^2.0
 
-composer require sammyjo20/saloon-laravel-plugin ^1.0
+composer require sammyjo20/saloon-laravel ^2.0
 ```
 {% endtab %}
 {% endtabs %}
