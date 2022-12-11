@@ -7,31 +7,11 @@ Headers can be added by using the `headers()` method on either the connector or 
 You may configure default headers on the connector or request using the protected `defaultHeaders` method.
 
 {% tabs %}
-{% tab title="Request" %}
-```php
-<?php
-
-use Sammyjo20\Saloon\Http\Request;
-
-class GetServersRequest extends Request
-{
-    // {...}
-    
-    protected function defaultHeaders(): array
-    {
-        return [
-            'Content-Type' => 'application/json'
-        ];
-    }
-}
-```
-{% endtab %}
-
 {% tab title="Connector" %}
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -50,6 +30,26 @@ class ForgeConnector extends Connector
 Default headers on a connector will be applied to every request. This is handy for providing specific headers like Content-Type or Accept.
 {% endhint %}
 {% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json'
+        ];
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 #### Using Properties With Default Headers
@@ -61,7 +61,7 @@ You may also use properties in requests to populate headers, for example populat
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {

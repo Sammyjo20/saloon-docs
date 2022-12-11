@@ -11,31 +11,11 @@ Saloon's default sender is the GuzzleSender. By default, the config options are 
 You may configure the default HTTP config on the connector or request using the protected `defaultConfig` method.
 
 {% tabs %}
-{% tab title="Request" %}
-```php
-<?php
-
-use Sammyjo20\Saloon\Http\Request;
-
-class GetServersRequest extends Request
-{
-    // {...}
-    
-    protected function defaultConfig(): array
-    {
-        return [
-            'timeout' => 30,
-        ];
-    }
-}
-```
-{% endtab %}
-
 {% tab title="Connector" %}
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -54,6 +34,26 @@ class ForgeConnector extends Connector
 Default HTTP config on a connector will be applied to every request that uses the connector.
 {% endhint %}
 {% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+    protected function defaultConfig(): array
+    {
+        return [
+            'timeout' => 30,
+        ];
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 #### Using Properties With Default HTTP Config
@@ -65,7 +65,7 @@ You may also use properties in requests to populate HTTP config, for example - s
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {

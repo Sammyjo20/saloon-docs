@@ -21,7 +21,7 @@ Using Laravel? Use the artisan command to create a connector easily.
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -41,7 +41,7 @@ To add default headers, you can extend the `defaultHeaders` method to your conne
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -66,7 +66,7 @@ You may also add a `defaultQuery` method to your connector to specify default qu
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -93,7 +93,7 @@ You may want to define custom options to send to the HTTP client. For example, y
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {

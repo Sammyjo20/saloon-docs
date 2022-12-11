@@ -21,8 +21,7 @@ Using Laravel, Use the artisan command to create a connector.
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
@@ -42,7 +41,7 @@ Some requests require specific headers or query parameters to be sent. To define
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
@@ -70,8 +69,7 @@ You may also add a `defaultQuery` method to your request to specify default quer
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
@@ -101,8 +99,7 @@ You may want to define custom options to send to the HTTP Client when creating a
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
@@ -131,8 +128,7 @@ For example, I want to create a request to retrieve an individual server by an I
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use Saloon\Http\Request;
 
 class GetServerRequest extends Request
 {

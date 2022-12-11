@@ -77,4 +77,87 @@ $promise
 
 ### Custom responses
 
-* You must extend the sender's response since the sender is responsible for instantiating the object
+Sometimes you may want to use your response class. This is useful if you want to add your methods or overwrite Saloon's response methods. Saloon allows you to overwrite the response at a connector level for all requests or at a per-request level for a granular response.&#x20;
+
+Saloon is HTTP sender agnostic, so you should extend the response class the corresponding sender uses instead of creating your own. See below the list of senders and their response classes.
+
+| Sender                 | Response Class                 |
+| ---------------------- | ------------------------------ |
+| GuzzleSender (default) | Saloon\Http\Responses\Response |
+| HttpSender (Laravel)   | Saloon\Http\Responses\Response |
+
+#### Using the response property
+
+The simplest way of registering a custom response is to use the `$response` property on either the connector or request.
+
+{% tabs %}
+{% tab title="Connector" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Http\Connector;
+
+class ForgeConnector extends Connector
+{
+    // ...
+    
+<strong>    protected string $response = CustomResponse::class;
+</strong>}
+</code></pre>
+{% endtab %}
+
+{% tab title="Request" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+<strong>    protected string $response = CustomResponse::class;
+</strong>}
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+#### Using the resolveResponseClass method
+
+When you need a more advanced way to define a custom response, use the `resolveResponseClass` method on either the connector or request.
+
+{% tabs %}
+{% tab title="Connector" %}
+```php
+<?php
+
+use Saloon\Http\Connector;
+
+class ForgeConnector extends Connector
+{
+    // ...
+    
+    public function resolveResponseClass(): string
+    {
+        return CustomResponse::class;
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    // ...
+    
+    public function resolveResponseClass(): string
+    {
+        return CustomResponse::class;
+    }
+}
+```
+{% endtab %}
+{% endtabs %}

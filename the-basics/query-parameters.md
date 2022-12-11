@@ -7,31 +7,11 @@ Like headers, query parameters can be added by using the `query()` method on eit
 You may configure default query parameters on the connector or request using the protected `defaultQuery` method.
 
 {% tabs %}
-{% tab title="Request" %}
-```php
-<?php
-
-use Sammyjo20\Saloon\Http\Request;
-
-class GetServersRequest extends Request
-{
-    // {...}
-    
-    protected function defaultQuery(): array
-    {
-        return [
-            'per_page' => 50,
-        ];
-    }
-}
-```
-{% endtab %}
-
 {% tab title="Connector" %}
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Connector;
+use Saloon\Http\Connector;
 
 class ForgeConnector extends Connector
 {
@@ -50,6 +30,26 @@ class ForgeConnector extends Connector
 Default query parameters on a connector will be applied to every request that uses the connector.
 {% endhint %}
 {% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+    protected function defaultQuery(): array
+    {
+        return [
+            'per_page' => 50,
+        ];
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 #### Using Properties With Default Query Parameters
@@ -61,7 +61,7 @@ You may also use properties in requests to populate query parameters, for exampl
 ```php
 <?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
