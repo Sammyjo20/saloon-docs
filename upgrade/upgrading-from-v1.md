@@ -12,15 +12,29 @@ Advanced integrations and SDKs: \~30-45 minutes
 
 ### Installation
 
-Firstly, run the following composer command to install Saloon v2
+Firstly, run the following composer commands to install Saloon v2, depending on your installation.
 
+{% tabs %}
+{% tab title="Non-Laravel" %}
 ```bash
 composer require sammyjo20/saloon ^2.0
 ```
+{% endtab %}
+
+{% tab title="Laravel" %}
+```bash
+composer remove sammyjo20/saloon-laravel
+
+composer require sammyjo20/saloon ^2.0
+
+composer require sammyjo20/saloon-laravel-plugin ^1.0
+```
+{% endtab %}
+{% endtabs %}
 
 #### Rename namespaces
 
-The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings in your application and tests.
+The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings.
 
 | Find                                           | Replace                              |
 | ---------------------------------------------- | ------------------------------------ |
@@ -30,21 +44,62 @@ The `Sammyjo20` username has been dropped from all namespaces. You should run a 
 
 #### Rename class names
 
-The word `Saloon` has also been dropped from many of its classes. You should run a find and replace for the following strings in your application and tests.
+The word `Saloon` has also been dropped from many of its classes. You should run a find and replace for the following strings.
 
-| Find                                                      | Replace                                             |
-| --------------------------------------------------------- | --------------------------------------------------- |
+| Find                                                                  | Replace                                                                  |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | <pre><code>use Saloon\Http\SaloonConnector;
-</code></pre> | <pre><code>use Saloon\Http\Connector;
-</code></pre> |
+</code></pre>             | <pre><code>use Saloon\Http\Connector;
+</code></pre>                      |
 | <pre><code>use Saloon\Http\SaloonRequest;
-</code></pre>   | <pre><code>use Saloon\Http\Request;
-</code></pre>   |
-|                                                           |                                                     |
+</code></pre>               | <pre><code>use Saloon\Http\Request;
+</code></pre>                        |
+| <pre><code>use Saloon\Http\SaloonResponse;
+</code></pre>              | <pre><code>use Saloon\Http\Responses\Response;
+</code></pre>             |
+| <pre><code>use Saloon\Exceptions\SaloonRequestException
+</code></pre> | <pre><code>use Saloon\Exceptions\Request\RequestException;
+</code></pre> |
+| <pre><code>extends SaloonConnector
+</code></pre>                      | <pre><code>extends Connector
+</code></pre>                               |
+| <pre><code>extends SaloonRequest
+</code></pre>                        | <pre><code>extends Request
+</code></pre>                                 |
+| <pre><code>extends SaloonResponse
+</code></pre>                       | <pre><code>extends Response
+</code></pre>                                |
+| <pre><code>extends SaloonRequestException
+</code></pre>               | <pre><code>extends RequestException
+</code></pre>                        |
+
+#### Replace method properties and methods
+
+There have been a few properties and methods that have been renamed, or their visibility has changed. You should run a find and replace for the following strings.
+
+| Find                                                              | Replace                                                            |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
+| <pre><code>public function defineBaseUrl(): string
+</code></pre>  | <pre><code>public function resolveBaseUrl(): string
+</code></pre>  |
+| <pre><code>public function defineEndpoint(): string
+</code></pre> | <pre><code>public function resolveEndpoint(): string
+</code></pre> |
+| <pre><code>protected ?string $response = 
+</code></pre>           | <pre><code>protected string $response = 
+</code></pre>             |
+| <pre><code>protected ?string $method = 
+</code></pre>             | <pre><code>protected Method $method = 
+</code></pre>               |
+
+#### Using the new headers, query, config API
 
 #### Moving request data to the new body API
 
 #### Other
+
+* toException on the response has a changed return type from SaloonRequestException to Throwable
+* getGuzzleException on the response has changed to getSenderException
 
 ### Changes
 
