@@ -4,11 +4,11 @@ The Saloon request class stored the information of a single API request. Within 
 
 ### Getting Started
 
-Create a class that is in a similar place to your connector. The class should extend the `Request` abstract class. After that, overwrite the `method` property and set the HTTP verb/method your request needs.
+Create a class that is in a similar place to your connector. The class should extend the `Request` abstract class. After that, overwrite the `method` property and set the HTTP verb/method your request needs. You should import the `Saloon\Enums\Method` enum class.
 
-* `protected string $method = 'GET'`
+* `protected Method $method = Method::GET;`
 
-After that, extend the `resolveEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be concatenated with the base URL defined within your connector.
+After that, extend the `resolveEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be combined with the base URL defined within your connector.
 
 See the example request. This request will GET all of the servers from a Laravel Forge account.
 
@@ -21,11 +21,12 @@ Using Laravel, Use the artisan command to create a connector.
 ```php
 <?php
 
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
-    protected string $method = 'GET';
+    protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
     {
@@ -41,12 +42,12 @@ Some requests require specific headers or query parameters to be sent. To define
 ```php
 <?php
 
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
 
 class GetServersRequest extends Request
 {
-    protected string $method = 'GET';
+    protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
     {
@@ -69,11 +70,12 @@ You may also add a `defaultQuery` method to your request to specify default quer
 ```php
 <?php
 
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
-    protected string $method = 'GET';
+    protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
     {
@@ -99,11 +101,12 @@ You may want to define custom options to send to the HTTP Client when creating a
 ```php
 <?php
 
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetServersRequest extends Request
 {
-    protected string $method = 'GET';
+    protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
     {
@@ -128,11 +131,12 @@ For example, I want to create a request to retrieve an individual server by an I
 ```php
 <?php
 
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetServerRequest extends Request
+class GetServersRequest extends Request
 {
-    protected string $method = 'GET';
+    protected Method $method = Method::GET;
     
     protected function resolveEndpoint(): string
     {
