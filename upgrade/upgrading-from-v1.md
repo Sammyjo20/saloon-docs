@@ -20,7 +20,7 @@ composer require sammyjo20/saloon ^2.0
 
 #### Rename namespaces
 
-The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings.
+The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings in your application and tests.
 
 | Find                                           | Replace                              |
 | ---------------------------------------------- | ------------------------------------ |
@@ -29,6 +29,18 @@ The `Sammyjo20` username has been dropped from all namespaces. You should run a 
 </code></pre> |
 
 #### Rename class names
+
+The word `Saloon` has also been dropped from many of its classes. You should run a find and replace for the following strings in your application and tests.
+
+| Find                                                      | Replace                                             |
+| --------------------------------------------------------- | --------------------------------------------------- |
+| <pre><code>use Saloon\Http\SaloonConnector;
+</code></pre> | <pre><code>use Saloon\Http\Connector;
+</code></pre> |
+| <pre><code>use Saloon\Http\SaloonRequest;
+</code></pre>   | <pre><code>use Saloon\Http\Request;
+</code></pre>   |
+|                                                           |                                                     |
 
 #### Moving request data to the new body API
 

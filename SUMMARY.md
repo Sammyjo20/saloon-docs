@@ -33,6 +33,7 @@
 * [🏁 Laravel Commands](digging-deepeer/laravel-commands.md)
 * [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
 * [🔌 Building SDKs](digging-deepeer/building-sdks.md)
+* [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
 
 ## Conclusion
 
