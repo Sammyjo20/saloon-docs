@@ -13,7 +13,7 @@ class CreateForgeServerRequest extends SaloonRequest
 {
     //...
 
-    public function boot(): void
+    public function boot(SaloonRequest $request): void
     {
         $this->addResponseInterceptor(function (SaloonRequest $request, SaloonResponse $response) {
             $response->throw();
@@ -39,7 +39,7 @@ class CreateForgeServerRequest extends SaloonRequest
 {
     //...
 
-    public function boot(): void
+    public function boot(SaloonRequest $request): void
     {
         $this->addResponseInterceptor(function (SaloonRequest $request, SaloonResponse $response) {
             $response::macro('hello', function ($name) {

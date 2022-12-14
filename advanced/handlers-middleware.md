@@ -15,7 +15,7 @@ class CreateForgeServerRequest extends SaloonRequest
 {
     //...
 
-    public function boot(): void
+    public function boot(SaloonRequest $request): void
     {
         $this->addHandler('customHeaderHandler', function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
