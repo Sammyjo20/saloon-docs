@@ -4,7 +4,7 @@ Connectors are classes that hold the basic requirements of an API integration. C
 
 ### Are you building an integration for just one request?
 
-Saloon connectors are great for most API integrations; however, you may not need a connector if you make an API integration with only one request. If this is you, [read through the "Solo Request" section.](../digging-deepeer/solo-requests.md) Creating a solo request means you don't need to create unnecessary classes.
+Saloon connectors are great for most API integrations; however, you may not need a connector if you make an API integration with only one request. If this is you, [read through the "Solo Request" section.](../digging-deepeer/solo-requests.md) Creating a solo request means you don't need to create a connector.
 
 ### Getting Started
 
