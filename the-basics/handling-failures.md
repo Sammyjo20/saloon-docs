@@ -126,11 +126,95 @@ Saloon offers some other methods to handle failed responses.
 | getSenderException | Get the sender exception if a request failed.                                                          |
 | onError            | Allows you to define a callback if the response is considered "failed".                                |
 
+### Customising when exceptions are thrown
 
+By default, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response but with an error message in the response body. You may extend the `shouldThrowRequestException` method to change the default behaviour.&#x20;
 
+{% tabs %}
+{% tab title="Connector" %}
+```php
+<?php
 
+use Saloon\Http\Connector;
+use Saloon\Contracts\Response;
 
+class ForgeConnector extends Connector
+{
+    // {...}
+    
+    public function shouldThrowRequestException(Response $response): bool
+    {
+        return str_contains($response->body(), 'Server Error');
+    }
+}
+```
+{% endtab %}
 
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Response;
+
+class ErrorRequest extends Request
+{
+    // {...}
+    
+    public function shouldThrowRequestException(Response $response): bool
+    {
+        return str_contains($response->body(), 'Server Error');
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+### Customising the request exception
+
+By default, Saloon will use the exceptions [listed above](handling-failures.md#default-exceptions), but you may choose to return your own exception if a request has failed. Just extend the `getRequestException` method on either your connector or request. You will receive an instance of the response and a sender exception, which may be nullable.
+
+{% tabs %}
+{% tab title="Connector" %}
+```php
+<?php
+
+use Saloon\Http\Connector;
+use Saloon\Contracts\Response;
+use \Throwable;
+
+class ForgeConnector extends Connector
+{
+    // {...}
+    
+    public function getRequestException(Response $response, ?Throwable $senderException): ?Throwable
+    {
+        return new CustomException('Oh yee-naw!', $response, $senderException);
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Response;
+use \Throwable;
+
+class ErrorRequest extends Request
+{
+    // {...}
+    
+    public function getRequestException(Response $response, ?Throwable $senderException): ?Throwable
+    {
+        return new CustomException('Oh yee-naw!', $response, $senderException);
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
 
 * Using handler methods, use tabs to show connector/request&#x20;
 * Use the shouldThrow methods if APIs provide crappy 2xx responses with "Error" messages
