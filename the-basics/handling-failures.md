@@ -4,15 +4,17 @@ Saloon has a powerful exception handler with a strong set of default exception c
 
 ### Default Exceptions
 
+Saloon has a set of exception classes that will cover most of the scenarios.
+
 ```
 SaloonException
 └── TransferException
-    ├── FatalRequestException (e.g Connection Errors)
-    └── RequestException (e.g Request Errors)
+    ├── FatalRequestException (Connection Errors)
+    └── RequestException (Request Errors)
         ├── ServerException (5xx)
         │   ├── InternalServerErrorException (500)
         │   ├── ServiceUnavailableException (503)
-        │   ├── GatewayTimeoutException (504)
+        │   └── GatewayTimeoutException (504)
         └── ClientException (4xx)
             ├── UnauthorizedException (401)
             ├── ForbiddenException (403)
@@ -20,10 +22,10 @@ SaloonException
             ├── MethodNotAllowedException (405)
             ├── RequestTimeOutException (408)
             ├── UnprocessableEntityException (422)
-            ├── TooManyRequestsException (429)
+            └── TooManyRequestsException (429)
 ```
 
-
+### Default Behaviour
 
 When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not.
 
@@ -123,8 +125,11 @@ Saloon offers some other methods to handle failed responses.
 | getSenderException | Get the sender exception if a request failed.                                                          |
 | onError            | Allows you to define a callback if the response is considered "failed".                                |
 
-* Traditional failures
+
+
+
+
+
+
 * Using handler methods, use tabs to show connector/request&#x20;
 * Use the shouldThrow methods if APIs provide crappy 2xx responses with "Error" messages
-* Mention that Saloon doesn't throw exceptions by default
-* Use the AlwaysThrowOnErrors trait
