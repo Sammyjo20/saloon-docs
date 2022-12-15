@@ -17,7 +17,7 @@ $response->body(); // {"message": "Server Error"}
 
 ### Default Exceptions
 
-Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception.
+Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception. These are thrown depending on the method you use below, but you can customise Saloon's exception handler to change when it throws exceptions and what exceptions will be thrown.
 
 ```
 SaloonException
