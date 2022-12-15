@@ -2,9 +2,22 @@
 
 Saloon has a powerful exception handler with a strong set of default exception classes. Still, Saloon's logic can also be extended for your custom use, like for APIs that don't respond with traditional error responses, like a 2xx response with errors in the body or if you would like to use your exceptions.
 
+When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not.
+
+```php
+<?php
+
+$connector = new ForgeConnector;
+$response = $connector->send(new ErrorRequest);
+
+$response->failed(); // true
+$response->status(); // 500
+$response->body(); // {"message": "Server Error"}
+```
+
 ### Default Exceptions
 
-Saloon has a set of exception classes that will cover most of the scenarios.
+Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception.
 
 ```
 SaloonException
@@ -25,20 +38,6 @@ SaloonException
             └── TooManyRequestsException (429)
 ```
 
-### Default Behaviour
-
-When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not.
-
-```php
-<?php
-
-$connector = new ForgeConnector;
-$response = $connector->send(new ErrorRequest);
-
-$response->status(); // 500
-$response->body(); // {"message": "Server Error"}
-```
-
 ### Using the throw method
 
 On a per-response basis, you may use the `throw` method after sending your response. This method will throw an exception if the response has a "failed" HTTP status code like 4xx or 5xx.
@@ -48,6 +47,8 @@ On a per-response basis, you may use the `throw` method after sending your respo
 
 $connector = new ForgeConnector;
 $response = $connector->send(new ErrorRequest);
+
+// throws InternalServerErrorException (extends ServerException)
 
 $response->throw();
 ```
