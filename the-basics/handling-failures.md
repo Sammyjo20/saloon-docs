@@ -75,16 +75,17 @@ You may also add this trait to a request.
 
 ### Using the onError method
 
-You may wish to write some custom logic in your application if a request fails, but you don't want to throw an exception. You may use the `onError` the method from the response and provide a callable to be executed if an error happens.
+You may wish to write some custom logic in your application if a request fails, but you don't want to throw an exception. You may use the `onError` method from the response and provide a callable to be executed if an error happens.
 
 ```php
 <?php
 
+use Saloon\Contracts\Response;
+
 $response = $connector->send(new ErrorRequest);
 
-$response->onError(function (RequestException $exception) {
+$response->onError(function (Response $response) {
     // Handle any logic when an error happens.
-    $this->reportException($exception);
 });
 
 // Application logic is continued
