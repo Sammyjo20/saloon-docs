@@ -8,15 +8,9 @@ Saloon connectors are great for most API integrations; however, you may not need
 
 ### Getting Started
 
-We first recommend creating a directory for your API integrations. Once you have a chosen directory, create a class that extends the `Connector` abstract class. After that, extend the `resolveBaseUrl` function.
+First, create a directory for your API integrations. Once you have a chosen directory, create a class that extends the `Connector` abstract class. After that, extend the `resolveBaseUrl` function.
 
 See the example connector for Laravel Forge, an API for server management.
-
-{% hint style="info" %}
-Using Laravel? Use the artisan command to create a connector easily.
-
-**php artisan saloon:connector \<Integration Name> \<Connector Name>**
-{% endhint %}
 
 ```php
 <?php
@@ -31,6 +25,12 @@ class ForgeConnector extends Connector
     }
 }
 ```
+
+{% hint style="info" %}
+Using Laravel? Use the artisan command to create a connector easily.
+
+**php artisan saloon:connector \<Integration Name> \<Connector Name>**
+{% endhint %}
 
 ### Default Headers and Query Parameters
 

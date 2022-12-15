@@ -1,14 +1,14 @@
 # ✉ Requests
 
-The Saloon request class stored the information of a single API request. Within a request, you can set the HTTP Method (GET, POST, etc.) and define the endpoint of that request. You don't have to include the base URL. You can also define headers, query parameters and HTTP client config. Traditionally, you would write your HTTP requests each time you need to, but this way, you can write a request class once and use it multiple times in your application.
+The Saloon request class stores the information of a single API request. Within a request, you can set the HTTP Method (GET, POST, etc.) and define the endpoint of that request. You don't have to include the base URL. You can also define headers, query parameters and HTTP client config. Saloon request classes are reusable, so you can write a request class once and use it multiple times in your application.
 
 ### Getting Started
 
-Create a class that is in a similar place to your connector. The class should extend the `Request` abstract class. After that, overwrite the `method` property and set the HTTP verb/method your request needs. You should import the `Saloon\Enums\Method` enum class.
+Create a class that is in a similar place to your connector. The class should extend the `Request` abstract class. After that, overwrite the `method` property and set the HTTP method your request needs. You should import the `Saloon\Enums\Method` enum class.
 
 * `protected Method $method = Method::GET;`
 
-After that, extend the `resolveEndpoint` public method. This method should contain the endpoint of the request you are making. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be combined with the base URL defined within your connector.
+After that, extend the `resolveEndpoint` public method. This method should contain the endpoint of the request. You may wish to leave this string blank if you do not have a specific endpoint, like when consuming GraphQL APIs. The endpoint will be combined with the base URL defined within your connector.
 
 See the example request. This request will GET all of the servers from a Laravel Forge account.
 
@@ -34,6 +34,43 @@ class GetServersRequest extends Request
     }
 }
 ```
+
+### Using Constructor Arguments
+
+You may add properties to your request class and use a constructor to provide variables into the request instance. Since the request is still a regular class, you may customise it how you like.
+
+For example, If I want to create a request to retrieve an individual server by an ID. I could add a constructor to accept the server ID and use the variable within the endpoint method. This way, I can pass the ID into every request instance.
+
+{% tabs %}
+{% tab title="Definition" %}
+```php
+<?php
+
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+
+class GetServersRequest extends Request
+{
+    protected Method $method = Method::GET;
+    
+    protected function resolveEndpoint(): string
+    {
+        return '/servers/' . $this->id;
+    }
+
+    public function __construct(
+        protected int $id,
+    ) { }
+} 
+```
+{% endtab %}
+
+{% tab title="Usage" %}
+```php
+$request = new GetServerRequest(id: 12345);
+```
+{% endtab %}
+{% endtabs %}
 
 ### Default Headers and Query Parameters
 
@@ -120,31 +157,4 @@ class GetServersRequest extends Request
         ];
     }
 }
-```
-
-### Using Constructor Arguments
-
-You will often have variables that you want to pass into the request. You may add properties to your request class and use a constructor to provide variables into the request instance. Since the request is still a regular class, you may customise it how you like.
-
-For example, I want to create a request to retrieve an individual server by an ID. I will add a constructor to accept the server ID and concatenate the variable with the endpoint. This way, I can pass the ID into every request instance.
-
-```php
-<?php
-
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class GetServersRequest extends Request
-{
-    protected Method $method = Method::GET;
-    
-    protected function resolveEndpoint(): string
-    {
-        return '/servers/' . $this->id;
-    }
-} 
-
-// 
-
-$request = new GetServerRequest(id: 12345);
 ```
