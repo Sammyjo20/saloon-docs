@@ -130,6 +130,34 @@ array:28 [
 {% endtab %}
 {% endtabs %}
 
+#### Connector-first design
+
+With previous versions of Saloon, the recommended way to send requests was with the request, and using the request `send` methods.
+
+```php
+$request = new UserRequest;
+$response = $request->send();
+```
+
+One of the points developers found frustrating was defining a connector class on every request that you make. This was solely so you could make a request directly without instantiating the connector.
+
+This approach was very minimalist, but it introduced complexity and friction for the developer.
+
+From version two, the connector property is being dropped entirely from the request. This means that you must send your requests through the connector like this:
+
+```php
+$connector = new TwitterConnector;
+$response = $connector->send(new UserRequest);
+
+// or
+
+TwitterConnector::make()->send(new UserRequest);
+```
+
+This allows you to have constructor arguments on the connector, perfect for API tokens or configuration. Similar to before, the request can have its own headers, config, query parameters and body but the connector will provide the very top-level defaults.
+
+Although this is being taken out of the request, you may still add the functionality back with the `HasConnector` trait on the request. Although, if you add it back - you need to be aware of the downsides like not being able to have constructor arguments on your connector.
+
 ### New Features
 
 #### Middleware Pipeline
@@ -312,7 +340,42 @@ $request->body()->all();
 
 #### Even Better Laravel Support (HTTP Client)
 
-If you are using Saloon in a Laravel environment, and use the Saloon-Laravel variant of the library, then version two will implement a different default sender than the Guzzle sender. Saloon version two will use a HTTP Client sender that uses Laravel's HTTP Client. Since this is built on top of Guzzle anyway, all request options will work but all the typical HTTP Client events will be sent, which means other Laravel packages using these events will now work with Saloon. One great example is recording requests in Telescope.
+If you are using Saloon in a Laravel environment, and have installed the Saloon-Laravel library, then version two will come with a different sender than the Guzzle sender that you can use. The HTTP Client sender uses Laravel's HTTP Client. Since this is built on top of Guzzle anyway, all request options will work, but all the typical HTTP Client events will be sent, which means other Laravel packages using these events will now work with Saloon. One great example is recording requests in Telescope.
+
+#### Better Exception Handler
+
+#### Solo Requests
+
+Version two will also introduce a new `SoloRequest` class which will be perfect for making just one request for API integration. With SoloRequests, you don't need a connector at all - you can define everything in the request and send it above like you used to do.
+
+{% tabs %}
+{% tab title="Definition" %}
+```php
+<?php
+
+class GetPokemonRequest extends SoloRequest
+{
+     protected Method $method = Method::GET;
+     
+     public function resolveEndpoint()
+     {
+          return 'https://pokeapi.co/api/v2/pokemon';
+     }
+}
+```
+{% endtab %}
+
+{% tab title="Usage" %}
+```php
+<?php
+
+// No Connector Needed!
+
+$request = new GetPokemonRequest;
+$response = $request->send();
+```
+{% endtab %}
+{% endtabs %}
 
 ### Other Improvements
 
