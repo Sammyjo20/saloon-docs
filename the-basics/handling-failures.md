@@ -1,8 +1,31 @@
 # 🔥 Handling Failures
 
-Saloon helps you handle HTTP errors in various ways, even for APIs that don't respond with traditional error responses, like a 2xx response with errors in the body.&#x20;
+Saloon has a powerful exception handler with a strong set of default exception classes. Still, Saloon's logic can also be extended for your custom use, like for APIs that don't respond with traditional error responses, like a 2xx response with errors in the body or if you would like to use your exceptions.
 
-By default, when you send a request, Saloon will not do anything if the request fails.&#x20;
+### Default Exceptions
+
+```
+SaloonException
+└── TransferException
+    ├── FatalRequestException (e.g Connection Errors)
+    └── RequestException (e.g Request Errors)
+        ├── ServerException (5xx)
+        │   ├── InternalServerErrorException (500)
+        │   ├── ServiceUnavailableException (503)
+        │   ├── GatewayTimeoutException (504)
+        └── ClientException (4xx)
+            ├── UnauthorizedException (401)
+            ├── ForbiddenException (403)
+            ├── NotFoundException (404)
+            ├── MethodNotAllowedException (405)
+            ├── RequestTimeOutException (408)
+            ├── UnprocessableEntityException (422)
+            ├── TooManyRequestsException (429)
+```
+
+
+
+When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not.
 
 ```php
 <?php
