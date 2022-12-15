@@ -21,21 +21,20 @@ Saloon's default exception handler contains the following exceptions based on th
 
 ```
 SaloonException
-└── TransferException
-    ├── FatalRequestException (Connection Errors)
-    └── RequestException (Request Errors)
-        ├── ServerException (5xx)
-        │   ├── InternalServerErrorException (500)
-        │   ├── ServiceUnavailableException (503)
-        │   └── GatewayTimeoutException (504)
-        └── ClientException (4xx)
-            ├── UnauthorizedException (401)
-            ├── ForbiddenException (403)
-            ├── NotFoundException (404)
-            ├── MethodNotAllowedException (405)
-            ├── RequestTimeOutException (408)
-            ├── UnprocessableEntityException (422)
-            └── TooManyRequestsException (429)
+├── FatalRequestException (Connection Errors)
+└── RequestException (Request Errors)
+    ├── ServerException (5xx)
+    │   ├── InternalServerErrorException (500)
+    │   ├── ServiceUnavailableException (503)
+    │   └── GatewayTimeoutException (504)
+    └── ClientException (4xx)
+        ├── UnauthorizedException (401)
+        ├── ForbiddenException (403)
+        ├── NotFoundException (404)
+        ├── MethodNotAllowedException (405)
+        ├── RequestTimeOutException (408)
+        ├── UnprocessableEntityException (422)
+        └── TooManyRequestsException (429)
 ```
 
 ### Using the throw method
@@ -216,5 +215,6 @@ class ErrorRequest extends Request
 {% endtab %}
 {% endtabs %}
 
-* Using handler methods, use tabs to show connector/request&#x20;
-* Use the shouldThrow methods if APIs provide crappy 2xx responses with "Error" messages
+{% hint style="info" %}
+When the `getRequestException` method is defined on both the connector and the request, the request method will take priority.
+{% endhint %}
