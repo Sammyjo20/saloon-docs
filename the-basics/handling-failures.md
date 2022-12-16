@@ -1,6 +1,6 @@
 # 🔥 Handling Failures
 
-Saloon has a powerful exception handler with a strong set of default exception classes. Still, Saloon's logic can also be extended for your custom use, like for APIs that don't respond with traditional error responses, like a 2xx response with errors in the body or if you would like to use your exceptions.
+Saloon has a powerful exception handler that has lots of exceptions you can use in your application. It can also be customised on a per-connector and per-request basis. This is especially useful when you have an API which returns an OK (200) response with an error in the body.
 
 When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not.
 
@@ -17,7 +17,7 @@ $response->body(); // {"message": "Server Error"}
 
 ### Default Exceptions
 
-Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception. These are thrown depending on the method you use below, but you can customise Saloon's exception handler to change when it throws exceptions and what exceptions will be thrown.
+Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception. These are thrown depending on the method you use below.
 
 ```
 SaloonException

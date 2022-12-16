@@ -344,6 +344,26 @@ If you are using Saloon in a Laravel environment, and have installed the Saloon-
 
 #### Better Exception Handler
 
+Saloon v2 also ships with a completely overhauled exception handler. You can customise when exceptions are thrown and what exceptions are thrown without creating custom response classes. There is also a brand new set of default exceptions that are thrown depending on status codes.
+
+```
+SaloonException
+├── FatalRequestException (Connection Errors)
+└── RequestException (Request Errors)
+    ├── ServerException (5xx)
+    │   ├── InternalServerErrorException (500)
+    │   ├── ServiceUnavailableException (503)
+    │   └── GatewayTimeoutException (504)
+    └── ClientException (4xx)
+        ├── UnauthorizedException (401)
+        ├── ForbiddenException (403)
+        ├── NotFoundException (404)
+        ├── MethodNotAllowedException (405)
+        ├── RequestTimeOutException (408)
+        ├── UnprocessableEntityException (422)
+        └── TooManyRequestsException (429)
+```
+
 #### Solo Requests
 
 Version two will also introduce a new `SoloRequest` class which will be perfect for making just one request for API integration. With SoloRequests, you don't need a connector at all - you can define everything in the request and send it above like you used to do.
