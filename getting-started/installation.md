@@ -6,7 +6,7 @@ To get started with Saloon, you will need to install it through Composer.&#x20;
 composer require sammyjo20/saloon ^2.0
 ```
 
-> Saloon requires PHP 8.1&#x20;
+> Saloon supports PHP 8.1+
 
 ### Dependencies
 
