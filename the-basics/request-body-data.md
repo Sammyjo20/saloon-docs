@@ -107,6 +107,7 @@ $body = $request->body()->all();
 #### Available Methods
 
 * add(string $key, mixed $value)
+* remove(string $key)
 * merge(…$values)
 * set(array $value)
 * all(): array
