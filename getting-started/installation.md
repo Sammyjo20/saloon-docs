@@ -10,7 +10,7 @@ composer require sammyjo20/saloon ^2.0
 
 ### Dependencies
 
-Saloon requires just three dependencies.
+Saloon has just three dependencies.
 
 * [Guzzle](https://github.com/guzzle/guzzle) (For The Default GuzzleSender)
 * [Guzzle's Promise Library](https://github.com/guzzle/promises) (For Request Pooling & Asynchronous Requests)
