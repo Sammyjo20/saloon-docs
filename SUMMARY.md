@@ -34,7 +34,6 @@
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
-* [🏁 Laravel Commands](digging-deepeer/laravel-commands.md)
 * [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
 * [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
