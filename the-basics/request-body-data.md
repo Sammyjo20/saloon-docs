@@ -120,6 +120,50 @@ When using the `HasMultipartBody` trait, if you are using the default sender sup
 
 [Click here to read more about formatting multipart body](https://docs.guzzlephp.org/en/stable/quickstart.html#sending-form-files)
 
+{% tabs %}
+{% tab title="Default Multipart Body Example" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Body\WithBody;
+use Saloon\Traits\Body\HasMultipartBody;
+
+class CreateServerRequest extends Request implements WithBody
+{
+    use HasMultipartBody;
+    
+    protected function defaultBody(): array
+    {
+        return [
+            [
+                'name' => 'avatar',
+                'contents' => 'contents-in-here',
+            ],
+            [
+                'name' => 'banner',
+                'contents' => 'contents-in-here',
+            ],
+        ];
+    }
+} 
+```
+{% endtab %}
+
+{% tab title="Adding Multipart File Example" %}
+```php
+<?php
+
+$request = new CreateServerRequest;
+
+$request->body()->add([
+    'name' => 'avatar',
+    'contents' => 'contents-in-here',
+]);
+```
+{% endtab %}
+{% endtabs %}
+
 ### HasXmlBody or HasBody
 
 These two traits do not encode the body. The `HasXmlBody` trait will apply the `application/xml` Content-Type header but the `HasBody` trait has been designed to be available for just sending raw string text with your Content-Type.
