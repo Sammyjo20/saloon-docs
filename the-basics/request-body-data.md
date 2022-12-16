@@ -141,8 +141,12 @@ class CreateServerRequest extends Request implements WithBody
                 'contents' => 'contents-in-here',
             ],
             [
-                'name' => 'banner',
-                'contents' => 'contents-in-here',
+                'name'     => 'other_file',
+                'contents' => 'hello',
+                'filename' => 'filename.txt',
+                'headers'  => [
+                    'X-Foo' => 'this is an extra header to include'
+                ]
             ],
         ];
     }
