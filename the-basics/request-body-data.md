@@ -18,7 +18,7 @@ class CreateServerRequest extends Request implements WithBody
 }
 ```
 
-Next, you will need to add a trait to implement the missing `body()` method that the interface requires. Saloon has a trait for all the common types of request body.
+Next, you will need to add a trait to provide an implementation for the missing `body()` method. Saloon has a trait for all the common types of request body.
 
 * HasJsonBody - Sending JSON requests (`application/json`)
 * HasFormBody - Sending `application/x-www-form-urlencoded` requests
