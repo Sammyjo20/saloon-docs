@@ -18,7 +18,7 @@ class CreateServerRequest extends Request implements WithBody
 }
 ```
 
-Next, you will need to add a trait to provide an implementation for the missing `body()` method. Saloon has a trait for all the common types of request body.
+Next, you will need to add a trait to implement the missing `body()` method that the interface requires. Saloon has a trait for all the common types of request body.
 
 * HasJsonBody - Sending JSON requests (`application/json`)
 * HasFormBody - Sending `application/x-www-form-urlencoded` requests
@@ -119,54 +119,6 @@ $body = $request->body()->all();
 When using the `HasMultipartBody` trait, if you are using the default sender supplied with Saloon, the GuzzleSender - you must specify the name and contents of the file you upload in a format that Guzzle will understand.
 
 [Click here to read more about formatting multipart body](https://docs.guzzlephp.org/en/stable/quickstart.html#sending-form-files)
-
-{% tabs %}
-{% tab title="Default Multipart Body Example" %}
-```php
-<?php
-
-use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
-use Saloon\Traits\Body\HasMultipartBody;
-
-class CreateServerRequest extends Request implements WithBody
-{
-    use HasMultipartBody;
-    
-    protected function defaultBody(): array
-    {
-        return [
-            [
-                'name' => 'avatar',
-                'contents' => 'contents-in-here',
-            ],
-            [
-                'name'     => 'other_file',
-                'contents' => 'hello',
-                'filename' => 'filename.txt',
-                'headers'  => [
-                    'X-Foo' => 'this is an extra header to include'
-                ]
-            ],
-        ];
-    }
-} 
-```
-{% endtab %}
-
-{% tab title="Adding Multipart File Example" %}
-```php
-<?php
-
-$request = new CreateServerRequest;
-
-$request->body()->add([
-    'name' => 'avatar',
-    'contents' => 'contents-in-here',
-]);
-```
-{% endtab %}
-{% endtabs %}
 
 ### HasXmlBody or HasBody
 
