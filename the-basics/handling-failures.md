@@ -37,24 +37,9 @@ SaloonException
         └── TooManyRequestsException (429)
 ```
 
-### Using the throw method
-
-On a per-response basis, you may use the `throw` method after sending your response. This method will throw an exception if the response has a "failed" HTTP status code like 4xx or 5xx.
-
-```php
-<?php
-
-$connector = new ForgeConnector;
-$response = $connector->send(new ErrorRequest);
-
-// throws InternalServerErrorException (extends ServerException)
-
-$response->throw();
-```
-
 ### Always throwing on failed requests
 
-Alternatively, you may wish to always throw an exception if a request fails. You may add the `AlwaysThrowsOnError` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method.
+You may wish to always throw an exception if a request fails. You may add the `AlwaysThrowsOnError` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method.
 
 ```php
 <?php
@@ -72,6 +57,21 @@ class ForgeConnector extends Connector
 {% hint style="info" %}
 You may also add this trait to a request.
 {% endhint %}
+
+### Using the throw method
+
+On a per-response basis, you may use the `throw` method after sending your response. This method will throw an exception if the response has a "failed" HTTP status code like 4xx or 5xx.
+
+```php
+<?php
+
+$connector = new ForgeConnector;
+$response = $connector->send(new ErrorRequest);
+
+// throws InternalServerErrorException (extends ServerException)
+
+$response->throw();
+```
 
 ### Using the onError method
 
