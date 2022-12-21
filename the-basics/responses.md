@@ -4,7 +4,7 @@ Depending on how you sent your request (synchronous/asynchronous) you will eithe
 
 ### Handling synchronous responses
 
-By default, Saloon will return an instance of `Saloon\Contracts\Response`. this is the default response and is used by the GuzzleSender. This response class contains many helpful methods for interacting with your HTTP response.
+By default, Saloon will return an instance of `Saloon\Http\Response`. this is the default response. This response class contains many helpful methods for interacting with your HTTP response.
 
 ```php
 <?php
@@ -79,12 +79,7 @@ $promise
 
 Sometimes you may want to use your response class. This is useful if you want to add your methods or overwrite Saloon's response methods. Saloon allows you to overwrite the response at a connector level for all requests or at a per-request level for a granular response.&#x20;
 
-Saloon is HTTP sender agnostic, so you should extend the response class the corresponding sender uses instead of creating your own. See below the list of senders and their response classes.
-
-| Sender                 | Response Class                 |
-| ---------------------- | ------------------------------ |
-| GuzzleSender (default) | Saloon\Http\Responses\Response |
-| HttpSender (Laravel)   | Saloon\Http\Responses\Response |
+You may extend the `Saloon\Http\Response` class or provide your own implementation with the `Saloon\Contracts\Response` interface. You may use the `HasResponseHelpers` middleware when making your own implementation to save defining every method.
 
 #### Using the response property
 
