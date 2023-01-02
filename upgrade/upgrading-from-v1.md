@@ -30,6 +30,10 @@ composer require sammyjo20/saloon-laravel ^2.0
 {% endtab %}
 {% endtabs %}
 
+{% hint style="danger" %}
+From version two, the minimum required PHP version is 8.1 and the minimum Laravel version is 9 (when using the additional Laravel package)
+{% endhint %}
+
 #### Rename namespaces
 
 The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings.
