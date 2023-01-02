@@ -12,20 +12,23 @@ Advanced integrations and SDKs: \~30-45 minutes
 
 ### Installation
 
-Firstly, run the following composer commands to install Saloon v2, depending on your installation.
+Firstly, update your composer.json file to `^2.0.` if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.
 
 {% tabs %}
 {% tab title="Non-Laravel" %}
-```bash
-composer require sammyjo20/saloon ^2.0
+```json
+"require": {
+    "sammyjo20/saloon": "^2.0"
+}
 ```
 {% endtab %}
 
 {% tab title="Laravel" %}
-```bash
-composer require sammyjo20/saloon ^2.0
-
-composer require sammyjo20/saloon-laravel ^2.0
+```json
+"require": {
+    "sammyjo20/saloon": "^2.0",
+    "sammyjo20/saloon-laravel": "^2.0"
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -34,98 +37,202 @@ composer require sammyjo20/saloon-laravel ^2.0
 From version two, the minimum required PHP version is 8.1 and the minimum Laravel version is 9 (when using the additional Laravel package)
 {% endhint %}
 
-#### Rename namespaces
+### Namespace Changes
 
-The `Sammyjo20` username has been dropped from all namespaces. You should run a find and replace for the following strings.
+All of Saloon’s classes have a new namespace `Saloon\\` instead of `Sammyjo20\\Saloon`. This change will affect every use of Saloon’s internal classes, so it’s recommended to run a find-and-replace.
 
-| Find                                           | Replace                              |
-| ---------------------------------------------- | ------------------------------------ |
-| <pre><code>use Sammyjo20\Saloon\
-</code></pre> | <pre><code>use Saloon\
-</code></pre> |
+* Find: `use Sammyjo20\\Saloon`
+* Replace: `use Saloon`
 
-#### Rename class names
+#### Laravel Namespace Changes
 
-The word `Saloon` has also been dropped from many of its classes. You should run a find and replace for the following strings.
+If you are using the Laravel helpers package for Saloon, you should also change the namespaces.
 
-| Find                                                                  | Replace                                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| <pre><code>use Saloon\Http\SaloonConnector;
-</code></pre>             | <pre><code>use Saloon\Http\Connector;
-</code></pre>                      |
-| <pre><code>use Saloon\Http\SaloonRequest;
-</code></pre>               | <pre><code>use Saloon\Http\Request;
-</code></pre>                        |
-| <pre><code>use Saloon\Http\SaloonResponse;
-</code></pre>              | <pre><code>use Saloon\Http\Responses\Response;
-</code></pre>             |
-| <pre><code>use Saloon\Exceptions\SaloonRequestException
-</code></pre> | <pre><code>use Saloon\Exceptions\Request\RequestException;
-</code></pre> |
-| <pre><code>extends SaloonConnector
-</code></pre>                      | <pre><code>extends Connector
-</code></pre>                               |
-| <pre><code>extends SaloonRequest
-</code></pre>                        | <pre><code>extends Request
-</code></pre>                                 |
-| <pre><code>extends SaloonResponse
-</code></pre>                       | <pre><code>extends Response
-</code></pre>                                |
-| <pre><code>extends SaloonRequestException
-</code></pre>               | <pre><code>extends RequestException
-</code></pre>                        |
+* Find: `use Sammyjo20\\SaloonLaravel`
+* Replace: `use Saloon\\Laravel`
 
-#### Replace method properties and methods
+### Class Name Changes
 
-There have been a few properties and methods that have been renamed, or their visibility has changed. You should run a find and replace for the following strings.
+To help make Saloon more readable and to improve the developer experience, Saloon’s classes have changed names. There were a number of classes that had the name `Saloon` within, like `SaloonRequest` and `SaloonConnector.` you should find and replace these too. Please make sure that you have renamed the namespaces first.
 
-| Find                                                              | Replace                                                            |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
-| <pre><code>public function defineBaseUrl(): string
-</code></pre>  | <pre><code>public function resolveBaseUrl(): string
-</code></pre>  |
-| <pre><code>public function defineEndpoint(): string
-</code></pre> | <pre><code>public function resolveEndpoint(): string
-</code></pre> |
-| <pre><code>protected ?string $response = 
-</code></pre>           | <pre><code>protected string $response = 
-</code></pre>             |
-| <pre><code>protected ?string $method = 
-</code></pre>             | <pre><code>protected Method $method = 
-</code></pre>               |
+#### Connector
 
-#### Using the new headers, query, config API
+* Find: `use Saloon\\Http\\SaloonConnector`
+* Replace: `use Saloon\\Http\\Connector`
+* Find: `extends SaloonConnector`
+* Replace: `extends Connector`
 
-#### Moving request data to the new body API
+#### Request
 
-#### Other
+* Find: `use Saloon\\Http\\SaloonRequest`
+* Replace: `use Saloon\\Http\\Request`
+* Find: `extends SaloonRequest`
+* Replace: `extends Request`
 
-* toException on the response has a changed return type from SaloonRequestException to Throwable
-* getGuzzleException on the response has changed to getSenderException
+#### Response (if using custom responses)
 
-### Changes
+* Find `use Saloon\\Http\\SaloonResponse`
+* Replace: `use Saloon\\Http\\Response`
+* Find: `extends SaloonResponse`
+* Replace: `extends Response`
 
-* Namespace renaming&#x20;
-* Class renaming
-* Changing data to body and using WithBody interface
-* Changing location of body traits
-* Changing defineEndpoint to resolveEndpoint
-* Changing defineBaseUrl to resolveBaseUrl
-* Removing the connector property on requests or adding back HasConnector
-* Changing response interceptors to middleware
-* Moving where Guzzle handlers are added
-* withAuth renamed to authenticate
-* Authenticators are executed at the end of a request preparation lifecycle rather than at the beginning
-* toPsrResponse renamed to getPsrResponse on responses
-* defineXMLBody renamed to defaultBody
-* Request collections and magic request registration removed
-* MockResponse::fromRequest has been removed
-* Carbon has been replaced with DateTime instances
-* MockClient and MockResponse moved to a different folder
-* Request changed to PendingRequest inside of plugins and boot methods
+#### MockClient
 
-### High Impact Changes
+* Find: `use Saloon\\Clients\\MockClient`
+* Replace: `use Saloon\\Http\\Faking\\MockClient`
 
-### Medium Impact Changes
+#### MockResponse
 
-### Low Impact Changes
+* Find: `use Saloon\\Http\\MockRespone`
+* Replace: `use Salooon\\Http\\Faking\\MockResponse`
+
+### Method Changes
+
+Saloon has also had a major refactor with the methods that are used to build and interact with connectors and requests. You should carefully find and replace the given strings.
+
+#### Connector
+
+The connector’s base URL method has changed.
+
+* Find: `public function defineBaseUrl(): string`
+* Replace: `public function resolveBaseUrl(): string`
+
+The connector’s properties types have changed.
+
+* Find: `protected ?string $response`
+* Replace: `protected string $response`
+
+The method to define a custom response has changed.
+
+* Find: `public function getResponseClass(): string`
+* Replace: `public function resolveResponseClass(): string`
+
+The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\\Http\\PendingRequest` instead.
+
+* Find: `public function boot(SaloonRequest $request): void`
+* Replace: `public function boot(PendingRequest $pendingRequest): void`
+
+The `request` method has been removed.
+
+The `__call` and `__callStatic` methods have been removed alongside the magic methods that build up requests. Including the `requests` property.
+
+#### Request
+
+The request’s method property has changed to use a new `Saloon\\Enums\\Method` Enum. Make sure to migrate to use the new Enum too. For example: `protected Method $method = Method::GET`.
+
+* Find: `protected ?string $method`
+* Replace: `protected Method $method`
+
+The request’s define endpoint method has changed.
+
+* Find: `protected function defineEndpoint(): string`
+* Replace: `public function resolveEndpoint(): string`
+
+The request’s properties types have changed.
+
+* Find: `protected ?string $response`
+* Replace: `protected string $response`
+
+The method to define a custom response has changed.
+
+* Find: `public function getResponseClass(): string`
+* Replace: `public function resolveResponseClass(): string`
+
+The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\\Http\\PendingRequest` instead.
+
+* Find: `public function boot(SaloonRequest $request): void`
+* Replace: `public function boot(PendingRequest $pendingRequest): void`
+
+The `send`, `sendAsync`, `getConnector` and `setConnector` methods and the `connector` property has been removed from the request. Please see below to add connector support back to your request if you need it
+
+The `getFullRequestUrl` method has been removed on the request. You can get the URL of the request with the `PendingRequest` inside of the boot method, traits and middleware.
+
+The `__call` method has been removed from the request. Any methods that no longer exist on the request will not be proxied to the connector.
+
+The `traitExistsOnConnector` method has been removed from the request.
+
+#### Responses
+
+Saloon’s response has changed to be a generic-PSR compatible response. If you are extending the existing Response, you should make sure that it is still working correctly.
+
+#### Authenticator Traits
+
+Previously, Saloon had five traits which would throw an exception if a request or connector wasn’t authenticated. The following traits have now been removed:
+
+* RequiresBasicAuth
+* RequiresDigestAuth
+* RequiresTokenAuth
+
+You should now use the generic `RequiresAuth` trait if you would still like to throw an exception
+
+### Plugin Traits
+
+* Now is static method
+* Now accepts PendingRequest
+
+### Connector-first design
+
+#### Add connector support back
+
+### Response Interceptors
+
+### Guzzle Handlers/Middleware
+
+* No longer add handlers on a per-request or connector basis, you must add it to the sender
+
+### Migrating to the new headers, query and config API
+
+### Migrating to the new request body API
+
+* No more data() method and only added once you add a body trait
+
+#### Migrating to body traits
+
+### OAuth Carbon Removal
+
+Saloon no longer uses Carbon as a dependency, so all dates returned that used to return a `CarbonInterface` now return `DateTimeImmutable`
+
+* OAuthAuthenticator: `getExpiresAt()`
+* AccessTokenAuthenticator: `getExpiresAt()`
+
+### Removing Connector Magic Properties
+
+### Migrating to use PendingRequest in traits
+
+### Other Changes
+
+Namespace renaming
+
+Class renaming
+
+Changing data to body and using WithBody interface
+
+Changing location of body traits
+
+Changing defineEndpoint to resolveEndpoint
+
+Changing defineBaseUrl to resolveBaseUrl
+
+Removing the connector property on requests or adding back HasConnector
+
+Changing response interceptors to middleware
+
+Moving where Guzzle handlers are added
+
+withAuth renamed to authenticate
+
+Authenticators are executed at the end of a request preparation lifecycle rather than at the beginning
+
+toPsrResponse renamed to getPsrResponse on responses
+
+defineXMLBody renamed to defaultBody
+
+Request collections and magic request registration removed
+
+MockResponse::fromRequest has been removed
+
+Carbon has been replaced with DateTime instances
+
+MockClient and MockResponse moved to a different folder
+
+Request changed to PendingRequest inside of plugins and boot methods
