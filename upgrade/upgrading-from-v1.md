@@ -1,5 +1,9 @@
 # 🌿 Upgrading from v1
 
+{% hint style="warning" %}
+This documentation is still a work in progress while Saloon v2 is in beta.
+{% endhint %}
+
 ### Introduction
 
 There have been several changes in version two, it's recommended that you read through [what's new in v2](whats-new-in-v2.md) before starting the upgrade.
