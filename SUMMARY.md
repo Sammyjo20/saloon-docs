@@ -37,6 +37,7 @@
 * [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
 * [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
+* [🛩 Senders](digging-deepeer/senders.md)
 
 ## Conclusion
 

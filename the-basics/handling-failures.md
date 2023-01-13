@@ -128,7 +128,7 @@ Saloon offers some other methods to handle failed responses.
 
 ### Customising when exceptions are thrown
 
-By default, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response but with an error message in the response body. You may extend the `shouldThrowRequestException` method to change the default behaviour.&#x20;
+By default, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response status but with an error message in the response body. You should extend the `shouldThrowRequestException` method to change the default behaviour.
 
 {% tabs %}
 {% tab title="Connector" %}
