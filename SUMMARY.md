@@ -38,8 +38,8 @@
 * [🛩 Senders](digging-deepeer/senders.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
 * [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
-  * [Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
   * [Manual Fake Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
+  * [Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
 
 ## Conclusion
 

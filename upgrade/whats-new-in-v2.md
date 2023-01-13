@@ -239,7 +239,7 @@ Saloon v2 now offers interfaces for all of the major classes so you can build yo
 
 #### Better Way To Interact With Request, Headers, Query Parameters and Config
 
-Another notable change would be the simplification of interacting with headers, config and request body. Instead of individual methods for interacting with these properties, they are now wrapped in easy-to-understand methods with unified method names. Additionally, previously you wouldn't be able to access the default properties after instantiating the request, but now you can.
+Another notable change would be the simplification of interacting with headers, config and request body. Instead of individual methods for interacting with these properties, they are now wrapped in easy to understand methods with unified method names. Additionally, previously you wouldn't be able to access the default properties after instantiating the request, but now you can.
 
 {% tabs %}
 {% tab title="Version 1" %}
@@ -302,16 +302,16 @@ $request->config()->all();
 
 #### &#x20;Better Way To Interact With Request Body/Data
 
-Additionally, sending request payload/body has been reworked. Previously the same `data` object was used for all types of data, which meant Saloon had to throw exceptions when you use certain methods, for example, if I tried to "add" when using a string body because you can't easily add to a string. Additionally, the `data()` methods were always available even if you didn't add a trait to activate them, which was confusing to the developer and could lead to annoying issues.
+Additionally, sending request payload/body has been reworked. Previously the same `data` object was used for all types of data, which meant Saloon had to throw exceptions when you use certain methods, for example if I tried to "add" when using a string body, because you can't easily add to a string. Additionally, the `data()` methods were always available even if you didn't add a trait to activate them, which was confusing to the developer and could lead to annoying issues.
 
-With version two, you can now add a trait based on the data type like before, but when you add the trait, it will add the `body()` method. You also add the `HasBody` interface so Saloon knows you intend to send body. The body method implements a contract called `BodyRepository` but depending on the trait added, it used a different implementation of BodyRepository to support the data you have requested. For example, if you add the `HasJsonBody` trait, it will use the `ArrayBodyRepository` which provides the additional methods like add/merge. However, if you use the `HasXmlBody` trait, it will use `StringBodyRepository` which only has a few methods.
+With version two, you can now add a trait based on the data type like before, but when you add the trait, it will add the `body()` method. You also add the `WithBody` interface so Saloon knows you intend to send body. The body method implements a contract called `BodyRepository` but depending on the trait added, it used a different implementation of BodyRepository to support the data you have requested. For example, if you add the `HasJsonBody` trait, it will use the `ArrayBodyRepository` which provides the additional methods like add/merge. However if you use the `HasXmlBody` trait, it will use `StringBodyRepository` which only has a few methods.
 
 This also means that the `defaultBody` method is implemented differently depending on the trait.
 
 ```php
 <?php
 
-class CreateForgeServerRequest extends Request implements HasBody
+class CreateForgeServerRequest extends Request implements WithBody
 {
     use HasJsonBody;
     
@@ -336,33 +336,6 @@ $request->body()->all();
     'name' => 'Server-One',
     'os' => 'Ubuntu',
 ]
-```
-
-#### Better Multipart Requests
-
-With the changes to request body, Saloon has also made it easier to send multipart form requests for attaching files. Saloon makes this easy by adding the `HasBody` interface and `HasMultipartBody` trait. You can use the `add` method to attach a file to your request.&#x20;
-
-```php
-<?php
-
-class UpdateUserRequest extends Request implements HasBody
-{
-    use HasMultipartBody;
-}
-
-$request = new CreateForgeServerRequest();
-
-$request->body()->add(
-    name: 'logo',
-    contents: 'your-file-contents-or-stream', 
-    filename: 'logo.png', 
-    headers: [
-       // Optional custom headers
-    ]
-);
-
-$connector = new ForgeConnector;
-$connector->send($request);
 ```
 
 #### Even Better Laravel Support (HTTP Client)
@@ -424,11 +397,11 @@ $response = $request->send();
 {% endtab %}
 {% endtabs %}
 
-### Other Improvements / Changes
+### Other Improvements
 
 #### Tidier Codebase
 
-Like with every library, new methods of programming is learned and better patterns are implemented. Saloon version two is pretty much a rewrite and has a much easier-to-understand, tidier codebase.
+Like with every library, new methods of programming is learned and better patterns are implemented. Saloon version two is pretty much a rewrite and has a much easier to understand, tidier codebase.
 
 #### Reduced Dependencies
 
@@ -442,8 +415,8 @@ Saloon now only has three dependencies
 
 #### New Query Authenticator
 
-With Saloon v2, a new query parameter authenticator has added, to support some APIs where their authentication is provided through a query parameter.
+With Saloon v2, a new query parameter authenticator has added, to support some APIs where their  authentication is provided through a query parameter.
 
-#### Request Collections & Magic Methods Removed
+#### Request Collections Renamed To Request Groups
 
-Previously, Saloon had request collections which can be added to connectors alongside a `$requests` array which allowed you to define custom properties on the connector. These properties would then link directly to a request or a request collection. Saloon v2 has removed this feature in order to have less "magical" code going on. It was also difficult for IDEs to understand.
+Previously, Saloon had request collections which can be added to connectors which was a class with many methods inside. This was used when building SDKs with Saloon. With version two, these have been renamed to "Request Groups" to not get confused with Laravel's collections.
