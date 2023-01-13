@@ -34,10 +34,12 @@
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
-* [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
 * [🔌 Building SDKs](digging-deepeer/building-sdks.md)
-* [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
 * [🛩 Senders](digging-deepeer/senders.md)
+* [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
+* [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses/README.md)
+  * [Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
+  * [Manual Fake Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 
 ## Conclusion
 

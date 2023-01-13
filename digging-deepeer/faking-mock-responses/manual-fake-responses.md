@@ -1,14 +1,10 @@
-# 🤿 Faking / Mock Responses
-
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
+# Manual Fake Responses
 
 Saloon provides a way to test your PHP applications and SDKs really easily. In your tests, you will need to create an instance of `MockClient` . The MockClient accepts an array of MockResponses which when used on a request, will respond with a fake response without actually sending a real request to the web. This helps speed up tests massively and can help you test your application for different API response scenarios, like a 404 error or 500 error.
 
 ### Registering a MockClient
 
-Request mocking starts with a `MockClient`. This class can be applied directly to a connector instance to be used across all requests, or it can be applied on a per request basis.
+Request mocking starts with a `MockClient`. This class can be applied directly to a connector instance to be used across all requests, or it can be applied on a per-request basis.
 
 {% tabs %}
 {% tab title="All Requests (Connector)" %}
@@ -27,12 +23,30 @@ $mockClient = new MockClient([
 $forge = new ForgeConnector;
 $forge->withMockClient($mockClient);
 
-// Send requests like normal...
+// All requests sent with the $forge instance will use the Mock Client
 ```
 {% endtab %}
 
 {% tab title="Individual Request" %}
+```php
+<?php
 
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
+
+$mockClient = new MockClient([
+    MockResponse::make(['name' => 'Sam'], 200),
+    MockResponse::make(['name' => 'Alex'], 200),
+    MockResponse::make(['error' => 'Server Unavailable'], 500),
+]);
+
+$forge = new ForgeConnector;
+$request = new GetAllServersRequest;
+
+// Send a request with a MockClient
+
+$forge->send($request, $mockClient);
+```
 {% endtab %}
 {% endtabs %}
 
