@@ -4,21 +4,21 @@ When sending HTTP requests, a common requirement is to attach a payload/body to 
 
 ### Getting Started
 
-To get started, you will need to add the `WithBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
+To get started, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
 
 ```php
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     //
 }
 ```
 
-Next, you will need to add a trait to implement the missing `body()` method that the interface requires. Saloon has a trait for all the common types of request body.
+Next, you will need to add a trait to provide an implementation for the missing `body()` method. Saloon has a trait for all the common types of request bodies.
 
 * HasJsonBody - Sending JSON requests (`application/json`)
 * HasFormBody - Sending `application/x-www-form-urlencoded` requests
@@ -26,9 +26,9 @@ Next, you will need to add a trait to implement the missing `body()` method that
 * HasXmlBody - Sending `application/xml` requests
 * HasBody - Sending plain string body, you must specify the content-type.
 
-### HasJsonBody, HasFormBody or HasMultipartBody
+### HasJsonBody or HasFormBody
 
-These three traits allow you to interact with the request body the same way, but each applies different strategies to encode the data and apply a different Content-Type header.
+These two traits allow you to interact with the request body the same way, but each applies different strategies to encode the data and apply a different Content-Type header.
 
 #### Adding Traits
 
@@ -38,10 +38,10 @@ These three traits allow you to interact with the request body the same way, but
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     use HasJsonBody;
 }
@@ -53,27 +53,12 @@ class CreateServerRequest extends Request implements WithBody
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasFormBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     use HasFormBody;
-}
-```
-{% endtab %}
-
-{% tab title="HasMultipartBody" %}
-```php
-<?php
-
-use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
-use Saloon\Traits\Body\HasMultipartBody;
-
-class CreateServerRequest extends Request implements WithBody
-{
-    use HasMultipartBody;
 }
 ```
 {% endtab %}
@@ -81,7 +66,7 @@ class CreateServerRequest extends Request implements WithBody
 
 #### Interacting with the body() method
 
-Once you have added one of the traits, you can access the `body()` method on your request. When using either the `HasJsonBody`, `HasFormBody` or `HasMultipartBody` traits, you will have methods to add, remove, merge, set and retrieve all the properties in the data.
+Once you have added one of the traits, you can access the `body()` method on your request. When using either the `HasJsonBody` or `HasFormBody` traits, you will have methods to add, remove, merge, set and retrieve all the properties in the data.
 
 ```php
 <?php
@@ -114,11 +99,70 @@ $body = $request->body()->all();
 * isEmpty(): bool
 * isNotEmpty(): bool
 
-#### Multipart Body
+### Multipart Body
 
-When using the `HasMultipartBody` trait, if you are using the default sender supplied with Saloon, the GuzzleSender - you must specify the name and contents of the file you upload in a format that Guzzle will understand.
+Saloon has also made it easier to send multipart form requests for attaching files. Once you have added the `HasBody` method, add the `HasMultipartBody` trait. Next, you can use the available methods below to add/remove/get and set the multipart body. You may use the `MultipartValue` object if you want to define default multipart bodies to send.
 
-[Click here to read more about formatting multipart body](https://docs.guzzlephp.org/en/stable/quickstart.html#sending-form-files)
+{% tabs %}
+{% tab title="Default Multipart Body Example" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasMultipartBody;
+
+class CreateServerRequest extends Request implements HasBody
+{
+    use HasMultipartBody;
+    
+    protected function defaultBody(): array
+    {
+        return [
+            new MultipartValue(name: 'logo', value: 'image-contents'), 
+            new MultipartValue(name: 'logo', value: StreamObject), 
+            new MultipartValue(name: 'logo', value: 'image-contents', filename: 'logo.png', headers: [...]), 
+        ];
+    }
+} 
+```
+{% endtab %}
+
+{% tab title="Adding Multipart File Example" %}
+```php
+<?php
+
+$request = new CreateServerRequest;
+
+$request->body()->add(
+    name: 'logo',
+    contents: 'your-file-contents-or-stream', 
+    filename: 'logo.png', 
+    headers: [
+       // Optional custom headers
+    ]
+);
+
+// You may also get a multipart value by name.
+
+$request->body()->get('logo'); // MultipartValue class
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+The `contents` of the `MultipartValue` class can be either the raw-text contents of the file or a PHP stream/resource.
+{% endhint %}
+
+#### Available Methods
+
+* add(string $key, mixed $value)
+* remove(string $key)&#x20;
+* merge(…$values)&#x20;
+* set(array $value)&#x20;
+* all(): array&#x20;
+* isEmpty(): bool
+* isNotEmpty(): bool
 
 ### HasXmlBody or HasBody
 
@@ -133,9 +177,9 @@ These two traits do not encode the body. The `HasXmlBody` trait will apply the `
 
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasXmlBody;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     use HasXmlBody;
 }
@@ -148,9 +192,9 @@ class CreateServerRequest extends Request implements WithBody
 
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasBody;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody as HasBodyContract;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBodyContract
 {
     use HasBody;
 }
@@ -191,10 +235,10 @@ Managing the body on the fly to requests is handy, but Saloon is all about stand
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     use HasJsonBody;
     
@@ -221,10 +265,10 @@ class CreateServerRequest extends Request implements WithBody
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasBody;
 
-class CreateServerRequest extends Request implements WithBody
+class CreateServerRequest extends Request implements HasBody
 {
     use HasBody;
     
@@ -249,7 +293,7 @@ Depending on the type of body you add, the `defaultBody`method will expect an ar
 
 ### Connector Body
 
-You may also use the `WithBody` and a body trait on your connector. When you have a connector with a body trait and a request, Saloon will prefer the request’s body type over the connector’s. Additionally, if you are using the `HasJsonBody`, `HasFormBody`, or `HasMultipartBody` traits on both, the arrays will be merged.
+You may also use the `HasBody` and a body trait on your connector. When you have a connector with a body trait and a request, Saloon will prefer the request’s body type over the connector’s. Additionally, if you are using the `HasJsonBody`, `HasFormBody`, or `HasMultipartBody` traits on both, the arrays will be merged.
 
 The same method is applied for adding body to a connector, add the interface and a body trait. You may also extend the `defaultBody` method.
 
@@ -257,10 +301,10 @@ The same method is applied for adding body to a connector, add the interface and
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Body\WithBody;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
 
-class ForgeConnector extends Connector implements WithBody
+class ForgeConnector extends Connector implements HasBody
 {
     use HasJsonBody;
 
