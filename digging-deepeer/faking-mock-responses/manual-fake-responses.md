@@ -245,7 +245,7 @@ $mockClient = new MockClient([
 
 ### Using closures for mocking
 
-Sometimes, you may need to return a custom mock response based on the request that is currently trying to be sent. With closure/callable mocking, you can do this. Just provide an anonymous function or an invokable class when defining the mock response, and you will get access to the current request before it is converted into a mock response. This is great if you have stored fixtures based on the request and need to load the fixture data up. This will work with all of the methods above of mocking the request.
+Sometimes, you may need to return a custom mock response based on the request that is currently trying to be sent. With closure/callable mocking, you can do this. Just provide an anonymous function or an invokable class when defining the mock response, and you will get access to the current `PendingRequest` before it is converted into a mock response. This is great if you have stored fixtures based on the request and need to load the fixture data up. This will work with all of the methods above of mocking the request.
 
 ```php
 <?php
@@ -253,7 +253,7 @@ Sometimes, you may need to return a custom mock response based on the request th
 use Saloon\Contracts\Request;
 
 $mockClient = new MockClient([
-    function (Request $request): MockResponse {
+    function (PendingRequest $request): MockResponse {
         // Write some custom logic here...
     
         return new MockResponse([...]);
