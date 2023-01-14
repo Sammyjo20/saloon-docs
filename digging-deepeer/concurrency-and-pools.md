@@ -84,12 +84,9 @@ If you are going to send lots of requests you may wish to provide a generator in
 ```php
 <?php
 
-$generatorCallback = function () use ($requests): Generator {
+$generatorCallback = function (): Generator {
     for ($i = 0; $i < 3; $i++) {
-        $request = new UserRequest;
-        $requests->put($i, $request);
-
-        yield $i => $request;
+        yield $i => new UserRequest;
     }
 };
 
