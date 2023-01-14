@@ -46,7 +46,7 @@ The pool class accepts many types of requests:
 
 * Array of requests
 * PHP generator providing requests
-* Closure or Invokable class containing an array of requests
+* Closure or Invokable class returning an array of requests
 * Closure or Invokable class returning a generator
 
 You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method.&#x20;
@@ -160,7 +160,3 @@ $pool->setConcurrency(function () {
 ### Named/Keyed Requests
 
 You may wish to key the requests so you know which ones come back first.
-
-### Notes
-
-Handling exceptions with promises, include bits about RequestException and FatalRequestException.
