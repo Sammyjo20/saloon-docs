@@ -4,7 +4,7 @@ While Saloon's typical setup of a connector and requests is great, sometimes all
 
 ### Setup
 
-Create a class, but instead of extending `Saloon\Http\Request`, you should extend `Saloon\Http\SoloRequest.` Next, just define everything else like you would a normal request.
+Create a class, but instead of extending `Saloon\Http\Request`, you should extend `Saloon\Http\SoloRequest.` Next, just define everything else like you would a normal request. Make sure to include the full URL of the service you are integrating with.
 
 ```php
 <?php
