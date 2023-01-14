@@ -30,6 +30,9 @@ $pool = $forge->pool(
     exceptionHandler: function () { ... },
 );
 
+$promise = $pool->send();
+
+$promise->wait();
 ```
 
 ### Available Methods
