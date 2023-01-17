@@ -1,4 +1,4 @@
-# Manual Fake Responses
+# 🚧 Manual Fake Responses
 
 Saloon makes it easy to fake API integrations in your tests. In your tests, you will need to create an instance of `MockClient` . The `MockClient` accepts an array of `MockResponses` which when used on a request, will respond with a fake response without actually sending a real request to the web. This helps speed up tests massively and can help you test your application for different API response scenarios, like a 404 error or 500 error.
 

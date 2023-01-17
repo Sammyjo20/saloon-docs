@@ -32,14 +32,16 @@
 * [🔁 Caching Responses](digging-deepeer/caching-responses.md)
 * [🔏 OAuth2 Authentication](digging-deepeer/oauth2-authentication.md)
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
-* [🤿 Faking / Mock Responses](digging-deepeer/faking-mock-responses.md)
-  * [Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
-  * [Manual Fake Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
 * [🔌 Building SDKs](digging-deepeer/building-sdks.md)
-* [🛩 Senders](digging-deepeer/senders.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
+* [🛩 Senders](digging-deepeer/senders.md)
+
+## Testing
+
+* [📸 Recording Requests](testing/recording-requests.md)
+* [🚧 Manual Fake Responses](testing/manual-fake-responses.md)
 
 ## Conclusion
 
