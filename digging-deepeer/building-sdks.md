@@ -1,14 +1,6 @@
 # 🔌 Building SDKs
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 Saloon provides everything you need to build a great SDK or library for an API. Saloon already offers the ability to mock responses, provide authentication, implement OAuth2 boilerplate and even record your API requests in your tests so that you can write tests for the API integration without hitting the real API each time. With Saloon you will be up and running in minutes. No more writing HTTP boilerplate code! Saloon also comes with just three dependencies making your library or SDK lightweight.
-
-### Saloon SDK Template
-
-Saloon has an official SDK template that you can clone straight from GitHub or download and use. It has everything you need to get started building an SDK, and even has a configuration command to set up the class namespace and file names. [Click here to get started.](https://github.com/Sammyjo20/saloon-sdk-template)
 
 ### Example SDK
 
