@@ -52,7 +52,7 @@ The pool class accepts many types of requests:
 * Closure or Invokable class returning an array of requests
 * Closure or Invokable class returning a generator
 
-You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method. The requests can be instances of `Saloon\Contacts\Request` or `Saloon\Contracts\PendingRequest`.
+You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method.&#x20;
 
 #### Array of requests&#x20;
 
@@ -95,10 +95,6 @@ $generatorCallback = function (): Generator {
 
 $forge = new ForgeConnector;
 $pool = $forge->pool($generatorCallback);
-
-// or
-
-$pool->setRequests($generatorCallback);
 ```
 
 #### Using a callable or invokable class
@@ -120,10 +116,6 @@ $callback = function () {
 
 $forge = new ForgeConnector;
 $pool = $forge->pool($callback);
-
-// or
-
-$pool->setRequests($callback);
 ```
 {% endtab %}
 
@@ -149,7 +141,7 @@ $pool = $forge->pool(new PoolClass);
 
 ### Concurrency
 
-By default, Saloon will send up to 5 requests concurrently. You can customise the concurrency that is used by pools with the `setConcurrency` method. It accepts an integer or a callable like a method or an invokable class in case you want to write advanced logic to determine the concurrency.&#x20;
+By default, Saloon will send up to 5 requests concurrently. You can customise the concurrency that is used by pools with the `setConcurrency` method. It accepts an integer or a callable in case you want to write advanced logic to determine the concurrency.&#x20;
 
 ```php
 <?php
@@ -159,16 +151,12 @@ $pool = $forge->pool(...);
 
 $pool->setConcurrency(10);
 
-// or
-
 $pool->setConcurrency(function () {
     return 10;
 });
 ```
 
-### Sending
-
-Once you have provided the pool with requests, you are ready to send the requests!
+### Sending&#x20;
 
 ### Response Handlers
 
