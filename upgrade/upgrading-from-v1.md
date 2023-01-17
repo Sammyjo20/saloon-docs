@@ -272,6 +272,17 @@ $request->config()->all();
 {% endtab %}
 {% endtabs %}
 
+### Migrating to the new request body API
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+\-- SECTION IN PROGRESS --
+
+* No more data() method and only added once you add a body trait
+* Changing data to body and using HasBody interface
+* Changing location of body traits
+* defineXMLBody renamed to defaultBody
+
 ### Removing Connector Magic Properties & Request Collections
 
 <mark style="color:red;">Estimated Impact: High</mark>
@@ -321,6 +332,18 @@ class Resource
 }
 ```
 
+### Authentication
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+Saloon version two has removed the `withAuth` method. You should use the `authenticate` method instead.
+
+### Response Interceptors
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+\-- SECTION IN PROGRESS --
+
 ### Responses
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
@@ -337,6 +360,13 @@ From version two, Saloon has updated its plugins. You can choose to add plugins 
 
 You should also make any changes to the `PendingRequest` instance and **not** use `$this` as it's bad practice to overwrite the connector/request instance.
 
+### Guzzle Handlers/Middleware
+
+<mark style="color:purple;">Estimated Impact: Medium</mark>
+
+* No longer add handlers on a per-request or connector basis, you must add it to the sender
+* You should use Saloon's onRequest middleware instead-but if you need to access Guzzle's middleware you can do it&#x20;
+
 ### Authenticator Traits
 
 <mark style="color:blue;">Estimated Impact: Low</mark>
@@ -348,31 +378,6 @@ Previously, Saloon had five traits which would throw an exception if a request o
 * RequiresTokenAuth
 
 You should now use the generic `RequiresAuth` trait if you would still like to throw an exception.
-
-### Authentication
-
-<mark style="color:red;">Estimated Impact: High</mark>
-
-Saloon version two has removed the `withAuth` method. You should use the `authenticate` method instead.
-
-### Response Interceptors
-
-<mark style="color:red;">Estimated Impact: High</mark>
-
-### Guzzle Handlers/Middleware
-
-<mark style="color:purple;">Estimated Impact: Medium</mark>
-
-* No longer add handlers on a per-request or connector basis, you must add it to the sender
-
-### Migrating to the new request body API
-
-<mark style="color:red;">Estimated Impact: High</mark>
-
-* No more data() method and only added once you add a body trait
-* Changing data to body and using HasBody interface
-* Changing location of body traits
-* defineXMLBody renamed to defaultBody
 
 #### Migrating to body traits
 
