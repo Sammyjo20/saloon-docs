@@ -45,15 +45,15 @@ From version two, the minimum required PHP version is 8.1 and the minimum Larave
 
 All of Saloon’s classes have a new namespace `Saloon\\` instead of `Sammyjo20\\Saloon`. This change will affect every use of Saloon’s internal classes, so it’s recommended to run a find-and-replace.
 
-* Find: `use Sammyjo20\\Saloon`
+* Find: `use Sammyjo20\Saloon`
 * Replace: `use Saloon`
 
 #### Laravel Namespace Changes
 
 If you are using the Laravel helpers package for Saloon, you should also change the namespaces.
 
-* Find: `use Sammyjo20\\SaloonLaravel`
-* Replace: `use Saloon\\Laravel`
+* Find: `use Sammyjo20\SaloonLaravel`
+* Replace: `use Saloon\Laravel`
 
 ### Class Name Changes
 
@@ -61,22 +61,22 @@ To help make Saloon more readable and to improve the developer experience, Saloo
 
 #### Connector
 
-* Find: `use Saloon\\Http\\SaloonConnector`
-* Replace: `use Saloon\\Http\\Connector`
+* Find: `use Saloon\Http\SaloonConnector`
+* Replace: `use Saloon\Http\Connector`
 * Find: `extends SaloonConnector`
 * Replace: `extends Connector`
 
 #### Request
 
-* Find: `use Saloon\\Http\\SaloonRequest`
-* Replace: `use Saloon\\Http\\Request`
+* Find: `use Saloon\Http\SaloonRequest`
+* Replace: `use Saloon\Http\Request`
 * Find: `extends SaloonRequest`
 * Replace: `extends Request`
 
 #### Response (if using custom responses)
 
-* Find `use Saloon\\Http\\SaloonResponse`
-* Replace: `use Saloon\\Http\\Response`
+* Find `use Saloon\Http\SaloonResponse`
+* Replace: `use Saloon\Http\Response`
 * Find: `extends SaloonResponse`
 * Replace: `extends Response`
 
@@ -87,8 +87,8 @@ To help make Saloon more readable and to improve the developer experience, Saloo
 
 #### MockResponse
 
-* Find: `use Saloon\\Http\\MockRespone`
-* Replace: `use Salooon\\Http\\Faking\\MockResponse`
+* Find: `use Saloon\Http\MockResponse`
+* Replace: `use Salooon\Http\Faking\MockResponse`
 
 ### Method Changes
 
@@ -209,7 +209,7 @@ With regards to request collections/request groups, Saloon has removed support f
 
 class Forge extends Connector
 {
-    public ServersResource$servers;
+    public ServersResource $servers;
 
     public function __construct()
     {
