@@ -82,8 +82,8 @@ To help make Saloon more readable and to improve the developer experience, Saloo
 
 #### MockClient
 
-* Find: `use Saloon\\Clients\\MockClient`
-* Replace: `use Saloon\\Http\\Faking\\MockClient`
+* Find: `use Saloon\Clients\MockClient`
+* Replace: `use Saloon\Http\Faking\MockClient`
 
 #### MockResponse
 
@@ -111,7 +111,7 @@ The method to define a custom response has changed.
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
 
-The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\\Http\\PendingRequest` instead.
+The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\Http\PendingRequest` instead.
 
 * Find: `public function boot(SaloonRequest $request): void`
 * Replace: `public function boot(PendingRequest $pendingRequest): void`
@@ -122,17 +122,17 @@ The `__call` and `__callStatic` methods have been removed alongside the magic me
 
 #### Request
 
-The request’s method property has changed to use a new `Saloon\\Enums\\Method` Enum. Make sure to migrate to use the new Enum too. For example: `protected Method $method = Method::GET`.
+The request’s method property has changed to use a new `Saloon\Enums\Method` Enum. Make sure to migrate to use the new Enum too. For example: `protected Method $method = Method::GET`.
 
 * Find: `protected ?string $method`
 * Replace: `protected Method $method`
 
 The request’s define endpoint method has changed.
 
-* Find: `protected function defineEndpoint(): string`
+* Find: `public function defineEndpoint(): string`
 * Replace: `public function resolveEndpoint(): string`
 
-The request’s properties types have changed.
+The request’s property types have changed.
 
 * Find: `protected ?string $response`
 * Replace: `protected string $response`
@@ -142,7 +142,7 @@ The method to define a custom response has changed.
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
 
-The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\\Http\\PendingRequest` instead.
+The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\Http\PendingRequest` instead.
 
 * Find: `public function boot(SaloonRequest $request): void`
 * Replace: `public function boot(PendingRequest $pendingRequest): void`
@@ -171,7 +171,6 @@ You should now use the generic `RequiresAuth` trait if you would still like to t
 
 ### Plugin Traits
 
-* Now is static method
 * Now accepts PendingRequest
 
 ### Connector-first design
@@ -250,9 +249,68 @@ class Resource
 
 ### Other Changes
 
-Namespace renaming
+#### Better Way To Interact With Request, Headers, Query Parameters and Config
 
-Class renaming
+Another notable change would be the simplification of interacting with headers, config and request body. Instead of individual methods for interacting with these properties, they are now wrapped in easy-to-understand methods with unified method names. Additionally, previously you wouldn't be able to access the default properties after instantiating the request, but now you can. You should make sure any references to headers, query parameters or config use the new methods.
+
+{% tabs %}
+{% tab title="Version 1" %}
+```php
+<?php
+
+$request = new GetForgeServerRequest(12345);
+
+$request->addHeader($value);
+$request->getHeader($value);
+$request->setHeaders($value);
+$request->mergeHeaders(...$values);
+$request->getHeaders();
+
+$request->addQuery($value);
+$request->getQuery(?$value);
+$request->setQuery($value);
+$request->mergeQuery(...$values);
+
+$request->addConfig($value);
+$request->getConfig(?$value);
+$request->setConfig($value);
+$request->mergeConfig(...$values);
+
+$request->addData($value);
+$request->getData(?$value);
+$request->setData($value);
+$request->mergeData(...$values);
+```
+{% endtab %}
+
+{% tab title="Version 2" %}
+```php
+<?php
+
+$request = new GetForgeServerRequest(12345);
+
+$request->headers()->add($value);
+$request->headers()->get($value, $default);
+$request->headers()->set($value);
+$request->headers()->merge(...$values);
+$request->headers()->all();
+
+$request->queryParameters()->add($value);
+$request->queryParameters()->get($value, $default);
+$request->queryParameters()->set($value);
+$request->queryParameters()->merge(...$values);
+$request->queryParameters()->all();
+
+$request->config()->add($value);
+$request->config()->get($value, $default);
+$request->config()->set($value);
+$request->config()->merge(...$values);
+$request->config()->all();
+
+// Data has been moved to body()... more on that below
+```
+{% endtab %}
+{% endtabs %}
 
 Changing data to body and using WithBody interface
 
