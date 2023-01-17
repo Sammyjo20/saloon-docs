@@ -116,7 +116,7 @@ The method to define a custom response has changed.
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
 
-If you are using the `boot` method, the argument has changed from `SaloonRequest $request` to use a `Saloon\Http\PendingRequest` instead.
+If you are using the `boot` method, the argument has changed from `SaloonRequest $request` to use a `Saloon\Contracts\PendingRequest` instead.
 
 * Find: `public function boot(SaloonRequest $request): void`
 * Replace: `public function boot(PendingRequest $pendingRequest): void`
@@ -148,7 +148,7 @@ The method to define a custom response has changed.
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
 
-The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\Http\PendingRequest` instead.
+The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\Contracts\PendingRequest` instead.
 
 * Find: `public function boot(SaloonRequest $request): void`
 * Replace: `public function boot(PendingRequest $pendingRequest): void`
@@ -272,54 +272,9 @@ $request->config()->all();
 {% endtab %}
 {% endtabs %}
 
-### Responses
-
-<mark style="color:purple;">Estimated Impact: Medium</mark>
-
-Saloon’s `Response` class has changed to be a more generic, PSR-compatible response. If you are extending the existing Response class, you should make sure that it is still working correctly.&#x20;
-
-### Authenticator Traits
-
-<mark style="color:purple;">Estimated Impact: Medium</mark>
-
-Previously, Saloon had five traits which would throw an exception if a request or connector wasn’t authenticated. The following traits have now been removed:
-
-* RequiresBasicAuth
-* RequiresDigestAuth
-* RequiresTokenAuth
-
-You should now use the generic `RequiresAuth` trait if you would still like to throw an exception.
-
-### Plugin Traits
-
-* Now accepts PendingRequest
-
-### Connector-first design
-
-#### Add connector support back
-
-### Response Interceptors
-
-### Guzzle Handlers/Middleware
-
-* No longer add handlers on a per-request or connector basis, you must add it to the sender
-
-### Migrating to the new headers, query and config API
-
-### Migrating to the new request body API
-
-* No more data() method and only added once you add a body trait
-
-#### Migrating to body traits
-
-### OAuth Carbon Removal
-
-Saloon no longer uses Carbon as a dependency, so all dates returned that used to return a `CarbonInterface` now return `DateTimeImmutable`
-
-* OAuthAuthenticator: `getExpiresAt()`
-* AccessTokenAuthenticator: `getExpiresAt()`
-
 ### Removing Connector Magic Properties & Request Collections
+
+<mark style="color:red;">Estimated Impact: High</mark>
 
 With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector. For example:
 
@@ -366,35 +321,73 @@ class Resource
 }
 ```
 
-### Migrating to use PendingRequest in traits
+### Responses
 
-### Other Changes
+<mark style="color:purple;">Estimated Impact: Medium</mark>
 
-####
+Saloon’s `Response` class has changed to be a more generic, PSR-compatible response. If you are extending the existing Response class, you should make sure that it is still working correctly.&#x20;
 
-Changing data to body and using WithBody interface
+* toPsrResponse renamed to getPsrResponse on responses
 
-Changing location of body traits
+### Plugin Traits
 
-Changing defineEndpoint to resolveEndpoint
+<mark style="color:purple;">Estimated Impact: Medium</mark>
 
-Changing defineBaseUrl to resolveBaseUrl
+From version two, Saloon has updated its plugins. You can choose to add plugins to both your connector or your request. Previously, plugins would receive an instance of `SaloonRequest` in the arguments. Now, plugins will return a `PendingRequest` instance. You should update your plugins accordingly.&#x20;
 
-Removing the connector property on requests or adding back HasConnector
+You should also make any changes to the `PendingRequest` instance and **not** use `$this` as it's bad practice to overwrite the connector/request instance.
 
-Changing response interceptors to middleware
+### Authenticator Traits
 
-Moving where Guzzle handlers are added
+<mark style="color:blue;">Estimated Impact: Low</mark>
 
-withAuth renamed to authenticate
+Previously, Saloon had five traits which would throw an exception if a request or connector wasn’t authenticated. The following traits have now been removed:
+
+* RequiresBasicAuth
+* RequiresDigestAuth
+* RequiresTokenAuth
+
+You should now use the generic `RequiresAuth` trait if you would still like to throw an exception.
+
+### Authentication
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+Saloon version two has removed the `withAuth` method. You should use the `authenticate` method instead.
+
+### Response Interceptors
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+### Guzzle Handlers/Middleware
+
+<mark style="color:purple;">Estimated Impact: Medium</mark>
+
+* No longer add handlers on a per-request or connector basis, you must add it to the sender
+
+### Migrating to the new request body API
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+* No more data() method and only added once you add a body trait
+* Changing data to body and using HasBody interface
+* Changing location of body traits
+* defineXMLBody renamed to defaultBody
+
+#### Migrating to body traits
+
+### OAuth Carbon Removal
+
+<mark style="color:blue;">Estimated Impact: Low</mark>
+
+Saloon no longer has Carbon as a dependency, so all dates returned that used to return a `CarbonInterface` now return `DateTimeImmutable`
+
+* OAuthAuthenticator: `getExpiresAt()`
+* AccessTokenAuthenticator: `getExpiresAt()`
+
+### Notes
 
 Authenticators are executed at the end of a request preparation lifecycle rather than at the beginning
-
-toPsrResponse renamed to getPsrResponse on responses
-
-defineXMLBody renamed to defaultBody
-
-Request collections and magic request registration removed
 
 MockResponse::fromRequest has been removed
 
