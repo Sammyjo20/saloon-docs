@@ -34,7 +34,7 @@
 * [🔁 Caching Responses](digging-deepeer/caching-responses.md)
 * [🔏 OAuth2 Authentication](digging-deepeer/oauth2-authentication.md)
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
-* [👪 Plugins](digging-deepeer/plugins.md)
+* [👪 Plugins](digging-deepeer/traits.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
 * [🛩 Senders](digging-deepeer/senders.md)
 
