@@ -1,6 +1,6 @@
 # ✉ Requests
 
-The Saloon request class stores the information of a single API request. Within a request, you can set the HTTP Method (GET, POST, etc.) and define the endpoint of that request. You don't have to include the base URL. You can also define headers, query parameters and HTTP client config. Saloon request classes are reusable, so you can write a request class once and use it multiple times in your application.
+The Saloon request class stores the information of a single API request. Within a request, you can set the HTTP Method (GET, POST, etc.) and define the endpoint of that request. You don't have to include the base URL because your connector will provide it for you. You can also define headers, query parameters and HTTP client config. Saloon request classes are reusable, so you can write a request class once and use it multiple times in your application.
 
 ### Getting Started
 
