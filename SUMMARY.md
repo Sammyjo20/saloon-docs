@@ -47,4 +47,5 @@
 
 * [💁 Other Resources](conclusion/other-resources.md)
 * [🎖 Showcase](conclusion/showcase.md)
-* [❤ Support](conclusion/support.md)
+* [❤ Support](https://ko-fi.com/sammyjo20)
+* [👨🚀 About Me](https://github.com/Sammyjo20)
