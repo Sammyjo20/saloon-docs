@@ -26,6 +26,7 @@
 
 ## Digging Deepeer
 
+* [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 * [☝ Solo Requests](digging-deepeer/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deepeer/concurrency-and-pools.md)
 * [💂 Middleware](digging-deepeer/middleware.md)
@@ -34,14 +35,13 @@
 * [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
 * [♻ Lifecycle Hooks](digging-deepeer/lifecycle-hooks.md)
 * [👪 Traits](digging-deepeer/traits.md)
-* [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 * [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
 * [🛩 Senders](digging-deepeer/senders.md)
 
 ## Testing
 
-* [📸 Recording Requests](testing/recording-requests.md)
-* [🚧 Manual Fake Responses](testing/manual-fake-responses.md)
+* [📸 Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
+* [🚧 Manual Fake Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 
 ## Conclusion
 
