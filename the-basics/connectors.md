@@ -110,3 +110,40 @@ class ForgeConnector extends Connector
     }
 }
 ```
+
+### Using Constructor Arguments
+
+You may add properties to your connector class and use a constructor to provide variables into the connector instance, like an API token. This is great when building SDK-style classes.
+
+{% tabs %}
+{% tab title="Definition" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Http\Connector;
+
+class ForgeConnector extends Connector
+{
+    public function resolveBaseUrl(): string
+    {
+        return 'https://forge.laravel.com/api/v1';
+    }
+
+<strong>    public function __construct(
+</strong><strong>        protected string $apiToken,
+</strong><strong>    ){
+</strong><strong>       $this->withTokenAuth($this->apiToken); 
+</strong><strong>    }
+</strong>}
+</code></pre>
+{% endtab %}
+
+{% tab title="Usage" %}
+```php
+$connector = new ForgeConnector('api-token');
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+This example uses a method `withTokenAuth` which is documented on the [authentication ](authentication.md)page.
+{% endhint %}

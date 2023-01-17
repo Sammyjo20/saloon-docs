@@ -8,7 +8,9 @@ To start sending requests, instantiate your connector class and request class an
 <?php
 
 $connector = new ForgeConnector('api-token');
-$response = $connector->send(new GetServersRequest);
+$request = new GetServersRequest;
+
+$response = $connector->send($request);
 
 ```
 
