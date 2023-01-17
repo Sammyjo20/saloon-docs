@@ -287,50 +287,9 @@ $request->config()->all();
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector. For example:
+With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector.&#x20;
 
-```php
-// Properties Example
-// e.g $forge->servers->get();
-
-class Forge extends Connector
-{
-    public ServersResource $servers;
-
-    public function __construct()
-    {
-        $this->servers = new ServersResource($this);
-    }
-}
-
-// Method example
-// e.g $forge->servers()->get();
-
-class Forge extends Connector
-{
-    public function servers(): ServersResource
-    {
-         return new ServersResource($this);
-    }
-}
-
-// Resource Class
-
-use Saloon\Contracts\Connector;
-use Saloon\Contracts\Response;
-
-class Resource 
-{
-    public function __construct(
-           protected Connector $connector;
-    }{}
-    
-    public function get()
-    {
-        return $this->connector->send(new GetServersRequest);
-    }
-}
-```
+[Click here for an example SDK resource instead of request collections](../digging-deepeer/building-sdks.md#resources)
 
 ### Authentication
 
