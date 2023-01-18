@@ -101,7 +101,7 @@ $body = $request->body()->all();
 
 ### Multipart Body
 
-Saloon has also made it easier to send multipart form requests for attaching files. Once you have added the `HasBody` method, add the `HasMultipartBody` trait. Next, you can use the available methods below to add/remove/get and set the multipart body. You may use the `MultipartValue` object if you want to define default multipart bodies to send.
+Saloon has also made it easier to send multipart form requests for attaching files. Once you have added the `HasBody` interface, add the `HasMultipartBody` trait. Next, you can use the available methods below to add/remove/get and set the multipart body. You may use the `MultipartValue` object if you want to define default multipart bodies to send.
 
 {% tabs %}
 {% tab title="Default Multipart Body Example" %}

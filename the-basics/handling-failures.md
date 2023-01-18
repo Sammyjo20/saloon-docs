@@ -15,7 +15,39 @@ $response->status(); // 500
 $response->body(); // {"message": "Server Error"}
 ```
 
-### Default Exceptions
+### Always throw exceptions on failed requests
+
+You may wish to always throw an exception if a request fails. You may add the `AlwaysThrowsOnError` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method. You may also add this trait to a request.
+
+```php
+<?php
+
+use Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
+
+class ForgeConnector extends Connector
+{
+    use AlwaysThrowsOnError;
+    
+    // {...}
+}
+```
+
+### Using the throw method
+
+On a per-response basis, you may use the `throw` method after sending your response. This method will throw an exception if the response has a "failed" HTTP status code like 4xx or 5xx.
+
+```php
+<?php
+
+$connector = new ForgeConnector;
+$response = $connector->send(new ErrorRequest);
+
+// throws InternalServerErrorException (extends ServerException)
+
+$response->throw();
+```
+
+### Response Exceptions
 
 Saloon's default exception handler contains the following exceptions based on the status code and severity of the exception. These are thrown depending on the method you use below.
 
@@ -37,42 +69,6 @@ SaloonException
         └── TooManyRequestsException (429)
 ```
 
-### Always throwing on failed requests
-
-You may wish to always throw an exception if a request fails. You may add the `AlwaysThrowsOnError` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method.
-
-```php
-<?php
-
-use Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
-
-class ForgeConnector extends Connector
-{
-    use AlwaysThrowsOnError;
-    
-    // {...}
-}
-```
-
-{% hint style="info" %}
-You may also add this trait to a request.
-{% endhint %}
-
-### Using the throw method
-
-On a per-response basis, you may use the `throw` method after sending your response. This method will throw an exception if the response has a "failed" HTTP status code like 4xx or 5xx.
-
-```php
-<?php
-
-$connector = new ForgeConnector;
-$response = $connector->send(new ErrorRequest);
-
-// throws InternalServerErrorException (extends ServerException)
-
-$response->throw();
-```
-
 ### Using the onError method
 
 You may wish to write some custom logic in your application if a request fails, but you don't want to throw an exception. You may use the `onError` method from the response and provide a callable to be executed if an error happens.
@@ -90,6 +86,10 @@ $response->onError(function (Response $response) {
 
 // Application logic is continued
 ```
+
+{% hint style="info" %}
+The `onError` method will only work if your HTTP status is either 4xx or 5xx.
+{% endhint %}
 
 ### Handling failures with promises
 
@@ -128,7 +128,7 @@ Saloon offers some other methods to handle failed responses.
 
 ### Customising when exceptions are thrown
 
-By default, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response status but with an error message in the response body. You should extend the `shouldThrowRequestException` method to change the default behaviour.
+If you use the `throw` method or the `AlwaysThrowsOnErrors` trait, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response status but with an error message in the response body. You should extend the `shouldThrowRequestException` method to change the default behaviour.
 
 {% tabs %}
 {% tab title="Connector" %}

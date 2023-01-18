@@ -4,7 +4,7 @@ Depending on how you sent your request (synchronous/asynchronous) you will eithe
 
 ### Handling synchronous responses
 
-By default, Saloon will return an instance of `Saloon\Http\Response`. this is the default response. This response class contains many helpful methods for interacting with your HTTP response.
+By default, Saloon will return an instance of `Saloon\Http\Response`. This response class contains many helpful methods for interacting with your HTTP response. You can see a list of the available methods below.
 
 ```php
 <?php
@@ -16,7 +16,7 @@ $body = $response->body();
 $decodedBody = $response->json();
 ```
 
-{% hint style="warning" %}
+{% hint style="danger" %}
 By default, Saloon will not throw an exception if a synchronous request fails. [Refer to the handling failures section for handling errors.](handling-failures.md)
 {% endhint %}
 
@@ -56,7 +56,7 @@ By default, Saloon will not throw an exception if a synchronous request fails. [
 
 ### Handling asynchronous responses
 
-When using concurrent requests/pooling or `sendAsync` , Saloon will respond with a `GuzzleHttp\Promise\PromiseInterface.` The result will be a `Response` a class described above. When the request fails, Saloon will not use the `then` method but return an instance of `RequestException`in the `otherwise` block.
+When using concurrent requests/pooling or `sendAsync` , Saloon will respond with a `GuzzleHttp\Promise\PromiseInterface.` The promise will contain a `Response` a class described above. When the request fails, Saloon will not use the `then` method but return an instance of `RequestException`in the `otherwise` block.
 
 ```php
 <?php
@@ -70,7 +70,7 @@ $promise
     ->then(function (Response $response) {
         // Handle successful response
     })
-    ->otherwise(function (RequestException|FatalRequestException $exception) {
+    ->otherwise(function (Exception $exception) {
         // Handle failed request
     });
 ```
