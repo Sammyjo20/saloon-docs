@@ -303,6 +303,17 @@ Saloon version two has removed the `withAuth` method. You should use the `authen
 
 \-- SECTION IN PROGRESS --
 
+### AlwaysThrowOnErrors Trait Rename
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+From Saloon version two, the `AlwaysThrowsOnErrors` trait has been renamed to `AlwaysThrowOnErrors`.&#x20;
+
+* Find: `Saloon\Traits\Plugins\AlwaysThrowsOnErrors`
+* Replace: `Saloon\Traits\Plugins\AlwaysThrowOnErrors`
+* Find: `AlwaysThrowsOnErrors`
+* Replace: `AlwaysThrowOnErrors`
+
 ### Responses
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
