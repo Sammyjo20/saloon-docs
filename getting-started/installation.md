@@ -3,7 +3,7 @@
 To get started with Saloon, you will need to install it through Composer.&#x20;
 
 ```bash
-composer require sammyjo20/saloon "^2.0.0-beta1"
+composer require sammyjo20/saloon "^2.0-beta2"
 ```
 
 > Saloon supports PHP 8.1+
@@ -21,5 +21,5 @@ Saloon has just three dependencies.
 You may also install the optional Saloon helper library for Laravel, which adds a config file, commands and a facade to let you easily test.
 
 ```bash
-composer require sammyjo20/saloon-laravel "^2.0.0-beta1"
+composer require sammyjo20/saloon-laravel "^2.0-beta2"
 ```
