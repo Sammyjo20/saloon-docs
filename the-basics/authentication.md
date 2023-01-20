@@ -137,7 +137,7 @@ $request->withTokenAuth($user->forge_api_key);
 
 ### Custom Authenticators
 
-Sometimes the API integration you are building requires multiple ways to authenticate, like a token and a certificate or perhaps authenticating an Oauth 2 API. When the built-in authentication is insufficient, You can build custom authenticators that can be transported between your application and Saloon's requests.
+Sometimes the API integration you are building requires multiple ways to authenticate, like a token and a certificate or perhaps authenticating an OAuth 2 API. When the built-in authentication is insufficient, You can build custom authenticators that can be transported between your application and Saloon's requests.
 
 {% tabs %}
 {% tab title="Definition" %}
