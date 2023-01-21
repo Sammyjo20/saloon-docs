@@ -16,7 +16,7 @@ Advanced integrations and SDKs: \~30-45 minutes
 
 ### Installation
 
-First, update Saloon in your `composer.json` file to use the version `^2.0.` if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.&#x20;
+First, update Saloon in your `composer.json` file to use the version `^2.0`. if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.&#x20;
 
 {% tabs %}
 {% tab title="Non-Laravel" %}
@@ -125,13 +125,6 @@ The `request` method has been removed.
 
 The `__call` and `__callStatic` methods have been removed alongside the magic methods that build up requests. Including the `requests` property.
 
-#### Connector Properties
-
-The connector’s properties types have changed.
-
-* Find: `protected ?string $response`
-* Replace: `protected string $response`
-
 ### Request Changes
 
 <mark style="color:red;">Estimated Impact: High</mark>
@@ -167,11 +160,6 @@ The request’s method property has changed to use a new `Saloon\Enums\Method` E
 
 * Find: `protected ?string $method`
 * Replace: `protected Method $method`
-
-The request’s property types have changed.
-
-* Find: `protected ?string $response`
-* Replace: `protected string $response`
 
 ### Updated way to send requests
 
@@ -276,12 +264,120 @@ $request->config()->all();
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-\-- SECTION IN PROGRESS --
+Saloon has also rebuilt the way that request data/body is sent using POST/PUT/PATCH requests. First, make sure that your data traits are using the new namespaces. It's recommended that you [read through the new section](../the-basics/request-body-data.md) on request body/data to understand why the changes have been made.
 
-* No more data() method and only added once you add a body trait
-* Changing data to body and using HasBody interface
-* Changing location of body traits
-* defineXMLBody renamed to defaultBody
+**HasJsonBody**
+
+* Find: `use Saloon\Traits\Plugins\HasJsonBody`
+* Replace: `Saloon\Traits\Body\HasJsonBody`
+
+**HasFormParams**
+
+* Find: `use Saloon\Traits\Plugins\HasFormParams`
+* Replace: `use Saloon\Traits\Body\HasJsonBody`
+
+**HasMultipartBody**
+
+* Find: `use Saloon\Traits\Plugins\HasMultipartBody`
+* Replace: `use Saloon\Traits\Body\HasMultipartBody`
+
+**HasXMLBody**
+
+* Find: `use Saloon\Traits\Plugins\HasXMLBody`
+* Replace: `use Saloon\Traits\Body\HasXmlBody`
+* Replace: `use HasXMLBody`
+* Find: `use HasXmlBody`
+
+**HasBody**
+
+* Find: `use Saloon\Traits\Plugins\HasBody`
+* Replace: `use Saloon\Traits\Body\HasBody`
+
+Next, add the `HasBody` interface to your request or connector. This interface is required for Saloon to properly detect if you are using request body or not. Since you have already added a body trait, the required `body` method should be implemented. You may need to re-index your IDE before it understands the changes made.
+
+#### **Syntax changed from data to body**
+
+Previously, Saloon called request body "data". To match PSR standards better, this has been renamed to "body".
+
+#### Changing default
+
+Previously, you may have defined a method like `defaultData` this needs to be renamed to `defaultBody`. The methods have also changed from being public to protected.&#x20;
+
+{% tabs %}
+{% tab title="Version One" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+<strong>    public function defaultData(): array    
+</strong>    {
+        return [
+            // ...
+        ];
+    }
+}
+</code></pre>
+{% endtab %}
+
+{% tab title="Version Two" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class GetServersRequest extends Request
+{
+    // {...}
+    
+<strong>    public function defaultBody(): array
+</strong>    {
+        return [
+            // ...
+        ];
+    }
+}
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+Make sure that you define the correct return type for your request body trait.
+{% endhint %}
+
+#### HasXMLBody defineXmlBody removed
+
+Saloon has removed the `defineXmlBody` method when you use the `HasXmlTrait`. You must replace this with `defaultBody`
+
+#### Request Body Methods
+
+Saloon has also changed the previous request data methods. You should update your code accordingly if you used these old methods.
+
+{% tabs %}
+{% tab title="Version One" %}
+```php
+<?php
+
+$request = new CreateForgeSiteRequest($serverId, $domain);
+
+$request->setData(['domain' => $customDomain]);
+$request->mergeData(['database' => 'test123']);
+$request->addData('name', 'my-saloon-server');
+$request->getData('name');
+```
+{% endtab %}
+
+{% tab title="Version Two" %}
+```php
+<?php
+
+$request = new CreateForgeSiteRequest($serverId, $domain);
+
+$request->body()->set(['domain' => $customDomain]);
+$request->body()->merge(['database' => 'test123']);
+$request->body()->add('name', 'my-saloon-server');
+$request->body()->get('name');
+```
+{% endtab %}
+{% endtabs %}
 
 ### Removing Connector Magic Properties & Request Collections
 
@@ -311,22 +407,20 @@ From Saloon version two, the `AlwaysThrowsOnErrors` trait has been renamed to `A
 
 * Find: `Saloon\Traits\Plugins\AlwaysThrowsOnErrors`
 * Replace: `Saloon\Traits\Plugins\AlwaysThrowOnErrors`
-* Find: `AlwaysThrowsOnErrors`
-* Replace: `AlwaysThrowOnErrors`
+* Find: `use AlwaysThrowsOnErrors`
+* Replace: `use AlwaysThrowOnErrors`
 
 ### Responses
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
 
-Saloon’s `Response` class has changed to be a more generic, PSR-compatible response. If you are extending the existing Response class, you should make sure that it is still working correctly.&#x20;
-
-* toPsrResponse renamed to getPsrResponse on responses
+Saloon’s `Response` class has changed to be a more generic, PSR-compatible response. If you are extending the existing Response class, you should make sure that it is still working correctly.
 
 ### Plugin Traits
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
 
-From version two, Saloon has updated its plugins. You can choose to add plugins to both your connector or your request. Previously, plugins would receive an instance of `SaloonRequest` in the arguments. Now, plugins will return a `PendingRequest` instance. You should update your plugins accordingly.&#x20;
+From version two, Saloon has updated its plugins. You can choose to add plugins to both your connector or your request. Previously, plugins would receive an instance of `SaloonRequest` in the arguments. Now, plugins will receive a `PendingRequest` instance. You should update your plugins accordingly.&#x20;
 
 You should also make any changes to the `PendingRequest` instance and **not** use `$this` as it's bad practice to overwrite the connector/request instance.
 
@@ -360,14 +454,8 @@ Saloon no longer has Carbon as a dependency, so all dates returned that used to 
 * OAuthAuthenticator: `getExpiresAt()`
 * AccessTokenAuthenticator: `getExpiresAt()`
 
-### Notes
+### Mock Response From Request
 
-Authenticators are executed at the end of a request preparation lifecycle rather than at the beginning
+<mark style="color:blue;">Estimated Impact: Low</mark>
 
-MockResponse::fromRequest has been removed
-
-Carbon has been replaced with DateTime instances
-
-MockClient and MockResponse moved to a different folder
-
-Request changed to PendingRequest inside of plugins and boot methods
+The `MockResponse::fromRequest` method has been removed from version two.
