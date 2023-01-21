@@ -10,7 +10,7 @@ Click here to see the [GuzzleSender's](https://github.com/Sammyjo20/Saloon/blob/
 
 ### Creating your own sender
 
-While Saloon's default sender is the GuzzleSender, Saloon is completely sender agnostic and different senders can be built to be used by it. If you would like to build a sender for a different HTTP client or customise the Guzzle sender you are more than welcome to.
+While Saloon's default sender is the GuzzleSender, Saloon is completely sender agnostic and different senders/HTTP clients can be built to be used by it. If you would like to build a sender for a different HTTP client or customise the Guzzle sender you are more than welcome to.
 
 #### Sender Contract
 

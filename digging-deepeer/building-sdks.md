@@ -1,18 +1,18 @@
 # 🔌 Building SDKs
 
-Saloon provides everything you need to build a great SDK or library for an API. It already offers the ability to mock responses, provide authentication, implement OAuth2 boilerplate and even record your API requests in your tests. With Saloon you won't need to write the same boilerplate code over and over again. Saloon comes with just three dependencies making your library or SDK lightweight.
+Saloon provides everything you need to build a great SDK or library for an API. Saloon already offers the ability to mock responses, provide authentication, implement OAuth2 boilerplate and even record your API requests in your tests so that you can write tests for the API integration without hitting the real API each time. With Saloon you will be up and running in minutes. No more writing HTTP boilerplate code! Saloon also comes with just three dependencies making your library or SDK lightweight.
 
 ### Example SDK
 
-This documentation will be using PokéAPI as an example API. [Click here to see a full SDK example repository.](https://github.com/Sammyjo20/pokeapi-sdk)
+Saloon will be using PokéAPI as an example API. [Click here to see a full SDK example repository.](https://github.com/Sammyjo20/pokeapi-sdk)
 
 ### Getting Started
 
-To start building an SDK with Saloon, we recommend that you create a connector as your SDK class. Once you are familiar with connectors, create a class and extend the `Saloon\Http\Connector` class. This class allows you to configure the base URL and any defaults you may need like default headers or authentication.&#x20;
+To start building an SDK with Saloon, we recommend that you create your base SDK class and extend the `Saloon\Http\Connector` class. This class allows you to configure the base URL, default headers, configuration and apply plugins. You can also configure request mocking really easily, so this will come in really handy when you want to write tests for the API without making real requests. [Make sure to read the connector section of the documentation.](../the-basics/connectors.md)
 
 #### Example SDK Connector
 
-This is an example SDK for a fun API the [PokéAPI](https://pokeapi.co/). As you can see, I have defined the API base URL, as well as used the constructor to require the person using the API always provides an authentication token. In the real world, the PokéAPI does not require an API token.
+This is an example SDK for a fun API for Pokémon - PokéAPI. As you can see, I have defined the API base URL, as well as used the constructor to require the person using the API always provides an authentication token. In the real world, the PokéAPI does not require an API token.
 
 ```php
 <?php
@@ -26,6 +26,13 @@ use Pokeapi\Responses\PokeapiResponse;
 
 class Pokeapi extends Connector
 {
+    /**
+     * Define the custom response
+     *
+     * @var string
+     */
+    protected string $response = PokeapiResponse::class;
+
     /**
      * Resolve the base URL of the service.
      *
@@ -63,7 +70,7 @@ class Pokeapi extends Connector
 
 #### Using the SDK connector
 
-Now that we have created the SDK class, all we need to do is instantiate it and provide the API token. We are now ready to send requests through our SDK. You may add your own methods to this class is it is the root class of your SDK.
+Now that we have created the SDK class, all we need to do is instantiate it and provide the API token. We are now ready to send requests through our SDK.
 
 ```php
 <?php
@@ -75,9 +82,9 @@ $pokeapi = new Pokeapi('my-api-token');
 // Ready to make requests!
 ```
 
-### Sending Requests
+### Sending Requests Directly
 
-One of the ways that you can build SDKs in Saloon is by creating request classes and then calling them from the SDK connector. This is the simplest way and you will get up and running really quickly with Saloon. Make sure you are familiar with how requests work first.
+One of the ways that you can build SDKs in Saloon is by creating requests and then calling them from the SDK connector. This is the simplest way and you will get up and running really quickly with Saloon.
 
 #### Getting started
 
@@ -85,7 +92,7 @@ Firstly, you will need to [create a request](../the-basics/requests.md), this is
 
 #### Use your request
 
-When you have created the request, all that developers would need to do is to instantiate and send the request on the connector. This means you only need to have two classes as a minimum for a fully-working SDK!
+When you have created the request, all that developers would need to do is run it! You can use the `send` method to send a request straight away.
 
 ```php
 <?php
@@ -93,11 +100,8 @@ When you have created the request, all that developers would need to do is to in
 use Pokeapi\Pokeapi;
 
 $pokeapi = new Pokeapi('my-api-token');
-$request = new GetAllPokemon(page: 1);
 
-// Developers would just send the request.
-
-$response = $pokeapi->send($request);
+$response = $pokeapi->send(new GetAllPokemon(page: 1));
 ```
 
 With this method, it’s really simple to build your SDK. All you would need to do is create all the requests and then document them in your README. Developers using your SDK can just instantiate your SDK and then use the `send` methods.
@@ -134,18 +138,16 @@ $response = $pokeapi->allPokemon(page: 1);
 {% endtab %}
 {% endtabs %}
 
-### Request Resources
+### Resources
 
 The resource pattern can help you combine your SDK requests into simple groups that are easy for the developer to find and consume. The tutorial below will guide you through creating a resource class however you should customise it to your SDK.&#x20;
 
 #### Creating the base resource class
 
-Let's start by creating a `Resource` class. This class should just contain a constructor that passes in an instance of `Saloon\Contracts\Connector`.
+Let's start by creating a `Resource` class. This class should just contain a constructor with requires a connector.
 
 ```php
 <?php
-
-use Saloon\Contracts\Connector;
 
 class Resource
 {
@@ -158,7 +160,7 @@ class Resource
 
 #### Creating a resource
 
-Now let's create a resource. For this API, I will create a Pokémon resource which will group all the Pokémon requests together. Imagine a resource like a controller in an MVC framework like Laravel. You should pass any arguments the request needs through the method arguments.
+Now let's create a resource. In my example, I will create a Pokémon resource which will group all the Pokémon related routes together. Imagine a resource like a controller in an MVC framework like Laravel.
 
 ```php
 <?php
@@ -179,7 +181,7 @@ class PokemonResource extends Resource
 
 #### Defining a resource on your connector
 
-Now we'll define a method on the connector which returns this resource class. Don't forget to pass the connector's instance (`$this`) into the resource.
+Next, we'll define a method on the connector which uses this resource class.
 
 ```php
 <?php
@@ -188,7 +190,7 @@ class Pokeapi extends Connector
 {
     // { ... }
     
-    public function pokemon(): PokemonResource
+    public function pokemon(): Resource
     {
         return new PokemonResource($this);
     }
@@ -197,7 +199,7 @@ class Pokeapi extends Connector
 
 #### Using the resource
 
-Now all our users have to do is access the `pokemon()` method on the SDK class to get access to all the various requests that our SDK has to offer.
+Now we'll have access to our `$pokeapi->pokemon()` resource which contains all the requests we have defined!
 
 ```php
 <?php
@@ -212,11 +214,3 @@ $giratina = $pokeapi->pokemon()->get(id: 'giratina');
 ### Custom Responses
 
 You may wish to customise the `Response` class that is returned by Saloon from your SDK connector. [Click here to read more about custom responses.](building-sdks.md#custom-responses)
-
-### Additional Features
-
-Please read through the other sections of Saloon's documentation to see the other features that you can offer for your SDK. Every other feature like testing, authentication, failure handling is all supported for SDKs.
-
-### Testing
-
-When building an SDK, it's important to write tests that ensure the SDK calls the correct requests from an API and returns the right response, especially if you're converting the response into a data-transfer-object. [Read through the testing section of the documentation](faking-mock-responses/manual-fake-responses.md) to get familiar with mocking and recording requests.
