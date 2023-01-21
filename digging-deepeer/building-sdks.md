@@ -81,7 +81,7 @@ One of the ways that you can build SDKs in Saloon is by creating request classes
 
 #### Getting started
 
-Firstly, you will need to [create a request](requests.md), this is exactly the same as making a normal request described in the documentation. Any requirements like data or pagination should just be provided in each request’s constructor.
+Firstly, you will need to [create a request](../the-basics/requests.md), this is exactly the same as making a normal request described in the documentation. Any requirements like data or pagination should just be provided in each request’s constructor.
 
 #### Use your request
 
@@ -219,4 +219,4 @@ Please read through the other sections of Saloon's documentation to see the othe
 
 ### Testing
 
-When building an SDK, it's important to write tests that ensure the SDK calls the correct requests from an API and returns the right response, especially if you're converting the response into a data-transfer-object. [Read through the testing section of the documentation](../digging-deepeer/faking-mock-responses/manual-fake-responses.md) to get familiar with mocking and recording requests.
+When building an SDK, it's important to write tests that ensure the SDK calls the correct requests from an API and returns the right response, especially if you're converting the response into a data-transfer-object. [Read through the testing section of the documentation](faking-mock-responses/manual-fake-responses.md) to get familiar with mocking and recording requests.
