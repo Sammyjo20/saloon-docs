@@ -25,18 +25,18 @@
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🪝 Building SDKs](digging-deepeer/building-sdks.md)
 
-## Digging Deepeer
+## Digging Deeper
 
-* [♻ Request Lifecycle](digging-deepeer/lifecycle-hooks.md)
-* [💂 Middleware](digging-deepeer/middleware.md)
-* [☝ Solo Requests](digging-deepeer/solo-requests.md)
-* [🏎 Concurrency & Pools](digging-deepeer/concurrency-and-pools.md)
-* [🔁 Caching Responses](digging-deepeer/caching-responses.md)
-* [🔏 OAuth2 Authentication](digging-deepeer/oauth2-authentication.md)
-* [🛤 Data Transfer Objects](digging-deepeer/data-transfer-objects.md)
-* [👪 Plugins](digging-deepeer/traits.md)
-* [😎 Laravel Integration](digging-deepeer/laravel-integration.md)
-* [🛩 Senders](digging-deepeer/senders.md)
+* [♻ Request Lifecycle](digging-deeper/lifecycle-hooks.md)
+* [💂 Middleware](digging-deeper/middleware.md)
+* [☝ Solo Requests](digging-deeper/solo-requests.md)
+* [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
+* [🔁 Caching Responses](digging-deeper/caching-responses.md)
+* [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
+* [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
+* [👪 Plugins](digging-deeper/traits.md)
+* [😎 Laravel Integration](digging-deeper/laravel-integration.md)
+* [🛩 Senders](digging-deeper/senders.md)
 
 ## Testing
 

@@ -79,12 +79,12 @@ $promise
 ```
 
 {% hint style="info" %}
-Saloon supports all the features Guzzle offers for asynchronous requests, including unwrapping promises and request pooling for high-performance API calls. [Click here to learn more.](../digging-deepeer/concurrency-and-pools.md)
+Saloon supports all the features Guzzle offers for asynchronous requests, including unwrapping promises and request pooling for high-performance API calls. [Click here to learn more.](../digging-deeper/concurrency-and-pools.md)
 {% endhint %}
 
 ### Sending Solo Requests
 
-Please make sure to read the section on [solo requests](../digging-deepeer/solo-requests.md) first to configure your request. You can send solo requests directly. You have the following methods available on the solo request.
+Please make sure to read the section on [solo requests](../digging-deeper/solo-requests.md) first to configure your request. You can send solo requests directly. You have the following methods available on the solo request.
 
 * send(MockClient $mockClient = null)
 * sendAsync(MockClient $mockClient = null)
