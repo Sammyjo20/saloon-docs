@@ -289,7 +289,7 @@ $request->config()->all();
 
 With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector.&#x20;
 
-[Click here for an example SDK resource instead of request collections](../digging-deepeer/building-sdks.md#resources)
+[Click here for an example SDK resource instead of request collections](../the-basics/building-sdks.md#resources)
 
 ### Authentication
 

@@ -23,12 +23,12 @@
 * [🚀 Sending Requests](the-basics/sending-requests.md)
 * [📡 Responses](the-basics/responses.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
+* [🔌 Building SDKs](the-basics/building-sdks.md)
 
 ## Digging Deepeer
 
 * [♻ Request Lifecycle](digging-deepeer/lifecycle-hooks.md)
 * [💂 Middleware](digging-deepeer/middleware.md)
-* [🔌 Building SDKs](digging-deepeer/building-sdks.md)
 * [☝ Solo Requests](digging-deepeer/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deepeer/concurrency-and-pools.md)
 * [🔁 Caching Responses](digging-deepeer/caching-responses.md)
@@ -40,8 +40,8 @@
 
 ## Testing
 
-* [📸 Recording Requests](digging-deepeer/faking-mock-responses/recording-requests.md)
-* [🚧 Manual Fake Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
+* [📸 Recording Responses](digging-deepeer/faking-mock-responses/recording-requests.md)
+* [🚧 Mock Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 
 ## Conclusion
 
