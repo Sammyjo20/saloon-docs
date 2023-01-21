@@ -255,11 +255,11 @@ $request->headers()->set($value);
 $request->headers()->merge(...$values);
 $request->headers()->all();
 
-$request->queryParameters()->add($value);
-$request->queryParameters()->get($value, $default);
-$request->queryParameters()->set($value);
-$request->queryParameters()->merge(...$values);
-$request->queryParameters()->all();
+$request->query()->add($value);
+$request->query()->get($value, $default);
+$request->query()->set($value);
+$request->query()->merge(...$values);
+$request->query()->all();
 
 $request->config()->add($value);
 $request->config()->get($value, $default);

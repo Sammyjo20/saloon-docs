@@ -23,7 +23,7 @@
 * [🚀 Sending Requests](the-basics/sending-requests.md)
 * [📡 Responses](the-basics/responses.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
-* [🔌 Building SDKs](digging-deepeer/building-sdks.md)
+* [🪝 Building SDKs](digging-deepeer/building-sdks.md)
 
 ## Digging Deepeer
 

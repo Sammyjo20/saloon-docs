@@ -19,7 +19,7 @@ Saloon used to send a request through a class called  `RequestSender.` this clas
 
 While Saloon still uses Guzzle for it's very useful PSR-compliant objects, in future versions of Saloon, it may not use Guzzle as a dependency. The work has already been completed to allow you to use any HTTP Client of your choice.
 
-<figure><img src="../.gitbook/assets/Saloon v2.png" alt=""><figcaption><p>The flow of Saloon v2</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/Saloon v2 (1).png" alt=""><figcaption><p>The flow of Saloon v2</p></figcaption></figure>
 
 #### Improving the developer experience
 
@@ -283,11 +283,11 @@ $request->headers()->set($value);
 $request->headers()->merge(...$values);
 $request->headers()->all();
 
-$request->queryParameters()->add($value);
-$request->queryParameters()->get($value, $default);
-$request->queryParameters()->set($value);
-$request->queryParameters()->merge(...$values);
-$request->queryParameters()->all();
+$request->query()->add($value);
+$request->query()->get($value, $default);
+$request->query()->set($value);
+$request->query()->merge(...$values);
+$request->query()->all();
 
 $request->config()->add($value);
 $request->config()->get($value, $default);
