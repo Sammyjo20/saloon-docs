@@ -14,6 +14,10 @@ Simple integrations: 15-30 minutes
 
 Advanced integrations and SDKs: \~30-45 minutes
 
+### Need help migrating from version one?&#x20;
+
+You can [open a discussion](https://github.com/sammyjo20/saloon) on Saloon's Github page if you need any help with the migration process.&#x20;
+
 ### Installation
 
 First, update Saloon in your `composer.json` file to use the version `^2.0`. if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.&#x20;
@@ -116,11 +120,6 @@ The method to define a custom response has changed.
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
 
-If you are using the `boot` method, the argument has changed from `SaloonRequest $request` to use a `Saloon\Contracts\PendingRequest` instead.
-
-* Find: `public function boot(SaloonRequest $request): void`
-* Replace: `public function boot(PendingRequest $pendingRequest): void`
-
 The `request` method has been removed.
 
 The `__call` and `__callStatic` methods have been removed alongside the magic methods that build up requests. Including the `requests` property.
@@ -140,11 +139,6 @@ The method to define a custom response has changed.
 
 * Find: `public function getResponseClass(): string`
 * Replace: `public function resolveResponseClass(): string`
-
-The `boot` method’s single argument has changed from `SaloonRequest $request` to use a `Saloon\Contracts\PendingRequest` instead.
-
-* Find: `public function boot(SaloonRequest $request): void`
-* Replace: `public function boot(PendingRequest $pendingRequest): void`
 
 The `send`, `sendAsync`, `getConnector` and `setConnector` methods and the `connector` property has been removed from the request. Please see below to add connector support back to your request if you need it
 
@@ -397,7 +391,33 @@ Saloon version two has removed the `withAuth` method. You should use the `authen
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-\-- SECTION IN PROGRESS --
+Previously, Saloon had the concept of `ResponseInterceptors` which were functions that Saloon would call before returning the response back to the application. This API has been removed in favour of using the new [Middleware API](../digging-deeper/middleware.md). It's recommended that you get yourself familiar with middleware, but here is an example of migrating from response interceptors to response middleware.
+
+{% tabs %}
+{% tab title="Version One" %}
+```php
+<?php
+
+$request->addResponseInterceptor(function (SaloonRequest $request, SaloonResponse $response) {
+    $response->throw();
+    
+    return $response;
+});
+```
+{% endtab %}
+
+{% tab title="Version Two" %}
+```php
+<?php
+
+use Saloon\Contracts\Response;
+
+$request->middleware()->onResponse(function (Response $response) {
+    $response->throw();
+});
+```
+{% endtab %}
+{% endtabs %}
 
 ### AlwaysThrowOnErrors Trait Rename
 
@@ -409,6 +429,46 @@ From Saloon version two, the `AlwaysThrowsOnErrors` trait has been renamed to `A
 * Replace: `Saloon\Traits\Plugins\AlwaysThrowOnErrors`
 * Find: `use AlwaysThrowsOnErrors`
 * Replace: `use AlwaysThrowOnErrors`
+
+### Boot Method Arguments
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+Saloon has a method that you can add on your connector and request to write logic while a request is being sent. This `boot` method has changed arguments in version two. It used to provide you with an instance of `Request` but will now provide you with an instance of `PendingRequst.` You should ensure any modifications are made on this PendingRequest instance and not use `$this` or modify the connector/request.
+
+{% tabs %}
+{% tab title="Version One" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class CreateForgeServerRequest extends SaloonRequest
+{
+    // {...}
+
+<strong>    public function boot(SaloonRequest $request): void
+</strong>    {
+        $request->addHeader('X-Example', 'Hello');
+    }
+}
+</code></pre>
+{% endtab %}
+
+{% tab title="Version Two" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Contracts\PendingRequest;
+
+class CreateForgeServerRequest extends Request
+{
+    // {...}
+
+<strong>    public function boot(PendingRequest $pendingRequest): void
+</strong>    {
+        $pendingRequest->headers()->add('X-Example', 'Hello');
+    }
+}
+</code></pre>
+{% endtab %}
+{% endtabs %}
 
 ### Responses
 
@@ -428,8 +488,53 @@ You should also make any changes to the `PendingRequest` instance and **not** us
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
 
-* No longer add handlers on a per-request or connector basis, you must add it to the sender
-* You should use Saloon's onRequest middleware instead-but if you need to access Guzzle's middleware you can do it&#x20;
+Previously, Saloon allowed you to use the `addHandler` method to use a Guzzle middleware. From version two, Guzzle middleware is still supported with the default GuzzleSender, but you must migrate your handlers to the new API.
+
+It's also recommended that you move any Guzzle middleware from requests into your connector class as middleware should only be executed once.
+
+{% tabs %}
+{% tab title="Version One" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class Forge extends SaloonConnector
+{
+    //...
+
+    public function boot(SaloonRequest $request): void
+    {
+<strong>        $this->addHandler('customHeaderHandler', function (callable $handler) {
+</strong>            return function (RequestInterface $request, array $options) use ($handler) {
+                $request->withHeader('X-Custom-Header', 'Hello');
+                
+                return $handler($request, $options);             
+            };
+        });
+    }
+}
+</code></pre>
+{% endtab %}
+
+{% tab title="Version Two" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class Forge extends Connector
+{
+    //...
+
+    public function boot(PendingRequest $pendingRequest): void
+    {
+<strong>        $pendingRequest->sender()->addMiddleware(function (callable $handler) {
+</strong>            return function (RequestInterface $request, array $options) use ($handler) {
+                $request->withHeader('X-Custom-Header', 'Hello');
+                
+                return $handler($request, $options);             
+            };
+<strong>        }, 'customHandlerMiddleware');
+</strong>    }
+}
+</code></pre>
+{% endtab %}
+{% endtabs %}
 
 ### Authenticator Traits
 
@@ -442,8 +547,6 @@ Previously, Saloon had five traits which would throw an exception if a request o
 * RequiresTokenAuth
 
 You should now use the generic `RequiresAuth` trait if you would still like to throw an exception.
-
-#### Migrating to body traits
 
 ### OAuth Carbon Removal
 

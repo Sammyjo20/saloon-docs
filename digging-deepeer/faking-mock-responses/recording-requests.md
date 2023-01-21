@@ -1,4 +1,4 @@
-# 📸 Recording Requests
+# 📸 Recording Responses
 
 When writing tests for an API integration, it is best to simulate a real request as much as possible. With Saloon's MockResponse class, you can build up example responses manually. This is useful, but it can be time-consuming, especially if an API returns a huge amount of data, it would take a long time to manually write MockResponses and keep it maintained.
 
@@ -53,7 +53,7 @@ If you are using Laravel, as well as the Saloon Laravel helper library, you don'
 ```php
 <?php
 
-use Saloon\Laravel\Saloon;
+use Saloon\Laravel\Facades\Saloon;
 
 Saloon::fake([
     MockResponse::fixture('servers.index'),
