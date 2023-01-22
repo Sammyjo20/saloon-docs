@@ -10,14 +10,14 @@ Saloon connectors are great for most API integrations; however, you may not need
 
 First, create a directory for your API integrations. Once you have a chosen directory, create a class that extends the `Connector` abstract class. After that, extend the `resolveBaseUrl` function.
 
-See the example connector for Laravel Forge, an API for server management.
+See the example connector for Laravel Forge, an API for server management. We'll name it `Forge` for the best readability.
 
 ```php
 <?php
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -43,7 +43,7 @@ To add default headers, you can extend the `defaultHeaders` method to your conne
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -68,7 +68,7 @@ You may also add a `defaultQuery` method to your connector to specify default qu
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -95,7 +95,7 @@ You may want to define custom options to send to the HTTP client. For example, y
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -121,7 +121,7 @@ You may add properties to your connector class and use a constructor to provide 
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -139,7 +139,7 @@ class ForgeConnector extends Connector
 
 {% tab title="Usage" %}
 ```php
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 ```
 {% endtab %}
 {% endtabs %}

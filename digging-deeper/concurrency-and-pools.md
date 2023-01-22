@@ -19,7 +19,7 @@ Saloon's pooling has been designed specifically to be easy to use. Simply instan
 ```php
 <?php
 
-$forge = new ForgeConnector;
+$forge = new Forge;
 
 // Pool has various optional parameters if you want to set them here...
 
@@ -61,7 +61,7 @@ The simplest way to provide requests to the pool is an array.&#x20;
 ```php
 <?php
 
-$forge = new ForgeConnector;
+$forge = new Forge;
 
 $forge->pool([
     new GetServersRequest,
@@ -93,7 +93,7 @@ $generatorCallback = function (): Generator {
     }
 };
 
-$forge = new ForgeConnector;
+$forge = new Forge;
 $pool = $forge->pool($generatorCallback);
 
 // or
@@ -118,7 +118,7 @@ $callback = function () {
     ];
 };
 
-$forge = new ForgeConnector;
+$forge = new Forge;
 $pool = $forge->pool($callback);
 
 // or
@@ -154,7 +154,7 @@ By default, Saloon will send up to 5 requests concurrently. You can customise th
 ```php
 <?php
 
-$forge = new ForgeConnector;
+$forge = new Forge;
 $pool = $forge->pool(...);
 
 $pool->setConcurrency(10);

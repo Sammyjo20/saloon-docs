@@ -7,10 +7,10 @@ To start sending requests, instantiate your connector class and request class an
 ```php
 <?php
 
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 $request = new GetServersRequest;
 
-$response = $connector->send($request);
+$response = $forge->send($request);
 
 ```
 
@@ -21,8 +21,12 @@ You can use the `make` static method on the connector or request to instantiate 
 ```php
 <?php
 
-ForgeConnector::make('api-token')->send(new GetServersRequest);
+Forge::make('api-token')->send(new GetServersRequest);
 ```
+
+{% hint style="info" %}
+When sending multiple requests for the same service, use the same connector instance as it has a [significant performance improvement](https://twitter.com/carre\_sam/status/1617096982626959361) than using a new connector instance for every request.
+{% endhint %}
 
 ### Request Properties
 
@@ -33,12 +37,12 @@ You may also overwrite any headers, query parameters, HTTP client config and req
 ```php
 <?php
 
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 
 // All requests sent will have the header and query parameter applied
 
-$connector->headers()->add('X-Custom-Header', 'Hello'!);
-$connector->query()->add('page', 5);
+$forge->headers()->add('X-Custom-Header', 'Hello'!);
+$forge->query()->add('page', 5);
 ```
 {% endtab %}
 
@@ -46,7 +50,7 @@ $connector->query()->add('page', 5);
 ```php
 <?php
 
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 $request = new GetServersRequest;
 
 // The single request will have the additional header and query parameter.
@@ -66,8 +70,8 @@ Saloon supports asynchronous requests out of the box. Use the `sendAsync` method
 ```php
 <?php
 
-$connector = new ForgeConnector('api-token');
-$promise = $connector->sendAsync(new GetServersRequest);
+$forge = new Forge('api-token');
+$promise = $forge->sendAsync(new GetServersRequest);
 
 $promise
    ->then(function (Response $response) {
@@ -112,13 +116,13 @@ Once you have added the trait to your request, make sure to add the `connector` 
 
 use Sammyjo20\Saloon\Http\Request;
 use Saloon\Traits\Request\HasConnector;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use App\Http\Integrations\LaravelForge\Forge;
 
 class GetServersRequest extends Request
 {
 <strong>    use HasConnector;
 </strong><strong>    
-</strong><strong>    protected string $connector = ForgeConnector::class;
+</strong><strong>    protected string $connector = Forge::class;
 </strong>
     protected string $method = 'GET';
 
@@ -139,7 +143,7 @@ When defining a connector with a property, you must not have any constructor pro
 
 use Sammyjo20\Saloon\Http\Request;
 use Saloon\Traits\Request\HasConnector;
-use App\Http\Integrations\LaravelForge\ForgeConnector;
+use App\Http\Integrations\LaravelForge\Forge;
 
 class GetServersRequest extends Request
 {
@@ -149,7 +153,7 @@ class GetServersRequest extends Request
     
 <strong>    protected function resolveConnector(): Connector
 </strong><strong>    {
-</strong><strong>        return new ForgeConnector;
+</strong><strong>        return new Forge;
 </strong><strong>    }
 </strong>
     public function resolveEndpoint(): string

@@ -14,11 +14,11 @@ These authentication methods are available on both the connector and the request
 
     Sends an `Authorization` header e.g `Authorization: Bearer your-api-key`
 2. **withBasicAuth($username, $password)**\
-   ****Uses HTTP "basic" authentication
+   Uses HTTP "basic" authentication
 3. **withDigestAuth($username, $password)**\
-   ****Uses HTTP "basic" authentication with a digest
+   Uses HTTP "basic" authentication with a digest
 4. **withQueryAuth($parameter, $value)**\
-   ****Uses a query parameter to authenticate. e.g `?api_key=your-api-key`
+   Uses a query parameter to authenticate. e.g `?api_key=your-api-key`
 
 ### Authenticating all requests
 
@@ -29,7 +29,7 @@ Most of the time, you use one API key for all your API requests to a service, li
 ```php
 <?php
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 { 
     public function resolveBaseUrl(): string
     {
@@ -53,7 +53,7 @@ class ForgeConnector extends Connector
 ```php
 <?php
 
-$connector = new ForgeConnector('my-api-key');
+$connector = new Forge('my-api-key');
 
 // All API requests will be authenticated with the API key
 ```
@@ -72,7 +72,7 @@ Sometimes you may use a single API key in your .env file/application config, and
 use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 { 
     public function resolveBaseUrl(): string
     {
@@ -91,7 +91,7 @@ class ForgeConnector extends Connector
 ```php
 <?php
 
-$connector = new ForgeConnector;
+$forge = new Forge;
 
 // All API requests will be authenticated with the default auth.
 ```
@@ -116,8 +116,8 @@ You may want to authenticate a request or a connector on the fly on a per-reques
 ```php
 <?php
 
-$connector = new ForgeConnector;
-$connector->withTokenAuth($user->forge_api_key);
+$forge = new Forge;
+$forge->withTokenAuth($user->forge_api_key);
 
 // All API requests sent with this connector instance will be authenticated.
 ```
@@ -167,8 +167,8 @@ class CustomAuthenticator implements Authenticator
 ```php
 <?php
 
-$connector = new ForgeConnector;
-$connector->authenticate(new CustomAuthenticator('my-api-key'));
+$forge = new Forge;
+$forge->authenticate(new CustomAuthenticator('my-api-key'));
 
 // When requests are sent with this connector, the X-API-KEY header is added.
 

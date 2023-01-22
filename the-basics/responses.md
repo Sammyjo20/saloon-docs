@@ -9,7 +9,7 @@ By default, Saloon will return an instance of `Saloon\Http\Response`. This respo
 ```php
 <?php
 
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 $response = $connector->send(new GetServersRequest);
 
 $body = $response->body();
@@ -63,7 +63,7 @@ When using concurrent requests/pooling or `sendAsync` , Saloon will respond with
 
 use Saloon\Contracts\Response;
 
-$connector = new ForgeConnector('api-token');
+$forge = new Forge('api-token');
 $promise = $connector->sendAsync(new GetServersRequest);
 
 $promise
@@ -91,7 +91,7 @@ The simplest way of registering a custom response is to use the `$response` prop
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     
@@ -126,7 +126,7 @@ When you need a more advanced way to define a custom response, use the `resolveR
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     

@@ -7,8 +7,8 @@ When you send a request, Saloon will not do anything if the request fails, but b
 ```php
 <?php
 
-$connector = new ForgeConnector;
-$response = $connector->send(new ErrorRequest);
+$forge = new Forge;
+$response = $forge->send(new ErrorRequest);
 
 $response->failed(); // true
 $response->status(); // 500
@@ -24,7 +24,7 @@ You may wish to always throw an exception if a request fails. You may add the `A
 
 use Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     use AlwaysThrowsOnError;
     
@@ -39,8 +39,8 @@ On a per-response basis, you may use the `throw` method after sending your respo
 ```php
 <?php
 
-$connector = new ForgeConnector;
-$response = $connector->send(new ErrorRequest);
+$forge = new Forge;
+$response = $forge->send(new ErrorRequest);
 
 // throws InternalServerErrorException (extends ServerException)
 
@@ -78,7 +78,7 @@ You may wish to write some custom logic in your application if a request fails, 
 
 use Saloon\Contracts\Response;
 
-$response = $connector->send(new ErrorRequest);
+$response = $forge->send(new ErrorRequest);
 
 $response->onError(function (Response $response) {
     // Handle any logic when an error happens.
@@ -100,8 +100,8 @@ When sending requests using `sendAsync` or using request pooling, you will recei
 
 use Saloon\Contracts\Response;
 
-$connector = new ForgeConnector('api-token');
-$promise = $connector->sendAsync(new GetServersRequest);
+$forge = new Forge('api-token');
+$promise = $forge->sendAsync(new GetServersRequest);
 
 $promise
     ->then(function (Response $response) {
@@ -138,7 +138,7 @@ If you use the `throw` method or the `AlwaysThrowsOnErrors` trait, Saloon will t
 use Saloon\Http\Connector;
 use Saloon\Contracts\Response;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     
@@ -183,7 +183,7 @@ use Saloon\Http\Connector;
 use Saloon\Contracts\Response;
 use \Throwable;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     

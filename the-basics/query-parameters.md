@@ -13,7 +13,7 @@ You may configure default query parameters on the connector or request using the
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     

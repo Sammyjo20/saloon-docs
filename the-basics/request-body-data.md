@@ -304,7 +304,7 @@ use Saloon\Http\Connector;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
 
-class ForgeConnector extends Connector implements HasBody
+class Forge extends Connector implements HasBody
 {
     use HasJsonBody;
 

@@ -13,7 +13,7 @@ You may configure default headers on the connector or request using the protecte
 
 use Saloon\Http\Connector;
 
-class ForgeConnector extends Connector
+class Forge extends Connector
 {
     // {...}
     
