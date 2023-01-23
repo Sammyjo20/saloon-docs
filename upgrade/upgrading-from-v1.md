@@ -268,7 +268,7 @@ Saloon has also rebuilt the way that request data/body is sent using POST/PUT/PA
 **HasFormParams**
 
 * Find: `use Saloon\Traits\Plugins\HasFormParams`
-* Replace: `use Saloon\Traits\Body\HasJsonBody`
+* Replace: `use Saloon\Traits\Body\HasFormBody`
 
 **HasMultipartBody**
 
