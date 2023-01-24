@@ -95,7 +95,7 @@ class Forge extends Connector
 {
     // {...}
     
-<strong>    protected string $response = CustomResponse::class;
+<strong>    protected ?string $response = CustomResponse::class;
 </strong>}
 </code></pre>
 {% endtab %}
@@ -109,7 +109,7 @@ class GetServersRequest extends Request
 {
     // {...}
     
-<strong>    protected string $response = CustomResponse::class;
+<strong>    protected ?string $response = CustomResponse::class;
 </strong>}
 </code></pre>
 {% endtab %}
