@@ -7,7 +7,7 @@ description: >-
 # 🚪 Saloon
 
 {% hint style="info" %}
-Saloon v2 is currently in beta, [click here](https://app.gitbook.com/s/29ap30WDt824nN7WNz2U/) to use version two instead.
+Saloon v2 is currently in stable beta and close to release. It's recommended that you start with version two if you are just getting started with Saloon. [click here](https://app.gitbook.com/s/29ap30WDt824nN7WNz2U/) to use version two instead.
 {% endhint %}
 
 ![Making a request, sending it and retrieving the JSON data as an array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
