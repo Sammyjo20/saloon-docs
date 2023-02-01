@@ -142,7 +142,7 @@ class Forge extends Connector
 {
     // {...}
     
-    public function hasRequestFailed(Response $response): bool
+    public function hasRequestFailed(Response $response): ?bool
     {
         return str_contains($response->body(), 'Server Error');
     }
@@ -161,7 +161,7 @@ class ErrorRequest extends Request
 {
     // {...}
     
-    public function hasRequestFailed(Response $response): bool
+    public function hasRequestFailed(Response $response): ?bool
     {
         return str_contains($response->body(), 'Server Error');
     }
