@@ -27,11 +27,12 @@
 
 ## Digging Deeper
 
+* [🔁 Request Retries](digging-deeper/request-retries.md)
 * [♻ Request Lifecycle](digging-deeper/lifecycle-hooks.md)
 * [💂 Middleware](digging-deeper/middleware.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
-* [🔁 Caching Responses](digging-deeper/caching-responses.md)
+* [💰 Caching Responses](digging-deeper/caching-responses.md)
 * [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
 * [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
 * [👪 Plugins](digging-deeper/traits.md)
