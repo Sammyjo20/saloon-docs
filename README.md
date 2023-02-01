@@ -1,5 +1,5 @@
 ---
-description: Your Lone Star of your API integrations
+description: Build beautiful API integrations and SDKs with Saloon
 ---
 
 # 🤠 Saloon
