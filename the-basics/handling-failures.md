@@ -126,9 +126,53 @@ Saloon offers some other methods to handle failed responses.
 | getSenderException | Get the sender exception if a request failed.                                                          |
 | onError            | Allows you to define a callback if the response is considered "failed".                                |
 
+### Customising when Saloon thinks a request has failed
+
+By default, Saloon will consider a request as failed if the status code is 4xx or 5xx, for both client and server errors. You may choose to change how Saloon considers a request as failed, For example, you may integrate with an API which still returns a 2xx response status but with an error message in the response body. Just extend the `hasRequestFailed` method on your connector or request.
+
+{% tabs %}
+{% tab title="Connector" %}
+```php
+<?php
+
+use Saloon\Http\Connector;
+use Saloon\Contracts\Response;
+
+class Forge extends Connector
+{
+    // {...}
+    
+    public function hasRequestFailed(Response $response): bool
+    {
+        return str_contains($response->body(), 'Server Error');
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Response;
+
+class ErrorRequest extends Request
+{
+    // {...}
+    
+    public function hasRequestFailed(Response $response): bool
+    {
+        return str_contains($response->body(), 'Server Error');
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
 ### Customising when exceptions are thrown
 
-If you use the `throw` method or the `AlwaysThrowsOnErrors` trait, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. For example, you may integrate with an API which still returns a 2xx response status but with an error message in the response body. You should extend the `shouldThrowRequestException` method to change the default behaviour.
+If you use the `throw` method or the `AlwaysThrowsOnErrors` trait, Saloon will throw an exception if the status code is 4xx or 5xx. Sometimes you may wish to change this behaviour. You should extend the `shouldThrowRequestException` method to change the default behaviour.
 
 {% tabs %}
 {% tab title="Connector" %}
