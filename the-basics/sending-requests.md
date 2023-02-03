@@ -7,7 +7,7 @@ To start sending requests, instantiate your connector class and request class an
 ```php
 <?php
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 $request = new GetServersRequest;
 
 $response = $forge->send($request);
@@ -21,7 +21,7 @@ You can use the `make` static method on the connector or request to instantiate 
 ```php
 <?php
 
-Forge::make('api-token')->send(new GetServersRequest);
+ForgeConnector::make('api-token')->send(new GetServersRequest);
 ```
 
 {% hint style="info" %}
@@ -37,7 +37,7 @@ You may also overwrite any headers, query parameters, HTTP client config and req
 ```php
 <?php
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 
 // All requests sent will have the header and query parameter applied
 
@@ -50,7 +50,7 @@ $forge->query()->add('page', 5);
 ```php
 <?php
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 $request = new GetServersRequest;
 
 // The single request will have the additional header and query parameter.
@@ -70,7 +70,7 @@ Saloon supports asynchronous requests out of the box. Use the `sendAsync` method
 ```php
 <?php
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 $promise = $forge->sendAsync(new GetServersRequest);
 
 $promise
@@ -153,7 +153,7 @@ class GetServersRequest extends Request
     
 <strong>    protected function resolveConnector(): Connector
 </strong><strong>    {
-</strong><strong>        return new Forge;
+</strong><strong>        return new ForgeConnector;
 </strong><strong>    }
 </strong>
     public function resolveEndpoint(): string

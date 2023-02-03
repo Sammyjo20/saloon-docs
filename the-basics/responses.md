@@ -9,7 +9,7 @@ By default, Saloon will return an instance of `Saloon\Http\Response`. This respo
 ```php
 <?php
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 $response = $connector->send(new GetServersRequest);
 
 $body = $response->body();
@@ -44,7 +44,7 @@ By default, Saloon will not throw an exception if a synchronous request fails. [
 | clientError                 | Returns true if the response status is between 400 and 500.                                                                                               |
 | failed                      | Determines if a request has failed. By default, it will return true if the response status is not 2xx.                                                    |
 | onError                     | Allows you to define a callback if the response is considered "failed".                                                                                   |
-| toException                 | Creates an exception if the response is considered "failed. [ Click here to read more about handling failures](handling-failures.md)                      |
+| toException                 | Creates an exception if the response is considered "failed. [Click here to read more about handling failures](handling-failures.md)                       |
 | throw                       | Will throw an exception if the response is considered "failed".                                                                                           |
 | isCached                    | Denotes if the response is cached. Only used when using the Saloon caching plugin.                                                                        |
 | isMocked                    | Denotes if the response has been mocked.                                                                                                                  |
@@ -63,7 +63,7 @@ When using concurrent requests/pooling or `sendAsync` , Saloon will respond with
 
 use Saloon\Contracts\Response;
 
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 $promise = $connector->sendAsync(new GetServersRequest);
 
 $promise
@@ -77,7 +77,7 @@ $promise
 
 ### Custom responses
 
-Sometimes you may want to use your response class. This is useful if you want to add your methods or overwrite Saloon's response methods. Saloon allows you to overwrite the response at a connector level for all requests or at a per-request level for a granular response.&#x20;
+Sometimes you may want to use your response class. This is useful if you want to add your methods or overwrite Saloon's response methods. Saloon allows you to overwrite the response at a connector level for all requests or at a per-request level for a granular response.
 
 You may extend the `Saloon\Http\Response` class or provide your own implementation with the `Saloon\Contracts\Response` interface. You may use the `HasResponseHelpers` middleware when making your own implementation to save defining every method.
 
@@ -91,7 +91,7 @@ The simplest way of registering a custom response is to use the `$response` prop
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     // {...}
     
@@ -126,7 +126,7 @@ When you need a more advanced way to define a custom response, use the `resolveR
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     // {...}
     

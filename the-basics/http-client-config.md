@@ -17,7 +17,7 @@ You may configure the default HTTP config on the connector or request using the 
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     // {...}
     

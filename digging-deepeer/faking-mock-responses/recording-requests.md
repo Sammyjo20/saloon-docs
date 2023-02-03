@@ -20,7 +20,7 @@ $mockClient = new MockClient([
     MockResponse::fixture('servers.index'),
 ]);
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 $forge->withMockClient($mockClient);
 ```
 {% endtab %}
@@ -36,7 +36,7 @@ $mockClient = new MockClient([
     MockResponse::fixture('servers.index'),
 ]);
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 $request = new GetAllServersRequest;
 
 // Send a request with a MockClient
@@ -103,7 +103,7 @@ $mockClient = new MockClient([
     GetForgeServerRequest::class => MockResponse::fixture('singleServer')
 ]);
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 $forge->withMockClient($mockClient);
 
 // The initial request will check if a fixture called "singleServer" 

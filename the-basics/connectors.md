@@ -17,7 +17,7 @@ See the example connector for Laravel Forge, an API for server management. We'll
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -43,7 +43,7 @@ To add default headers, you can extend the `defaultHeaders` method to your conne
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -68,7 +68,7 @@ You may also add a `defaultQuery` method to your connector to specify default qu
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -95,7 +95,7 @@ You may want to define custom options to send to the HTTP client. For example, y
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -121,7 +121,7 @@ You may add properties to your connector class and use a constructor to provide 
 
 use Saloon\Http\Connector;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 {
     public function resolveBaseUrl(): string
     {
@@ -139,7 +139,7 @@ class Forge extends Connector
 
 {% tab title="Usage" %}
 ```php
-$forge = new Forge('api-token');
+$forge = new ForgeConnector('api-token');
 ```
 {% endtab %}
 {% endtabs %}

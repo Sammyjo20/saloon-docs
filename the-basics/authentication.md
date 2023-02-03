@@ -29,7 +29,7 @@ Most of the time, you use one API key for all your API requests to a service, li
 ```php
 <?php
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 { 
     public function resolveBaseUrl(): string
     {
@@ -53,7 +53,7 @@ class Forge extends Connector
 ```php
 <?php
 
-$connector = new Forge('my-api-key');
+$forge = new ForgeConnector('my-api-key');
 
 // All API requests will be authenticated with the API key
 ```
@@ -72,7 +72,7 @@ Sometimes you may use a single API key in your .env file/application config, and
 use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 
-class Forge extends Connector
+class ForgeConnector extends Connector
 { 
     public function resolveBaseUrl(): string
     {
@@ -91,7 +91,7 @@ class Forge extends Connector
 ```php
 <?php
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 
 // All API requests will be authenticated with the default auth.
 ```
@@ -116,7 +116,7 @@ You may want to authenticate a request or a connector on the fly on a per-reques
 ```php
 <?php
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 $forge->withTokenAuth($user->forge_api_key);
 
 // All API requests sent with this connector instance will be authenticated.
@@ -167,7 +167,7 @@ class CustomAuthenticator implements Authenticator
 ```php
 <?php
 
-$forge = new Forge;
+$forge = new ForgeConnector;
 $forge->authenticate(new CustomAuthenticator('my-api-key'));
 
 // When requests are sent with this connector, the X-API-KEY header is added.
