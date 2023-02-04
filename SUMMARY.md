@@ -27,12 +27,12 @@
 
 ## Digging Deeper
 
-* [💂 Middleware](digging-deeper/middleware.md)
-* [👪 Plugins](digging-deeper/traits.md)
-* [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
+* [☝ Solo Requests](digging-deeper/solo-requests.md)
+* [💂 Middleware](digging-deeper/middleware.md)
+* [👪 Plugins](digging-deeper/traits.md)
 * [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
 * [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
 * [😎 Laravel Integration](digging-deeper/laravel-integration.md)

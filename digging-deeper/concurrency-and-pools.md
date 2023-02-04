@@ -1,9 +1,5 @@
 # 🏎 Concurrency & Pools
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 Saloon supports request concurrency and requests pools out of the box. This allows you to make multiple API calls to the same service while keeping the CURL connection open. Under the hood, it uses curl's multi-handler to keep the connection open, this results in huge speed benefits when making lots of API calls. Saloon's concurrency is powered by [Guzzle's implementation](https://docs.guzzlephp.org/en/stable/quickstart.html?highlight=pool#concurrent-requests) behind the scenes.
 
 One of Laravel's core members, Nuno Maduro [wrote a great blog post](https://nunomaduro.com/speed\_up\_your\_php\_http\_guzzle\_requests\_with\_concurrency) about request concurrency and its performance with Guzzle directly. The same performance can be shared with Saloon's implementation as Saloon uses Guzzle behind the scenes.
@@ -30,7 +26,11 @@ $pool = $forge->pool(
     exceptionHandler: function () { ... },
 );
 
+// Initiate the transfer of requests
+
 $promise = $pool->send();
+
+// Force all the requests to be fulfilled
 
 $promise->wait();
 ```
@@ -166,12 +166,112 @@ $pool->setConcurrency(function () {
 });
 ```
 
-### Sending
-
-Once you have provided the pool with requests, you are ready to send the requests!
-
 ### Response Handlers
+
+When you send requests with pooling, each request is asynchronous, so you cannot guarantee when they are returned. In order to handle the response, Saloon has provided you with two handlers to handle successful requests and failed requests.
+
+#### Handling Successful Requests
+
+Any responses that are successful will be handled by the response handler. You may add this with the constructor of your pool or add it once it is created. You can only have one handler. You will get a response instance.
+
+```php
+<?php
+
+use Saloon\Contracts\Response;
+
+$pool = $forge->pool(
+    requests: [],
+    concurrency: 5,
+    responseHandler: function (Response $response) {
+        // Handle Response
+    },
+);
+
+// Or
+
+$pool->withResponseHandler(function (Response $response) {
+    // Handle Response
+});
+```
+
+#### Handling Failed Requests
+
+When requests fail, they will always be caught with the error handler, even if you don't throw on requests. When a failed request happens you can handle the exception with the `withExceptionHandler` method.
+
+```php
+<?php
+
+use Saloon\Contracts\Response;
+use Saloon\Exceptions\Request\RequestException;
+use Saloon\Exceptions\Request\FatalRequestException;
+
+$pool = $forge->pool(
+    requests: [],
+    concurrency: 5,
+    exceptionHandler: function (FatalRequestException|RequestException $exception) {
+        // Handle Exception
+    },
+);
+
+// Or
+
+$pool->withExceptionHandler(function (FatalRequestException|RequestException $exception) {
+    // Handle Exception
+});
+```
 
 ### Named/Keyed Requests
 
-You may wish to key the requests so you know which ones come back first.
+Saloon also supports keyed responses to help you easily track exact requests that have been sent. This is especially useful if you are sending requests to different endpoints. You may used keying with arrays or even with a generator.
+
+```php
+<?php
+
+$pool = $forge->pool([
+    'servers' => new GetServersRequest,
+    'sites' => new GetSitesRequest,
+    'user' => new GetUserRequest,
+]);
+
+// You may access the key in the response and error handlers
+
+$pool->withResponseHandler(function (Response $response, string $key) {
+    match($key) {
+        'servers' => $this->updateServersList($response),
+        'sites' => $this->updateSitesList($response),
+        'user' => $this->updateUser($response),
+    }
+});
+```
+
+### Sending
+
+Once you have provided the pool with requests, you are ready to send them. Just use the `send` method on the pool. This will return an instance of `PromiseInterface` . Requests will be handled asynchronously but you can force them to complete with the `wait` method.
+
+```php
+<?php
+
+$forge = new ForgeConnector;
+
+$pool = $forge->pool([
+    new GetServersRequest,
+    new GetSitesRequest,
+    new GetUserRequest,
+]);
+
+$pool->withResponseHandler(function (Response $response) {
+    // Handle Response
+});
+
+$pool->withExceptionHandler(function (FatalRequestException|RequestException $exception) {
+    // Handle Exception
+});
+
+// Initiate the transfer of requests
+
+$promise = $pool->send();
+
+// Force all the requests to be fulfilled
+
+$promise->wait();
+```
