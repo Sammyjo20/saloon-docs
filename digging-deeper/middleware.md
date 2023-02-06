@@ -1,9 +1,5 @@
 # 💂 Middleware
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 Saloon has a powerful middleware system that allows you to tap into the request and response lifecycle and make any changes you need before the request is sent or the response is given back to the user. This is useful if you want to build your own advanced Saloon integrations or write more advanced logic like generating a unique reference for every request.
 
 ### The Boot Method
@@ -309,7 +305,7 @@ Saloon also supports adding global middleware. You most likely won't need this l
 ```php
 <?php
 
-use Saloon\Http\Config;
+use Saloon\Helpers\Config;
 
 Config::middleware()->onResponse(new LogResponse, 'logResponse');
 ```
@@ -355,6 +351,52 @@ Here are some known caveats that you should know about when using Saloon's middl
 
 ### Guzzle Handlers / Middleware
 
-* Mention Guzzle’s Handlers
-  * They should always be used in the connector’s constructors and not in boot methods/plugins as they will be duplicated on each use.
-* You must not add middleware while you're already inside request middleware, but you can register response middleware inside of request middleware
+With previous versions of Saloon, you could add Guzzle middleware or "handlers" directly to the connector or request. Version two is now sender agnostic, so the `addHandler` method has been removed but you may still add Guzzle middleware if you are using the `GuzzleSender` (the default sender with Saloon)
+
+### Adding Guzzle Middleware
+
+You can add middleware to the Guzzle client by using the `sender` method on the connector. You must only add Guzzle middleware directly on your connector with your constructor method. This is because Saloon only instantiates the sender once, so in order to prevent middleware from being registered multiple times, it should be placed in the constructor.
+
+```php
+<?php
+
+class ForgeConnector extends Connector
+{
+    // {...}
+    
+    public function __construct()
+    {
+        $this->sender()->addMiddleware(function (callable $handler) {
+            return function (RequestInterface $request, array $options) use ($handler) {
+                $request->withHeader('X-Custom-Header', 'Hello');
+                
+                return $handler($request, $options);             
+            };
+        })
+    }
+}
+```
+
+{% hint style="info" %}
+To read more about Guzzle's middleware and handlers [click here](https://docs.guzzlephp.org/en/stable/handlers-and-middleware.html).
+{% endhint %}
+
+### Accessing The Underlying Guzzle Instance
+
+You may need to modify the Guzzle client or the handler stack. If you need to do this, you can use the `getGuzzleClient` or `getHandlerStack` methods.
+
+```php
+<?php
+
+class ForgeConnector extends Connector
+{
+    // {...}
+    
+    public function __construct()
+    {
+        $guzzleClient = $this->sender()->getGuzzleClient();
+        
+        $handlerStack = $this->sender()->getHandlerStack();
+    }
+}
+```
