@@ -33,9 +33,9 @@ use Saloon\Contracts\Response;
 class Server
 {
     public function __construct(
-        readonly public int $id,
-        readonly public string $name,
-        readonly public string $ipAddress,
+        public int $id,
+        public string $name,
+        public string $ipAddress,
     ){}
 
     public static function fromResponse(Response $response): self
@@ -107,3 +107,66 @@ $server = $response->dto();
 
 $response = $server->getResponse();
 ```
+
+### Using a DTO to send a request
+
+You may also allow your data transfer objects to go both ways, back into requests. You can do this easily with Saloon, just accept your DTO as an argument in the constructor of your request and then use the DTO to set properties inside of the request.
+
+{% tabs %}
+{% tab title="Definition" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Http\Request;
+use Saloon\Enums\Method;
+use Saloon\Contracts\Response;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
+
+class UpdateServerRequest extends Request implements HasBody
+{
+    use HasJsonBody;
+
+    protected Method $method = Method::PUT;
+    
+    public function __constructor(readonly protected Server $server)
+    {
+        //
+    }
+    
+    public function resolveEndpoint(): string
+    {
+<strong>        return '/servers/' . $this->server->id;
+</strong>    }
+    
+    protected function defaultBody(): array
+    {
+        return [
+<strong>            'name' => $this->server->name,
+</strong>        ];
+    }
+    
+    public function createDtoFromResponse(Response $response): mixed
+    {
+        return Server::fromResponse($response);
+    }
+}
+</code></pre>
+{% endtab %}
+
+{% tab title="Usage" %}
+```php
+<?php
+
+$connector = new ForgeConnector;
+$response = $connector->send(new GetServerRequest(id: 12345));
+$server = $response->dto();
+
+// Modify the server
+$server->name = 'YEE-HAW-2';
+
+// Update the server request
+
+$response = $connector->send(new UpdateServerRequest($server));
+```
+{% endtab %}
+{% endtabs %}
