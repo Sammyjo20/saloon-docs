@@ -22,6 +22,7 @@
 * [🔐 Authentication](the-basics/authentication.md)
 * [🚀 Sending Requests](the-basics/sending-requests.md)
 * [📡 Responses](the-basics/responses.md)
+* [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🪝 Building SDKs](digging-deepeer/building-sdks.md)
 
@@ -34,7 +35,6 @@
 * [💂 Middleware](digging-deeper/middleware.md)
 * [👪 Plugins](digging-deeper/traits.md)
 * [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
-* [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
 * [😎 Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
 
