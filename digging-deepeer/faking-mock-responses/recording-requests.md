@@ -208,7 +208,7 @@ You may want to return custom fixtures based on the request without specifying e
 
 $mockClient = new MockClient([
     '*' => function (PendingRequest $request) {
-        $reflection = new ReflectionClass($request);
+        $reflection = new ReflectionClass($request->getRequest());
 
         return MockResponse::fixture($reflection->getShortName());
     },
@@ -235,7 +235,7 @@ $response = $forge->send($request);
 
 Saloon::fake([
     '*' => function (PendingRequest $request) {
-        $reflection = new ReflectionClass($request);
+        $reflection = new ReflectionClass($request->getRequest());
 
         return MockResponse::fixture($reflection->getShortName());
     },
