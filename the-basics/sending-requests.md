@@ -11,12 +11,11 @@ $forge = new ForgeConnector('api-token');
 $request = new GetServersRequest;
 
 $response = $forge->send($request);
-
 ```
 
 #### One-liner for sending requests
 
-You can use the `make` static method on the connector or request to instantiate the object without using "new". Note - this means you don't have a reusable connector instance.
+You can use the `make` static method on the connector or request to instantiate the object without using "new". Any arguments passed in will be forwarded to the connector. Note - this means you don't have a reusable connector instance.
 
 ```php
 <?php
@@ -25,43 +24,8 @@ ForgeConnector::make('api-token')->send(new GetServersRequest);
 ```
 
 {% hint style="info" %}
-When sending multiple requests for the same service, use the same connector instance as it has a [significant performance improvement](https://twitter.com/carre\_sam/status/1617096982626959361) than using a new connector instance for every request.
+When sending multiple requests for the same service, use the same connector instance as it has a [significant performance improvement](https://twitter.com/carre\_sam/status/1617096982626959361) over using a new connector instance for every request.
 {% endhint %}
-
-### Request Properties
-
-You may also overwrite any headers, query parameters, HTTP client config and request body on the connector or request. Read through the sections above for all the methods on the request property methods.
-
-{% tabs %}
-{% tab title="Connector" %}
-```php
-<?php
-
-$forge = new ForgeConnector('api-token');
-
-// All requests sent will have the header and query parameter applied
-
-$forge->headers()->add('X-Custom-Header', 'Hello'!);
-$forge->query()->add('page', 5);
-```
-{% endtab %}
-
-{% tab title="Request" %}
-```php
-<?php
-
-$forge = new ForgeConnector('api-token');
-$request = new GetServersRequest;
-
-// The single request will have the additional header and query parameter.
-
-$request->headers()->add('X-Custom-Header', 'Hello'!);
-$request->query()->add('page', 5);
-
-$response = $connector->send($request);
-```
-{% endtab %}
-{% endtabs %}
 
 ### Asynchronous Requests
 
@@ -88,12 +52,7 @@ Saloon supports all the features Guzzle offers for asynchronous requests, includ
 
 ### Sending Solo Requests
 
-Please make sure to read the section on [solo requests](../digging-deeper/solo-requests.md) first to configure your request. You can send solo requests directly. You have the following methods available on the solo request.
-
-* send(MockClient $mockClient = null)
-* sendAsync(MockClient $mockClient = null)
-* createPendingRequest
-* connector
+Please make sure to read the section on [solo requests](../digging-deeper/solo-requests.md) first to configure your request. You can send solo requests directly.&#x20;
 
 ```php
 <?php
@@ -101,6 +60,13 @@ Please make sure to read the section on [solo requests](../digging-deeper/solo-r
 $request = new GetServersRequest;
 $response = $request->send();
 ```
+
+You have the following methods available on the solo request.
+
+* send(MockClient $mockClient = null)
+* sendAsync(MockClient $mockClient = null)
+* createPendingRequest
+* connector
 
 ### Sending requests without instantiating the connector
 
@@ -167,6 +133,13 @@ class GetServersRequest extends Request
 
 #### Sending requests
 
+```php
+<?php
+
+$request = new GetServersRequest;
+$response = $request->send();
+```
+
 Now you can use the following methods on your request.
 
 * send(MockClient $mockClient = null)
@@ -174,9 +147,37 @@ Now you can use the following methods on your request.
 * createPendingRequest
 * connector
 
+### Request Properties
+
+You may also overwrite any headers, query parameters, HTTP client config and request body on the connector or request. Read through the sections above for all the methods on the request property methods.
+
+{% tabs %}
+{% tab title="Connector" %}
 ```php
 <?php
 
-$request = new GetServersRequest;
-$response = $request->send();
+$forge = new ForgeConnector('api-token');
+
+// All requests sent will have the header and query parameter applied
+
+$forge->headers()->add('X-Custom-Header', 'Hello'!);
+$forge->query()->add('page', 5);
 ```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+<?php
+
+$forge = new ForgeConnector('api-token');
+$request = new GetServersRequest;
+
+// The single request will have the additional header and query parameter.
+
+$request->headers()->add('X-Custom-Header', 'Hello'!);
+$request->query()->add('page', 5);
+
+$response = $connector->send($request);
+```
+{% endtab %}
+{% endtabs %}

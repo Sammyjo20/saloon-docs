@@ -10,7 +10,7 @@ By default, Saloon will return an instance of `Saloon\Http\Response`. This respo
 <?php
 
 $forge = new ForgeConnector('api-token');
-$response = $connector->send(new GetServersRequest);
+$response = $forge->send(new GetServersRequest);
 
 $body = $response->body();
 $decodedBody = $response->json();
@@ -64,7 +64,7 @@ When using concurrent requests/pooling or `sendAsync` , Saloon will respond with
 use Saloon\Contracts\Response;
 
 $forge = new ForgeConnector('api-token');
-$promise = $connector->sendAsync(new GetServersRequest);
+$promise = $forge->sendAsync(new GetServersRequest);
 
 $promise
     ->then(function (Response $response) {

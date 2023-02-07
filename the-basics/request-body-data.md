@@ -316,3 +316,25 @@ class ForgeConnector extends Connector implements HasBody
     }
 }
 ```
+
+### Custom Request Body
+
+While Saloon has covered most of the body types required for day-to-day integrations, you don't have to use one of the traits. You can build your own "BodyRepository" classes and use them in the `body()` method on your connector or request. Just make sure to add the `HasBody` interface as explained above.
+
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Contracts\Body\BodyRepository;
+
+class CreateServerRequest extends Request implements HasBody
+{
+    //
+    
+    public function body(): BodyRepository
+    {
+        return new CustomBodyRepository();
+    }
+}
+```
