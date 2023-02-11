@@ -13,20 +13,6 @@ $request = new GetServersRequest;
 $response = $forge->send($request);
 ```
 
-#### One-liner for sending requests
-
-You can use the `make` static method on the connector or request to instantiate the object without using "new". Any arguments passed in will be forwarded to the connector. Note - this means you don't have a reusable connector instance.
-
-```php
-<?php
-
-ForgeConnector::make('api-token')->send(new GetServersRequest);
-```
-
-{% hint style="info" %}
-When sending multiple requests for the same service, use the same connector instance as it has a [significant performance improvement](https://twitter.com/carre\_sam/status/1617096982626959361) over using a new connector instance for every request.
-{% endhint %}
-
 ### Asynchronous Requests
 
 Saloon supports asynchronous requests out of the box. Use the `sendAsync` method, and you will receive an instance of `PromiseInterface`. Saloon uses Guzzle's Promises library, which uses the A+ standard. [Click here to read more](https://github.com/guzzle/promises).
@@ -139,6 +125,10 @@ class GetServersRequest extends Request
 $request = new GetServersRequest;
 $response = $request->send();
 ```
+
+{% hint style="info" %}
+When sending multiple requests for the same service, use the same connector instance as it has a [significant performance improvement](https://twitter.com/carre\_sam/status/1617096982626959361) over using a new connector instance for every request.
+{% endhint %}
 
 Now you can use the following methods on your request.
 
