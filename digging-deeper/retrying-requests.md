@@ -1,9 +1,5 @@
 # 🎯 Retrying Requests
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 Sometimes you may deal with APIs that fail frequently or require you to retry multiple times before a request is successful. Saloon has a useful built-in feature that allows you to send a request and retry multiple times.&#x20;
 
 This method has been heavily inspired by Laravel's [excellent retrying functionality](https://laravel.com/docs/9.x/http-client#retries) for their built-in HTTP client.
