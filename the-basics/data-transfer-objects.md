@@ -71,7 +71,7 @@ When using the `dto` method, Saloon will attempt to create a DTO from your respo
 
 ### Accessing the response from your DTO
 
-Sometimes debugging a DTO can be difficult, especially if you have passed the data object through your application and no longer have access to the original `Response` that you created the response from. Saloon can automatically insert the response for you if you use the `HasResponse` trait and the `WithResponse` interface. Let's add it to our existing `Server` DTO.
+Sometimes debugging a DTO can be difficult, especially if you have passed the data object through your application and no longer have access to the original `Response` that you created the DTO from. Saloon can inject the response into your data transfer object for you if you use the `HasResponse` trait and the `WithResponse` interface. Let's add it to our existing `Server` DTO.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -110,7 +110,7 @@ $response = $server->getResponse();
 
 ### Using a DTO to send a request
 
-You may also allow your data transfer objects to go both ways, back into requests. You can do this easily with Saloon, just accept your DTO as an argument in the constructor of your request and then use the DTO to set properties inside of the request.
+You may also allow your data transfer objects to go both ways, back into requests. You can do this easily with Saloon, just accept your DTO as an argument in the constructor of your request and then use the DTO to set default properties inside of the request.
 
 {% tabs %}
 {% tab title="Definition" %}
