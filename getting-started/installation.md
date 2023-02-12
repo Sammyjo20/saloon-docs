@@ -23,3 +23,5 @@ You may also install the optional Saloon helper library for Laravel, which adds 
 ```bash
 composer require sammyjo20/saloon-laravel "2.0.0-beta6"
 ```
+
+To read more about the Laravel integration [click here](../digging-deeper/laravel-integration.md)
