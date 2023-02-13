@@ -28,7 +28,7 @@ Saloon is a PHP library that offers an API integration framework like you've nev
 * Fully extendable and welcomes your own implementations
 
 {% hint style="info" %}
-[Please consider giving Saloon a star on GitHub!](https://github.com/sammyjo20/saloon) (Almost at 1,000 stars!)
+[Please consider giving Saloon a star on GitHub!](https://github.com/sammyjo20/saloon) (Over 1,000 stars already!)
 {% endhint %}
 
 {% content-ref url="getting-started/installation.md" %}
