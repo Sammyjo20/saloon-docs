@@ -35,7 +35,7 @@
 * [💂 Middleware](digging-deeper/middleware.md)
 * [👪 Plugins](digging-deeper/traits.md)
 * [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
-* [😎 Laravel Integration](digging-deeper/laravel-integration.md)
+* [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
 
 ## Testing
