@@ -92,7 +92,7 @@ class GetServersRequest extends Request
 ```php
 <?php
 
-$request = new GetServersRequest(perPage: 50, page: 5);
+$request = new GetServersRequest(timeout: 30);
 ```
 {% endtab %}
 {% endtabs %}
