@@ -44,7 +44,7 @@ When you send your request, plugins are the first things that are invoked, even 
 Because we added the trait to our connector, every request will use the `HasLogging` plugin. If you would like the plugin to be applied to just one request, you can add the plugin to the request only.&#x20;
 
 {% hint style="warning" %}
-Be careful when adding the plugin to both the connector and the request at the same time. The request plugin will take priority.
+Be careful when adding the plugin to both the connector and the request at the same time, they will both be executed separately.
 {% endhint %}
 
 ### Built-in Plugins
