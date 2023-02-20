@@ -11,7 +11,7 @@ Saloon has been built to integrate beautifully with [Laravel](https://laravel.co
 You can install the separate package with Composer.
 
 ```bash
-composer require sammyjo20/saloon-laravel "2.0.0-beta7"
+composer require sammyjo20/saloon-laravel "^2.0"
 ```
 
 > Requires Laravel 9+
@@ -44,7 +44,7 @@ Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel'
 The HTTP client sender comes in as a separate library. This is to keep its versioning separate from Saloon and the Laravel Integration. You can install it with Composer.
 
 ```bash
---TODO--
+composer require sammyjo20/saloon-http-sender
 ```
 
 {% hint style="info" %}
