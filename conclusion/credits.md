@@ -2,7 +2,8 @@
 
 ### Development
 
-* Mention people who helped with the project (Juse, people in v2 issue)
+* [Juse Less](https://github.com/juse-less) for contributing to many core features of Saloon v2 but mainly pagination and debugging.
+* [Tom Witkowski](https://github.com/Gummibeer) for contributing to Saloon's fixture recording and helping decide many core parts of version two like data transfer objects and the error handler.
 
 ### Artwork
 

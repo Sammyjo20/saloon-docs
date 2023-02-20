@@ -31,12 +31,14 @@
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
+* [📖 Pagination](digging-deeper/pagination.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [💂 Middleware](digging-deeper/middleware.md)
 * [👪 Plugins](digging-deeper/traits.md)
 * [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
 * [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
+* [⏸ Delay](digging-deeper/delay.md)
 
 ## Testing
 
