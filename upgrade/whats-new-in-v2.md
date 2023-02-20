@@ -426,6 +426,36 @@ $response = $request->send();
 {% endtab %}
 {% endtabs %}
 
+#### Pagination
+
+Saloon v2 has also introduced pagination helpers to make it super easy to iterate through hundreds of pages of results without having to write your own boilerplate code.
+
+```php
+<?php
+
+$connector = new SpotifyConnector;
+
+// Create a paginator and pass in a request class, in this example
+// we'll pass in the LikedSongsRequest which will retrieve all
+// the liked songs of the authenticated user.
+
+$paginator = $connector->paginate(new LikedSongsRequest);
+
+// Create a Laravel LazyCollection from the paginator and iterate
+// over each of the results. Traditionally, the liked songs endpoint
+// only lets you get 50 tracks per request, but the paginator will
+// automatically grab every page of results and pass it into a 
+// single collection! 🔥
+
+$collection = $paginator->collect('items')->map(function ($track) {
+    return sprintf('%s - %s', $track['artist'], $track['name']);
+});
+
+// Convert the LazyCollection into an array.
+
+$data = $collection->all();
+```
+
 ### Other Improvements / Changes
 
 #### Tidier Codebase

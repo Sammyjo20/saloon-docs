@@ -226,7 +226,7 @@ public function paginate(Request $request, mixed ...$additionalArguments): Curso
     $paginator->setLimitKeyName('top');
     $paginator->setCursorKeyName('nextCursor');
     $paginator->setTotalKeyName('count');
-    $paginator->setNextPageKeyName('meta.next');
+    $paginator->setCursorKeyName('nextCursor');
     
     return $paginator;
 } 
