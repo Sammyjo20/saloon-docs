@@ -466,6 +466,12 @@ class CreateForgeServerRequest extends Request
 {% endtab %}
 {% endtabs %}
 
+### Caching Plugin
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+Saloon's caching plugin has also had a full overhaul to work with Saloon v2. It's recommended that you follow the steps for configuring the new caching plugin in the [documentation here.](../digging-deeper/caching-responses.md)
+
 ### Responses
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
