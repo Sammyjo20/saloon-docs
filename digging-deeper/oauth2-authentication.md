@@ -338,15 +338,15 @@ $authorizationUrl = $authConnector->getAuthorizationUrl(...);
 
 If you would like to see an example integration using the OAuth2 methods mentioned above, see the following Laravel app.
 
-[https://github.com/Sammyjo20/saloon-spotify-example](https://github.com/Sammyjo20/saloon-spotify-example)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example](https://github.com/Sammyjo20/saloon-v2-spotify-example)
 
 #### Controller
 
-[https://github.com/Sammyjo20/saloon-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php](https://github.com/Sammyjo20/saloon-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php](https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php)
 
 #### Saloon Connector/Requests
 
-[https://github.com/Sammyjo20/saloon-spotify-example/tree/main/app/Http/Integrations/Spotify](https://github.com/Sammyjo20/saloon-spotify-example/tree/main/app/Http/Integrations/Spotify)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example/tree/main/app/Http/Integrations/Spotify](https://github.com/Sammyjo20/saloon-v2-spotify-example/tree/main/app/Http/Integrations/Spotify)
 
 ### Available Methods / API
 
