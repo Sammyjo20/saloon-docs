@@ -212,7 +212,10 @@ The **AssertSent / AssertNotSent** are the two most powerful expectation methods
 ```php
 <?php
 
-// ... 
+use Saloon\Contracts\Request;
+use Saloon\Contracts\Response;
+
+// ...
 
 $forge = new ForgeConnector;
 $forge->withMockClient($mockClient);
@@ -223,9 +226,9 @@ $mockClient->assertSent(GetForgeServerRequest::class);
 
 $mockClient->assertSent('/servers/*');
 
-$mockClient->assertSent(function (SaloonRequest $request, SaloonResponse $response) {
-    return $request instanceof GetForgeServerRequest::class 
-    && $request->serverId === 123456;
+$mockClient->assertSent(function (Request $request, Response $response) {
+    return $request instanceof GetForgeServerRequest
+        && $request->serverId === 123456;
 });
 ```
 
@@ -239,7 +242,7 @@ Your test may require you to mock your own exceptions that might get thrown. To 
 $mockClient = new MockClient([
     MockResponse::make(['name' => 'Sam'], 200)->throw(new MyException('Something bad!'))
 ]);
- 
+
 // ...
 ```
 
@@ -250,12 +253,12 @@ Sometimes, you may need to return a custom mock response based on the request th
 ```php
 <?php
 
-use Saloon\Contracts\Request;
+use Saloon\Contracts\PendingRequest;
 
 $mockClient = new MockClient([
     function (PendingRequest $request): MockResponse {
         // Write some custom logic here...
-    
+
         return new MockResponse([...]);
     },
 ]);
