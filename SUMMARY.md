@@ -48,6 +48,7 @@
 ## Conclusion
 
 * [🤗 Credits](conclusion/credits.md)
+* [🧑🏫 Tutorials](conclusion/tutorials.md)
 * [💁 Other Resources](conclusion/other-resources.md)
 * [🎖 Showcase](conclusion/showcase.md)
 * [❤ Support](https://ko-fi.com/sammyjo20)
