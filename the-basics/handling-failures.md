@@ -22,11 +22,11 @@ You may wish to always throw an exception if a request fails. You may add the `A
 ```php
 <?php
 
-use Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 
 class ForgeConnector extends Connector
 {
-    use AlwaysThrowsOnError;
+    use AlwaysThrowOnErrors;
     
     // {...}
 }
