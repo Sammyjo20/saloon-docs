@@ -1,12 +1,8 @@
 # 🌿 Upgrading from v1
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 ### Introduction
 
-It's time for the big upgrade to version two! There have been several major changes to Saloon in version two, so it's recommended that you read through [what's new in v2](whats-new-in-v2.md) before starting the upgrade. You'll definitely need a cup of tea, coffee or beer if you fancy.&#x20;
+It's time for the big upgrade to version two! There have been several major changes to Saloon in version two, so it's recommended that you read through [what's new in v2](whats-new-in-v2.md) before starting the upgrade. You'll definitely need a cup of tea, coffee or beer if you fancy.
 
 #### Estimated Upgrade Time
 
@@ -14,13 +10,13 @@ Simple integrations: 15-30 minutes
 
 Advanced integrations and SDKs: \~30-45 minutes
 
-### Need help migrating from version one?&#x20;
+### Need help migrating from version one?
 
-You can [open a discussion](https://github.com/sammyjo20/saloon) on Saloon's Github page if you need any help with the migration process.&#x20;
+You can [open a discussion](https://github.com/sammyjo20/saloon) on Saloon's Github page if you need any help with the migration process.
 
 ### Installation
 
-First, update Saloon in your `composer.json` file to use the version `^2.0`. if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.&#x20;
+First, update Saloon in your `composer.json` file to use the version `^2.0`. if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.
 
 {% tabs %}
 {% tab title="Non-Laravel" %}
@@ -295,7 +291,7 @@ Previously, Saloon called request body "data". To match PSR standards better, th
 
 #### Changing default
 
-Previously, you may have defined a method like `defaultData` this needs to be renamed to `defaultBody`. The methods have also changed from being public to protected.&#x20;
+Previously, you may have defined a method like `defaultData` this needs to be renamed to `defaultBody`. The methods have also changed from being public to protected.
 
 {% tabs %}
 {% tab title="Version One" %}
@@ -377,7 +373,7 @@ $request->body()->get('name');
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector.&#x20;
+With regards to request collections/request groups, Saloon has removed support for them entirely in v2. Previously, Saloon had a lot of "magic" logic which was cool, but tricky for IDEs to support. As request collections were just classes that passed in the connector, it's recommended that you create your own classes that support this, and then add methods into your connector.
 
 [Click here for an example SDK resource instead of request collections](../digging-deepeer/building-sdks.md#resources)
 
@@ -423,7 +419,7 @@ $request->middleware()->onResponse(function (Response $response) {
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-From Saloon version two, the `AlwaysThrowsOnErrors` trait has been renamed to `AlwaysThrowOnErrors`.&#x20;
+From Saloon version two, the `AlwaysThrowsOnErrors` trait has been renamed to `AlwaysThrowOnErrors`.
 
 * Find: `Saloon\Traits\Plugins\AlwaysThrowsOnErrors`
 * Replace: `Saloon\Traits\Plugins\AlwaysThrowOnErrors`
@@ -480,7 +476,7 @@ Saloon’s `Response` class has changed to be a more generic, PSR-compatible res
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
 
-From version two, Saloon has updated its plugins. You can choose to add plugins to both your connector or your request. Previously, plugins would receive an instance of `SaloonRequest` in the arguments. Now, plugins will receive a `PendingRequest` instance. You should update your plugins accordingly.&#x20;
+From version two, Saloon has updated its plugins. You can choose to add plugins to both your connector or your request. Previously, plugins would receive an instance of `SaloonRequest` in the arguments. Now, plugins will receive a `PendingRequest` instance. You should update your plugins accordingly.
 
 You should also make any changes to the `PendingRequest` instance and **not** use `$this` as it's bad practice to overwrite the connector/request instance.
 

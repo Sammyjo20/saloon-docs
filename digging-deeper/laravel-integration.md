@@ -1,9 +1,5 @@
 # ⛵ Laravel Integration
 
-{% hint style="warning" %}
-This documentation is still a work in progress while Saloon v2 is in beta.
-{% endhint %}
-
 Saloon has been built to integrate beautifully with [Laravel](https://laravel.com). The separate Laravel plugin comes with a facade that helps with mocking and recording requests, Artisan console commands to really easily build your API integration, and even a separate default sender that uses Laravel's HTTP Client.
 
 ### Installation
