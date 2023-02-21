@@ -17,7 +17,7 @@ $response->body(); // {"message": "Server Error"}
 
 ### Always throw exceptions on failed requests
 
-You may wish to always throw an exception if a request fails. You may add the `AlwaysThrowOnErrors` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method. You may also add this trait to a request.
+You may wish to always throw an exception if a request fails. You may add the `AlwaysThrowsOnError` trait on your connector, and every request that fails will throw an exception, just like if you were to use the `throw` method. You may also add this trait to a request.
 
 ```php
 <?php
