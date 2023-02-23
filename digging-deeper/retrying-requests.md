@@ -50,6 +50,10 @@ $forge->sendAndRetry(new GetServersRequest, 3, 100, function ($exception, $pendi
 });
 ```
 
+{% hint style="danger" %}
+When modifying the PendingRequest,  Request middleware cannot be added to a because the PendingRequest has already run the middleware pipeline. Additionally, you should take care when debugging because the debugger will log the PendingRequest before it is modified by the sendAndRetry method.
+{% endhint %}
+
 ### Disabling throwing exceptions
 
 By default, Saloon will throw an exception if all the attempts are made and every attempt was unsuccessful. You may choose to disable this functionality and always return a failed response by using the `throw` argument.
