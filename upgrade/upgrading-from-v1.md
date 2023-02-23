@@ -89,7 +89,7 @@ To help make Saloon more readable and to improve the developer experience, Saloo
 #### MockResponse
 
 * Find: `use Saloon\Http\MockResponse`
-* Replace: `use Salooon\Http\Faking\MockResponse`
+* Replace: `use Saloon\Http\Faking\MockResponse`
 
 #### Response (if using custom responses)
 
