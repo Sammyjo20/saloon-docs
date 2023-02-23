@@ -8,3 +8,9 @@
 ### Artwork
 
 Special thanks to [Caneco](https://twitter.com/caneco) for the logo and branding ✨
+
+### Thank you.
+
+Special thank you for using Saloon. It's an honour to build something that people enjoy and actively use. I hope it will be useful for many years ahead.
+
+[https://www.youtube.com/watch?v=vPZ9DLBNQLY](https://www.youtube.com/watch?v=vPZ9DLBNQLY)
