@@ -190,3 +190,63 @@ $request->authenticate(new CustomAuthenticator('my-api-key'));
 {% hint style="info" %}
 You may use custom authenticators in the same way as other authenticators, so you may use the `defaultAuth` method or even authenticate on the fly.
 {% endhint %}
+
+### Authenticating APIs that require per-request authentication
+
+Some APIs that you will integrate with require an authentication token per request. Usually, this is quite tricky as it requires logic to wrap around your requests. Still, with Saloon, you can create a custom authenticator which makes another request to get the authentication token.
+
+Let's start by creating a custom authenticator. This authenticator will make another request using the same connector and then authenticate the original request with the authentication token.&#x20;
+
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class ForgeAuthenticator implements Authenticator
+{
+    public function set(PendingRequest $pendingRequest): void
+    {
+        // Make sure to ignore the authentication request to prevent loops.
+
+	if ($pendingRequest->getRequest() instanceof AuthRequest) {
+	    return;
+	}
+
+	// Make a request to the Authentication endpoint using the same connector.
+
+<strong>	$response = $pendingRequest->getConnector()->send(new AuthRequest);
+</strong>				
+	// Finally, authenticate the previous PendingRequest before it is sent.
+
+<strong>        $pendingRequest->headers()->add('Authorization', 'Bearer ' . $response->json('token'));
+</strong>    }
+}
+</code></pre>
+
+{% hint style="info" %}
+Unfortunately, you cannot use the authentication methods like **authenticate** or **withTokenAuth** because you cannot call authenticators inside of each other.&#x20;
+{% endhint %}
+
+Next, we will use our authenticator as the default authenticator on the request. If you need to use an API token per user, you should pass a token into the constructor of the connector.
+
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+class ForgeConnector extends Connector
+{ 
+    public function resolveBaseUrl(): string
+    {
+        return 'https://forge.laravel.com/api/v1';
+    }
+
+    protected function defaultAuth(): ?Authenticator
+    {
+<strong>        return new ForgeAuthenticator;
+</strong>    }
+}
+</code></pre>
+
+Now when we make a request, our authenticator will make an additional request to retrieve the authentication token, and then use that token in the previous request. This way you can send your request like normal.
+
+```php
+<?php
+
+$forge = new ForgeConnector;
+$response = $forge->send(new GetServersRequest);
+```
