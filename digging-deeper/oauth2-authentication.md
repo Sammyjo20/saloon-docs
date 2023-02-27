@@ -313,6 +313,65 @@ protected function createOAuthAuthenticatorFromResponse(SaloonResponse $response
 }
 ```
 
+### Customising The Requests
+
+Sometimes you might integrate with an API that requires additional query parameters or headers to be sent with the OAuth2 flow. You may use the `requestModifier` method on the methods or use the `setRequestModifier` method within the `OAuthConfig` to add a callable that is invoked before a request is sent.
+
+{% tabs %}
+{% tab title="Per Request" %}
+```php
+<?php
+
+$connector->getAccessToken($code, requestModifier: function (Request $request) {
+    $request->query()->add('access_type', 'offline');
+});
+
+$connector->getRefreshToken($code, requestModifier: function (Request $request) {
+    $request->headers()->add('X-App-Key', $appKey);
+});
+
+$connector->getUser($code, requestModifier: function (Request $request) {
+    $request->headers('Accept', 'text/plain');
+});
+```
+{% endtab %}
+
+{% tab title="All Requests" %}
+```php
+<?php
+
+use Saloon\Http\OAuth2\GetUserRequest;
+use Saloon\Http\OAuth2\GetAccessTokenRequest;
+use Saloon\Http\OAuth2\GetRefreshTokenRequest;
+
+protected function defaultOauthConfig(): OAuthConfig
+{
+    return OAuthConfig::make()
+        ->setClientId('my-client-id')
+        ->setClientSecret('my-client-secret')
+        ->setRedirectUri('https://my-app.saloon.dev/auth/callback')
+	->setRequestModifier(function (Request $request) {
+	     // This callback is invoked on every request, so you 
+	     // may want to use if-statements or a match statement
+	     // to apply conditions based on request.
+	
+             if ($request instanceof GetAccessTokenRequest) {
+                 $request->query()->add('access_type', 'offline');
+             }
+             
+             if ($request instanceof GetRefreshTokenRequest) {
+                 $request->headers()->add('X-App-Key', $appKey);
+             }
+             
+             if ($request instanceof GetUserRequest) {
+                 $request->headers('Accept', 'text/plain');
+             }
+        )},
+}
+```
+{% endtab %}
+{% endtabs %}
+
 ### Per User/Tenant OAuth Config
 
 Sometimes you may have separate client credentials for every tenant or user that you need to authenticate the third party with. You can instantiate the connector and then change the configuration depending on your user.
@@ -338,15 +397,15 @@ $authorizationUrl = $authConnector->getAuthorizationUrl(...);
 
 If you would like to see an example integration using the OAuth2 methods mentioned above, see the following Laravel app.
 
-[https://github.com/Sammyjo20/saloon-spotify-example](https://github.com/Sammyjo20/saloon-spotify-example)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example](https://github.com/Sammyjo20/saloon-v2-spotify-example)
 
 #### Controller
 
-[https://github.com/Sammyjo20/saloon-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php](https://github.com/Sammyjo20/saloon-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php](https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/SpotifyController.php)
 
 #### Saloon Connector/Requests
 
-[https://github.com/Sammyjo20/saloon-spotify-example/tree/main/app/Http/Integrations/Spotify](https://github.com/Sammyjo20/saloon-spotify-example/tree/main/app/Http/Integrations/Spotify)
+[https://github.com/Sammyjo20/saloon-v2-spotify-example/tree/main/app/Http/Integrations/Spotify](https://github.com/Sammyjo20/saloon-v2-spotify-example/tree/main/app/Http/Integrations/Spotify)
 
 ### Available Methods / API
 
@@ -361,10 +420,10 @@ If you would like to see an example integration using the OAuth2 methods mention
 *   **getAuthorizationUrl($scopes, $state, $scopeSeparator)**
 
     This method will return the authorization URL that the user should be redirected to in order to authorize your application with the third-party provider.
-*   **getAccessToken($code, $state)**
+*   **getAccessToken($code, $state, $requestModifier)**
 
     This method will make a request to create an access token from the authorization code that your application receives in the call-back URL.
-*   **refreshAccessToken($accessTokenAuthenticator|$refreshToken)**
+*   **refreshAccessToken($accessTokenAuthenticator|$refreshToken, $requestModifier)**
 
     This method will make a request to refresh an access token. It will return an instance of AccessTokenAuthenticator which can be used to authenticate your connectors.
 *   **getState()**
