@@ -71,7 +71,7 @@ class GetServersRequest extends Request
     
     protected int $page;
     
-    public function __constructor(int $perPage, int $page)
+    public function __construct(int $perPage, int $page)
     {
         $this->perPage = $perPage;
         $this->page = $page;
