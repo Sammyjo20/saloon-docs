@@ -1,4 +1,4 @@
-# 🧑🏫 Tutorials
+# 📚 Tutorials
 
 If you are interested in following a tutorial for Saloon,  I have listed videos that people have made showing you how to get setup.
 
