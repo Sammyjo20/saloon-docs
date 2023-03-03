@@ -193,7 +193,7 @@ You may use custom authenticators in the same way as other authenticators, so yo
 
 ### Authenticating APIs that require per-request authentication
 
-Some APIs that you will integrate with require an authentication token per request. Usually, this is quite tricky as it requires logic to wrap around your requests. Still, with Saloon, you can create a custom authenticator which makes another request to get the authentication token.
+Some APIs that you will integrate with require an authentication token, such as a JWT, per request. Usually, this is quite tricky as it requires logic to wrap around your requests. Still, with Saloon, you can create a custom authenticator which makes another request to get the authentication token.
 
 Let's start by creating a custom authenticator. This authenticator will make another request using the same connector and then authenticate the original request with the authentication token.&#x20;
 
