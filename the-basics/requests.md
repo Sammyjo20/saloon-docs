@@ -53,7 +53,7 @@ class GetServersRequest extends Request
 {
     protected Method $method = Method::GET;
     
-    protected function resolveEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/servers/' . $this->id;
     }
