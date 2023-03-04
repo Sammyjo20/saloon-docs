@@ -16,7 +16,7 @@ class GetAllPokemonRequest extends SoloRequest
 {
     protected Method $method = Method::GET;
     
-    protected function resolveEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'https://pokeapi.co/api/v2/pokemon';
     }
