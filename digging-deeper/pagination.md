@@ -257,7 +257,7 @@ foreach($paginator as $response) {
 #### Collection
 
 {% hint style="info" %}
-The `collect` method requires Laravel's `illuminate/collection` package.
+The `collect` method requires Laravel's `illuminate/collections` package.
 {% endhint %}
 
 Similar to a for-loop, you can use a collection to wrap around the results.
