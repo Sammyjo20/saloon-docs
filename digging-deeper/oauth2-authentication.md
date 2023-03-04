@@ -283,6 +283,50 @@ $request->authenticate($authenticator);
 $response = $connector->send($request);
 ```
 
+### Building a method to create an authenticated instance of your SDK
+
+Now that you have stored the authenticator against a user in your application and you know how to retrieve the same authenticator and authenticate your requests, it may be useful to wrap this logic into a method that you can easily call against your users. For example, if you are using Laravel and are storing the Authenticator against your User model, you _could_ make a method  `spotify()` which returns your Spotify connector already authenticated and refreshed if it needs to be.
+
+{% tabs %}
+{% tab title="Definition" %}
+```php
+<?php
+
+class User
+{
+    public function spotify(): SpotifyApiConnector
+    {
+        $authenticator = $this->spotify_authenticator;
+        
+        if ($authenticator->hasExpired()) {
+            $authenticator = SpotifyAuthConnector::make()->refreshAccessToken($authenticator);
+            
+            $user->spotify_authenticator = $authenticator;
+            $user->save();
+        }
+        
+        $spotify = new SpotifyApiConnector;
+        $spotify->authenticate($authenticator);
+        
+        return $spotify;
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Usage" %}
+```php
+<?php
+
+$user = Auth::user();
+
+$spotify = $user->spotify();
+
+$spotify->send(new CurrentSongRequest);
+```
+{% endtab %}
+{% endtabs %}
+
 ### Customising The Authenticator
 
 Sometimes the API provider you are authenticating with may require additional information to be used in the authenticator. You can customise how the authenticator will be created by extending the **createAccessTokenAuthenticator()** protected method. Make sure that you return a class that implements the **AccessTokenAuthenticatorInterface**.
