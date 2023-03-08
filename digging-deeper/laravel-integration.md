@@ -56,7 +56,7 @@ Next, in your `config/saloon.php` file, change the default sender to `HttpSender
 
 declare(strict_types=1);
 
-use Saloon\HttpSender\Http\Senders\HttpSender;
+use Saloon\HttpSender\HttpSender;
 
 return [
 
