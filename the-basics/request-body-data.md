@@ -4,19 +4,18 @@ When sending HTTP requests, a common requirement is to attach a payload/body to 
 
 ### Getting Started
 
-To get started, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
+To get started, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client. Also make sure to change your method to POST, PUT or PATCH depending on the requirements of the API.
 
-```php
-<?php
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
 use Saloon\Contracts\Body\HasBody;
 
-class CreateServerRequest extends Request implements HasBody
-{
-    //
+<strong>class CreateServerRequest extends Request implements HasBody
+</strong>{
+    protected Method $method = Method::POST;
 }
-```
+</code></pre>
 
 Next, you will need to add a trait to provide an implementation for the missing `body()` method. Saloon has a trait for all the common types of request bodies.
 
