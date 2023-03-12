@@ -19,7 +19,7 @@ $authorizationUrl = $authConnector->getAuthorizationUrl($scopes, $state);
 
 // 2. Handle the callback from the API provider and create an access token...
 
-$authenticator = $authConnector->getAccessTokens($code, $state);
+$authenticator = $authConnector->getAccessToken($code, $state);
 
 // 3. Authenticate your requests!
 
@@ -185,7 +185,7 @@ After the user has approved your application, the API provider will redirect you
 
 $authConnector = new SpotifyAuthConnector;
 
-$authenticator = $authConnector->getAccessTokens($code);
+$authenticator = $authConnector->getAccessToken($code);
 
 // ... Use authenticator in your other requests.
 ```
@@ -206,7 +206,7 @@ $authConnector = new SpotifyAuthConnector;
 // It will throw an exception if the state and expected state don't match,
 // but both must be present.
 
-$authenticator = $authConnector->getAccessTokens($code, $state, $expectedState);
+$authenticator = $authConnector->getAccessToken($code, $state, $expectedState);
 ```
 
 ### Storing Authentication On Users
@@ -218,7 +218,7 @@ You will likely need to store the authenticator securely against a user, like in
 
 $authConnector = new SpotifyAuthConnector;
 
-$authenticator = $authConnector->getAccessTokens($code);
+$authenticator = $authConnector->getAccessToken($code);
 
 $serialized = $authenticator->serialize(); // Securely store this against your user.
 
@@ -238,7 +238,7 @@ After you have created the access tokens above, you should have an **AccessToken
 
 $authConnector = new SpotifyAuthConnector;
 
-$authenticator = $authConnector->getAccessTokens($code);
+$authenticator = $authConnector->getAccessToken($code);
 
 $connector = new SpotifyApiConnector;
 
