@@ -35,6 +35,17 @@ class GetServersRequest extends Request
 }
 ```
 
+{% hint style="info" %}
+Typically, you should let Saloon combine the Base URL in your connector with the endpoint in your request, but you can also provide fully qualified URLs in requests which overwrite the base URL if you need to.
+{% endhint %}
+
+```php
+public function resolveEndpoint(): string
+{
+    return 'https;//some-other-domain.com/endpoint';
+}
+```
+
 ### Using Constructor Arguments
 
 You may add properties to your request class and use a constructor to provide variables into the request instance. Since the request is still a regular class, you may customise it how you like.

@@ -2,10 +2,6 @@
 
 Some API providers implement the OAuth 2 _Authorization Code Flow_ for authentication. Implementing this grant type every time you create a new API integration can be tedious and time-consuming. Saloon offers a simple, extendable OAuth2 framework to help you get up and running quickly.
 
-{% hint style="info" %}
-Saloon has implemented the Authorization Code grant type since it is the most common OAuth2 flow. If you require any of the other grant types, please open a discussion on the GitHub repository.
-{% endhint %}
-
 ### Overview
 
 Saloon has provided methods for the full Authorization Code grant.
@@ -36,19 +32,13 @@ $newAuthenticator = $authConnector->refreshAccessTokens($authenticator);
 
 ### Prerequisites
 
-This section of the documentation assumes that you are familiar with OAuth2 and specifically the _Authorization Code Grant_.
-
-This feature has been heavily inspired by the [“OAuth2 Client” package by “The PHP League”](https://github.com/thephpleague/oauth2-client) installed millions of times.
+This section of the documentation assumes that you are familiar with OAuth2 and specifically the _Authorization Code Grant_. If you are not familiar with how this grant type works, [Auth0 has a great explanation on its website.](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow)
 
 ### Getting Setup
 
-Let’s get started by preparing our Saloon connector ready to support the Authorization Code Flow. We recommend that you create a new connector in your integration just for authentication with the third-party provider. This can help keep the authentication and API code separate. Some providers may even have a separate OAuth2 server on a different subdomain to the API.
+Let’s get started by preparing a Saloon connector ready to support the Authorization Code Flow. We recommend that you create a new connector in your integration just for authentication with the third-party provider. This can help keep the authentication and API code separate. Some providers may even have a separate OAuth2 server on a different subdomain to the API.
 
 #### 1. Add the AuthorizationCodeGrant trait to your connector
-
-{% hint style="warning" %}
-We strongly recommend that you create a new connector just for the OAuth2 flow.
-{% endhint %}
 
 ```php
 <?php
@@ -63,9 +53,13 @@ class SpotifyAuthConnector extends Connector;
 }
 ```
 
+{% hint style="warning" %}
+We strongly recommend that you create a new connector just for the OAuth2 flow because third parties use a different domain to authenticate with.
+{% endhint %}
+
 #### 2. Configure the base endpoint
 
-After you have created the connector and added the trait, make sure to set the base endpoint to the URL of the OAuth2 server. For example:
+After you have created the connector and added the trait, make sure to set the base endpoint to the URL of the OAuth2 server.
 
 ```php
 <?php
@@ -114,69 +108,119 @@ class SpotifyAuthConnector extends Connector
             ->setRedirectUri('https://my-app.saloon.dev/auth/callback')
 	    ->setAuthorizeEndpoint('authorize')
             ->setTokenEndpoint('token')
-            ->setUserEndpoint('user')
+            ->setUserEndpoint('user');
     }
 }
 ```
 
-#### Per-User/Tenant Config
-
-If your OAuth2 config is dependent on a per-user/tenant basis, you can modify the config after you have instantiated the connector.
-
-```php
-<?php
-
-$user = auth()->user(); // Your tenant/user.
-
-$authConnector = new SpotifyAuthConnector;
-
-// Overwrite the config just for this connector.
-
-$authConnector->oauthConfig()->setClientId($user->spotify_client_id);
-$authConnector->oauthConfig()->setClientSecret($user->spotify_client_secret);
-```
-
-{% hint style="warning" %}
-Make sure to use the **oauthConfig()** method instead of accessing the property directly since it will not be set during instantiation of your class.
+{% hint style="info" %}
+Each of the endpoint methods, like `setAuthorizeEndpoint`on the OAuthConfig class support full URLs if you need to overwrite the base URL on the connector.
 {% endhint %}
 
-### Generating An Authorization URL
+#### Setting the OAuth config for different tenants
 
-To generate an authorization URL, you can use the **getAuthorizationUrl()** method on the connector. Firstly instantiate the connector and then run the method. You can also provide scopes as well. It will also generate state for you if it has been provided.
+If your OAuth2 config is dependent on a per-user/tenant basis, it's recommended that you pass in any dependencies as constructor arguments of your connector and then set the `oauthConfig` inside the constructor. For example, let's say I have a `User` class which contains the currently authenticated user.
+
+I will allow you to provide that `User` model into the constructor, and then I will set the client ID and client secret based on the user. This will be combined with the existing default OAuth config so you can still provide common attributes like scopes and the redirect URI.
+
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
+use Saloon\Helpers\OAuth2\OAuthConfig;
+use Saloon\Http\Connector;
+
+class SpotifyAuthConnector extends Connector
+{
+    use AuthorizationCodeGrant;
+    
+<strong>    public function __construct(User $user)
+</strong>    {
+<strong>        $this->oauthConfig()->setClientId($user->spotify_client_id);
+</strong><strong>        $this->oauthConfig()->setClientSecret($user->spotify_client_secret);
+</strong>    }
+
+    public function resolveBaseUrl(): string
+    {
+        return 'https://accounts.spotify.com';
+    }
+
+    protected function defaultOauthConfig(): OAuthConfig
+    {
+        return OAuthConfig::make()
+	    ->setDefaultScopes(['user-read-currently-playing'])
+            ->setRedirectUri('https://my-app.saloon.dev/auth/callback');
+    }
+}
+
+</code></pre>
+
+### Creating an Authorization URL
+
+Generating an authorization URL is the first stage of the authentication process. To generate an authorization URL, you can use the **getAuthorizationUrl()** method on the connector.
 
 ```php
 <?php
 
 $authConnector = new SpotifyAuthConnector;
 
-$scopes = ['user-library-read'];
+$authorizationUrl = $authConnector->getAuthorizationUrl();
+```
 
-$authorizationUrl = $authConnector->getAuthorizationUrl($scopes, $state);
+You can also provide additional scopes as well which will be combined with the default scopes if you provided them in the OAuth config. It will also generate a state for you if it has been provided.
 
-// Redirect the user to the URL...
+```php
+$authorizationUrl = $authConnector->getAuthorizationUrl(
+    scopes: ['user-library-read'],
+);
+```
+
+Saloon will separate scopes with spaces but if your API integration requires scopes to be separated any other way, you can specify this with the `scopeSeparator` argument.
+
+```php
+$authorizationUrl = $authConnector->getAuthorizationUrl(
+    scopeSeparator: '+',
+);
+```
+
+Finally, you can provide additional query parameters if you need to with the `additionalQueryParameters.` This should be a key-value array where the key is the query parameter name and the value is the value of the query parameter.
+
+```php
+$authorizationUrl = $authConnector->getAuthorizationUrl(
+    additionalQueryParameters: [
+        'username' => 'JohnWayne'
+    ],
+);
+
+// ?username=JohnWayne
 ```
 
 #### Optional State
 
-To help prevent CSRF attacks, It’s highly recommended that you create a token in your authorization URL that you can confirm when the user redirects back to your application. This is known as state. Saloon will generate a 32-character alpha-numeric string for the state if you do not provide your own state.
+To help prevent CSRF attacks, It’s highly recommended that you make use of a unique token in your authorization URL that you can verify when the user redirects back to your application. This is known as state. Saloon will generate a 32-character alpha-numeric string for the state if you do not provide your own state.
 
-You should generate the authorization URL first, then store the state securely. If you are using a framework like Laravel, you could store this state token in the user’s session.
+You should generate the authorization URL first, then use the `getState` method on the connector to get the state back. You should store this string somewhere secure to verify the next stage of authentication. If you are using a framework like Laravel, you could store this state token in the user’s session.
 
 ```php
 <?php
 
 $authConnector = new SpotifyAuthConnector;
 
+$authorizationUrl = $authConnector->getAuthorizationUrl($scopes);
+
+// Get the state and store it somewhere secure to verify later
+
+$state = $authConnector->getState(); // '8484b43fdjfdnfdj3llls...'
+```
+
+You may also provide your own state string if you would rather generate your own. Just pass your string in the `state` argument in the `getAuthorizationUrl` method.
+
+```php
 $state = 'secret';
 
 $authorizationUrl = $authConnector->getAuthorizationUrl($scopes, $state);
-
-// Get the state, secure it somewhere like the session.
-
-$state = $authConnector->getState(); // 'secret'
 ```
 
-### Creating Access Tokens
+### Creating Access Token Authenticator
 
 After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This should be passed into your **getAccessToken()** method on your connector. If successful, the method will return an **AccessTokenAuthenticator**. This is a Saloon Authenticator that can be used to authenticate the rest of your requests.
 
@@ -187,47 +231,32 @@ $authConnector = new SpotifyAuthConnector;
 
 $authenticator = $authConnector->getAccessToken($code);
 
-// ... Use authenticator in your other requests.
+// Use authenticator in your other requests.
+
+$connector = new SpotifyConnector;
+$connector->authenticate($authenticator);
+
+$connector->send(new GetTracksRequest);
 ```
 
 {% hint style="info" %}
-The method will return an **AccessTokenAuthenticator**. This is a Saloon Authenticator that can be used to authenticate the rest of your requests. [Click here to read more about using authenticators.](broken-reference)
+The method will return an **AccessTokenAuthenticator**. This is a Saloon Authenticator that can be used to authenticate the rest of your requests. [Click here to read more about using authenticators.](../the-basics/authentication.md#custom-authenticators)
 {% endhint %}
 
 #### Verifying State
 
-As mentioned above, if you stored the state that was generated during creating an authorization url, you should pass this expected state alongside the state sent back by the API provider's OAuth2 server.
+As mentioned above, if you stored the state that was generated during creating an authorization URL, you should pass this expected state alongside the state sent back by the API provider's OAuth2 server. This will be used to verify the state provided back by the application is valid.
 
 ```php
 <?php
 
 $authConnector = new SpotifyAuthConnector;
 
-// It will throw an exception if the state and expected state don't match,
-// but both must be present.
+// It will throw an exception if the state and expected state don't match
+// however both must be present
 
 $authenticator = $authConnector->getAccessToken($code, $state, $expectedState);
 ```
-
-### Storing Authentication On Users
-
-You will likely need to store the authenticator securely against a user, like in an encrypted field in the database. You may serialise and unserialise the authenticator using the helper methods below.
-
-```php
-<?php
-
-$authConnector = new SpotifyAuthConnector;
-
-$authenticator = $authConnector->getAccessToken($code);
-
-$serialized = $authenticator->serialize(); // Securely store this against your user.
-
-$authenticator = AccessTokenAuthenticator::unserialize($serialized); // You can unserialize it too.
-```
-
-{% hint style="info" %}
-If you are using Laravel Eloquent, you can use the **EncryptedOAuthAuthenticatorCast / OAuthAuthenticatorCast** casts to automatically cast the authenticator for storing into your database.
-{% endhint %}
 
 ### Authenticate Your Requests
 
@@ -254,14 +283,43 @@ $connector->authenticate($authenticator);
 // Make requests...
 ```
 
-### Refreshing Access Tokens
+### Storing Authentication For Future Use
 
-Before using the authenticator, you should always check if the access token has expired and if it needs refreshing. When you need to refresh access tokens, you can call the **refreshAccessToken()** method which will create a fresh authenticator.
+You will likely need to store the authenticator securely so you can use it for future requests. For example, let's say I want to store the authentication against a user in my application's database. You may serialise and unserialise the authenticator using the helper methods below, then you can store the string wherever you like.
 
 ```php
 <?php
 
-$authenticator = $user->auth; // Your authenticator class.
+$authConnector = new SpotifyAuthConnector;
+
+$authenticator = $authConnector->getAccessToken($code);
+
+// Securely store this against your user.
+
+$serialized = $authenticator->serialize(); 
+
+// Unserialize the authenticator when retrieving it
+
+$authenticator = AccessTokenAuthenticator::unserialize($serialized); // You can unserialize it too.
+```
+
+{% hint style="info" %}
+If you are using Laravel Eloquent, you can use the **EncryptedOAuthAuthenticatorCast / OAuthAuthenticatorCast** casts to automatically cast the authenticator for storing in your database.
+{% endhint %}
+
+### Refreshing Access Tokens
+
+Before using the authenticator, you should always check if the access token has expired and if it needs refreshing. When you need to refresh access tokens, you can call the **refreshAccessToken()** method which will create a fresh authenticator.
+
+In this example, `$user` is the user of my application and I have written methods to get and store the authenticators.
+
+```php
+<?php
+
+// Retrieve your authenticator class from your application, for example
+// let's retrieve the authenticator from a User class.
+
+$authenticator = $user->getAuthenticator();
 
 // Check if the authenticator has expired, if it has - we can refresh
 // the access token.
@@ -270,8 +328,9 @@ if ($authenticator->hasExpired() === true) {
     $authConnector = new SpotifyAuthConnector;
     $authenticator = $authConnector->refreshAccessToken($authenticator);
     
-    $user->auth = $authenticator;
-    $user->save();
+    // Store your new authenticator in your application or against a user.
+            
+    $user->updateAuthenticator($authenticator);
 }
 
 // Continue to make your request...
@@ -282,50 +341,6 @@ $request = new CurrentSongRequest;
 $request->authenticate($authenticator);
 $response = $connector->send($request);
 ```
-
-### Building a method to create an authenticated instance of your SDK
-
-Now that you have stored the authenticator against a user in your application and you know how to retrieve the same authenticator and authenticate your requests, it may be useful to wrap this logic into a method that you can easily call against your users. For example, if you are using Laravel and are storing the Authenticator against your User model, you _could_ make a method  `spotify()` which returns your Spotify connector already authenticated and refreshed if it needs to be.
-
-{% tabs %}
-{% tab title="Definition" %}
-```php
-<?php
-
-class User
-{
-    public function spotify(): SpotifyApiConnector
-    {
-        $authenticator = $this->spotify_authenticator;
-        
-        if ($authenticator->hasExpired()) {
-            $authenticator = SpotifyAuthConnector::make()->refreshAccessToken($authenticator);
-            
-            $user->spotify_authenticator = $authenticator;
-            $user->save();
-        }
-        
-        $spotify = new SpotifyApiConnector;
-        $spotify->authenticate($authenticator);
-        
-        return $spotify;
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Usage" %}
-```php
-<?php
-
-$user = Auth::user();
-
-$spotify = $user->spotify();
-
-$spotify->send(new CurrentSongRequest);
-```
-{% endtab %}
-{% endtabs %}
 
 ### Customising The Authenticator
 
@@ -416,27 +431,6 @@ protected function defaultOauthConfig(): OAuthConfig
 {% endtab %}
 {% endtabs %}
 
-### Per User/Tenant OAuth Config
-
-Sometimes you may have separate client credentials for every tenant or user that you need to authenticate the third party with. You can instantiate the connector and then change the configuration depending on your user.
-
-```php
-<?php
-
-$user = auth()->user(); // Your tenant/user.
-
-$authConnector = new SpotifyAuthConnector;
-
-// Overwrite the config just for this connector.
-
-$authConnector->oauthConfig()->setClientId($user->spotify_client_id);
-$authConnector->oauthConfig()->setClientSecret($user->spotify_client_secret);
-
-// Continue like normal...
-
-$authorizationUrl = $authConnector->getAuthorizationUrl(...);
-```
-
 ### Real-world example
 
 If you would like to see an example integration using the OAuth2 methods mentioned above, see the following Laravel app.
@@ -460,7 +454,7 @@ If you would like to see an example integration using the OAuth2 methods mention
     Allows you to define the default configuration for the OAuth2 server that you are attempting to authenticate with.
 *   **oauthConfig()**
 
-    Method that allows you to access and modify the OAuth2 configuration in the connector and after the connector has been created. This is useful if you need to set the credentials on a per-tenant basis.
+    Method that allows you to access and modify the OAuth2 configuration in the connector after the connector has been created. This is useful if you need to set the credentials on a per-tenant basis.
 *   **getAuthorizationUrl($scopes, $state, $scopeSeparator)**
 
     This method will return the authorization URL that the user should be redirected to in order to authorize your application with the third-party provider.

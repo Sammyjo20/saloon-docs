@@ -20,6 +20,10 @@ These authentication methods are available on both the connector and the request
 4. **withQueryAuth($parameter, $value)**\
    Uses a query parameter to authenticate. e.g `?api_key=your-api-key`
 
+### Looking for OAuth2 authentication?
+
+Saloon has native support for the client credentials and authorization code grant types for OAuth2. To get setup with this, head on over to the [dedicated OAuth Authentication page](../digging-deeper/oauth2-authentication.md).
+
 ### Authenticating all requests
 
 Most of the time, you use one API key for all your API requests to a service, like a personal access token or a username/password combination. Therefore, it's recommended that you use the constructor of your connector and expect an API token to be provided. This is useful if you have a different API key per user that needs to be passed into your connector.
