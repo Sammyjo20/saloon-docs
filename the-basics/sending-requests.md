@@ -66,7 +66,7 @@ Once you have added the trait to your request, make sure to add the `connector` 
 {% tab title="Connector Property" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 use Saloon\Traits\Request\HasConnector;
 use App\Http\Integrations\LaravelForge\Forge;
 
@@ -93,7 +93,7 @@ When defining a connector with a property, you must not have any constructor pro
 {% tab title="Using resolveConnector" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Sammyjo20\Saloon\Http\Request;
+use Saloon\Http\Request;
 use Saloon\Traits\Request\HasConnector;
 use App\Http\Integrations\LaravelForge\Forge;
 
