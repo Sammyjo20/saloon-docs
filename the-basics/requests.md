@@ -42,7 +42,7 @@ Typically, you should let Saloon combine the Base URL in your connector with the
 ```php
 public function resolveEndpoint(): string
 {
-    return 'https;//some-other-domain.com/endpoint';
+    return 'https://some-other-domain.com/endpoint';
 }
 ```
 
