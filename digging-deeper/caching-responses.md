@@ -1,6 +1,6 @@
 # 🔁 Caching Responses
 
-There are scenarios where you may want to cache a response from an API, like retrieving a static list or retrieving data that you know won't change for a specified amount of time. Caching can be incredibly powerful and can speed up an application by relying less on a third-party integration. Saloon has a [first-party plugin](https://github.com/Sammyjo20/saloon-cache-plugi) that you can install to enable caching support.&#x20;
+There are scenarios where you may want to cache a response from an API, like retrieving a static list or retrieving data that you know won't change for a specified amount of time. Caching can be incredibly powerful and can speed up an application by relying less on a third-party integration. Saloon has a [first-party plugin](https://github.com/Sammyjo20/saloon-cache-plugin) that you can install to enable caching support.&#x20;
 
 ### Installation
 
