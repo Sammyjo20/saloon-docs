@@ -85,7 +85,7 @@ use Saloon\Http\Paginators\PagedPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator;
 {
-    return new PagedPaginator($this, $request, perPage: 50, ...$additionalArguments);
+    return new PagedPaginator($this, $request, 50, ...$additionalArguments);
 } 
 ```
 
@@ -110,7 +110,7 @@ use Saloon\Http\Paginators\PagedPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator;
 {
-    $paginator = new PagedPaginator($this, $request, perPage: 50, ...$additionalArguments);
+    $paginator = new PagedPaginator($this, $request, 50, ...$additionalArguments);
     
     $paginator->setLimitKeyName('limit');
     $paginator->setTotalKeyName('count');
@@ -136,7 +136,7 @@ use Saloon\Http\Paginators\OffsetPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator;
 {
-    return new OffsetPaginator($this, $request, limit: 50, ...$additionalArguments);
+    return new OffsetPaginator($this, $request, 50, ...$additionalArguments);
 } 
 ```
 
@@ -160,7 +160,7 @@ use Saloon\Http\Paginators\OffsetPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator;
 {
-    $paginator = new OffsetPaginator($this, $request, limit: 50, ...$additionalArguments);
+    $paginator = new OffsetPaginator($this, $request, 50, ...$additionalArguments);
     
     $paginator->setLimitKeyName('top');
     $paginator->setOffsetKeyName('skip');
@@ -182,7 +182,7 @@ use Saloon\Http\Paginators\CursorPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator;
 {
-    return new CursorPaginator($this, $request, limit: 50, ...$additionalArguments);
+    return new CursorPaginator($this, $request, 50, ...$additionalArguments);
 } 
 ```
 
@@ -221,7 +221,7 @@ use Saloon\Http\Paginators\CursorPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator;
 {
-    $paginator = new CursorPaginator($this, $request, limit: 50, ...$additionalArguments);
+    $paginator = new CursorPaginator($this, $request, 50, ...$additionalArguments);
     
     $paginator->setLimitKeyName('top');
     $paginator->setCursorKeyName('nextCursor');
