@@ -1,6 +1,6 @@
 # 🤓 Headers
 
-Headers can be added by using the `headers()` method on either the connector or the request. When you add headers to a connector instance, every request sent through that connector will merge those headers with the request. When you add headers to a request instance, it will just be added to that one request instance.
+Headers can be added by using the `defaultHeaders()` method on either the connector or the request. When you add headers to a connector instance, every request sent through that connector will merge those headers with the request. When you add headers to a request instance, it will just be added to that one request instance.
 
 ### Default Headers
 
