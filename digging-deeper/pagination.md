@@ -65,7 +65,7 @@ class SpotifyConnector extends Connector implements HasPagination
 {
     // {..}
 
-    public function paginate(Request $request, mixed ...$additionalArguments): Paginator;
+    public function paginate(Request $request, mixed ...$additionalArguments): Paginator
     {
         //
     }    
@@ -83,7 +83,7 @@ The PagedPaginator requires you to define the request and the per-page/limit. Th
 
 use Saloon\Http\Paginators\PagedPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator
 {
     return new PagedPaginator($this, $request, 50, ...$additionalArguments);
 } 
@@ -108,7 +108,7 @@ To configure the `PagedPaginator` you can use the following methods
 
 use Saloon\Http\Paginators\PagedPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator
 {
     $paginator = new PagedPaginator($this, $request, 50, ...$additionalArguments);
     
@@ -134,7 +134,7 @@ The OffsetPaginator requires you to define the request and the limit. This is re
 
 use Saloon\Http\Paginators\OffsetPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator
 {
     return new OffsetPaginator($this, $request, 50, ...$additionalArguments);
 } 
@@ -158,7 +158,7 @@ To configure the `OffsetPaginator` you can use the following methods
 
 use Saloon\Http\Paginators\OffsetPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator
 {
     $paginator = new OffsetPaginator($this, $request, 50, ...$additionalArguments);
     
@@ -180,7 +180,7 @@ The CursorPaginator requires you to define the request and the limit. This is re
 
 use Saloon\Http\Paginators\CursorPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator
 {
     return new CursorPaginator($this, $request, 50, ...$additionalArguments);
 } 
@@ -219,7 +219,7 @@ To configure the `CursorPaginator` you can use the following methods
 
 use Saloon\Http\Paginators\CursorPaginator;
 
-public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator;
+public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator
 {
     $paginator = new CursorPaginator($this, $request, 50, ...$additionalArguments);
     
