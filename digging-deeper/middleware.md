@@ -263,7 +263,7 @@ $request->middleware()->onResponse(new LogResponse);
 
 ### Using Constructors
 
-While registering middleware on the fly is really useful, it often leads to repeated code. If you would like your connector to always have a specific request or response middleware you should use the `boot` method as described above, or use the constructor of your connector or request.
+While registering middleware on the fly is really useful, it often leads to repeated code. If you would like your connector to always have a specific request or response middleware you should use the `boot` method described above, or use the constructor of your connector or request.
 
 ```php
 <?php
@@ -279,6 +279,10 @@ class ForgeConnector extends Connector
     }
 }
 ```
+
+{% hint style="danger" %}
+Be cautious using anonymous closures inside the constructor/boot method. This may cause issues like Saloon not being able to close connections properly. [Click here to read more.](../conclusion/known-issues.md#usage-of-anonymous-functions-with-long-running-processes-like-laravel-queues)
+{% endhint %}
 
 ### Using Plugins
 
@@ -311,7 +315,7 @@ Config::middleware()->onResponse(new LogResponse, 'logResponse');
 ```
 
 {% hint style="danger" %}
-Be very careful with global middleware. Since it uses a static property behind the scenes, the value is kept between tests when running a full test suite. You can use the `Config::resetMiddleware` method to get around this issue.
+Be cautious with global middleware. Since it uses a static property behind the scenes, the value is kept between tests when running a full test suite. You can use the `Config::resetMiddleware` method to get around this issue.
 {% endhint %}
 
 ### Middleware Execution Order
