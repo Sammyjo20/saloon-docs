@@ -21,7 +21,7 @@ Saloon used to send a request through a class called  `RequestSender.` this clas
 
 While Saloon still uses Guzzle for it's very useful PSR-compliant objects, in future versions of Saloon, it may not use Guzzle as a dependency. The work has already been completed to allow you to use any HTTP Client of your choice.
 
-<figure><img src="../.gitbook/assets/Saloon v2.png" alt=""><figcaption><p>The flow of Saloon v2</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/Saloon v2 (1).png" alt=""><figcaption><p>The flow of Saloon v2</p></figcaption></figure>
 
 #### Improving the developer experience
 

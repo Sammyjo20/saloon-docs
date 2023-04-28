@@ -39,7 +39,7 @@ class ForgeConnector extends Connector
 
 When you send your request, plugins are the first things that are invoked, even before the `boot` method. This is to allow maximum compatibility with [middleware ](middleware.md)and [authenticators](../the-basics/authentication.md). This also means that because it's the first process in the chain, other steps like middleware and the boot method will be able to overwrite anything added by a plugin.
 
-<figure><img src="../.gitbook/assets/Saloon v2 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Saloon v2.png" alt=""><figcaption></figcaption></figure>
 
 Because we added the trait to our connector, every request will use the `HasLogging` plugin. If you would like the plugin to be applied to just one request, you can add the plugin to the request only.&#x20;
 
