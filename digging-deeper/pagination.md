@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Most APIs you will integrate with will implement some sort of pagination for their records. Traditionally, traversing through many pages of results can be time-consuming and slow to build. Saloon helps to solve this problem with its pre-build paginators that can be used to iterate through hundreds of pages of results in a fast, beautiful way.&#x20;
+Most APIs you will integrate with will implement some sort of pagination for their records. Traditionally, traversing through many pages of results can be time-consuming and slow to build. Saloon helps to solve this problem with its pre-build paginators that can be used to iterate through hundreds of pages of results in a fast, beautiful way.
 
 ```php
 <?php
@@ -34,7 +34,7 @@ Saloon's paginators provide many ways to iterate over responses and even iterate
 
 Salooon uses a custom-built iterator behind the scenes so memory usage is low and it's incredibly fast to iterate through hundreds of pages, especially when you combine it with asynchronous requests/pooling.
 
-You can see the above example fully in the [Saloon Spotify Example Repository](https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/TracksController.php) &#x20;
+You can see the above example fully in the [Saloon Spotify Example Repository](https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/TracksController.php)
 
 {% hint style="warning" %}
 Saloon's pagination currently only works with JSON APIs
@@ -85,11 +85,11 @@ use Saloon\Http\Paginators\PagedPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): PagedPaginator
 {
-    return new PagedPaginator($this, $request, 50, ...$additionalArguments);
+    return new PagedPaginator(connector: $this, originalRequest: $request, perPage: 50, ...$additionalArguments);
 } 
 ```
 
-#### Defaults
+**Defaults**
 
 The `PagedPaginator` has assumed the following items are present in your API:
 
@@ -99,7 +99,7 @@ The `PagedPaginator` has assumed the following items are present in your API:
 * The results count is called `total`
 * The first page is zero
 
-#### Configuring the PagedPaginator
+**Configuring the PagedPaginator**
 
 To configure the `PagedPaginator` you can use the following methods
 
@@ -136,11 +136,11 @@ use Saloon\Http\Paginators\OffsetPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): OffsetPaginator
 {
-    return new OffsetPaginator($this, $request, 50, ...$additionalArguments);
+    return new OffsetPaginator(connector: $this, originalRequest: $request, perPage: 50, ...$additionalArguments);
 } 
 ```
 
-#### Defaults
+**Defaults**
 
 The `OffsetPaginator`has assumed the following items are present in your API:
 
@@ -149,7 +149,7 @@ The `OffsetPaginator`has assumed the following items are present in your API:
 * The results count is called `total`
 * The default offset is zero
 
-#### Configuring the OffsetPaginator
+**Configuring the OffsetPaginator**
 
 To configure the `OffsetPaginator` you can use the following methods
 
@@ -182,7 +182,7 @@ use Saloon\Http\Paginators\CursorPaginator;
 
 public function paginate(Request $request, mixed ...$additionalArguments): CursorPaginator
 {
-    return new CursorPaginator($this, $request, 50, ...$additionalArguments);
+    return new CursorPaginator(connector: $this, originalRequest: $request, perPage: 50, ...$additionalArguments);
 } 
 ```
 
@@ -200,7 +200,7 @@ class CustomPaginator extends CursorPaginator
 }
 ```
 
-#### Defaults
+**Defaults**
 
 The `CursorPaginator`has assumed the following items are present in your API:
 
@@ -210,7 +210,7 @@ The `CursorPaginator`has assumed the following items are present in your API:
 * The results count is called `total`
 * The default cursor is `null`
 
-#### Configuring the CursorPaginator
+**Configuring the CursorPaginator**
 
 To configure the `CursorPaginator` you can use the following methods
 
@@ -240,7 +240,7 @@ Now you have tested your request and configured the paginator, you're ready to g
 
 #### Foreach Loop
 
-This is the simplest way to iterate over results. When you pass the paginator inside of a for-loop you will get each response.&#x20;
+This is the simplest way to iterate over results. When you pass the paginator inside of a for-loop you will get each response.
 
 ```php
 <?php
@@ -317,7 +317,7 @@ foreach($paginator->json('results') as $tracks) {
 Saloon also supports asynchronous requests and request concurrency/pooling with paginators. This is really exciting because you can make hundreds of API calls in a fraction of the time compared to sending normally. If you are unsure of how Saloon handles request concurrency, [read here](concurrency-and-pools.md).
 
 {% hint style="warning" %}
-To use asynchronous requests/pooling, Saloon requires the API to return the "count" or "results" of the API. This is because asynchronous requests are not sent right away, Saloon does not know when to stop sending requests.&#x20;
+To use asynchronous requests/pooling, Saloon requires the API to return the "count" or "results" of the API. This is because asynchronous requests are not sent right away, Saloon does not know when to stop sending requests.
 {% endhint %}
 
 #### Asynchronous Requests
