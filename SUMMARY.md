@@ -47,10 +47,10 @@
 
 ## Conclusion
 
-* [🐞 Known Issues](conclusion/known-issues.md)
-* [🤗 Credits](conclusion/credits.md)
 * [📚 Tutorials](conclusion/tutorials.md)
 * [💁 Other Resources](conclusion/other-resources.md)
+* [🐞 Known Issues](conclusion/known-issues.md)
+* [🤗 Credits](conclusion/credits.md)
 * [🎖 Showcase](conclusion/showcase.md)
 * [❤ Support](https://ko-fi.com/sammyjo20)
 * [👋 About Me](https://github.com/Sammyjo20)
