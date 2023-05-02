@@ -32,7 +32,7 @@ $data = $collection->all();
 
 Saloon's paginators provide many ways to iterate over responses and even iterate through the results within a response, like the example above. This is incredible because you can retrieve all of the results at once instead of having to write logic to build up an array of results.
 
-Salooon uses a custom-built iterator behind the scenes so memory usage is low and it's incredibly fast to iterate through hundreds of pages, especially when you combine it with asynchronous requests/pooling.
+Saloon uses a custom-built iterator behind the scenes so memory usage is low and it's incredibly fast to iterate through hundreds of pages, especially when you combine it with asynchronous requests/pooling.
 
 You can see the above example fully in the [Saloon Spotify Example Repository](https://github.com/Sammyjo20/saloon-v2-spotify-example/blob/main/app/Http/Controllers/TracksController.php)
 
