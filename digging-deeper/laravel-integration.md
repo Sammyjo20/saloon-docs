@@ -28,7 +28,7 @@ Each of the commands will create files within the `App\Http\Integrations` namesp
 | saloon:request \<Integration Name> \<Request Name>             | Creates a new request          |
 | saloon:response \<Integration Name> \<Response Name>           | Creates a custom response      |
 | saloon:plugin \<Integration Name> \<Plugin Name>               | Creates a plugin               |
-| saloon:authenticator \<Integration Name> \<Authenticator Name> | Creates a custom authenticator |
+| saloon:auth \<Integration Name> \<Authenticator Name> | Creates a custom authenticator |
 | saloon:oauth-connector \<Integration Name> \<Connector Name>   | Creates a new OAuth2 connector |
 
 ### Laravel HTTP Client Sender
