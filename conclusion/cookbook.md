@@ -119,6 +119,7 @@ Now, inside your Saloon connectors, you should overwrite the `defaultSender` met
 <?php
 
 use Saloon\Http\Connector;
+use Saloon\Contracts\Sender;
 use Saloon\Http\Senders\GuzzleSender;
 
 class SpotifyConnector extends Connector

@@ -73,6 +73,8 @@ Once you have created a custom sender, you must overwrite the protected `default
 ```php
 <?php
 
+use Saloon\Contracts\Sender;
+
 class ForgeConnector extends Connector
 {
     // {...}
