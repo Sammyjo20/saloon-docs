@@ -1,4 +1,4 @@
-# Authorization Code Flow
+# Authorization Code Grant
 
 Some API providers implement the OAuth 2 _Authorization Code Flow_ for authentication. Implementing this grant type every time you create a new API integration can be tedious and time-consuming. Saloon offers a simple, extendable OAuth2 trait to help you get up and running quickly.
 
@@ -42,7 +42,6 @@ Let’s start with preparing our connector to support the Authorization Code Flo
 <?php
 
 use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
-use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
 
 class SpotifyConnector extends Connector;
@@ -83,7 +82,7 @@ class SpotifyConnector extends Connector
             ->setRedirectUri('https://my-app.saloon.dev/auth/callback')
 	    ->setAuthorizeEndpoint('https://accounts.spotify.com/authorize')
             ->setTokenEndpoint('https://accounts.spotify.com/api/token')
-            ->setUserEndpoint('me')
+            ->setUserEndpoint('/me')
             ->setRequestModifier(function (Request $request) {
                 // Optional: Modify the requests being sent.
             })
@@ -104,7 +103,6 @@ In the following example, I will pass in the `$clientId` and the `$clientSecret`
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
-use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
 
 class SpotifyConnector extends Connector
@@ -173,7 +171,7 @@ $authorizationUrl = $connector->getAuthorizationUrl();
 
 ### Creating Access Tokens
 
-After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`.  The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate the rest of your requests. It acts like a DTO that can be easily serialized and transported around your application.
+After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`.  The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate your connector/requests. It acts like a DTO that can be easily serialized and transported around your application.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -366,6 +364,24 @@ protected function defaultOauthConfig(): OAuthConfig
 ```
 {% endtab %}
 {% endtabs %}
+
+### Returning Responses
+
+If you prefer, you may request Saloon to return a `Saloon\Http\Resonse` instance instead of a `AccessTokenAuthenticator` when creating or refreshing access tokens. To use responses, just provide the `returnResponse` argument when creating or refreshing access tokens.
+
+```php
+<?php
+
+$connector = new SpotifyConnector;
+
+$response = $connector->getAccessToken(
+    returnResponse: true,
+);
+
+$response = $connector->refreshAccessToken(
+    returnResponse: true,
+);
+```
 
 ### Real-world example
 
