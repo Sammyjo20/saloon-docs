@@ -176,9 +176,9 @@ Sometimes the API provider you are authenticating with may require additional in
 ```php
 <?php
 
-protected function createOAuthAuthenticator(string $accessToken, string $refreshToken, DateTimeImmutable $expiresAt): OAuthAuthenticatorInterface
+protected function createOAuthAuthenticator(string $accessToken, ?DateTimeImmutable $expiresAt = null): OAuthAuthenticatorInterface
 {
-    return new WarehouseAuthenticator($accessToken, $refreshToken, $expiresAt);
+    return new WarehouseAuthenticator($accessToken, $expiresAt);
 }
 ```
 
@@ -189,7 +189,7 @@ Sometimes the API provider you are authenticating with may have a different way 
 ```php
 <?php
 
-protected function createOAuthAuthenticatorFromResponse(SaloonResponse $response, string $fallbackRefreshToken = null): OAuthAuthenticatorInterface
+protected function createOAuthAuthenticatorFromResponse(SaloonResponse $response): OAuthAuthenticatorInterface
 {
     $responseData = $response->object();
 
