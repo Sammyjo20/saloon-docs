@@ -33,8 +33,8 @@ Let's start with preparing our connector to support the client credentials grant
 ```php
 <?php
 
-use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 
 class WarehouseConnector extends Connector;
 {
@@ -47,8 +47,8 @@ After you have added the trait, you will need to tell Saloon how to authenticate
 ```php
 <?php
 
-use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 
 class WarehouseConnector extends Connector;
 {
@@ -86,8 +86,8 @@ In the following example, I will pass in the `$clientId` and the `$clientSecret`
 ```php
 <?php
 
-use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 
 class WarehouseConnector extends Connector
 {

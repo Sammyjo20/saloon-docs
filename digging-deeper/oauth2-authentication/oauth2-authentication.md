@@ -41,8 +41,8 @@ Let’s start with preparing our connector to support the Authorization Code Flo
 ```php
 <?php
 
-use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 
 class SpotifyConnector extends Connector;
 {
@@ -57,10 +57,10 @@ You can also provide default scopes and even provide a callback to modify the OA
 ```php
 <?php
 
-use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
-use Saloon\Helpers\OAuth2\OAuthConfig;
-use Saloon\Contracts\Request;
 use Saloon\Http\Connector;
+use Saloon\Contracts\Request;
+use Saloon\Helpers\OAuth2\OAuthConfig;
+use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 
 class SpotifyConnector extends Connector
 {
@@ -102,8 +102,8 @@ In the following example, I will pass in the `$clientId` and the `$clientSecret`
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 
 class SpotifyConnector extends Connector
 {
