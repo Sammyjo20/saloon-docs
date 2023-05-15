@@ -171,9 +171,9 @@ $authorizationUrl = $connector->getAuthorizationUrl();
 <strong>$state = $authConnector->getState(); // '8484b43fdjfdnfdj3llls...'
 </strong></code></pre>
 
-### Creating Access Token Authenticator
+### Creating Access Tokens
 
-After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`. This is a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) that can be used to authenticate the rest of your requests.
+After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`.  The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate the rest of your requests. It acts like a DTO that can be easily serialized and transported around your application.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -189,7 +189,9 @@ $connector->authenticate($authenticator);
 $connector->send(new GetTracksRequest);
 </code></pre>
 
+{% hint style="info" %}
 Once you have received the authenticator instance, you should cache it securely in your application for future use. Read further to see how you can do this.
+{% endhint %}
 
 #### Verifying State
 
@@ -208,7 +210,7 @@ $authenticator = $authConnector->getAccessToken($code, $state, $expectedState);
 
 ### Storing Authentication For Later
 
-You will likely need to store the authenticator securely so you can use it for future requests. For example, let's say I want to store the authenticator against a user in my application's database. You may serialize and unserialize the authenticator class using the helper methods below, then you can store the string wherever you like, usually encrypted in the database if it's against a user. Then, you can retrieve this authenticator and use it to authenticate your connector.
+You will likely need to store the authenticator securely so you can use it for future requests. You may serialize and unserialize the authenticator class using the helper methods below, then you can store the string wherever you like, usually encrypted in the database if it's against a user. Then, you can retrieve this authenticator and use it to authenticate your connector.
 
 ```php
 <?php
@@ -224,10 +226,6 @@ $serialized = $authenticator->serialize();
 
 $authenticator = AccessTokenAuthenticator::unserialize($serialized);
 ```
-
-{% hint style="info" %}
-If you are using Laravel and the Saloon Laravel library, you can use the **EncryptedOAuthAuthenticatorCast / OAuthAuthenticatorCast** casts to automatically cast the authenticator for storing in your database.
-{% endhint %}
 
 ### Authenticator Methods
 
@@ -253,6 +251,8 @@ In this example, `$user` is the user of my application and I have written method
 ```php
 <?php
 
+// $user in this example is my application's user
+
 $authenticator = $user->getCachedAuthenticator();
 $connector = new SpotifyConnector;
 
@@ -270,6 +270,10 @@ $connector->authenticate($authenticator);
 
 $response = $connector->send(new GetTracksRequest);
 ```
+
+{% hint style="info" %}
+If you are using Laravel and the Saloon Laravel library, you can use built-in `EncryptedOAuthAuthenticatorCast` **/** `OAuthAuthenticatorCast` Eloquent casts to automatically cast the authenticator for storing in your database.
+{% endhint %}
 
 ### Customising The Authenticator
 
