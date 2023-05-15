@@ -22,7 +22,7 @@ These authentication methods are available on both the connector and the request
 
 ### Looking for OAuth2 authentication?
 
-Saloon has native support for the client credentials and authorization code grant types for OAuth2. To get setup with this, head on over to the [dedicated OAuth Authentication page](../digging-deeper/oauth2-authentication.md).
+Saloon has native support for the client credentials and authorization code grant types for OAuth2. To get setup with this, head on over to the [dedicated OAuth Authentication page](../digging-deeper/oauth2-authentication/oauth2-authentication.md).
 
 ### Authenticating all requests
 

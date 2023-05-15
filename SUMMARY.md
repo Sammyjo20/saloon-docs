@@ -35,7 +35,8 @@
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [💂 Middleware](digging-deeper/middleware.md)
 * [👪 Plugins](digging-deeper/traits.md)
-* [🔏 OAuth2 Authentication](digging-deeper/oauth2-authentication.md)
+* [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
+  * [Authorization Code Flow](digging-deeper/oauth2-authentication/oauth2-authentication.md)
 * [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [⏸ Delay](digging-deeper/delay.md)
@@ -47,7 +48,7 @@
 
 ## Conclusion
 
-* [👨🍳 Cookbook](conclusion/cookbook.md)
+* [👨🍳 👨🍳 Cookbook](conclusion/cookbook.md)
 * [📚 Tutorials](conclusion/tutorials.md)
 * [💁 Other Resources](conclusion/other-resources.md)
 * [🐞 Known Issues](conclusion/known-issues.md)
