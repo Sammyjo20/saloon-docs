@@ -10,8 +10,6 @@ This flow is the typical process where your application redirects your users to 
 [oauth2-authentication.md](oauth2-authentication.md)
 {% endcontent-ref %}
 
-<figure><img src="../../.gitbook/assets/auth-sequence-auth-code.png" alt=""><figcaption><p>Source: Auth0 <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow">https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow</a></p></figcaption></figure>
-
 ### Client Credentials Grant
 
 This flow is often used for internal server-to-server authentication. Like a shopping website communicating with an internal warehouse API. You are often given a single access token which can be used to generate access tokens.
@@ -19,5 +17,3 @@ This flow is often used for internal server-to-server authentication. Like a sho
 {% content-ref url="client-credentials-grant.md" %}
 [client-credentials-grant.md](client-credentials-grant.md)
 {% endcontent-ref %}
-
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Source: Auth0 <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow">https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow</a></p></figcaption></figure>
