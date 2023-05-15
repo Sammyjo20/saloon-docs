@@ -49,7 +49,7 @@
 
 ## Conclusion
 
-* [👨🍳 👨🍳 Cookbook](conclusion/cookbook.md)
+* [🍳 Cookbook](conclusion/cookbook.md)
 * [📚 Tutorials](conclusion/tutorials.md)
 * [💁 Other Resources](conclusion/other-resources.md)
 * [🐞 Known Issues](conclusion/known-issues.md)
