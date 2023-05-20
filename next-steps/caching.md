@@ -8,10 +8,10 @@ Currently the caching plugin only supports explicit caching, where you define wh
 
 ### Installation
 
-Firstly, install the Saloon Cache Plugin from composer into your project.
+Firstly, install the Saloon Cache Plugin from Composer into your project.
 
 ```bash
-composer require sammyjo20/saloon-cache-plugin
+composer require saloonhttp/cache-plugin "^1.0"
 ```
 
 ### Configuration
