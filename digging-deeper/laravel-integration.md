@@ -20,16 +20,16 @@ php artisan vendor:publish --tag=saloon-config
 
 ### Available Laravel Commands
 
-Each of the commands will create files within the `App\Http\Integrations` namespace. Each integration name is required for its own namespace. For example: `App\Http\Integrations\Forge`.&#x20;
+Each of the commands will create files within the `App\Http\Integrations` namespace. Each integration name is required for its own namespace. For example: `App\Http\Integrations\Forge`.
 
-| Command                                                        | Description                    |
-| -------------------------------------------------------------- | ------------------------------ |
-| saloon:connector \<Integration Name> \<Connector Name>         | Creates a new connector        |
-| saloon:request \<Integration Name> \<Request Name>             | Creates a new request          |
-| saloon:response \<Integration Name> \<Response Name>           | Creates a custom response      |
-| saloon:plugin \<Integration Name> \<Plugin Name>               | Creates a plugin               |
-| saloon:auth \<Integration Name> \<Authenticator Name> | Creates a custom authenticator |
-| saloon:oauth-connector \<Integration Name> \<Connector Name>   | Creates a new OAuth2 connector |
+| Command                                                      | Description                    |
+| ------------------------------------------------------------ | ------------------------------ |
+| saloon:connector \<Integration Name> \<Connector Name>       | Creates a new connector        |
+| saloon:request \<Integration Name> \<Request Name>           | Creates a new request          |
+| saloon:response \<Integration Name> \<Response Name>         | Creates a custom response      |
+| saloon:plugin \<Integration Name> \<Plugin Name>             | Creates a plugin               |
+| saloon:auth \<Integration Name> \<Authenticator Name>        | Creates a custom authenticator |
+| saloon:oauth-connector \<Integration Name> \<Connector Name> | Creates a new OAuth2 connector |
 
 ### Laravel HTTP Client Sender
 
@@ -40,12 +40,8 @@ Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel'
 The HTTP client sender comes in as a separate library. This is to keep its versioning separate from Saloon and the Laravel Integration. You can install it with Composer.
 
 ```bash
-composer require sammyjo20/saloon-http-sender
+composer require saloonhttp/laravel-http-sender
 ```
-
-{% hint style="info" %}
-The HTTP sender is currently still considered in beta. Please provide feedback through discussions and issues.
-{% endhint %}
 
 #### Configuration
 
@@ -77,7 +73,7 @@ return [
 ];
 ```
 
-Now when you send requests, they will be sent through Laravel's HTTP client - if you have Laravel Telescope installed, you should see the requests appearing under the "HTTP Client" tab of Telescope. &#x20;
+Now when you send requests, they will be sent through Laravel's HTTP client - if you have Laravel Telescope installed, you should see the requests appearing under the "HTTP Client" tab of Telescope.
 
 ### Events
 
