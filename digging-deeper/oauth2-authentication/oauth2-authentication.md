@@ -359,7 +359,7 @@ protected function defaultOauthConfig(): OAuthConfig
              if ($request instanceof GetUserRequest) {
                  $request->headers('Accept', 'text/plain');
              }
-        )},
+        }),
 }
 ```
 {% endtab %}
