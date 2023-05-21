@@ -40,7 +40,7 @@ Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel'
 The HTTP client sender comes in as a separate library. This is to keep its versioning separate from Saloon and the Laravel Integration. You can install it with Composer.
 
 ```bash
-composer require saloonhttp/laravel-http-sender
+composer require saloonphp/laravel-http-sender
 ```
 
 #### Configuration
