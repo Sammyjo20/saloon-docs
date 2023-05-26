@@ -7,7 +7,7 @@ There are scenarios where you may want to cache a response from an API, like ret
 To install the caching functionality into Saloon, install the plugin using Composer.
 
 ```bash
-composer require saloonhttp/cache-plugin "^2.0"
+composer require saloonphp/cache-plugin "^2.0"
 ```
 
 ### Configuration
