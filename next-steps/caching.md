@@ -11,7 +11,7 @@ Currently the caching plugin only supports explicit caching, where you define wh
 Firstly, install the Saloon Cache Plugin from Composer into your project.
 
 ```bash
-composer require saloonhttp/cache-plugin "^1.0"
+composer require saloonphp/cache-plugin "^1.0"
 ```
 
 ### Configuration
