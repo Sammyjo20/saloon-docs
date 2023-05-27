@@ -41,6 +41,7 @@
 * [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [⏸ Delay](digging-deeper/delay.md)
+* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
 
 ## Testing
 
