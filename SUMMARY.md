@@ -28,18 +28,18 @@
 
 ## Digging Deeper
 
+* [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [📖 Pagination](digging-deeper/pagination.md)
 * [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
-* [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [💂 Middleware](digging-deeper/middleware.md)
-* [👪 Plugins](digging-deeper/traits.md)
+* [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
-* [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
+* [💂 Middleware](digging-deeper/middleware.md)
+* [👪 Plugins](digging-deeper/traits.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [⏸ Delay](digging-deeper/delay.md)
 
