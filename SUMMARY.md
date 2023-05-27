@@ -32,6 +32,7 @@
 * [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [📖 Pagination](digging-deeper/pagination.md)
+* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [💂 Middleware](digging-deeper/middleware.md)
 * [👪 Plugins](digging-deeper/traits.md)
@@ -41,7 +42,6 @@
 * [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [⏸ Delay](digging-deeper/delay.md)
-* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
 
 ## Testing
 
