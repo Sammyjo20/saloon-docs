@@ -69,7 +69,7 @@ class GetServersRequest extends Request
     
     protected string $username;
     
-    public function __constructor(string $username)
+    public function __construct(string $username)
     {
         $this->username = $username;
     }
