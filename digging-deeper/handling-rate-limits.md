@@ -374,7 +374,7 @@ use Saloon\RateLimitPlugin\Helpers\ApiRateLimited;
  
 public function middleware(): array
 {
-    return [new ApiRateLimited];
+    return [new LaravelRateLimitMiddleware];
 }
 ```
 
