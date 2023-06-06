@@ -337,3 +337,27 @@ class CreateServerRequest extends Request implements HasBody
     }
 }
 ```
+
+### Custom JSON Flags
+
+When using the `HasJsonBody` trait, you may want to customise the flags used when encoding the body to be sent to the API you are integrating with. You may do this with the `setJsonFlags` method. It's recommended that you set this within the constructor of your request or connector to ensure that the flags are always used.&#x20;
+
+For example, if I know that my JSON will contain URLs, but I don't want the URL slashes to be escaped, I can use the `JSON_UNESCAPED_SLASHES` flag. You can also specify multiple flags at once by using the `|` pipe to separate the flags.
+
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
+
+class CreateServerRequest extends Request implements HasBody
+{
+    use HasJsonBody;
+    
+    public function __construct()
+    {
+        $this->body()->setJsonFlags(JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    }
+}
+```
