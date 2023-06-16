@@ -287,7 +287,7 @@ class CreateServerRequest extends Request implements HasBody
 {% endtabs %}
 
 {% hint style="info" %}
-Depending on the type of body you add, the `defaultBody`method will expect an array or string.
+Depending on the type of body you add, the `defaultBody`method will accept an array or a string.
 {% endhint %}
 
 ### Connector Body
