@@ -265,7 +265,7 @@ $mockClient = new MockClient([
     '*' => function (PendingRequest $pendingRequest) {
         $name = implode('/', array_filter([
              parse_url($pendingRequest->getUrl(), PHP_URL_HOST),
-             mb_strtoupper($pendingRequest->getMethod()->value ?? 'GET'),
+             mb_strtoupper($pendingRequest->getMethod() ?? 'GET'),
              parse_url($pendingRequest->getUrl(), PHP_URL_PATH),
              http_build_query(array_diff_key($pendingRequest->query()->all(), array_flip(['key', 'format']))),
         ]));

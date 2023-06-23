@@ -8,7 +8,7 @@ This section of the documentation assumes that you are familiar with OAuth2 and 
 
 ### Flow Example
 
-Saloon has provided methods for the full Authorization Code grant.&#x20;
+Saloon has provided methods for the full Authorization Code grant.
 
 ```php
 $connector = new SpotifyConnector;
@@ -96,7 +96,7 @@ Each of the endpoint methods, like `setAuthorizeEndpoint`on the OAuthConfig clas
 
 #### Overwriting the OAuth2 config
 
-Sometimes, you may have a different OAuth2 client ID and secret for each user of your application. If your OAuth2 config is dependent on a per-user/tenant basis, it's recommended that you pass in the credentials as constructor arguments of your connector and then set the `oauthConfig` inside the constructor.&#x20;
+Sometimes, you may have a different OAuth2 client ID and secret for each user of your application. If your OAuth2 config is dependent on a per-user/tenant basis, it's recommended that you pass in the credentials as constructor arguments of your connector and then set the `oauthConfig` inside the constructor.
 
 In the following example, I will pass in the `$clientId` and the `$clientSecret` as constructor arguments and overwrite the OAuth2 config.
 
@@ -159,7 +159,7 @@ $authorizationUrl = $authConnector->getAuthorizationUrl(
 );
 ```
 
-If you do not provide your own state, Saloon will automatically generate a unique, 32-character string. Once you have generated the authorization URL, you can then use the `getState` method on your connector to get the state back. You should store this string in your application's session or cache to be verified later.&#x20;
+If you do not provide your own state, Saloon will automatically generate a unique, 32-character string. Once you have generated the authorization URL, you can then use the `getState` method on your connector to get the state back. You should store this string in your application's session or cache to be verified later.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -171,7 +171,7 @@ $authorizationUrl = $connector->getAuthorizationUrl();
 
 ### Creating Access Tokens
 
-After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`.  The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate your connector/requests. It acts like a DTO that can be easily serialized and transported around your application.
+After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`. The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate your connector/requests. It acts like a DTO that can be easily serialized and transported around your application.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -307,7 +307,7 @@ protected function createOAuthAuthenticatorFromResponse(SaloonResponse $response
 
 ### Customising The Requests
 
-Sometimes you might integrate with an API that requires additional query parameters or headers to be sent with the OAuth2 flow. You may use the `requestModifier` method on the methods or use the `setRequestModifier` method within the `OAuthConfig` to add a callable that is invoked before a request is sent.
+Sometimes you might integrate with an API that requires additional query parameters or headers to be sent with the OAuth2 flow. You may use the `requestModifier` property on the methods or use the `setRequestModifier` method within the `OAuthConfig` to add a callable that is invoked before a request is sent.
 
 {% tabs %}
 {% tab title="Per Request" %}
@@ -365,6 +365,34 @@ protected function defaultOauthConfig(): OAuthConfig
 {% endtab %}
 {% endtabs %}
 
+### Using your own request classes
+
+There are situations where Saloon's own request classes for getting the access token, refreshing the access token or getting the user might not suit the API you are integrating with. For example, if an API uses JSON encoding instead of form encoding. You may use the following methods on your connector to overwrite the instantiation process of the request classes.
+
+```php
+<?php
+
+class SpotifyConnector extends Connector
+{
+    // ...
+
+    protected function resolveAccessTokenRequest(string $code, OAuthConfig $oauthConfig): Request
+    {
+        return new CustomGetAccessTokenRequest($code, $oauthConfig);
+    }
+    
+    protected function resolveRefreshTokenRequest(OAuthConfig $oauthConfig, string $refreshToken): Request
+    {
+        return new CustomGetRefreshTokenRequest($oauthConfig, $refreshToken);
+    }
+    
+    protected function resolveUserRequest(OAuthConfig $oauthConfig): Request
+    {
+        return new CustomGetUserRequest($oauthConfig);
+    }
+}
+```
+
 ### Returning Responses
 
 If you prefer, you may request Saloon to return a `Saloon\Http\Resonse` instance instead of a `AccessTokenAuthenticator` when creating or refreshing access tokens. To use responses, just provide the `returnResponse` argument when creating or refreshing access tokens.
@@ -385,6 +413,6 @@ $response = $connector->refreshAccessToken(
 
 ### Real-world example
 
-If you would like to see an example integration using the OAuth2 methods mentioned above, you can see the following Laravel application.&#x20;
+If you would like to see an example integration using the OAuth2 methods mentioned above, you can see the following Laravel application.
 
 [https://github.com/Sammyjo20/saloon-v2-spotify-example](https://github.com/Sammyjo20/saloon-v2-spotify-example)

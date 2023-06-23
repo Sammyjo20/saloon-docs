@@ -233,3 +233,21 @@ protected function defaultOauthConfig(): OAuthConfig
 </code></pre>
 {% endtab %}
 {% endtabs %}
+
+### Using your own request classes
+
+There are situations where Saloon's own request classes for getting the access token might not suit the API you are integrating with. For example, if an API uses JSON encoding instead of form encoding. You may use the following method on your connector to overwrite the instantiation process of the request class.
+
+```php
+<?php
+
+class SpotifyConnector extends Connector
+{
+    // ...
+
+    protected function resolveAccessTokenRequest(OAuthConfig $oauthConfig, array $scopes = [], string $scopeSeparator = ' '): Request
+    {
+        return new GetClientCredentialsTokenRequest($oauthConfig, $scopes, $scopeSeparator);
+    }
+}
+```
