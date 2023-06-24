@@ -25,16 +25,16 @@ Continue reading below to understand more about the specific body type that you 
 [json-body.md](json-body.md)
 {% endcontent-ref %}
 
-{% content-ref url="multipart-body.md" %}
-[multipart-body.md](multipart-body.md)
+{% content-ref url="multipart-form-body.md" %}
+[multipart-form-body.md](multipart-form-body.md)
 {% endcontent-ref %}
 
 {% content-ref url="stream-body.md" %}
 [stream-body.md](stream-body.md)
 {% endcontent-ref %}
 
-{% content-ref url="form-body.md" %}
-[form-body.md](form-body.md)
+{% content-ref url="form-body-url-encoded.md" %}
+[form-body-url-encoded.md](form-body-url-encoded.md)
 {% endcontent-ref %}
 
 {% content-ref url="xml-body.md" %}
