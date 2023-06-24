@@ -55,9 +55,9 @@ use Saloon\Http\Request;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasStreamBody;
 
-class CreateServerRequest extends Request implements HasBodyContract
+class CreateServerRequest extends Request implements HasBody
 {
-    use HasBody;
+    use HasStreamBody;
 
     protected Method $method = Method::POST;
     
