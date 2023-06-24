@@ -254,7 +254,7 @@ $request->config()->all();
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-Saloon has also rebuilt the way that request data/body is sent using POST/PUT/PATCH requests. First, make sure that your data traits are using the new namespaces. It's recommended that you [read through the new section](../the-basics/request-body-data.md) on request body/data to understand why the changes have been made.
+Saloon has also rebuilt the way that request data/body is sent using POST/PUT/PATCH requests. First, make sure that your data traits are using the new namespaces. It's recommended that you [read through the new section](../the-basics/request-body-data/) on request body/data to understand why the changes have been made.
 
 **HasJsonBody**
 
