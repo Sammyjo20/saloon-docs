@@ -44,7 +44,3 @@ Continue reading below to understand more about the specific body type that you 
 {% content-ref url="string-plain-text-body.md" %}
 [string-plain-text-body.md](string-plain-text-body.md)
 {% endcontent-ref %}
-
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
