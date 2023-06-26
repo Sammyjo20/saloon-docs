@@ -14,7 +14,7 @@ You should also extend the `defineEndpoint` public method. This method should co
 See the example request. This request will GET all of the servers from the Laravel Forge API.
 
 {% hint style="info" %}
-If you are using Laravel, Use the artisan command to create a connector for you.
+If you are using Laravel, Use the artisan command to create a request for you.
 
 **php artisan saloon:request \<Integration Name> \<Request Name>**
 {% endhint %}
