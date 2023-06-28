@@ -85,12 +85,12 @@ class CreateServerRequest extends Request implements HasBody
     protected Method $method = Method::POST;
     
     public function __construct(
-        protected array $body
+        protected array $payload
     ){}
     
     protected function defaultBody(): array
     {
-        return $this->body;
+        return $this->payload;
     }
 }
 ```
