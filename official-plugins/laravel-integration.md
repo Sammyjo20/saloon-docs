@@ -1,4 +1,4 @@
-# ⛵ Laravel Integration
+# ⛵ Laravel Helpers
 
 Saloon has been built to integrate beautifully with [Laravel](https://laravel.com). The separate Laravel plugin comes with a facade that helps with mocking and recording requests, Artisan console commands to really easily build your API integration, and even a separate default sender that uses Laravel's HTTP Client.
 
@@ -17,6 +17,10 @@ Next, publish the configuration file with the following Artisan command
 ```bash
 php artisan vendor:publish --tag=saloon-config
 ```
+
+#### Laravel Zero
+
+If you are using Laravel Zero, then the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware&#x20;
 
 ### Available Laravel Commands
 

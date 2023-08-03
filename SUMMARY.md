@@ -35,30 +35,32 @@
 ## Digging Deeper
 
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
-* [🔁 Caching Responses](digging-deeper/caching-responses.md)
-* [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [📖 Pagination](digging-deeper/pagination.md)
-* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
-* [⛵ Laravel Integration](digging-deeper/laravel-integration.md)
+* [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
+* [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
 * [💂 Middleware](digging-deeper/middleware.md)
-* [👪 Plugins](digging-deeper/traits.md)
+* [⏸ Request Delay](digging-deeper/delay.md)
 * [🛩 Senders](digging-deeper/senders.md)
-* [⏸ Delay](digging-deeper/delay.md)
+* [👪 Plugins](digging-deeper/traits.md)
 
 ## Testing
 
 * [📸 Recording Responses](digging-deepeer/faking-mock-responses/recording-requests.md)
 * [🚧 Mock Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 
+## Official Plugins
+
+* [🔁 Caching Responses](official-plugins/caching-responses.md)
+* [⛵ Laravel Helpers](official-plugins/laravel-integration.md)
+* [⛔ Handling Rate Limits](official-plugins/handling-rate-limits.md)
+
 ## Conclusion
 
 * [🍳 Cookbook](conclusion/cookbook.md)
-* [📚 Tutorials](conclusion/tutorials.md)
-* [💁 Other Resources](conclusion/other-resources.md)
+* [📚 Tutorials & Blog Posts](conclusion/tutorials.md)
 * [🐞 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
 * [🎖 Showcase](conclusion/showcase.md)

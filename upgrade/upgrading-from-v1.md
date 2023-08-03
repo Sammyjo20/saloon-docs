@@ -470,7 +470,7 @@ class CreateForgeServerRequest extends Request
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-Saloon's caching plugin has also had a full overhaul to work with Saloon v2. It's recommended that you follow the steps for configuring the new caching plugin in the [documentation here.](../digging-deeper/caching-responses.md)
+Saloon's caching plugin has also had a full overhaul to work with Saloon v2. It's recommended that you follow the steps for configuring the new caching plugin in the [documentation here.](../official-plugins/caching-responses.md)
 
 ### Responses
 

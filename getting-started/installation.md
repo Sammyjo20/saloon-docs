@@ -18,10 +18,4 @@ Saloon has just three dependencies.
 
 ### Using Laravel?
 
-You may also install the optional Saloon helper library for Laravel, which adds a config file, commands and a facade to let you easily test.
-
-```bash
-composer require sammyjo20/saloon-laravel "^2.0"
-```
-
-To read more about the Laravel integration [click here](../digging-deeper/laravel-integration.md)
+To read more about the Laravel integration [click here](../official-plugins/laravel-integration.md)

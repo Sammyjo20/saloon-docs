@@ -85,7 +85,7 @@ class SpotifyConnector extends Connector
             ->setUserEndpoint('/me')
             ->setRequestModifier(function (Request $request) {
                 // Optional: Modify the requests being sent.
-            });
+            })
     }
 }
 ```

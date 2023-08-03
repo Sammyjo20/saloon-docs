@@ -1,12 +1,12 @@
 # ⛔ Handling Rate Limits
 
-Handling rate limits with API integrations can be hard. Saloon has a first-party plugin that provides you with the tools you need to prevent rate limits and handle what happens if a rate limit is exceeded.&#x20;
+Handling rate limits with API integrations can be hard. Saloon has a first-party plugin that provides you with the tools you need to prevent rate limits and handle what happens if a rate limit is exceeded.
 
 With this plugin, you are able to define various limits on a per-connector or request basis. You can also control if Saloon should throw an exception or sleep if a limit is reached. Saloon will keep track of how many requests are made and when a rate limit is hit, Saloon will prevent further requests on the connector/request until the rate limit has been lifted.
 
 Saloon will even listen out for "429 Too Many Requests" responses and will automatically throw exceptions before your future requests are sent and the limit will be lifted based on the `Retry-After` header.
 
-This plugin also comes with a Laravel Job middleware which you can use inside of your jobs to automatically release them back onto the queue if a rate limit has been reached.&#x20;
+This plugin also comes with a Laravel Job middleware which you can use inside of your jobs to automatically release them back onto the queue if a rate limit has been reached.
 
 ```php
 <?php
@@ -96,7 +96,7 @@ class SpotifyConnector extends Connector
 
 ### Stores
 
-Here are the various stores that the rate-limiting plugin supports. You may also [create your own stores](broken-reference) if this library does not come with the one you need. Stores are used to keep track of how many requests have been sent through a given connector/request.
+Here are the various stores that the rate-limiting plugin supports. You may also [create your own stores](../digging-deeper/broken-reference/) if this library does not come with the one you need. Stores are used to keep track of how many requests have been sent through a given connector/request.
 
 #### Available Stores
 
