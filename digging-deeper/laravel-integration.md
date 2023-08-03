@@ -20,7 +20,18 @@ php artisan vendor:publish --tag=saloon-config
 
 #### Laravel Zero
 
-If you are using Laravel Zero, then the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware&#x20;
+If you are using **Laravel Zero**, then the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware might not be registered. You can register Saloon's service provider in your `AppServiceProvider.php's`  `register()` method definition.
+
+```php
+<?php
+
+use Saloon\Laravel\SaloonServiceProvider;
+
+public function register()
+{
+    $this->app->register(SaloonServiceProvider::class);
+}
+```
 
 ### Available Laravel Commands
 

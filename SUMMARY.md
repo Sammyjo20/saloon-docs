@@ -53,9 +53,9 @@
 
 ## Official Plugins
 
-* [🔁 Caching Responses](official-plugins/caching-responses.md)
-* [⛵ Laravel Helpers](official-plugins/laravel-integration.md)
-* [⛔ Handling Rate Limits](official-plugins/handling-rate-limits.md)
+* [🔁 Caching Responses](digging-deeper/caching-responses.md)
+* [⛵ Laravel Helpers](digging-deeper/laravel-integration.md)
+* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
 
 ## Conclusion
 

@@ -18,4 +18,4 @@ Saloon has just three dependencies.
 
 ### Using Laravel?
 
-To read more about the Laravel integration [click here](../official-plugins/laravel-integration.md)
+To read more about the Laravel integration [click here](../digging-deeper/laravel-integration.md)
