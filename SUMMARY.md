@@ -46,16 +46,16 @@
 * [🛩 Senders](digging-deeper/senders.md)
 * [👪 Plugins](digging-deeper/traits.md)
 
-## Testing
-
-* [📸 Recording Responses](digging-deepeer/faking-mock-responses/recording-requests.md)
-* [🚧 Mock Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
-
 ## Official Plugins
 
 * [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [⛵ Laravel Helpers](digging-deeper/laravel-integration.md)
 * [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
+
+## Testing
+
+* [📸 Recording Responses](digging-deepeer/faking-mock-responses/recording-requests.md)
+* [🚧 Mock Responses](digging-deepeer/faking-mock-responses/manual-fake-responses.md)
 
 ## Conclusion
 
