@@ -48,8 +48,8 @@
 
 ## Official Plugins
 
-* [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [⛵ Laravel Helpers](digging-deeper/laravel-integration.md)
+* [🔁 Caching Responses](digging-deeper/caching-responses.md)
 * [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
 
 ## Testing
