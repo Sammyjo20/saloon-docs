@@ -13,7 +13,7 @@ After that, extend the `resolveEndpoint` public method. This method should conta
 See the example request. This request will GET all of the servers from a Laravel Forge account.
 
 {% hint style="info" %}
-Using Laravel, Use the artisan command to create a connector.
+Using the Laravel Saloon Plugin? Use the following Artisan command to create a request!
 
 **php artisan saloon:request \<Integration Name> \<Request Name>**
 {% endhint %}

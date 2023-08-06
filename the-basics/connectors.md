@@ -27,7 +27,7 @@ class ForgeConnector extends Connector
 ```
 
 {% hint style="info" %}
-Using Laravel? Use the artisan command to create a connector easily.
+Using the Laravel Saloon Plugin? Use the following Artisan command to create a connector!
 
 **php artisan saloon:connector \<Integration Name> \<Connector Name>**
 {% endhint %}
