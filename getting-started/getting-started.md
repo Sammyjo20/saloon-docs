@@ -11,7 +11,7 @@ If you are using Laravel, you can install the **saloon-laravel** package which i
 #### Non-Laravel / PHP Installation
 
 ```bash
-composer require sammyjo20/saloon "^1.0"
+composer require saloonphp/saloon "^1.0"
 ```
 
 {% hint style="info" %}
@@ -23,7 +23,7 @@ Saloon requires PHP 8.0+
 #### Laravel Installation
 
 ```bash
-composer require sammyjo20/saloon-laravel "^1.0"
+composer require saloonphp/laravel-plugin "^1.0"
 ```
 
 {% hint style="info" %}

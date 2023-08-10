@@ -7,7 +7,7 @@ description: >-
 # 🚪 Saloon
 
 {% hint style="info" %}
-Saloon version two is officially out! [Click here to use version two instead.](https://app.gitbook.com/s/29ap30WDt824nN7WNz2U/)
+Saloon version two is officially out! [Click here to use version two instead.](http://127.0.0.1:5000/s/29ap30WDt824nN7WNz2U/)
 {% endhint %}
 
 ![Making a request, sending it and retrieving the JSON data as an array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
