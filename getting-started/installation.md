@@ -3,7 +3,7 @@
 To get started with Saloon, you will need to install it through Composer.&#x20;
 
 ```bash
-composer require sammyjo20/saloon "^2.0"
+composer require saloonphp/saloon "^2.0"
 ```
 
 > Saloon supports PHP 8.1+

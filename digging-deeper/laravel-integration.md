@@ -7,7 +7,7 @@ Saloon has been built to integrate beautifully with [Laravel](https://laravel.co
 You can install the separate package with Composer.
 
 ```bash
-composer require sammyjo20/saloon-laravel "^2.0"
+composer require saloonphp/laravel-plugin "^2.0"
 ```
 
 > Requires Laravel 9+
