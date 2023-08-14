@@ -2,7 +2,7 @@
 
 When writing tests for an API integration, it is best to simulate a real request as much as possible. With Saloon's MockResponse class, you can build up example responses manually. This is useful, but it can be time-consuming, especially if an API returns a huge amount of data, it would take a long time to manually write MockResponses and keep it maintained.
 
-Saloon has a feature called fixture recording, this feature will allow you to make a real request to the API you are integrating with and then it will store that response in a file for later. This is a common practice for people writing integrations for APIs, but Saloon makes it effortless.&#x20;
+Saloon has a feature called fixture recording, this feature will allow you to make a real request to the API you are integrating with and then it will store that response in a file for later. This is a common practice for people writing integrations for APIs, but Saloon makes it effortless.
 
 ### Registering a MockClient
 
@@ -199,7 +199,7 @@ MockConfig::throwOnMissingFixtures()
 
 ### Advanced Usage
 
-You may want to return custom fixtures based on the request without specifying exact names of fixtures. For example, I might want to build a fixture name based on the name of the request being sent. You may use a closure inside the mock client and write the custom logic to meet these needs.&#x20;
+You may want to return custom fixtures based on the request without specifying exact names of fixtures. For example, I might want to build a fixture name based on the name of the request being sent. You may use a closure inside the mock client and write the custom logic to meet these needs.
 
 {% tabs %}
 {% tab title="Non-Laravel" %}
@@ -274,3 +274,191 @@ $mockClient = new MockClient([
     },
 ]);
 ```
+
+### Redacting Fixture Information
+
+When using fixtures to record real responses from an API - sometimes the API will return back some sensitive information that you shouldn't store in your application's repository, like names of real people, financial data or emails. With Saloon, you can create a custom fixture class and provide a few methods to obscure the information when the data is stored. You can even provide closures for the data replacement so you can use tools like Faker to replace data like-for-like.
+
+{% hint style="info" %}
+The first time the request is made and the fixture is stored, the original response won't be redacted. Only future requests made with the fixture will use the redacted recording.
+{% endhint %}
+
+Firstly, create a new class in your tests directory and give the class a name. We'll call this class `SingleServerFixture`. Then make sure to extend the base `Fixture` class provided by Saloon.&#x20;
+
+```php
+<?php
+
+namespace Tests\Fixtures\Forge\SingleServerFixture;
+
+use Saloon\Http\Faking\Fixture;
+
+class ForgeSingleServerFixture extends Fixture
+{
+    //
+}
+```
+
+Next, we need to give the fixture a name. Just extend the `defineName` method and give the fixture a name. You can still use slashes in this directory to denote folders.
+
+```php
+<?php
+
+namespace Tests\Fixtures\Forge\SingleServerFixture;
+
+use Saloon\Http\Faking\Fixture;
+
+class ForgeSingleServerFixture extends Fixture
+{
+    protected function defineName(): string
+    {
+        return 'forge/singleServer';
+    }
+}
+```
+
+Now you can use a few different methods to redact your fixture data. You can use the `defineSensitiveHeaders` method to swap any headers out with sensitive data, the `defineSensitiveJsonParameters` for JSON responses or `defineSensitiveRegexPatterns` to define regex patterns for Saloon to find.&#x20;
+
+```php
+<?php
+
+namespace Tests\Fixtures\Forge\SingleServerFixture;
+
+use Saloon\Http\Faking\Fixture;
+
+class ForgeSingleServerFixture extends Fixture
+{
+    protected function defineName(): string
+    {
+        return 'forge/singleServer';
+    }
+    
+    protected function defineSensitiveHeaders(): array
+    {
+        return [];
+    }
+
+    protected function defineSensitiveJsonParameters(): array
+    {
+        return [];
+    }
+    
+    protected function defineSensitiveRegexPatterns(): array
+    {
+        return [];
+    } 
+}
+```
+
+#### Replacing Sensitive Headers
+
+If a particular header contains sensitive information, you may use this method to define the headers that are sensitive and what to replace them with. You may use a value or a closure for a custom replacement based on the value
+
+{% tabs %}
+{% tab title="Simple - Using Arrays" %}
+```php
+protected function defineSensitiveHeaders(): array
+{
+    return [
+        // Key = Header Name
+        // Value = Replacement Value
+    
+        'Content-Type' => 'REDACTED',
+    ];
+}
+```
+{% endtab %}
+
+{% tab title="Advanced - Using Closures" %}
+```php
+protected function defineSensitiveHeaders(): array
+{
+    return [
+        // Key = Header Name
+        // Value = Replacement Value / Closure
+    
+        'Content-Type' => static function (string $value) {
+            return substr_replace($value, 'xxx', 1);
+        },
+    ];
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### Replacing Sensitive JSON Parameters
+
+If the response you are dealing with is JSON - you can define sensitive JSON keys that should be replaced. For example, if there is a "name" key - anytime this is found the value will be replaced with the replacement you define. The keys provided are recursive, so if "name" is within a nested JSON array, it will still be replaced.
+
+{% tabs %}
+{% tab title="Simple - Using Arrays" %}
+```php
+protected function defineSensitiveJsonParameters(): array
+{
+    return [
+        // Key = JSON Key
+        // Value = Replacement Value
+    
+        'name' => 'REDACTED',
+    ];
+}
+```
+{% endtab %}
+
+{% tab title="Advanced - Using Closures" %}
+```php
+protected function defineSensitiveJsonParameters(): array
+{
+    return [
+        // Key = JSON Key
+        // Value = Replacement Value / Closure
+    
+        'name' => static function (string $value) {
+            // Example: You could use something like Faker to generate
+            // fake information and provide a similar structure.
+        
+            return faker()->firstName();
+        },
+    ];
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### Finding and Replacing From Regex Patterns
+
+When the API response you are given is not JSON - it can be difficult to replace the information. When you encounter APIs like these, you can use the `defineSensitiveRegexPatterns` method to find and replace regex patterns in an all-string response body. The key of the array is the regex pattern and the value is the replacement.
+
+{% tabs %}
+{% tab title="Simple - Using Arrays" %}
+```php
+protected function defineSensitiveRegexPatterns(): array
+{
+    return [
+        // Key = Regex Pattern
+        // Value = Replacement Value
+        
+        '/@[a-z0-9_]{0,100}/' => 'REDACTED-TWITTER-HANDLE',
+    ];
+}
+```
+{% endtab %}
+
+{% tab title="Advanced - Using Closures" %}
+```php
+protected function defineSensitiveRegexPatterns(): array
+{
+    return [
+        // Key = Regex Pattern
+        // Value = Replacement Value
+        
+        '/@[a-z0-9_]{0,100}/' => static function (string $value) {
+            // Example: You could use something like Faker to generate
+            // fake information and provide a similar structure.
+        
+            return faker()->userName();
+        },
+    ];
+}
+```
+{% endtab %}
+{% endtabs %}
