@@ -285,18 +285,17 @@ The first time the request is made and the fixture is stored, the original respo
 
 Firstly, create a new class in your tests directory and give the class a name. We'll call this class `SingleServerFixture`. Then make sure to extend the base `Fixture` class provided by Saloon.&#x20;
 
-```php
-<?php
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
 namespace Tests\Fixtures\Forge\SingleServerFixture;
 
-use Saloon\Http\Faking\Fixture;
-
-class ForgeSingleServerFixture extends Fixture
-{
+<strong>use Saloon\Http\Faking\Fixture;
+</strong>
+<strong>class ForgeSingleServerFixture extends Fixture
+</strong>{
     //
 }
-```
+</code></pre>
 
 Next, we need to give the fixture a name. Just extend the `defineName` method and give the fixture a name. You can still use slashes in this directory to denote folders.
 
@@ -307,7 +306,7 @@ namespace Tests\Fixtures\Forge\SingleServerFixture;
 
 use Saloon\Http\Faking\Fixture;
 
-class ForgeSingleServerFixture extends Fixture
+class SingleServerFixture extends Fixture
 {
     protected function defineName(): string
     {
@@ -325,7 +324,7 @@ namespace Tests\Fixtures\Forge\SingleServerFixture;
 
 use Saloon\Http\Faking\Fixture;
 
-class ForgeSingleServerFixture extends Fixture
+class SingleServerFixture extends Fixture
 {
     protected function defineName(): string
     {
