@@ -54,4 +54,4 @@ The full documentation can be found by visiting the Github repository here:
 
 ### Issue Tracking
 
-As this is not directly affiliated with Saloon.Please report any issues you have directly on the repository linked above.
+As this is not directly affiliated with Saloon, please report any issues you have directly on the repository linked above.
