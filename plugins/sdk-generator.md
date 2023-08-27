@@ -1,6 +1,6 @@
 # 🏭 SDK Generator
 
-The Saloon SDK Generator is a third-party Saloon plugin written and maintained by Crescat-IO (Helge Sverre) and allows people to easily generate Saloon SDKs from an OpenAPI file or Postman collection. The generator can automatically create connectors, requests and responses for you to help save you time when starting a new SDK.&#x20;
+The Saloon SDK Generator is a third-party Saloon plugin written and maintained by [Crescat](https://crescat.io/) ([Helge Sverre](https://twitter.com/HelgeSverre)) and allows people to easily generate Saloon SDKs from an OpenAPI file or Postman collection. The generator can automatically create connectors, requests and responses for you to help save you time when starting a new SDK.&#x20;
 
 {% hint style="info" %}
 Note: This tool helps you set up the foundation for your SDK, but it might not create a complete, ready-to-use solution.
