@@ -18,4 +18,4 @@ Saloon has just three dependencies.
 
 ### Using Laravel?
 
-There is an additional Laravel Plugin you can install for Saloon which provides useful testing helpers, a Saloon facade and Artisan commands! To read more about the Laravel plugin [click here](../digging-deeper/laravel-integration.md)
+There is an additional Laravel Plugin you can install for Saloon which provides useful testing helpers, a Saloon facade and Artisan commands! To read more about the Laravel plugin [click here](../plugins/laravel-integration.md)

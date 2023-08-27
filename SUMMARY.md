@@ -46,11 +46,12 @@
 * [🛩 Senders](digging-deeper/senders.md)
 * [👪 Plugins](digging-deeper/traits.md)
 
-## Official Plugins
+## Plugins
 
-* [⛵ Laravel Helpers](digging-deeper/laravel-integration.md)
-* [🔁 Caching Responses](digging-deeper/caching-responses.md)
-* [⛔ Handling Rate Limits](digging-deeper/handling-rate-limits.md)
+* [⛵ Laravel Helpers](plugins/laravel-integration.md)
+* [🔁 Caching Responses](plugins/caching-responses.md)
+* [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)
+* [🏭 SDK Generator](plugins/sdk-generator.md)
 
 ## Testing
 

@@ -96,7 +96,7 @@ class SpotifyConnector extends Connector
 
 ### Stores
 
-Here are the various stores that the rate-limiting plugin supports. You may also [create your own stores](broken-reference/) if this library does not come with the one you need. Stores are used to keep track of how many requests have been sent through a given connector/request.
+Here are the various stores that the rate-limiting plugin supports. You may also [create your own stores](../digging-deeper/broken-reference/) if this library does not come with the one you need. Stores are used to keep track of how many requests have been sent through a given connector/request.
 
 #### Available Stores
 
