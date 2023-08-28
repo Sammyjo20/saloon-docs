@@ -20,7 +20,7 @@
 * [🤓 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
 * [🔧 HTTP Client Config](the-basics/http-client-config.md)
-* [📦 Request Body/Data](the-basics/request-body-data/README.md)
+* [📦 Sending Body/Data](the-basics/request-body-data/README.md)
   * [JSON Body](the-basics/request-body-data/json-body.md)
   * [Multipart Form Body](the-basics/request-body-data/multipart-form-body.md)
   * [Form Body (URL Encoded)](the-basics/request-body-data/form-body-url-encoded.md)
