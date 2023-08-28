@@ -15,6 +15,8 @@
 
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
+* [🚀 Sending Requests](the-basics/sending-requests.md)
+* [📡 Responses](the-basics/responses.md)
 * [🤓 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
 * [🔧 HTTP Client Config](the-basics/http-client-config.md)
@@ -26,8 +28,6 @@
   * [String / Plain Text Body](the-basics/request-body-data/string-plain-text-body.md)
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔐 Authentication](the-basics/authentication.md)
-* [🚀 Sending Requests](the-basics/sending-requests.md)
-* [📡 Responses](the-basics/responses.md)
 * [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🪝 Building SDKs](digging-deepeer/building-sdks.md)
