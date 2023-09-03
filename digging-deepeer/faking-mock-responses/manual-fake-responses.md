@@ -1,4 +1,4 @@
-# 🚧 Manual Fake Responses
+# 🚧 Mock Responses
 
 Saloon makes it easy to fake API integrations in your tests. In your tests, you will need to create an instance of `MockClient` . The `MockClient` accepts an array of `MockResponses` which when used on a request, will respond with a fake response without actually sending a real request to the web. This helps speed up tests massively and can help you test your application for different API response scenarios, like a 404 error or 500 error.
 
@@ -182,9 +182,9 @@ $forge->send(new WildcardServiceRequest) // Will return with `['name' => 'Wildca
 
 ### Adding Expectations
 
-When using faking responses, it's important to be able to check that a specific make request was sent and with the correct data, headers, and config. Saloon provides you with various ways to add expectations to your tests.&#x20;
+When using faking responses, it's important to be able to check that a specific make request was sent and with the correct data, headers, and config. Saloon provides you with various ways to add expectations to your tests.
 
-#### Available Expectations&#x20;
+#### Available Expectations
 
 * AssertSent
 * AssertNotSent
@@ -263,3 +263,38 @@ $mockClient = new MockClient([
     },
 ]);
 ```
+
+### Preventing Stray API Requests
+
+Once you have written your tests - it's a good idea to ensure that no real API requests are made in the future while running those tests. This is because you could be making requests when you don't intend to which could incur charges or worse, make real changes to data you don't expect. With Saloon, you can prevent stray API requests with the global `Config` helper. Simply in your tests, call the `Config::preventStrayRequests()` method and you should be good to go!&#x20;
+
+It's recommended that you place this in your `Pest.php` file or in your `setUp()` method to make sure it's used on every test.
+
+{% tabs %}
+{% tab title="Pest.php (PEST)" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+<strong>use Saloon\Helpers\Config;
+</strong>
+beforeEach(function () {
+    Config::preventStrayRequests();
+});
+</code></pre>
+{% endtab %}
+
+{% tab title="TestCase.php (PHPUnit)" %}
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+<strong>use Saloon\Helpers\Config;
+</strong>
+class TestCase {
+
+    public function setUp()
+    {
+<strong>        Config::preventStrayRequests();
+</strong>    }
+
+}
+</code></pre>
+{% endtab %}
+{% endtabs %}
