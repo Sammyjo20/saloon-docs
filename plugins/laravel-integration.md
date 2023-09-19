@@ -46,6 +46,8 @@ Each of the commands will create files within the `App\Http\Integrations` namesp
 | saloon:auth \<Integration Name> \<Authenticator Name>        | Creates a custom authenticator |
 | saloon:oauth-connector \<Integration Name> \<Connector Name> | Creates a new OAuth2 connector |
 
+You can use the `saloon:list` command to display information about Saloon usage within your application.
+
 ### Laravel HTTP Client Sender
 
 Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel's [HTTP client](https://laravel.com/docs/9.x/http-client#main-content) under the hood, which allows your requests to be handled by Laravel just like using the HTTP client directly. This means Saloon's requests can be recorded in Telescope and also picked up by Laravel's event system.
