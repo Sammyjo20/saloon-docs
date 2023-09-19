@@ -18,6 +18,8 @@ You can [open a discussion](https://github.com/sammyjo20/saloon) on Saloon's Git
 
 First, update Saloon in your `composer.json` file to use the version `^2.0`. if you are using the additional Laravel package, you should update this to `^2.0` too. After that, run `composer update`.
 
+Additionally, Saloon has moved to it's own Github organization so the name has been changed from `sammyjo20` to `saloonphp` and the Laravel package has been renamed from `sammyjo20/saloon-laravel` to `saloonphp/laravel-plugin.`
+
 {% tabs %}
 {% tab title="Non-Laravel" %}
 ```json
@@ -35,7 +37,7 @@ First, update Saloon in your `composer.json` file to use the version `^2.0`. if 
 }
 ```
 
-> If you previously used just "saloon-laravel" it's recommended that you add "sammyjo20/saloon" as an additional required dependency.
+> If you previously used `sammyjo20/saloon-laravel` or `saloonphp/laravel-plugin` it's recommended that you add "saloonphp/saloon" as an additional required dependency.
 {% endtab %}
 {% endtabs %}
 
