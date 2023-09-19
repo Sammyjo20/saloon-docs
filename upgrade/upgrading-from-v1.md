@@ -22,7 +22,7 @@ First, update Saloon in your `composer.json` file to use the version `^2.0`. if 
 {% tab title="Non-Laravel" %}
 ```json
 "require": {
-    "sammyjo20/saloon": "^2.0"
+    "saloonphp/saloon": "^2.0"
 }
 ```
 {% endtab %}
@@ -30,12 +30,12 @@ First, update Saloon in your `composer.json` file to use the version `^2.0`. if 
 {% tab title="Laravel" %}
 ```json
 "require": {
-    "sammyjo20/saloon": "^2.0",
-    "sammyjo20/saloon-laravel": "^2.0"
+    "saloonphp/saloon": "^2.0",
+    "saloonphp/laravel-plugin": "^2.0"
 }
 ```
 
-> If you previously used just "saloon-laravel" it's recommended that you add "sammyjo20/saloon" as an additional dependency to your require block.
+> If you previously used just "saloon-laravel" it's recommended that you add "sammyjo20/saloon" as an additional required dependency.
 {% endtab %}
 {% endtabs %}
 
