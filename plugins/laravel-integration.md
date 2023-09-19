@@ -46,7 +46,8 @@ Each of the commands will create files within the `App\Http\Integrations` namesp
 | saloon:auth \<Integration Name> \<Authenticator Name>        | Creates a custom authenticator |
 | saloon:oauth-connector \<Integration Name> \<Connector Name> | Creates a new OAuth2 connector |
 
-You can use the `saloon:list` command to display information about Saloon usage within your application.
+You can use the `saloon:list` command to display information about Saloon usage within your application such
+as your integrations and what requests, connectors, plugins, responses an authenticators they have.
 
 ### Laravel HTTP Client Sender
 
