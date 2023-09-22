@@ -474,6 +474,46 @@ class CreateForgeServerRequest extends Request
 
 Saloon's caching plugin has also had a full overhaul to work with Saloon v2. It's recommended that you follow the steps for configuring the new caching plugin in the [documentation here.](../plugins/caching-responses.md)
 
+### Data Transfer Objects
+
+<mark style="color:red;">Estimated Impact: High</mark>
+
+Previously, Saloon provided data transfer objects through a `CastsToDto` trait. This trait could be added to the connector or request and would allow you to define a `castToDto` method. From Saloon v2, DTO casting is a built-in feature for every connector and request and the `CastsToDto` trait has been removed. All you need to do is change the **protected**  `castToDto` method to a **public** `createDtoFromResponse` method.
+
+{% tabs %}
+{% tab title="Version One" %}
+```php
+<?php
+
+use Sammyjo20\Saloon\Traits\Plugins\CastsToDto;
+
+class ForgeConnector extends SaloonConenctor
+{
+    use CastsToDto;
+    
+    protected function castToDto(SaloonResponse $response): mixed
+    {
+        // ...
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Version Two" %}
+```php
+<?php
+
+class ForgeConnector extends SaloonConenctor
+{
+    protected function createDtoFromResponse(SaloonResponse $response): mixed
+    {
+        // ...
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
 ### Responses
 
 <mark style="color:purple;">Estimated Impact: Medium</mark>
