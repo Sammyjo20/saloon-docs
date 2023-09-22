@@ -37,7 +37,7 @@ Additionally, Saloon has moved to it's own Github organization so the name has b
 }
 ```
 
-> If you previously used `sammyjo20/saloon-laravel` or `saloonphp/laravel-plugin` it's recommended that you add "saloonphp/saloon" as an additional required dependency.
+> If you previously used `sammyjo20/saloon-laravel` or `saloonphp/laravel-plugin` it's recommended that you add `saloonphp/saloon` as an additional required dependency.
 {% endtab %}
 {% endtabs %}
 
@@ -185,7 +185,7 @@ You should make sure that your requests use this new way of sending requests.
 
 #### Using Request-First Sending
 
-Although this is being taken out of the request, you may still add the functionality back with the `HasConnector` trait on the request. Although, if you add it back - you need to be aware of the downsides like not being able to have constructor arguments on your connector.
+Although this is being taken out of the request, you may still add the functionality back with the `HasConnector` trait on the request. However, if you add it back - you need to be aware of the downsides like not being able to have constructor arguments on your connector.
 
 ### Updated Request, Headers, Query Parameters and Config Methods
 
