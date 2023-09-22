@@ -53,7 +53,7 @@ class SpotifyConnector extends Connector
 You can install this plugin via Composer.
 
 ```
-composer require saloonphp/rate-limit-plugin
+composer require saloonphp/rate-limit-plugin "^1.0"
 ```
 
 ### Getting Started
