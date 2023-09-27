@@ -197,87 +197,9 @@ Once you have written all of your tests, you might want to prevent accidental AP
 MockConfig::throwOnMissingFixtures()
 ```
 
-### Advanced Usage
-
-You may want to return custom fixtures based on the request without specifying exact names of fixtures. For example, I might want to build a fixture name based on the name of the request being sent. You may use a closure inside the mock client and write the custom logic to meet these needs.
-
-{% tabs %}
-{% tab title="Non-Laravel" %}
-```php
-<?php
-
-$mockClient = new MockClient([
-    '*' => function (PendingRequest $request) {
-        $reflection = new ReflectionClass($request->getRequest());
-
-        return MockResponse::fixture($reflection->getShortName());
-    },
-]);
-
-$forge = new ForgeConnector;
-$forge->withMockClient($mockClient);
-
-// This will create a fixture called "GetForgeServerRequest"
-
-$request = new GetForgeServerRequest(12345);
-$response = $forge->send($request);
-
-// This will create a fixture called "GetAllForgeServersRequest"
-
-$request = new GetAllForgeServersRequest($data);
-$response = $forge->send($request);
-```
-{% endtab %}
-
-{% tab title="Laravel" %}
-```php
-<?php
-
-Saloon::fake([
-    '*' => function (PendingRequest $request) {
-        $reflection = new ReflectionClass($request->getRequest());
-
-        return MockResponse::fixture($reflection->getShortName());
-    },
-]);
-
-$forge = new ForgeConnector;
-
-// This will create a fixture called "GetForgeServerRequest"
-
-$request = new GetForgeServerRequest(12345);
-$response = $forge->send($request);
-
-// This will create a fixture called "GetAllForgeServersRequest"
-
-$request = new GetAllForgeServersRequest($data);
-$response = $forge->send($request);
-```
-{% endtab %}
-{% endtabs %}
-
-Another example from [Astrotomic's Steam SDK](https://github.com/Astrotomic/steam-sdk) allows you to create a directory for each request. This is really useful for organising your mock fixtures.
-
-```php
-<?php
-
-$mockClient = new MockClient([
-    '*' => function (PendingRequest $pendingRequest) {
-        $name = implode('/', array_filter([
-             parse_url($pendingRequest->getUrl(), PHP_URL_HOST),
-             mb_strtoupper($pendingRequest->getMethod() ?? 'GET'),
-             parse_url($pendingRequest->getUrl(), PHP_URL_PATH),
-             http_build_query(array_diff_key($pendingRequest->query()->all(), array_flip(['key', 'format']))),
-        ]));
-          
-        return MockResponse::fixture($name);
-    },
-]);
-```
-
 ### Redacting Fixture Information
 
-When using fixtures to record real responses from an API - sometimes the API will return back some sensitive information that you shouldn't store in your application's repository, like names of real people, financial data or emails. With Saloon, you can create a custom fixture class and provide a few methods to obscure the information when the data is stored. You can even provide closures for the data replacement so you can use tools like Faker to replace data like-for-like.
+When using fixtures to record real responses from an API - sometimes the API will return some sensitive information that you shouldn't store in your application's repository, like names of real people, financial data or emails. With Saloon, you can create a custom fixture class and provide a few methods to obscure the information when the data is stored. You can even provide closures for the data replacement so you can use tools like Faker to replace data like-for-like.
 
 {% hint style="info" %}
 The first time the request is made and the fixture is stored, the original response won't be redacted. Only future requests made with the fixture will use the redacted recording.
@@ -462,6 +384,17 @@ protected function defineSensitiveRegexPatterns(): array
 {% endtab %}
 {% endtabs %}
 
+#### Using your custom fixtures
+
+Once you have created your custom fixture class with the redaction configuration, you can simply use it instead of `MockResponse::fixture()` in your tests. All detection methods in the mock client work with this type of fixture too.
+
+<pre class="language-php"><code class="lang-php">&#x3C;?php
+
+$mockClient = new MockClient([
+<strong>    GetServerRequest::class => new SingleServerFixture;
+</strong>]);
+</code></pre>
+
 ### Preventing Stray API Requests
 
 Once you have written your tests - it's a good idea to ensure that no real API requests are made in the future while running those tests. This is because you could be making requests when you don't intend to which could incur charges or worse, make real changes to data you don't expect. With Saloon, you can prevent stray API requests with the global `Config` helper. Simply in your tests, call the `Config::preventStrayRequests()` method and you should be good to go!&#x20;
@@ -496,3 +429,81 @@ class TestCase {
 </code></pre>
 {% endtab %}
 {% endtabs %}
+
+### Advanced Usage
+
+You may want to return custom fixtures based on the request without specifying exact names of fixtures. For example, I might want to build a fixture name based on the name of the request being sent. You may use a closure inside the mock client and write the custom logic to meet these needs.
+
+{% tabs %}
+{% tab title="Non-Laravel" %}
+```php
+<?php
+
+$mockClient = new MockClient([
+    '*' => function (PendingRequest $request) {
+        $reflection = new ReflectionClass($request->getRequest());
+
+        return MockResponse::fixture($reflection->getShortName());
+    },
+]);
+
+$forge = new ForgeConnector;
+$forge->withMockClient($mockClient);
+
+// This will create a fixture called "GetForgeServerRequest"
+
+$request = new GetForgeServerRequest(12345);
+$response = $forge->send($request);
+
+// This will create a fixture called "GetAllForgeServersRequest"
+
+$request = new GetAllForgeServersRequest($data);
+$response = $forge->send($request);
+```
+{% endtab %}
+
+{% tab title="Laravel" %}
+```php
+<?php
+
+Saloon::fake([
+    '*' => function (PendingRequest $request) {
+        $reflection = new ReflectionClass($request->getRequest());
+
+        return MockResponse::fixture($reflection->getShortName());
+    },
+]);
+
+$forge = new ForgeConnector;
+
+// This will create a fixture called "GetForgeServerRequest"
+
+$request = new GetForgeServerRequest(12345);
+$response = $forge->send($request);
+
+// This will create a fixture called "GetAllForgeServersRequest"
+
+$request = new GetAllForgeServersRequest($data);
+$response = $forge->send($request);
+```
+{% endtab %}
+{% endtabs %}
+
+Another example from [Astrotomic's Steam SDK](https://github.com/Astrotomic/steam-sdk) allows you to create a directory for each request. This is really useful for organising your mock fixtures.
+
+```php
+<?php
+
+$mockClient = new MockClient([
+    '*' => function (PendingRequest $pendingRequest) {
+        $name = implode('/', array_filter([
+             parse_url($pendingRequest->getUrl(), PHP_URL_HOST),
+             mb_strtoupper($pendingRequest->getMethod() ?? 'GET'),
+             parse_url($pendingRequest->getUrl(), PHP_URL_PATH),
+             http_build_query(array_diff_key($pendingRequest->query()->all(), array_flip(['key', 'format']))),
+        ]));
+          
+        return MockResponse::fixture($name);
+    },
+]);
+```
