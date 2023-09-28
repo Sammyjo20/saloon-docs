@@ -35,7 +35,12 @@
 ## Digging Deeper
 
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [📖 Pagination](digging-deeper/pagination.md)
+* [📖 Pagination v1 (Old)](digging-deeper/pagination-v1-old.md)
+* [📖 Pagination v2](digging-deeper/pagination-v2/README.md)
+  * [Paged Pagination](digging-deeper/pagination-v2/paged-pagination.md)
+  * [Limit/Offset Pagination](digging-deeper/pagination-v2/limit-offset-pagination.md)
+  * [Cursor Pagination](digging-deeper/pagination-v2/cursor-pagination.md)
+  * [Custom Pagination](digging-deeper/pagination-v2/custom-pagination.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)

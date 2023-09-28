@@ -1,4 +1,12 @@
-# 📖 Pagination
+# 📖 Pagination v1 (Old)
+
+### 👋 Just a quick note before we begin
+
+In the process of creating Saloon's next major version, version three, a new pagination plugin was developed. The new pagination plugin has been redesigned to be more convenient for developers, and easier to implement and maintain. If you have not used Saloon's pagination feature before, it is recommended that you begin with the [Pagination v2 (Plugin)](pagination-v2/) rather than the built-in pagination. The built-in pagination has been removed from v3, so it is advisable to switch to the plugin version to avoid further upgrades when migrating to Saloon v3.
+
+{% hint style="info" %}
+If you are currently using version two's pagination, it is recommended to follow the new documentation and rebuild your paginators. [Click here to get started](pagination-v2/).
+{% endhint %}
 
 ### Introduction
 
