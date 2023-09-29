@@ -58,7 +58,7 @@ After that, you need to add the `HasPagination` interface to your connector. Thi
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Connector;
-use Saloon\PaginationPlugin\Contracts\Paginator;
+use Saloon\PaginationPlugin\Paginator;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
 
 class SpotifyConnector extends Connector implements HasPagination
