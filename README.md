@@ -10,7 +10,7 @@ You are viewing the documentation for the **latest** **version** - Saloon **v3**
 
 <figure><img src=".gitbook/assets/header.png" alt=""><figcaption></figcaption></figure>
 
-[![Build Status](https://github.com/saloonphp/saloon/actions/workflows/tests.yml/badge.svg)](https://img.shields.io/github/actions/workflow/status/saloonphp/saloon/tests.yml?label=tests) ![Downloads](https://img.shields.io/packagist/dm/sammyjo20/saloon)
+[![Build Status](https://github.com/saloonphp/saloon/actions/workflows/tests.yml/badge.svg)](https://img.shields.io/github/actions/workflow/status/saloonphp/saloon/tests.yml?label=tests)![Downloads](https://img.shields.io/packagist/dm/sammyjo20/saloon)![](https://img.shields.io/github/stars/saloonphp/saloon)
 
 ### Introduction
 
