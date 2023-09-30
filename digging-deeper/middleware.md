@@ -1,4 +1,4 @@
-# 💂 Middleware
+# 💫 Middleware
 
 Saloon has a powerful middleware system that allows you to tap into the request and response lifecycle and make any changes you need before the request is sent or the response is given back to the user. This is useful if you want to build your own advanced Saloon integrations or write more advanced logic like generating a unique reference for every request.
 
@@ -58,7 +58,7 @@ The PendingRequest class is used for boot methods, middleware and [plugins](trai
 
 ### Request Middleware
 
-You may also at any point tap into the request lifecycle by using request middleware. Request middleware is useful to change something on the PendingRequest instance before the request is sent like authenticating the&#x20;
+You may also at any point tap into the request lifecycle by using request middleware. Request middleware is useful to change something on the PendingRequest instance before the request is sent like authenticating the
 
 Simply on your connector or request, you can call the `middleware()` method and use the `onRequest()` method. You should provide a callable, like a closure or invokable class. You get access to the `PendingRequest` instance.
 
@@ -147,9 +147,9 @@ $request->middleware()->onRequest(new AuthenticateRequest);
 
 ### Early Fake Responses
 
-You may also choose to tap into Saloon's MockResponse functionality by creating your own fake responses. Behind the scenes, Saloon's MockResponse extends the SimulatedResponsePayload class which can be returned within a request middleware. When you return a SimulatedResponsePayload or MockResponse, the rest of the request middleware will still be processed but the fake response will be stored on the PendingRequest.&#x20;
+You may also choose to tap into Saloon's MockResponse functionality by creating your own fake responses. Behind the scenes, Saloon's MockResponse extends the SimulatedResponsePayload class which can be returned within a request middleware. When you return a SimulatedResponsePayload or MockResponse, the rest of the request middleware will still be processed but the fake response will be stored on the PendingRequest.
 
-If this fake response is present before Saloon sends the request, it will use the `SimulatedSender` instead of the default sender you have provided. This is super handy if you want to build your own middleware that stops Saloon from sending real requests, like for caching.&#x20;
+If this fake response is present before Saloon sends the request, it will use the `SimulatedSender` instead of the default sender you have provided. This is super handy if you want to build your own middleware that stops Saloon from sending real requests, like for caching.
 
 ```php
 <?php
@@ -174,7 +174,7 @@ Even though you are returning a MockResponse, the next middleware will still rec
 
 ### Response Middleware
 
-Once you have sent your request, even if it's a mocked response, Saloon will send the response down the response middleware pipeline. You may add your own response middleware to change the response class or log responses.&#x20;
+Once you have sent your request, even if it's a mocked response, Saloon will send the response down the response middleware pipeline. You may add your own response middleware to change the response class or log responses.
 
 On your connector or request, you can call the `middleware()` method and use the `onResponse()` method. You should provide a callable, like a closure or invokable class. You get access to the `Response` instance.
 

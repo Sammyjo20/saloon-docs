@@ -1,4 +1,4 @@
-# 🔧 HTTP Client Config
+# ⚙ HTTP Client Config
 
 Like headers and query parameters, HTTP config can be added by using the `config()` method on either the connector or the request. When you add config to a connector instance, every request sent through that connector will merge those configuration options with the request. When you add config to a request instance, it will just be added to that one request instance.
 

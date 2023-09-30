@@ -1,4 +1,4 @@
-# 📚 Tutorials & Blog Posts
+# 📖 Tutorials & Blog Posts
 
 ### Video Tutorials
 

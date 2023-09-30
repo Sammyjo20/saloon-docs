@@ -1,4 +1,4 @@
-# 🎁 What's new in v2
+# 🪄 What's new in v3
 
 Version two of Saloon is an upgrade in everything you already love in version one but refines and improves your developer experience. It has many internal changes that make it more maintainable and lightweight. This results in a fantastic experience building API integrations or your next SDK.
 

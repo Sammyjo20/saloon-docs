@@ -9,7 +9,7 @@ description: Build beautiful API integrations and SDKs with Saloon
 [![Build Status](https://github.com/saloonphp/saloon/actions/workflows/tests.yml/badge.svg)](https://img.shields.io/github/actions/workflow/status/saloonphp/saloon/tests.yml?label=tests) ![Downloads](https://img.shields.io/packagist/dm/sammyjo20/saloon)
 
 {% hint style="info" %}
-You are viewing the documentation for Saloon v2. If you are using version one, [click here](http://127.0.0.1:5000/o/cASkBOXfspBu84TFkYqQ/s/WZee3WHlwQmemMUmidXH/).
+You are viewing the documentation for the **latest** **version** - Saloon **v3**. If you are using version two, [click here](https://docs.saloon.dev/v/2). Alternatively, you can select the version in the navigation at the top of the page.
 {% endhint %}
 
 ### Introduction

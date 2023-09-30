@@ -1,4 +1,4 @@
-# 🌿 Upgrading from v1
+# 🌳 Upgrading from v2
 
 ### Introduction
 
@@ -478,7 +478,7 @@ Saloon's caching plugin has also had a full overhaul to work with Saloon v2. It'
 
 <mark style="color:red;">Estimated Impact: High</mark>
 
-Previously, Saloon provided data transfer objects through a `CastsToDto` trait. This trait could be added to the connector or request and would allow you to define a `castToDto` method. From Saloon v2, DTO casting is a built-in feature for every connector and request and the `CastsToDto` trait has been removed. All you need to do is change the **protected**  `castToDto` method to a **public** `createDtoFromResponse` method.
+Previously, Saloon provided data transfer objects through a `CastsToDto` trait. This trait could be added to the connector or request and would allow you to define a `castToDto` method. From Saloon v2, DTO casting is a built-in feature for every connector and request and the `CastsToDto` trait has been removed. All you need to do is change the **protected** `castToDto` method to a **public** `createDtoFromResponse` method.
 
 {% tabs %}
 {% tab title="Version One" %}

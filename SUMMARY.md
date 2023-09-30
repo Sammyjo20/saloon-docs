@@ -4,8 +4,8 @@
 
 ## Upgrade
 
-* [🎁 What's new in v2](upgrade/whats-new-in-v2.md)
-* [🌿 Upgrading from v1](upgrade/upgrading-from-v1.md)
+* [🪄 What's new in v3](upgrade/whats-new-in-v2.md)
+* [🌳 Upgrading from v2](upgrade/upgrading-from-v1.md)
 
 ## Getting Started
 
@@ -15,9 +15,9 @@
 
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
-* [🤓 Headers](the-basics/headers.md)
+* [🌵 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
-* [🔧 HTTP Client Config](the-basics/http-client-config.md)
+* [⚙ HTTP Client Config](the-basics/http-client-config.md)
 * [📦 Sending Body/Data](the-basics/request-body-data/README.md)
   * [JSON Body](the-basics/request-body-data/json-body.md)
   * [Multipart Form Body](the-basics/request-body-data/multipart-form-body.md)
@@ -35,8 +35,7 @@
 ## Digging Deeper
 
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [📖 Pagination v1 (Old)](digging-deeper/pagination-v1-old.md)
-* [📖 Pagination v2](digging-deeper/pagination-v2/README.md)
+* [📚 Pagination](digging-deeper/pagination-v2/README.md)
   * [Paged Pagination](digging-deeper/pagination-v2/paged-pagination.md)
   * [Limit/Offset Pagination](digging-deeper/pagination-v2/limit-offset-pagination.md)
   * [Cursor Pagination](digging-deeper/pagination-v2/cursor-pagination.md)
@@ -46,7 +45,7 @@
 * [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
-* [💂 Middleware](digging-deeper/middleware.md)
+* [💫 Middleware](digging-deeper/middleware.md)
 * [⏸ Request Delay](digging-deeper/delay.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [👪 Plugins](digging-deeper/traits.md)
@@ -66,9 +65,9 @@
 ## Conclusion
 
 * [🍳 Cookbook](conclusion/cookbook.md)
-* [📚 Tutorials & Blog Posts](conclusion/tutorials.md)
+* [📖 Tutorials & Blog Posts](conclusion/tutorials.md)
 * [🐞 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
 * [🎖 Showcase](conclusion/showcase.md)
-* [❤ Support](https://github.com/saloonphp/saloon?sponsor=1)
+* [❤ Support Saloon](https://github.com/saloonphp/saloon?sponsor=1)
 * [👋 About Me](https://github.com/Sammyjo20)

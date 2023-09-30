@@ -1,4 +1,4 @@
-# 📖 Pagination v2
+# 📚 Pagination
 
 ### Introduction
 
