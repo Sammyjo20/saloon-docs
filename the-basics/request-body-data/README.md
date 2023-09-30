@@ -1,4 +1,4 @@
-# 📦 Sending Body/Data
+# 🎁 Attaching Body/Data
 
 When sending HTTP requests, a common requirement is to attach a payload/body to POST, PUT, or PATCH requests, like JSON, XML or multipart data. Saloon makes this easy for you with built-in body traits.
 

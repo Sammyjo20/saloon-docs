@@ -1,4 +1,4 @@
-# 👪 Plugins
+# 🏗 Building Your Own Plugins
 
 Saloon has plugins which make it easy for you to add logic to your connector or requests in a reusable and elegant way. Plugins are traits that can be added to either a request or a connector and have a special "boot" method which is invoked during the request lifecycle.
 
@@ -37,7 +37,7 @@ class ForgeConnector extends Connector
 {% endtab %}
 {% endtabs %}
 
-When you send your request, plugins are the first things that are invoked, even before the `boot` method. This is to allow maximum compatibility with [middleware ](middleware.md)and [authenticators](../the-basics/authentication.md). This also means that because it's the first process in the chain, other steps like middleware and the boot method will be able to overwrite anything added by a plugin.
+When you send your request, plugins are the first things that are invoked, even before the `boot` method. This is to allow maximum compatibility with [middleware ](../digging-deeper/middleware.md)and [authenticators](../the-basics/authentication.md). This also means that because it's the first process in the chain, other steps like middleware and the boot method will be able to overwrite anything added by a plugin.
 
 <figure><img src="../.gitbook/assets/Saloon v2 (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -46,19 +46,3 @@ Because we added the trait to our connector, every request will use the `HasLogg
 {% hint style="warning" %}
 Be careful when adding the plugin to both the connector and the request at the same time, they will both be executed separately.
 {% endhint %}
-
-### Built-in Plugins
-
-Saloon comes with a few plugins out of the box, you may have already used them.&#x20;
-
-#### AcceptsJson
-
-This plugin will add the `Accept: application/json` header to your pending request. This is useful when dealing with JSON APIs.
-
-#### AlwaysThrowOnErrors
-
-This plugin will call the `$response->throw()` method. This method will throw an exception if the response has failed, rather than just returning a failed response.
-
-#### HasTimeout
-
-This plugin allows you to define a `connectTimeout` and `requestTimeout` property on your request or connector.

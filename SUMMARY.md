@@ -18,7 +18,7 @@
 * [🌵 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
 * [⚙ HTTP Client Config](the-basics/http-client-config.md)
-* [📦 Sending Body/Data](the-basics/request-body-data/README.md)
+* [🎁 Attaching Body/Data](the-basics/request-body-data/README.md)
   * [JSON Body](the-basics/request-body-data/json-body.md)
   * [Multipart Form Body](the-basics/request-body-data/multipart-form-body.md)
   * [Form Body (URL Encoded)](the-basics/request-body-data/form-body-url-encoded.md)
@@ -46,28 +46,31 @@
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
 * [💫 Middleware](digging-deeper/middleware.md)
-* [⏸ Request Delay](digging-deeper/delay.md)
+* [⏸ Delaying Requests](digging-deeper/delay.md)
 * [🛩 Senders](digging-deeper/senders.md)
-* [👪 Plugins](digging-deeper/traits.md)
-
-## Plugins
-
-* [⛵ Laravel Helpers](plugins/laravel-integration.md)
-* [🔁 Caching Responses](plugins/caching-responses.md)
-* [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)
-* [🏭 SDK Generator](plugins/sdk-generator.md)
+* [⛩ PSR Support](digging-deeper/psr-support.md)
+* [🔎 Debugging](digging-deeper/debugging.md)
 
 ## Testing
 
 * [📸 Recording Responses](testing/recording-requests.md)
 * [🚧 Mock Responses](testing/manual-fake-responses.md)
 
+## Plugins
+
+* [⛰ Built-In Plugins](plugins/built-in-plugins.md)
+* [⛵ Laravel Helpers](plugins/laravel-integration.md)
+* [🔁 Caching Responses](plugins/caching-responses.md)
+* [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)
+* [🏭 SDK Generator](plugins/sdk-generator.md)
+* [🏗 Building Your Own Plugins](plugins/traits.md)
+
 ## Conclusion
 
 * [🍳 Cookbook](conclusion/cookbook.md)
 * [📖 Tutorials & Blog Posts](conclusion/tutorials.md)
 * [🐞 Known Issues](conclusion/known-issues.md)
-* [🤗 Credits](conclusion/credits.md)
 * [🎖 Showcase](conclusion/showcase.md)
+* [🤗 Credits](conclusion/credits.md)
 * [❤ Support Saloon](https://github.com/saloonphp/saloon?sponsor=1)
 * [👋 About Me](https://github.com/Sammyjo20)
