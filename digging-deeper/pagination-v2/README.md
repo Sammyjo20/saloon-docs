@@ -72,10 +72,6 @@ class SpotifyConnector extends Connector implements HasPagination
 }
 </code></pre>
 
-{% hint style="warning" %}
-Take care when importing the pagination plugin classes when using Saloon v2. You'll want to make sure you are using the **Saloon\PaginationPlugin** namespace.
-{% endhint %}
-
 Now you need to choose a paginator that corresponds to the pagination type used by the third-party API. This documentation is divided into three sections based on Saloon's three pre-installed paginators.
 
 {% content-ref url="paged-pagination.md" %}
