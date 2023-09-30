@@ -21,7 +21,7 @@ namespace Pokeapi;
 
 use Generator;
 use Saloon\Http\Connector;
-use Saloon\Contracts\Request;
+use Saloon\Http\Request;
 use Pokeapi\Responses\PokeapiResponse;
 
 class Pokeapi extends Connector
@@ -140,12 +140,12 @@ The resource pattern can help you combine your SDK requests into simple groups t
 
 #### Creating the base resource class
 
-Let's start by creating a `Resource` class. This class should just contain a constructor that passes in an instance of `Saloon\Contracts\Connector`.
+Let's start by creating a `Resource` class. This class should just contain a constructor that passes in an instance of `Saloon\Http\Connector`.
 
 ```php
 <?php
 
-use Saloon\Contracts\Connector;
+use Saloon\Http\Connector;
 
 class Resource
 {

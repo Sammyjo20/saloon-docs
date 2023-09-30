@@ -16,7 +16,7 @@ While Saloon's default sender is the GuzzleSender, Saloon is completely sender a
 
 Saloon has a `Sender` interface which defines the structure that a sender must have. You must implement this contract for Saloon to accept the sender that you are creating. The contract contains just one method: `sendRequest`. This method will receive an instance of `PendingRequest` which is the object that contains everything ready to be sent. At this point, plugins and request middleware has been run and the request is ready to be sent.
 
-The `sendRequest` method must either return a `Saloon\Contracts\Response` or an instance of `GuzzleHttp\Promise\PromiseInterface`. These response types will change depending if the request was sent asynchronously or not.
+The `sendRequest` method must either return a `Saloon\Http\Response` or an instance of `GuzzleHttp\Promise\PromiseInterface`. These response types will change depending if the request was sent asynchronously or not.
 
 ```php
 <?php

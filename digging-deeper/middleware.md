@@ -16,7 +16,7 @@ You may register middleware inside of the boot method too, which will be used in
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 class ForgeConnector extends Connector
 {
@@ -35,7 +35,7 @@ class ForgeConnector extends Connector
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 class GetServersRequest extends Request
 {
@@ -75,7 +75,7 @@ You can use a regular closure/anonymous function to create a middleware on the f
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $forge = new ForgeConnector;
 
@@ -89,7 +89,7 @@ $forge->middleware()->onRequest(function (PendingRequest $pendingRequest) {
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $request = new GetServersRequest;
 
@@ -109,7 +109,7 @@ You may also use invokable classes to keep your middleware classes tidy. If you 
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 use Saloon\Contracts\RequestMiddleware;
 
 class AuthenticateRequest implements RequestMiddleware
@@ -126,7 +126,7 @@ class AuthenticateRequest implements RequestMiddleware
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $forge = new ForgeConnector;
 $forge->middleware()->onRequest(new AuthenticateRequest);
@@ -137,7 +137,7 @@ $forge->middleware()->onRequest(new AuthenticateRequest);
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $request = new GetServersRequest;
 $request->middleware()->onRequest(new AuthenticateRequest);
@@ -154,7 +154,7 @@ If this fake response is present before Saloon sends the request, it will use th
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $request = new GetServersRequest;
 
@@ -179,7 +179,7 @@ Once you have sent your request, even if it's a mocked response, Saloon will sen
 On your connector or request, you can call the `middleware()` method and use the `onResponse()` method. You should provide a callable, like a closure or invokable class. You get access to the `Response` instance.
 
 {% hint style="info" %}
-Return values are not required, but you may return an instance of `Saloon\Contracts\Response` to overwrite the response class in the middleware.
+Return values are not required, but you may return an instance of `Saloon\Http\Response` to overwrite the response class in the middleware.
 {% endhint %}
 
 #### Anonymous Functions
@@ -191,7 +191,7 @@ You can use a regular closure/anonymous function to create a middleware on the f
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $forge = new ForgeConnector;
 
@@ -205,7 +205,7 @@ $forge->middleware()->onResponse(function (Response $response) {
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $request = new GetServersRequest;
 
@@ -225,7 +225,7 @@ Similar to request middleware, you can also create invokable middleware classes 
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Contracts\ResponseMiddleware;
 
 class LogResponse implements ResponseMiddleware
@@ -242,7 +242,7 @@ class LogResponse implements ResponseMiddleware
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $forge = new ForgeConnector;
 $forge->middleware()->onResponse(new LogResponse);
@@ -253,7 +253,7 @@ $forge->middleware()->onResponse(new LogResponse);
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $request = new GetServersRequest;
 $request->middleware()->onResponse(new LogResponse);
@@ -332,7 +332,7 @@ You may choose to "prepend" middleware which will put a given middleware at the 
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 class GetServersRequest extends Request
 {

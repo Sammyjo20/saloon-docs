@@ -148,7 +148,7 @@ Sometimes the API integration you are building requires multiple ways to authent
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 use Saloon\Contracts\Authenticator;
 
 class CustomAuthenticator implements Authenticator

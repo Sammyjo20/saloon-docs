@@ -408,7 +408,7 @@ $request->addResponseInterceptor(function (SaloonRequest $request, SaloonRespons
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $request->middleware()->onResponse(function (Response $response) {
     $response->throw();
@@ -453,7 +453,7 @@ class CreateForgeServerRequest extends SaloonRequest
 {% tab title="Version Two" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 class CreateForgeServerRequest extends Request
 {

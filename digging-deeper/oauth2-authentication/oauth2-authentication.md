@@ -58,7 +58,7 @@ You can also provide default scopes and even provide a callback to modify the OA
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Request;
+use Saloon\Http\Request;
 use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 
@@ -332,7 +332,7 @@ $connector->getUser($code, requestModifier: function (Request $request) {
 ```php
 <?php
 
-use Saloon\Contracts\Request;
+use Saloon\Http\Request;
 use Saloon\Http\OAuth2\GetUserRequest;
 use Saloon\Http\OAuth2\GetAccessTokenRequest;
 use Saloon\Http\OAuth2\GetRefreshTokenRequest;
