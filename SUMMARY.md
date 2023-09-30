@@ -70,5 +70,5 @@
 * [🐞 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
 * [🎖 Showcase](conclusion/showcase.md)
-* [❤ Support](https://ko-fi.com/sammyjo20)
+* [❤ Support](https://github.com/saloonphp/saloon?sponsor=1)
 * [👋 About Me](https://github.com/Sammyjo20)
