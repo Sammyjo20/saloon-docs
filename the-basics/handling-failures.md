@@ -76,7 +76,7 @@ You may wish to write some custom logic in your application if a request fails, 
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $response = $forge->send(new ErrorRequest);
 
@@ -98,7 +98,7 @@ When sending requests using `sendAsync` or using request pooling, you will recei
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $forge = new ForgeConnector('api-token');
 $promise = $forge->sendAsync(new GetServersRequest);
@@ -136,7 +136,7 @@ By default, Saloon will consider a request as failed if the status code is 4xx o
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class ForgeConnector extends Connector
 {
@@ -155,7 +155,7 @@ class ForgeConnector extends Connector
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class ErrorRequest extends Request
 {
@@ -180,7 +180,7 @@ If you use the `throw` method or the `AlwaysThrowsOnErrors` trait, Saloon will t
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class ForgeConnector extends Connector
 {
@@ -199,7 +199,7 @@ class ForgeConnector extends Connector
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class ErrorRequest extends Request
 {
@@ -224,7 +224,7 @@ By default, Saloon will use the exceptions [listed above](handling-failures.md#d
 <?php
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use \Throwable;
 
 class ForgeConnector extends Connector
@@ -244,7 +244,7 @@ class ForgeConnector extends Connector
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use \Throwable;
 
 class ErrorRequest extends Request

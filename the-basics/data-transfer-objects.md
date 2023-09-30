@@ -10,7 +10,7 @@ Firstly, in your request or connector, extend the `createDtoFromResponse` method
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class GetServerRequest extends Request
 {
@@ -28,7 +28,7 @@ I have created a `Server` data transfer object that I will use. This is what the
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class Server
 {
@@ -75,7 +75,7 @@ Sometimes debugging a DTO can be difficult, especially if you have passed the da
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Traits\Responses\HasResponse;
 use Saloon\Contracts\DataObjects\WithResponse;
 
@@ -118,7 +118,7 @@ You may also allow your data transfer objects to go both ways, back into request
 
 use Saloon\Http\Request;
 use Saloon\Enums\Method;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
 

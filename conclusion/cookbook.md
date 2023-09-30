@@ -31,7 +31,7 @@ In our connector, we'll extend the `boot()` method which is a method that runs b
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 class MusicApi extends Connector
 {

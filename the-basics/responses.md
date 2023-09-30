@@ -61,7 +61,7 @@ When using concurrent requests/pooling or `sendAsync` , Saloon will respond with
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $forge = new ForgeConnector('api-token');
 $promise = $forge->sendAsync(new GetServersRequest);
@@ -79,7 +79,7 @@ $promise
 
 Sometimes you may want to use your response class. This is useful if you want to add your methods or overwrite Saloon's response methods. Saloon allows you to overwrite the response at a connector level for all requests or at a per-request level for a granular response.
 
-You may extend the `Saloon\Http\Response` class or provide your own implementation with the `Saloon\Contracts\Response` interface. You may use the `HasResponseHelpers` middleware when making your own implementation to save defining every method.
+You may extend the `Saloon\Http\Response` class or provide your own implementation with the `Saloon\Http\Response` interface. You may use the `HasResponseHelpers` middleware when making your own implementation to save defining every method.
 
 #### Using the response property
 

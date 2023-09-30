@@ -212,8 +212,8 @@ The **AssertSent / AssertNotSent** are the two most powerful expectation methods
 ```php
 <?php
 
-use Saloon\Contracts\Request;
-use Saloon\Contracts\Response;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 // ...
 
@@ -253,7 +253,7 @@ Sometimes, you may need to return a custom mock response based on the request th
 ```php
 <?php
 
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 
 $mockClient = new MockClient([
     function (PendingRequest $request): MockResponse {

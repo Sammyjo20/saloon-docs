@@ -52,7 +52,7 @@ The pool class accepts many types of requests:
 * Closure or Invokable class returning an array of requests
 * Closure or Invokable class returning a generator
 
-You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method. The requests can be instances of `Saloon\Contacts\Request` or `Saloon\Contracts\PendingRequest`.
+You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method. The requests can be instances of `Saloon\Http\Request` or `Saloon\Http\PendingRequest`.
 
 #### Array of requests&#x20;
 
@@ -177,7 +177,7 @@ Any responses that are successful will be handled by the response handler. You m
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 $pool = $forge->pool(
     requests: [],
@@ -201,7 +201,7 @@ When requests fail, they will always be caught with the error handler, even if y
 ```php
 <?php
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
 

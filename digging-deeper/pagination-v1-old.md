@@ -67,7 +67,7 @@ Once you have recorded an example response, go to your connector and add the `Ha
 
 use Saloon\Contracts\HasPagination;
 use Saloon\Contracts\Paginator;
-use Saloon\Contracts\Request;
+use Saloon\Http\Request;
 
 class SpotifyConnector extends Connector implements HasPagination
 {

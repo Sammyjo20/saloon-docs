@@ -218,7 +218,7 @@ $connector->getAccessToken(requestModifier: function (Request $request) {
 {% tab title="Untitled" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Contracts\Request;
+use Saloon\Http\Request;
 use Saloon\Http\OAuth2\GetClientCredentialsTokenRequest;
 
 protected function defaultOauthConfig(): OAuthConfig
