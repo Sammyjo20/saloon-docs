@@ -48,8 +48,8 @@
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
 * [💫 Middleware](digging-deeper/middleware.md)
 * [⏸ Delaying Requests](digging-deeper/delay.md)
-* [🛩 Senders](digging-deeper/senders.md)
 * [⛩ PSR Support](digging-deeper/psr-support.md)
+* [🛩 Senders](digging-deeper/senders.md)
 
 ## Testing
 
@@ -58,7 +58,7 @@
 
 ## Plugins
 
-* [🤠 Built-In Plugins](plugins/built-in-plugins.md)
+* [🪐 Built-In Plugins](plugins/built-in-plugins.md)
 * [⛵ Laravel Helpers](plugins/laravel-integration.md)
 * [🔁 Caching Responses](plugins/caching-responses.md)
 * [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)

@@ -1,66 +1,87 @@
 # 🛩 Senders
 
-### Introduction
-
-Under the hood, Saloon uses a "Sender" to send a fully built pending request to the web. Saloon uses the GuzzleSender as its default sender as Guzzle provides lots of functionality out of the box and is well-tested and used among the PHP community.
-
-#### Example Sender
-
-Click here to see the [GuzzleSender](https://github.com/Sammyjo20/Saloon/blob/v2/src/Http/Senders/GuzzleSender.php) code as an example of a sender.
+Under the hood, Saloon uses a `Sender` class to send a fully built request to the web. Saloon uses the `GuzzleSender` as its default sender as Guzzle provides lots of useful functionality out of the box and is the most popular HTTP client for PHP. If you are interested to see how the sender looks, [click here to see the GuzzleSender code](https://github.com/saloonphp/saloon/blob/v3/src/Http/Senders/GuzzleSender.php).
 
 ### Creating your own sender
 
-While Saloon's default sender is the GuzzleSender, Saloon is completely sender agnostic and different senders/HTTP clients can be built to be used by it. If you would like to build a sender for a different HTTP client or customise the Guzzle sender read through the documentation below.
+While Saloon's default sender is the `GuzzleSender`, you are free to create your own and change the default sender that your connector uses.&#x20;
 
 #### Sender Contract
 
-Saloon has a `Sender` interface which defines the structure that a sender must have. You must implement this contract for Saloon to accept the sender that you are creating. The contract contains just one method: `sendRequest`. This method will receive an instance of `PendingRequest` which is the object that contains everything ready to be sent. At this point, plugins and request middleware has been run and the request is ready to be sent.
-
-The `sendRequest` method must either return a `Saloon\Http\Response` or an instance of `GuzzleHttp\Promise\PromiseInterface`. These response types will change depending if the request was sent asynchronously or not.
+Saloon has a `Sender` interface which defines the structure that a sender must have. You must implement this contract for Saloon to accept the sender that you are creating.&#x20;
 
 ```php
 <?php
 
-declare(strict_types=1);
-
-namespace Saloon\Contracts;
-
+use Saloon\Http\Response;
+use Saloon\Http\PendingRequest;
+use Saloon\Data\FactoryCollection;
 use GuzzleHttp\Promise\PromiseInterface;
 
 interface Sender
 {
     /**
-     * Send the request.
-     *
-     * @param PendingRequest $pendingRequest
-     * @param bool $asynchronous
-     * @return Response|PromiseInterface
+     * Get the factory collection
      */
-    public function sendRequest(PendingRequest $pendingRequest, bool $asynchronous = false): Response|PromiseInterface;
+    public function getFactoryCollection(): FactoryCollection;
+
+    /**
+     * Send the request synchronously
+     */
+    public function send(PendingRequest $pendingRequest): Response;
+
+    /**
+     * Send the request asynchronously
+     */
+    public function sendAsync(PendingRequest $pendingRequest): PromiseInterface;
 }
 ```
 
+The interface contains three methods.
+
+* **getFactoryCollection** - This method expects a `FactoryCollection` DTO to be returned. This `FactoryCollection` DTO should contain all of the PSR-17 factories so that Saloon can build up requests, URIs and streams.
+* **send** - This method is called when a request is being sent synchronously. You must return a Saloon `Response` class.
+* **sendAsync** - This method is called when a request is being sent asynchronously. You must return a `PromiseInterface`.&#x20;
+
+#### Suggested PSR-17 Factory Libraries
+
+Saloon builds the PSR-7 request class internally based on the factories that you define in the `FactoryCollection` DTO. These PSR-17 factories are often provided by the HTTP client like Guzzle but sometimes they may not be provided. You can install any library you choose but there are two which we recommend:
+
+* [**guzzlehttp/psr7**](https://github.com/guzzle/psr7) - Guzzle's implementation of PSR-7 and PSR-17
+* [**nyholm/psr7**](https://github.com/Nyholm/psr7) - A popular, lightweight PSR-7 and 17 implementation
+
+#### MultipartBodyFactory
+
+Saloon is now also responsible for building the data stream from the various request body types that a request uses (JSON, String, Multipart). Saloon will use the `StreamFactory` provided in your `FactoryCollection` but there isn't an implementation for building `multipart/form-data` bodies. You will need to make your own `MultipartBodyFactory` implementation to build the multipart streams.
+
+Guzzle has a great multipart builder, but another great alternative is the [multipart builder created by PHP-HTTP](https://github.com/php-http/multipart-stream-builder).
+
 #### HTTP Client Instances
 
-The sender instance is kept alive for the entire connector's lifetime so that the same sender is used to send all requests. This is required because Guzzle's HTTP client cannot be destructed if you are using request concurrency. It's recommended that your HTTP client is created when the sender is constructed and kept as a property on the sender.&#x20;
+The sender instance is kept alive for the entire connector's lifetime so that the same sender is used to send all requests. This is required because Guzzle's HTTP client cannot be destructed if you are using request concurrency. It's recommended that your HTTP client is created when the sender is constructed and kept as a property on the sender.
 
-#### Headers, Query Parameters and HTTP Config
+#### Sending Requests
 
-You will be able to access all the headers, query parameters and HTTP config from the pending request instance you are given. You can use the methods provided on these resources to send the headers, query parameters and config to your HTTP client.
+You should make sure to use the PSR-7 request provided by the `PendingRequest` class to send the request - as this class is the final class built by Saloon. You can create this by calling the `createPsrRequest` method.&#x20;
 
-```php
-<?php
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
-$pendingRequest->headers();
-$pendingRequest->query();
-$pendingRequest->config();
-```
+use Saloon\Http\PendingRequest;
 
-#### Request Body
+class CustomSender implements Sender
+{
+    public function send(PendingRequest $pendingRequest): Response
+    {
+<strong>        $psrRequest = $pendingRequest->createPsrRequest();
+</strong>        
+        // Send your request
+    }
+}
+</code></pre>
 
-Saloon's pending request class contains a `body()` method which can return a different `BodyRepository` depending on the request body that was used. Saloon provides a `__toString()` method on the repository to make it easy to send it, however, Saloon does not send a Content-Type, so it will be either up to your sender or the developer to provide this as a header.&#x20;
-
-Saloon also does not provide a `__toString()` method for multipart requests. You must handle multipart value objects yourself and convert them into a multipart body.
+{% hint style="warning" %}
+The PSR-7 request is not cached on the `PendingRequest` so you should only call `createPsrRequest` once in the request lifecycle.
+{% endhint %}
 
 #### Responses
 
