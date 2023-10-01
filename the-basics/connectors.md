@@ -55,7 +55,6 @@ class ForgeConnector extends Connector
         return [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'Multiple-Values-Header' => ['Value1', 'Value2'], // Value1;Value2
         ];
     }
 }

@@ -142,19 +142,5 @@ Retrieve all headers as an array.
 Check if the header object is empty.
 
 {% hint style="info" %}
-Click here to view the API reference for this method.&#x20;
+Click here to view the API reference for this method.
 {% endhint %}
-
-### Complex Headers
-
-Sometimes you may wish to send multiple header values for a given header. You can provide an array of values you wish to make up a full header.
-
-```php
-<?php
-
-$request = new GetServersRequest();
-
-$request->headers()->add('Content-Type', ['text/html', 'charset=utf-8']);
-
-// Content-Type: text/html;charset=utf-8
-```
