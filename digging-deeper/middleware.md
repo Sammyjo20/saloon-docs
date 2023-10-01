@@ -6,7 +6,7 @@ Saloon has a powerful middleware system that allows you to tap into the request 
 
 Before we get into Saloon's middleware, there is a useful built-in method on every connector and request that you can utilize. This is the `boot` method. It gets executed every time you send a request. You will get access to the underlying `PendingRequest` instance that the sender will provide to the HTTP client. The boot method is a great way to quickly tap into a pending request and change something like add a header, modify the request body or even trigger events.
 
-You may extend the public boot method on either your connector or your request. Remember if you use the connector's boot method, every request with that connector will use that boot method.
+You may extend the public boot method on either your connector or your request. Remember if you use the **connector's** boot method, every request with that connector will use that boot method.
 
 You may register middleware inside of the boot method too, which will be used in the rest of the `PendingRequest` lifecycle.
 
@@ -58,12 +58,12 @@ The PendingRequest class is used for boot methods, middleware and [plugins](../p
 
 ### Request Middleware
 
-You may also at any point tap into the request lifecycle by using request middleware. Request middleware is useful to change something on the PendingRequest instance before the request is sent like authenticating the
+You may also at any point tap into the request lifecycle by using request middleware. Request middleware is useful for changing something on the `PendingRequest` instance before the request is sent like making another request to get an authentication token for the original request.
 
-Simply on your connector or request, you can call the `middleware()` method and use the `onRequest()` method. You should provide a callable, like a closure or invokable class. You get access to the `PendingRequest` instance.
+On your connector or request, call the `middleware()` method and use the `onRequest()` method. You should provide a callable, like a closure or invokable class. This callable will be given access to the `PendingRequest` instance which can be mutated.
 
 {% hint style="info" %}
-Return values are not required, but you may either return an instance of `PendingRequest` or a `MockResponse` class for an early fake response.
+Return values are not required, but you may either return an instance of `PendingRequest` or a `FakeResponse` class for an early fake response.
 {% endhint %}
 
 #### Anonymous Functions
@@ -147,36 +147,37 @@ $request->middleware()->onRequest(new AuthenticateRequest);
 
 ### Early Fake Responses
 
-You may also choose to tap into Saloon's MockResponse functionality by creating your own fake responses. Behind the scenes, Saloon's MockResponse extends the SimulatedResponsePayload class which can be returned within a request middleware. When you return a SimulatedResponsePayload or MockResponse, the rest of the request middleware will still be processed but the fake response will be stored on the PendingRequest.
+You may also choose to tap into Saloon's mock functionality by creating your own fake responses. When you return a `FakeResponse`, the rest of the request middleware will still be processed but the fake response will be stored on the `PendingRequest`.
 
-If this fake response is present before Saloon sends the request, it will use the `SimulatedSender` instead of the default sender you have provided. This is super handy if you want to build your own middleware that stops Saloon from sending real requests, like for caching.
+If this fake response is present before Saloon sends the request, it won't send the request to the sender, instead, Saloon will use the `FakeResponse`. This is super handy if you want to build your own middleware that stops Saloon from sending real requests, like for caching.
 
 ```php
 <?php
 
 use Saloon\Http\PendingRequest;
+use Saloon\Http\Faking\FakeResponse;
 
 $request = new GetServersRequest;
 
 $request->middleware()
     ->onRequest(function (PendingRequest $pendingRequest) {
-        return new MockResponse(
-            data: ['data' => 'Fake Data!'], 
-            statusCode: 200, 
+        return new FakeResponse(
+            body: ['data' => 'Fake Data!'], 
+            status: 200, 
             headers: []
         );
     });
 ```
 
 {% hint style="warning" %}
-Even though you are returning a MockResponse, the next middleware will still receive the PendingRequest instance. Additionally, if another middleware also returns a fake response, the latest will be preferred.
+Even though you are returning a `FakeResponse` class, the next middleware will still receive the PendingRequest instance. Additionally, if another middleware also returns a fake response, the latest one will be used.
 {% endhint %}
 
 ### Response Middleware
 
-Once you have sent your request, even if it's a mocked response, Saloon will send the response down the response middleware pipeline. You may add your own response middleware to change the response class or log responses.
+Once you have sent your request, even if it's a fake response, Saloon will send the response down the response middleware pipeline. You may add your own response middleware to change the response class or do something like log responses.
 
-On your connector or request, you can call the `middleware()` method and use the `onResponse()` method. You should provide a callable, like a closure or invokable class. You get access to the `Response` instance.
+On your connector or request, you can call the `middleware()` method and use the `onResponse()` method. You should provide a callable, like a closure or invokable class. This callable will be given access to the `Response` instance.
 
 {% hint style="info" %}
 Return values are not required, but you may return an instance of `Saloon\Http\Response` to overwrite the response class in the middleware.
@@ -281,7 +282,7 @@ class ForgeConnector extends Connector
 ```
 
 {% hint style="danger" %}
-Be cautious using anonymous closures inside the constructor/boot method. This may cause issues like Saloon not being able to close connections properly. [Click here to read more.](../conclusion/known-issues.md#usage-of-anonymous-functions-with-long-running-processes-like-laravel-queues)
+Be cautious using anonymous non-static closures inside the constructor/boot method. This may cause issues like Saloon not being able to close connections properly. [Click here to read more.](../conclusion/known-issues.md#usage-of-anonymous-functions-with-long-running-processes-like-laravel-queues)
 {% endhint %}
 
 ### Using Plugins
@@ -309,30 +310,36 @@ Saloon also supports adding global middleware. You most likely won't need this l
 ```php
 <?php
 
-use Saloon\Helpers\Config;
+use Saloon\Config;
 
-Config::middleware()->onResponse(new LogResponse, 'logResponse');
+Config::globalMiddleware()->onResponse(new LogResponse, 'logResponse');
 ```
 
 {% hint style="danger" %}
-Be cautious with global middleware. Since it uses a static property behind the scenes, the value is kept between tests when running a full test suite. You can use the `Config::resetMiddleware` method to get around this issue.
+Be cautious with global middleware. Since it uses a static property behind the scenes, the value is kept between tests when running a full test suite. You can use the `Config::clearGlobalMiddleware()` method to get around this issue.
 {% endhint %}
 
 ### Middleware Execution Order
 
-The following image illustrates the order that middleware is executed in.
+The following is the order in which middleware is executed.
 
-<figure><img src="../.gitbook/assets/Middleware Order.png" alt=""><figcaption></figcaption></figure>
+1. Global middleware (Like the Laravel plugin)
+2. Mock client finds a fake response (if present)
+3. Plugin middleware
+4. User-added middleware
+5. Debugging middleware is run (for the final object)
 
-### Prepending Middleware
+### Choosing When Your Middleware Is Executed
 
-You may choose to "prepend" middleware which will put a given middleware at the top of the execution chain. For example if I added a middleware in the boot methods, as described above, it would usually run after plugin and request/connector middleware - but if I used the `prepend` method, it will run at the very beginning (assuming nothing else has been prepended after your middleware)
+You may choose to change when your middleware is executed. For example, you might want to run something at the very end of all the other middleware that has been run. This is especially useful if you are building a plugin for people to install in Saloon and require the final request object before it is sent. You can use the third argument to specify an order. This expects a `PipeOrder` enum and allows you to choose either `FIRST` or `LAST`.&#x20;
 
-```php
-<?php
+When the middleware is executed, any middleware marked as "first" will run first, and any that have been marked as "last" will be executed last.
+
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
 use Saloon\Http\PendingRequest;
+use Saloon\Enums\PipeOrder;
 
 class GetServersRequest extends Request
 {
@@ -340,22 +347,22 @@ class GetServersRequest extends Request
     
     public function boot(PendingRequest $pendingRequest): void
     {
-        $request->middleware()->onResponse(new LogResponse, prepend: true);
-    }
+<strong>        $request->middleware()->onRequest(new RecordResponse, order: PipeOrder::LAST);
+</strong>    }
 }
-```
+</code></pre>
 
 ### Middleware Caviets
 
 Here are some known caveats that you should know about when using Saloon's middleware.
 
-* **You cannot add request middleware from inside of another request middleware,** but you can add response middleware inside of the onRequest() middleware method.
-* **You cannot add response middleware from inside of another response middleware.**
-* You may return a simulated response payload or fake response in request middleware but you will always get a PendingRequest back
+* You cannot add request middleware from inside of another request middleware**,** but you can add response middleware inside of the onRequest() middleware method.
+* You cannot add response middleware from inside of another response middleware.
+* You may return a fake response in request middleware but you will always get a PendingRequest back
 
 ### Guzzle Handlers / Middleware
 
-With previous versions of Saloon, you could add Guzzle middleware or "handlers" directly to the connector or request. Version two is now sender agnostic, so the `addHandler` method has been removed but you may still add Guzzle middleware if you are using the `GuzzleSender` (the default sender with Saloon)
+With previous versions of Saloon, you could add Guzzle middleware or "handlers" directly to the connector or request. From version two, Saloon is now sender-agnostic, so the `addHandler` method has been removed but you may still add Guzzle middleware if you are using the `GuzzleSender` (the default sender with Saloon)
 
 ### Adding Guzzle Middleware
 

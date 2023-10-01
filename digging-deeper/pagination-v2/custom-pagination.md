@@ -1,7 +1,5 @@
 # Custom Pagination
 
-### Introduction
-
 If you are building an integration with a third-party API that does not use paged, limit/offset or cursor pagination, you can build your own paginator. Saloon's base paginator class has been designed to be flexible and easy to build against.
 
 ### Getting Started

@@ -1,7 +1,5 @@
 # 📚 Pagination
 
-### Introduction
-
 When building API integrations, you may encounter a scenario where the server does not provide all the results in a single list. Instead, it divides the results into several pages. This strategy is called pagination, and integrating it into your application can be tedious and repetitive. With Saloon, you can install this pagination plugin to reduce the boilerplate code and iterate through every result across _every_ page in one loop. **It's like magic!** Saloon has three paginators out of the box to support the most common types of pagination:
 
 * **Paged pagination** - where you have to specify the next page as a query parameter (?page=1, ?page=2 and so on)
