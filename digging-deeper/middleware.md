@@ -20,7 +20,7 @@ use Saloon\Http\PendingRequest;
 
 class ForgeConnector extends Connector
 {
-    // { ... }
+    // ...
     
     public function boot(PendingRequest $pendingRequest): void
     {
@@ -39,7 +39,7 @@ use Saloon\Http\PendingRequest;
 
 class GetServersRequest extends Request
 {
-    // { ... }
+    // ...
     
     public function boot(PendingRequest $pendingRequest): void
     {

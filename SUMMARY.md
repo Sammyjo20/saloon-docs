@@ -69,8 +69,8 @@
 
 * [🍳 Cookbook](conclusion/cookbook.md)
 * [📖 Tutorials & Blog Posts](conclusion/tutorials.md)
-* [🐞 Known Issues](conclusion/known-issues.md)
 * [🎖 Showcase](conclusion/showcase.md)
+* [💥 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
 * [❤ Support Saloon](https://github.com/saloonphp/saloon?sponsor=1)
 * [👋 About Me](https://github.com/Sammyjo20)

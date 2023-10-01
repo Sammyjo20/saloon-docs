@@ -37,14 +37,13 @@ public function register()
 
 Each of the commands will create files within the `App\Http\Integrations` namespace. Each integration name is required for its own namespace. For example: `App\Http\Integrations\Forge`.
 
-| Command                                                      | Description                    |
-| ------------------------------------------------------------ | ------------------------------ |
-| saloon:connector \<Integration Name> \<Connector Name>       | Creates a new connector        |
-| saloon:request \<Integration Name> \<Request Name>           | Creates a new request          |
-| saloon:response \<Integration Name> \<Response Name>         | Creates a custom response      |
-| saloon:plugin \<Integration Name> \<Plugin Name>             | Creates a plugin               |
-| saloon:auth \<Integration Name> \<Authenticator Name>        | Creates a custom authenticator |
-| saloon:oauth-connector \<Integration Name> \<Connector Name> | Creates a new OAuth2 connector |
+| Command                                                | Description                    |
+| ------------------------------------------------------ | ------------------------------ |
+| saloon:connector \<Integration Name> \<Connector Name> | Creates a new connector        |
+| saloon:request \<Integration Name> \<Request Name>     | Creates a new request          |
+| saloon:response \<Integration Name> \<Response Name>   | Creates a custom response      |
+| saloon:plugin \<Integration Name> \<Plugin Name>       | Creates a plugin               |
+| saloon:auth \<Integration Name> \<Authenticator Name>  | Creates a custom authenticator |
 
 You can use the `saloon:list` command to get information about Saloon usage within your application. This includes details about your integrations, as well as associated requests, connectors, plugins, responses, and authenticators.
 

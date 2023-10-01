@@ -182,7 +182,7 @@ Saloon::fake([
 Ordinarily, Saloon will store all fixtures in a **tests/Fixtures/Saloon** directory. If you would like to customise this, you may use the MockConfig class in your tests or in your setUp methods.
 
 ```php
-<?php
+use Saloon\MockConfig;
 
 MockConfig::setFixturePath('tests/other-directory')
 ```
@@ -192,7 +192,7 @@ MockConfig::setFixturePath('tests/other-directory')
 Once you have written all of your tests, you might want to prevent accidental API requests in the future for fixtures that don't exist. If you would like Saloon to throw exceptions if a fixture does not exist, you may do this with the MockConfig class.
 
 ```php
-<?php
+use Saloon\MockConfig;
 
 MockConfig::throwOnMissingFixtures()
 ```
@@ -405,7 +405,7 @@ It's recommended that you place this in your `Pest.php` file or in your `setUp()
 {% tab title="Pest.php (PEST)" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-<strong>use Saloon\Helpers\Config;
+<strong>use Saloon\Config;
 </strong>
 beforeEach(function () {
     Config::preventStrayRequests();
@@ -416,7 +416,7 @@ beforeEach(function () {
 {% tab title="TestCase.php (PHPUnit)" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-<strong>use Saloon\Helpers\Config;
+<strong>use Saloon\Config;
 </strong>
 class TestCase {
 

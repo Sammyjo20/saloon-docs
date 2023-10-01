@@ -1,11 +1,11 @@
 # 🤗 Credits
 
-### Development
+### Special Thanks
 
 * [Juse Less](https://github.com/juse-less) for contributing to many core features of Saloon v2 but mainly pagination and debugging.
 * [Tom Witkowski](https://github.com/Gummibeer) for contributing to Saloon's fixture recording and helping decide many core parts of version two like data transfer objects and the error handler.
-* [Ashley Allen](https://github.com/ash-jc-allen) for working closely with me and writing an amazing book that features Saloon ([Consuming APIs in Laravel](https://consuming-apis-in-laravel.com/)). Ashley made countless contributions to the documentation and helped make decisions for v3.
 * [Caneco](https://github.com/caneco) for such a wonderful logo and branding.
+* [Ashley Allen](https://github.com/ash-jc-allen) for working closely with me and writing an amazing book that features Saloon ([Consuming APIs in Laravel](https://consuming-apis-in-laravel.com/)). Ashley made countless contributions to the documentation and helped make decisions for v3.
 
 ### But also... Thank _you_.
 

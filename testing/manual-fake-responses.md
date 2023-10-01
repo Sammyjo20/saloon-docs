@@ -266,7 +266,7 @@ $mockClient = new MockClient([
 
 ### Preventing Stray API Requests
 
-Once you have written your tests - it's a good idea to ensure that no real API requests are made in the future while running those tests. This is because you could be making requests when you don't intend to which could incur charges or worse, make real changes to data you don't expect. With Saloon, you can prevent stray API requests with the global `Config` helper. Simply in your tests, call the `Config::preventStrayRequests()` method and you should be good to go!&#x20;
+Once you have written your tests - it's a good idea to ensure that no real API requests are made in the future while running those tests. This is because you could be making requests when you don't intend to which could incur charges or worse, make real changes to data you don't expect. With Saloon, you can prevent stray API requests with the global `Config` helper. Simply in your tests, call the `Config::preventStrayRequests()` method and you should be good to go!
 
 It's recommended that you place this in your `Pest.php` file or in your `setUp()` method to make sure it's used on every test.
 
@@ -274,7 +274,7 @@ It's recommended that you place this in your `Pest.php` file or in your `setUp()
 {% tab title="Pest.php (PEST)" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-<strong>use Saloon\Helpers\Config;
+<strong>use Saloon\Config;
 </strong>
 beforeEach(function () {
     Config::preventStrayRequests();
@@ -285,7 +285,7 @@ beforeEach(function () {
 {% tab title="TestCase.php (PHPUnit)" %}
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-<strong>use Saloon\Helpers\Config;
+<strong>use Saloon\Config;
 </strong>
 class TestCase {
 
