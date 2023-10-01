@@ -4,7 +4,7 @@ Saloon provides everything you need to build a great SDK or library for an API. 
 
 ### Example SDK
 
-This documentation will be using PokéAPI as an example API. [Click here to see a full SDK example repository.](https://github.com/Sammyjo20/pokeapi-sdk)
+This documentation will be using PokéAPI as an example API. [Click here to see a full SDK example repository](https://github.com/Sammyjo20/pokeapi-sdk/tree/v2).
 
 ### Getting Started
 
