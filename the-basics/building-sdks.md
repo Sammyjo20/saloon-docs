@@ -4,15 +4,15 @@ Saloon provides everything you need to build a great SDK or library for an API. 
 
 ### Example SDK
 
-This documentation will be using PokéAPI as an example API. [Click here to see a full SDK example repository.](https://github.com/Sammyjo20/pokeapi-sdk)
+This documentation will be using PokéAPI as an example API. [Click here to see a full SDK example repository](https://github.com/Sammyjo20/pokeapi-sdk/tree/v3).
 
 ### Getting Started
 
-To start building an SDK with Saloon, we recommend that you create a connector as your SDK class. Once you are familiar with connectors, create a class and extend the `Saloon\Http\Connector` class. This class allows you to configure the base URL and any defaults you may need like default headers or authentication.&#x20;
+To start building an SDK with Saloon, we recommend that you create a connector as your SDK class. Once you are familiar with connectors, create a class and extend the `Saloon\Http\Connector` class. This class allows you to configure the base URL and any defaults you may need like default headers or authentication.
 
 #### Example SDK Connector
 
-This is an example SDK for a fun API the [PokéAPI](https://pokeapi.co/). As you can see, I have defined the API base URL, as well as used the constructor to require the person using the API always provides an authentication token. In the real world, the PokéAPI does not require an API token.
+This is an example SDK for a fun API  - the [PokéAPI](https://pokeapi.co/). As you can see, I have defined the API base URL, as well as used the constructor to ensure the person using the API always provides an authentication token. In the real world, the PokéAPI does not require an API token.
 
 ```php
 <?php
@@ -63,7 +63,7 @@ class Pokeapi extends Connector
 
 #### Using the SDK connector
 
-Now that we have created the SDK class, all we need to do is instantiate it and provide the API token. We are now ready to send requests through our SDK. You may add your own methods to this class is it is the root class of your SDK.
+Now that we have created the SDK class, all we need to do is instantiate it and provide the API token. We are now ready to send requests through our SDK. You may add your own methods to this class as it is the root class of your SDK.
 
 ```php
 <?php
@@ -85,7 +85,7 @@ Firstly, you will need to [create a request](requests.md), this is exactly the s
 
 #### Use your request
 
-When you have created the request, all that developers would need to do is to instantiate and send the request on the connector. This means you only need to have two classes as a minimum for a fully-working SDK!
+When you have created the request, all that developers would need to do is instantiate and send the request on the connector. This means you only need to have two classes as a minimum for a fully working SDK!
 
 ```php
 <?php
@@ -100,7 +100,7 @@ $request = new GetAllPokemon(page: 1);
 $response = $pokeapi->send($request);
 ```
 
-With this method, it’s really simple to build your SDK. All you would need to do is create all the requests and then document them in your README. Developers using your SDK can just instantiate your SDK and then use the `send` methods.
+With this method, it’s really simple to build your SDK. All you would need to do is create all the requests and then document them in your README. Developers using your SDK can just instantiate your SDK and then use the `send` methods. This also gives the developer freedom to customise the request's headers, config and query parameters if they choose to.
 
 ### Sending Requests With Methods
 
@@ -136,20 +136,16 @@ $response = $pokeapi->allPokemon(page: 1);
 
 ### Request Resources
 
-The resource pattern can help you combine your SDK requests into simple groups that are easy for the developer to find and consume. The tutorial below will guide you through creating a resource class however you should customise it to your SDK.&#x20;
+The resource pattern can help you combine your SDK requests into simple groups that are easy for the developer to find and consume. The tutorial below will guide you through creating a resource for your SDK.
 
-#### Creating the base resource class
+#### Saloon's BaseResource class
 
-Let's start by creating a `Resource` class. This class should just contain a constructor that passes in an instance of `Saloon\Http\Connector`.
+Saloon provides a handy `Saloon\Http\BaseResource` class that you can use in your SDK. This class simply has a constructor and a connector as a read-only `protected` property.
 
 ```php
-<?php
-
-use Saloon\Http\Connector;
-
-class Resource
+class BaseResource
 {
-    public function __construct(protected Connector $connector)
+    public function __construct(readonly protected Connector $connector)
     {
         //
     }
@@ -158,13 +154,15 @@ class Resource
 
 #### Creating a resource
 
-Now let's create a resource. For this API, I will create a Pokémon resource which will group all the Pokémon requests together. Imagine a resource like a controller in an MVC framework like Laravel. You should pass any arguments the request needs through the method arguments.
+Now let's create a resource. First, we'll create a class that extends Saloon's `BaseResource` class. For this API, I will create a Pokémon resource which will group all the Pokémon requests together. Imagine a resource like a controller in an MVC framework like Laravel. You should pass any arguments the request needs through the method arguments.
 
-```php
-<?php
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
-class PokemonResource extends Resource
-{
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
+
+<strong>class PokemonResource extends BaseResource
+</strong>{
      public function all(int $page): Response
      {
          return $this->connector->send(new GetAllPokemon($page));
@@ -175,7 +173,7 @@ class PokemonResource extends Resource
          return $this->connector->send(new GetSinglePokemon($id));
      }
 }
-```
+</code></pre>
 
 #### Defining a resource on your connector
 
