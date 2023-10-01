@@ -4,8 +4,8 @@
 
 ## Upgrade
 
-* [🪄 What's new in v3](upgrade/whats-new-in-v2.md)
-* [🌳 Upgrading from v2](upgrade/upgrading-from-v1.md)
+* [🪄 What's new in v3](upgrade/whats-new-in-v3.md)
+* [🌳 Upgrading from v2](upgrade/upgrading-from-v2.md)
 
 ## Getting Started
 
