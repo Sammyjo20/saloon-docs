@@ -173,15 +173,56 @@ Saloon v2 shipped with a simple `Date` helper class that wrapped around PHP's `D
 
 Saloon v2 shipped with a few helpers to reduce dependencies. The `Str` and `Arr` helper methods have been renamed to `StringHelpers` and `ArrayHelpers` respectively to prevent accidental imports when using Laravel. Saloon's internal helper classes have also been declared `final` as these shouldn't be extended or used by your application.
 
-#### Other Contracts Removed
+#### Other Interfaces (Contracts) Removed
+
+As mentioned above, Saloon v3 removes a lot of interfaces that weren't adding value to the library. Alongside the ones mentioned above, these other interfaces have been removed.
+
+<details>
+
+<summary>Show Removed Interfaces</summary>
+
+* src/Contracts/Arrayable.php
+* src/Contracts/Authenticatable.php
+* src/Contracts/CanThrowRequestExceptions.php
+* src/Contracts/Connector.php
+* src/Contracts/DebuggingDriver.php
+* src/Contracts/Dispatcher.php
+* src/Contracts/HasConfig.php
+* src/Contracts/HasDebugging.php
+* src/Contracts/HasDelay.php
+* src/Contracts/HasHeaders.php
+* src/Contracts/HasMiddlewarePipeline.php
+* src/Contracts/HasMockClient.php
+* src/Contracts/HasPagination.php
+* src/Contracts/HasQueryParams.php
+* src/Contracts/IntegerStore.php
+* src/Contracts/MiddlewarePipeline.php
+* src/Contracts/MockClient.php
+* src/Contracts/Paginator.php
+* src/Contracts/PendingRequest.php
+* src/Contracts/Pipeline.php
+* src/Contracts/Pool.php
+* src/Contracts/Request.php
+* src/Contracts/Response.php
+* src/Contracts/SimulatedResponsePayload.php
+
+</details>
 
 #### The Base BodyRepository Class Is No Longer Stringable
 
+If you have made your own `BodyRepository` class from the base class and relied on the `__toString` method this has now been removed. Additionally, the interface has been updated and now requires a `toStream()` method. Inside here, you must define how to convert your body type into a Stream using the provided `StreamFactory`.
+
 #### Timeout Enum Removed
+
+The old `Timeout` enum has now been removed. If your application used to use this method, you should migrate to use `Config::$defaultConnectionTimeout` and `Config::$defaultRequestTimeout`.
 
 #### ToArray Method Removed From MultipartValue
 
+Previously, the `MultipartValue` object had a `toArray` method. Now that all body repositories are converted into Streams, this method is no longer required.
+
 #### SimulatedSender Removed
+
+The `SimulatedSender` class which would be used if you were mocking or had a cached response has now been removed.
 
 ### Did we miss anything?&#x20;
 
