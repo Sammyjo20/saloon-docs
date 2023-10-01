@@ -36,11 +36,11 @@
 
 * [🔎 Debugging](digging-deeper/debugging.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [📚 Pagination](digging-deeper/pagination-v2/README.md)
-  * [Paged Pagination](digging-deeper/pagination-v2/paged-pagination.md)
-  * [Limit/Offset Pagination](digging-deeper/pagination-v2/limit-offset-pagination.md)
-  * [Cursor Pagination](digging-deeper/pagination-v2/cursor-pagination.md)
-  * [Custom Pagination](digging-deeper/pagination-v2/custom-pagination.md)
+* [📚 Pagination](digging-deeper/pagination/README.md)
+  * [Paged Pagination](digging-deeper/pagination/paged-pagination.md)
+  * [Limit/Offset Pagination](digging-deeper/pagination/limit-offset-pagination.md)
+  * [Cursor Pagination](digging-deeper/pagination/cursor-pagination.md)
+  * [Custom Pagination](digging-deeper/pagination/custom-pagination.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
@@ -58,7 +58,7 @@
 
 ## Plugins
 
-* [⛰ Built-In Plugins](plugins/built-in-plugins.md)
+* [🤠 Built-In Plugins](plugins/built-in-plugins.md)
 * [⛵ Laravel Helpers](plugins/laravel-integration.md)
 * [🔁 Caching Responses](plugins/caching-responses.md)
 * [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)

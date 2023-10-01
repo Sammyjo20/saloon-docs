@@ -47,7 +47,7 @@ You can [visit this page on the PHP documentation](https://www.php.net/manual/en
 
 #### New Paginators
 
-With version three, paginators are no longer included in the core Saloon library and have been moved to a plugin. Additionally, the paginators have been completely rebuilt. Review if you have used any of the pagination functionality and follow the new [pagination guide](../digging-deeper/pagination-v2/) to rebuild them in the new way.
+With version three, paginators are no longer included in the core Saloon library and have been moved to a plugin. Additionally, the paginators have been completely rebuilt. Review if you have used any of the pagination functionality and follow the new [pagination guide](../digging-deeper/pagination/) to rebuild them in the new way.
 
 #### Config and MockConfig classes have moved
 

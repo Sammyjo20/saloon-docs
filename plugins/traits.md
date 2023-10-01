@@ -22,7 +22,7 @@ trait HasLogging
 </code></pre>
 
 {% hint style="warning" %}
-You must not use `$this` inside of the trait, as mutating the original request or connector is discouraged. The PendingRequest is unique to just the request being sent.
+You must not use `$this` inside of the trait, as mutating the original request or connector is discouraged. The PendingRequest is the source of truth while a request is being sent.
 {% endhint %}
 {% endtab %}
 
@@ -44,5 +44,5 @@ When you send your request, plugins are the first things that are invoked, even 
 Because we added the trait to our connector, every request will use the `HasLogging` plugin. If you would like the plugin to be applied to just one request, you can add the plugin to the request only.&#x20;
 
 {% hint style="warning" %}
-Be careful when adding the plugin to both the connector and the request at the same time, they will both be executed separately.
+Take caution when adding the plugin to both the connector and the request, because the plugin will be executed twice.
 {% endhint %}
