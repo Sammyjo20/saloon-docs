@@ -58,11 +58,11 @@ Guzzle's PSR-7 library (linked above) has a great multipart builder, but another
 
 #### HTTP Client Instances
 
-The sender instance is kept alive for the entire connector's lifetime so that the same sender is used to send all requests. This is required because Guzzle's HTTP client cannot be destructed if you are using request concurrency. It's recommended that your HTTP client is created when the sender is constructed and kept as a property on the sender.
+The sender instance is kept alive for the entire connector's lifetime so that the same sender is used to send all requests. This is required because Guzzle's HTTP client cannot be destructed if you are using request concurrency. It's recommended that the HTTP client you are using is instantiated when the sender is constructed and kept as a property on the sender. You should also take care and not use properties for request information as the same instance is used for all requests.
 
 #### Sending Requests
 
-You should make sure to use the PSR-7 request provided by the `PendingRequest` class to send the request - as this class is the final class built by Saloon. You can create this by calling the `createPsrRequest` method.&#x20;
+You should use the PSR-7 request provided by the `PendingRequest` class to send the request - as this class is the final class built by Saloon and a good source of truth. You can create this by calling the `createPsrRequest` method.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -80,7 +80,7 @@ class CustomSender implements Sender
 </code></pre>
 
 {% hint style="warning" %}
-The PSR-7 request is not cached on the `PendingRequest` so you should only call `createPsrRequest` once in the request lifecycle.
+The PSR-7 request is not cached in the `PendingRequest` so you should only call `createPsrRequest` once in the request lifecycle to prevent running the PSR request hooks twice.
 {% endhint %}
 
 #### Responses
