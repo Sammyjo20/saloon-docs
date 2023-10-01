@@ -1,6 +1,6 @@
 # 🔌 Connectors
 
-Connectors are classes that hold the basic requirements of an API integration. Connectors communicate with the HTTP client (Sender). A connector expects a Base URL to be defined, but you can also register defaults that would be shared with all your requests, like headers or HTTP client config.
+Connectors are classes where you define the core details of an API, like the Base URL and headers that should be sent with every request. It's a central place to write code that applies to every request. Connectors communicate with the `Sender` (HTTP Client). You can also configure HTTP client options here to be passed directly to the sender.
 
 ### Are you building an integration for just one request?
 
@@ -10,7 +10,7 @@ Saloon connectors are great for most API integrations; however, you may not need
 
 First, create a directory for your API integrations. Once you have a chosen directory, create a class that extends the `Connector` abstract class. After that, extend the `resolveBaseUrl` function.
 
-See the example connector for Laravel Forge, an API for server management. We'll name it `Forge` for the best readability.
+See the example connector for Laravel Forge, an API for server management. We'll name it `ForgeConnector` for the best readability. Let's define our base URL to start.
 
 ```php
 <?php
