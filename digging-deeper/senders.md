@@ -54,7 +54,7 @@ Saloon builds the PSR-7 request class internally based on the factories that you
 
 Saloon is now also responsible for building the data stream from the various request body types that a request uses (JSON, String, Multipart). Saloon will use the `StreamFactory` provided in your `FactoryCollection` but there isn't an implementation for building `multipart/form-data` bodies. You will need to make your own `MultipartBodyFactory` implementation to build the multipart streams.
 
-Guzzle has a great multipart builder, but another great alternative is the [multipart builder created by PHP-HTTP](https://github.com/php-http/multipart-stream-builder).
+Guzzle's PSR-7 library (linked above) has a great multipart builder, but another great alternative is the [multipart builder created by PHP-HTTP](https://github.com/php-http/multipart-stream-builder).
 
 #### HTTP Client Instances
 
