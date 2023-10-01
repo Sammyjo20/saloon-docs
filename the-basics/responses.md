@@ -16,43 +16,42 @@ $body = $response->body();
 $decodedBody = $response->json();
 ```
 
-{% hint style="danger" %}
+{% hint style="warning" %}
 By default, Saloon will not throw an exception if a synchronous request fails. [Refer to the handling failures section for handling errors.](handling-failures.md)
 {% endhint %}
 
-### Available Methods
+### Key Methods
 
-| Method                      | Description                                                                                                                             |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| body                        | Returns the HTTP body as a string                                                                                                       |
-| stream                      | Returns the HTTP body as a stream                                                                                                       |
-| headers                     | Returns all the headers. You can interact with them just like you do with requests/connectors.                                          |
-| header                      | Returns a single header from the response.                                                                                              |
-| status                      | Return the HTTP status messages                                                                                                         |
-| getPsrResponse              | Returns a PSR-compatible response                                                                                                       |
-| getPendingRequest           | Returns the PendingRequest created to send the request, containing everything sent like headers, body, and HTTP client config.          |
-| getRequest                  | Returns the original request class that was used to send the request.                                                                   |
-| json                        | Retrieves a JSON response body and json\_decodes it into an array.                                                                      |
-| object                      | Retrieves a JSON response body and json\_decodes it into an object.                                                                     |
-| xml                         | Retrieves the response body and creates a SimpleXmlElement.                                                                             |
-| collect                     | Retrieves a JSON response body and json\_decodes it into a Laravel collection. **Requires illuminate/collections to be installed.**     |
-| dto                         | Converts the response into a data-transfer object. You must define your DTO first, [click here to read more.](data-transfer-objects.md) |
-| successful                  | Returns true if the response status is between 200 and 300.                                                                             |
-| ok                          | Returns true if the response status is 200.                                                                                             |
-| redirect                    | Returns true if the response status is between 300 and 400.                                                                             |
-| serverError                 | Returns true if the response status is >= 500.                                                                                          |
-| clientError                 | Returns true if the response status is between 400 and 500.                                                                             |
-| failed                      | Determines if a request has failed. By default, it will return true if the response status is not 2xx.                                  |
-| onError                     | Allows you to define a callback if the response is considered "failed".                                                                 |
-| toException                 | Creates an exception if the response is considered "failed. [Click here to read more about handling failures](handling-failures.md)     |
-| throw                       | Will throw an exception if the response is considered "failed".                                                                         |
-| isCached                    | Denotes if the response is cached. Only used when using the Saloon caching plugin.                                                      |
-| isMocked                    | Denotes if the response has been mocked.                                                                                                |
-| isSimulated                 | Denotes if the response was "simulated", like when a MockResponse was used.                                                             |
-| getSimulatedResponsePayload | When the response is simulated, get the underlying SimulatedResponsePayload class.                                                      |
-| getSenderException          | Get the sender exception if a request failed.                                                                                           |
-| getRawResponse              | Get the raw response provided from the sender.                                                                                          |
-| \_\_toString                | Returns the HTTP body as a string                                                                                                       |
+Below are some of the key methods provided by Saloon's `Response` class.
+
+| Method                                                                 | Description                                                                                                                                                                                           |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `getPendingRequest`                                                    | Returns the `PendingRequest` class that was built up for the request.                                                                                                                                 |
+| `getConnector`                                                         | Return the `Connector` that was used to send the request.                                                                                                                                             |
+| `getRequest`                                                           | Returns the `Request` that was sent.                                                                                                                                                                  |
+| `getPsrRequest`                                                        | Returns the PSR-7 request that was built up by Saloon                                                                                                                                                 |
+| `getPsrResponse`                                                       | Return the PSR-7 response that was built up by the HTTP client/sender.                                                                                                                                |
+| `status`                                                               | Returns the response status code.                                                                                                                                                                     |
+| `headers`                                                              | Returns all response headers                                                                                                                                                                          |
+| `header`                                                               | Returns a given header                                                                                                                                                                                |
+| `body`                                                                 | Returns the raw response body as a string                                                                                                                                                             |
+| `json`                                                                 | Retrieves a JSON response body and json\_decodes it into an array.                                                                                                                                    |
+| `array`                                                                | Alias of `json`                                                                                                                                                                                       |
+| `collect`                                                              | Retrieves a JSON response body and json\_decodes it into a Laravel collection. Requires `illuminate/collections`.                                                                                     |
+| `object`                                                               | Retrieves a JSON response body and json\_decodes it into an object.                                                                                                                                   |
+| `xml`                                                                  | Retrieves the response body and creates a `SimpleXmlElement` for easier XML parsing                                                                                                                   |
+| `dom`                                                                  | Used for HTML responses - returns a Symfony Crawler instance. Requires `symfony/dom-crawler`.                                                                                                         |
+| `stream`                                                               | Returns the response body as an instance of `StreamInterface`                                                                                                                                         |
+| `getRawStream`                                                         | Returns the response body as a file resource.                                                                                                                                                         |
+| `saveBodyToFile`                                                       | Allows you to save the raw body to a file or open file resource.                                                                                                                                      |
+| `dto`                                                                  | Converts the response into a data-transfer object. You must define your DTO first, [click here to read more.](data-transfer-objects.md)                                                               |
+| `dtoOrFail`                                                            | Will work just like `dto` but will throw an exception if the response is considered "failed".                                                                                                         |
+| `ok`, `successful`, `redirect`, `failed`, `clientError`, `serverError` | Methods used to determine if a request was successful or not based on status code. The `failed` method [can be customised](handling-failures.md#customising-when-saloon-thinks-a-request-has-failed). |
+| `onError`                                                              | Allows you to define a callback if the response is considered "failed".                                                                                                                               |
+| `throw`                                                                | Will throw an exception if the response is considered "failed".                                                                                                                                       |
+| `isCached`                                                             | Will return `true` if the response is cached.                                                                                                                                                         |
+| `isFaked`                                                              | Will return `true` if the response was created from a `FakeResponse` class.                                                                                                                           |
+| `isMocked`                                                             | Will return `true` if the response was created from a `MockResponse` class.                                                                                                                           |
 
 ### Handling asynchronous responses
 
