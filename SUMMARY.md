@@ -34,6 +34,7 @@
 
 ## Digging Deeper
 
+* [🔎 Debugging](digging-deeper/debugging.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [📚 Pagination](digging-deeper/pagination-v2/README.md)
   * [Paged Pagination](digging-deeper/pagination-v2/paged-pagination.md)
@@ -49,7 +50,6 @@
 * [⏸ Delaying Requests](digging-deeper/delay.md)
 * [🛩 Senders](digging-deeper/senders.md)
 * [⛩ PSR Support](digging-deeper/psr-support.md)
-* [🔎 Debugging](digging-deeper/debugging.md)
 
 ## Testing
 
