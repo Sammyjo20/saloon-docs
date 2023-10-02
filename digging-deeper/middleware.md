@@ -6,7 +6,7 @@ Saloon has a powerful middleware system that allows you to tap into the request 
 
 Before we get into Saloon's middleware, there is a useful built-in method on every connector and request that you can utilize. This is the `boot` method. It gets executed every time you send a request. You will get access to the underlying `PendingRequest` instance that the sender will provide to the HTTP client. The boot method is a great way to quickly tap into a pending request and change something like add a header, modify the request body or even trigger events.
 
-You may extend the public boot method on either your connector or your request. Remember if you use the **connector's** boot method, every request with that connector will use that boot method.
+You may extend the public boot method on either your connector or your request. Remember if you use the connector's boot method, every request with that connector will use that boot method.
 
 You may register middleware inside of the boot method too, which will be used in the rest of the `PendingRequest` lifecycle.
 
@@ -52,9 +52,9 @@ class GetServersRequest extends Request
 
 ### The PendingRequest
 
-The `PendingRequest` class is an intermediary class that Saloon uses to populate everything when you send a request. Every time you send a request, a new PendingRequest instance is created which prevents your connector or request from being mutated every time a request is sent. The PendingRequest class has many of the methods that you are used to seeing on the request/connector for managing headers, query parameters, config, and request body.
+The `PendingRequest` class is an intermediary class that Saloon uses to populate everything when you send a request. Every time you send a request, a new `PendingRequest` instance is created which prevents your connector or request from being mutated every time a request is sent. The `PendingRequest` class has many of the methods that you are used to seeing on the request/connector for managing headers, query parameters, config, and request body.
 
-The PendingRequest class is used for boot methods, middleware and [plugins](../plugins/traits.md).
+The `PendingRequest` class is used for boot methods, middleware and [plugins](../plugins/traits.md).
 
 ### Request Middleware
 
@@ -352,7 +352,7 @@ class GetServersRequest extends Request
 }
 </code></pre>
 
-### Middleware Caviets
+### Middleware Caveats
 
 Here are some known caveats that you should know about when using Saloon's middleware.
 

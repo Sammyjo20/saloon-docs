@@ -140,7 +140,3 @@ Retrieve all headers as an array.
 #### isEmpty
 
 Check if the header object is empty.
-
-{% hint style="info" %}
-Click here to view the API reference for this method.
-{% endhint %}

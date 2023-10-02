@@ -142,7 +142,3 @@ Retrieve all query parameters as an array.
 #### isEmpty
 
 Check if the query parameter object is empty.
-
-{% hint style="info" %}
-Click here to view the API reference for this method.
-{% endhint %}

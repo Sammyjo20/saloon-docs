@@ -37,11 +37,11 @@ $promise->wait();
 
 ### Available Methods
 
-* setRequests(callable|iterable $requests)
-* getRequests()
-* withResponseHandler(callable $callable)
-* withExceptionHandler(callable $callable)
-* send()
+* `setRequests(callable|iterable $requests)`
+* `getRequests()`
+* `withResponseHandler(callable $callable)`
+* `withExceptionHandler(callable $callable)`
+* `send()`
 
 ### Providing Requests
 
@@ -54,9 +54,9 @@ The pool class accepts many types of requests:
 
 You may provide these requests into the pool either as the first argument of the `pool` method or using the `setRequests` method. The requests can be instances of `Saloon\Http\Request` or `Saloon\Http\PendingRequest`.
 
-#### Array of requests&#x20;
+#### Array of requests
 
-The simplest way to provide requests to the pool is an array.&#x20;
+The simplest way to provide requests to the pool is an array.
 
 ```php
 <?php
@@ -82,7 +82,7 @@ $pool->setRequests([
 
 #### Using a PHP generator
 
-If you are going to send lots of requests you may wish to provide a generator into the pool. This allows you to keep memory consumption low and potentially send hundreds of requests.&#x20;
+If you are going to send lots of requests you may wish to provide a generator into the pool. This allows you to keep memory consumption low and potentially send hundreds of requests.
 
 ```php
 <?php
@@ -149,7 +149,7 @@ $pool = $forge->pool(new PoolClass);
 
 ### Concurrency
 
-By default, Saloon will send up to 5 requests concurrently. You can customise the concurrency that is used by pools with the `setConcurrency` method. It accepts an integer or a callable like a method or an invokable class in case you want to write advanced logic to determine the concurrency.&#x20;
+By default, Saloon will send up to 5 requests concurrently. You can customise the concurrency that is used by pools with the `setConcurrency` method. It accepts an integer or a callable like a method or an invokable class in case you want to write advanced logic to determine the concurrency.
 
 ```php
 <?php
