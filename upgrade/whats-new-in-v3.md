@@ -7,10 +7,8 @@ To begin it's worth mentioning that Saloon has become a lot more lightweight in 
 > **333 changed files** with <mark style="color:green;">**4,063 additions**</mark> and <mark style="color:red;">**7,576 deletions**</mark>.
 
 {% hint style="info" %}
-Don't worry! Although version three has modified almost every file, there have been very few external changes made that affect the developer.
+Don't worry! Although version three has modified almost every file, there have been very few external changes made that affect the developer. If you would like to view the code you can [click here](https://github.com/saloonphp/saloon). Please consider giving Saloon a star on GitHub! ⭐️
 {% endhint %}
-
-You can view the code or give Saloon a ⭐️ on [Github](https://github.com/saloonphp/saloon)
 
 ### Changes in version three
 
