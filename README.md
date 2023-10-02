@@ -4,13 +4,13 @@ description: Build beautiful API integrations and SDKs with Saloon
 
 # 🤠 Saloon
 
+{% hint style="info" %}
+You are viewing the documentation for an **outdated version** of Saloon. If you would like to see the latest, [click here](https://docs.saloon.dev/v/3).
+{% endhint %}
+
 <figure><img src=".gitbook/assets/header.png" alt=""><figcaption></figcaption></figure>
 
 [![Build Status](https://github.com/saloonphp/saloon/actions/workflows/tests.yml/badge.svg)](https://img.shields.io/github/actions/workflow/status/saloonphp/saloon/tests.yml?label=tests)![Downloads](https://img.shields.io/packagist/dm/sammyjo20/saloon)![](https://img.shields.io/github/stars/saloonphp/saloon)
-
-{% hint style="info" %}
-You are viewing the documentation for Saloon v2. If you are using version one, [click here](http://127.0.0.1:5000/o/cASkBOXfspBu84TFkYqQ/s/WZee3WHlwQmemMUmidXH/).
-{% endhint %}
 
 ### Introduction
 
