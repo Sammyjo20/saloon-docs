@@ -10,6 +10,8 @@ To begin it's worth mentioning that Saloon has become a lot more lightweight in 
 Don't worry! Although version three has modified almost every file, there have been very few external changes made that affect the developer.
 {% endhint %}
 
+You can view the code or give Saloon a ⭐️ on [Github](https://github.com/saloonphp/saloon)
+
 ### Changes in version three
 
 #### Improved Pagination
@@ -55,7 +57,7 @@ class SpotifyConnector extends Connector implements HasPagination
 Another important change to Saloon v3 was to lean more into the building and use of PSR-7 requests. Previously, Saloon would use Guzzle's configuration options to build up query parameters, request body and the URI. Now, Saloon builds all PSR requests in-house and passes that request to the sender. This provides a few key benefits over letting Guzzle handle it:
 
 * **Better developer experience** - with less hidden "magic" going on behind the scenes, you'll be able to debug and dump the PSR request Saloon creates to see how your request will be sent and what you're sending.
-* **Decoupled further from Guzzle** - Saloon now only uses Guzzle to send your requests which means Saloon is much freer in the future if Guzzle is abandoned.
+* **Decoupled further from Guzzle** - Saloon now only uses Guzzle to send your requests which means Saloon is much less dependent on Guzzle.
 * **Lower-level customization** - You will be able to modify the PSR-7 request before it is sent, which gives you much better control than before.
 * **New PSR methods -** You will now be able to create a PSR-7 request from a `PendingRequest` class.
 

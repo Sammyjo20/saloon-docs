@@ -31,7 +31,7 @@ Saloon's paginators are versatile and can work with any API format, including JS
 Saloon's paginators are provided through a plugin. First, install the following package with Composer.
 
 ```sh
-composer require saloonphp/pagination-plugin "^1.0"
+composer require saloonphp/pagination-plugin "^2.0"
 ```
 
 ### Making your requests pageable

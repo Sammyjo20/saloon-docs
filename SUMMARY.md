@@ -59,7 +59,7 @@
 ## Plugins
 
 * [🪐 Built-In Plugins](plugins/built-in-plugins.md)
-* [⛵ Laravel Helpers](plugins/laravel-integration.md)
+* [⛵ Laravel Plugin](plugins/laravel-integration.md)
 * [🔁 Caching Responses](plugins/caching-responses.md)
 * [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)
 * [🏭 SDK Generator](plugins/sdk-generator.md)

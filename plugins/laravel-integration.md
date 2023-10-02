@@ -1,4 +1,4 @@
-# ⛵ Laravel Helpers
+# ⛵ Laravel Plugin
 
 Saloon has been built to integrate beautifully with [Laravel](https://laravel.com). The separate Laravel plugin comes with a facade that helps with mocking and recording requests, Artisan console commands to really easily build your API integration, and even a separate default sender that uses Laravel's HTTP Client.
 
@@ -37,13 +37,7 @@ public function register()
 
 Each of the commands will create files within the `App\Http\Integrations` namespace. Each integration name is required for its own namespace. For example: `App\Http\Integrations\Forge`.
 
-| Command                                                | Description                    |
-| ------------------------------------------------------ | ------------------------------ |
-| saloon:connector \<Integration Name> \<Connector Name> | Creates a new connector        |
-| saloon:request \<Integration Name> \<Request Name>     | Creates a new request          |
-| saloon:response \<Integration Name> \<Response Name>   | Creates a custom response      |
-| saloon:plugin \<Integration Name> \<Plugin Name>       | Creates a plugin               |
-| saloon:auth \<Integration Name> \<Authenticator Name>  | Creates a custom authenticator |
+<table><thead><tr><th width="374">Command</th><th>Description</th></tr></thead><tbody><tr><td>saloon:connector &#x3C;Integration Name> &#x3C;Connector Name> <em>--oauth</em></td><td>Creates a new connector - You can provide an optional <code>--oauth</code> option if you would like to create an OAuth2 connector.</td></tr><tr><td>saloon:request &#x3C;Integration Name> &#x3C;Request Name></td><td>Creates a new request</td></tr><tr><td>saloon:response &#x3C;Integration Name> &#x3C;Response Name></td><td>Creates a custom response</td></tr><tr><td>saloon:plugin &#x3C;Integration Name> &#x3C;Plugin Name></td><td>Creates a plugin</td></tr><tr><td>saloon:auth &#x3C;Integration Name> &#x3C;Authenticator Name></td><td>Creates a custom authenticator</td></tr></tbody></table>
 
 You can use the `saloon:list` command to get information about Saloon usage within your application. This includes details about your integrations, as well as associated requests, connectors, plugins, responses, and authenticators.
 
