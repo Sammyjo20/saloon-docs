@@ -117,7 +117,7 @@ Saloon version three requires Guzzle `^7.6` which introduced support for a minim
 
 The previous version introduced support for middleware in Saloon and allowed users to add their own middleware. This also introduced some challenges with how some of Saloon's other features worked like mocking and authenticators. Often when the user adds their own middleware, they may not see headers from authenticators or mock clients being applied to the `PendingRequest` class. Saloon v3's middleware order has been improved for the best feature compatibility.
 
-If you are curious, this is the new middleware order looks:
+If you are curious, this is how the new middleware order looks:
 
 1. Plugins are "booted"
 2. Request and connector properties (Headers, Query Parameters, Config, Middleware) are merged
