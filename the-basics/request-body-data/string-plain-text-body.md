@@ -2,12 +2,12 @@
 
 This body type has been created if you need to send a plain string/text to the server. This body type does not come with a default Content-Type, so you must provide this.
 
-To get started, make change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client. We recommend aliasing it because the string body trait is also called `HasBody`.
+To get started, make change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\HasBody as HasBody;
+use Saloon\Contracts\Body\HasBody;
 
 <strong>class CreateServerRequest extends Request implements HasBody
 </strong>{
