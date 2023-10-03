@@ -7,25 +7,25 @@ To get started, make change your method to **POST, PUT or PATCH** depending on t
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
-use Saloon\Contracts\Body\HasBody as HasBodyContract;
+use Saloon\Contracts\Body\HasBody as HasBody;
 
-<strong>class CreateServerRequest extends Request implements HasBodyContract
+<strong>class CreateServerRequest extends Request implements HasBody
 </strong>{
     protected Method $method = Method::POST;
 }
 </code></pre>
 
-Next, you will need to add the `HasBody` trait to your request. This trait will implement the `body()` method that the `HasBody` interface requires. It also provides a method `defaultBody()` which you can extend to provide a default body on your request.
+Next, you will need to add the `HasStringBody` trait to your request. This trait will implement the `body()` method that the `HasBody` interface requires. It also provides a method `defaultBody()` which you can extend to provide a default body on your request.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
-<strong>use Saloon\Traits\Body\HasBody;
-</strong>use Saloon\Contracts\Body\HasBody as HasBodyContract;
-
-class CreateServerRequest extends Request implements HasBodyContract
+use Saloon\Contracts\Body\HasBody;
+<strong>use Saloon\Traits\Body\HasStringBody;
+</strong>
+class CreateServerRequest extends Request implements HasBody
 {
-<strong>    use HasBody;
+<strong>    use HasStringBody;
 </strong>
     protected Method $method = Method::POST;
     
@@ -48,17 +48,16 @@ Saloon won't add a Content-Type header for you for plain string bodies so you mu
 
 There are a couple of ways to interact with the request body to prepare it to be sent. You can either use the methods mentioned below to add to the body on any given instance or you can use the `defaultBody` method on your request. This is recommended because you could then define any requirements as constructor arguments in your request and then standardise your request even more.&#x20;
 
-```php
-<?php
+<pre class="language-php"><code class="lang-php">&#x3C;?php
 
 use Saloon\Http\Request;
-use Saloon\Traits\Body\HasBody;
-use Saloon\Contracts\Body\HasBody as HasBodyContract;
-
-class CreateServerRequest extends Request implements HasBodyContract
+use Saloon\Contracts\Body\HasBody;
+<strong>use Saloon\Traits\Body\HasStringBody;
+</strong>
+class CreateServerRequest extends Request implements HasBody
 {
-    use HasBody;
-
+<strong>    use HasStringBody;
+</strong>
     protected Method $method = Method::POST;
     
     public function __construct(
@@ -71,7 +70,7 @@ class CreateServerRequest extends Request implements HasBodyContract
         return 'Howdy, Partner. I want a ' . $this->ubuntuVersion . ' server through ' . $this->provider . ' provider!';
     }
 }
-```
+</code></pre>
 
 ### Interacting with the body() method
 
@@ -103,12 +102,12 @@ You can add the same interface and trait to your connector. If you have the trai
 <?php
 
 use Saloon\Http\Request;
-use Saloon\Traits\Body\HasBody;
-use Saloon\Contracts\Body\HasBody as HasBodyContract;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasStringBody;
 
-class ForgeConnector extends Connector implements HasBodyContract
+class ForgeConnector extends Connector implements HasBody
 {
-    use HasBody;
+    use HasStringBody;
 
     protected function defaultBody(): string
     {
