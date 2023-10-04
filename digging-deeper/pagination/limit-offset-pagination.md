@@ -54,7 +54,7 @@ class SpotifyConnector extends Connector implements HasPagination
 </strong>        
 <strong>            protected function isLastPage(Response $response): bool
 </strong>            {
-                return $this->getOffset() >== (int)$response->json('total');
+                return $this->getOffset() >= (int)$response->json('total');
             }
             
 <strong>            protected function getPageItems(Response $response, Request $request): array
@@ -103,7 +103,7 @@ This assumption might not be the way your third-party API works. You can really 
     
         protected function isLastPage(Response $response): bool
         {
-            return $this->getOffset() >== (int)$response->json('total');
+            return $this->getOffset() >= (int)$response->json('total');
         }
         
         protected function getPageItems(Response $response, Request $request): array
