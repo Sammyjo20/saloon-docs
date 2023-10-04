@@ -73,7 +73,7 @@ class GetServersRequest extends Request
     
     protected int $timeout;
     
-    public function __constructor(int $timeout)
+    public function __construct(int $timeout)
     {
         $this->timeout = $timeout;
     }

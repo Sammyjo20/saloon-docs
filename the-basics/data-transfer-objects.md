@@ -128,7 +128,7 @@ class UpdateServerRequest extends Request implements HasBody
 
     protected Method $method = Method::PUT;
     
-    public function __constructor(readonly protected Server $server)
+    public function __construct(readonly protected Server $server)
     {
         //
     }
