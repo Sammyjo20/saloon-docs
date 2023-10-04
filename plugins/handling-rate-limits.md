@@ -317,10 +317,9 @@ protected function handleTooManyAttempts(Response $response, Limit $limit): void
 }
 ```
 
-Additionally, may choose to disable this functionality by adding the `protected bool $detectTooManyAttempts = false` property to your connector or request which defines the trait.
+Alternatively, you may choose to disable this functionality. You can do this by setting the `detectTooManyAttempts` property to `false` in your connector/request's constructor.
 
-```php
-use Saloon\Http\Connector;
+<pre class="language-php"><code class="lang-php">use Saloon\Http\Connector;
 use Saloon\RateLimitPlugin\Stores\MemoryStore;
 use Saloon\RateLimitPlugin\Traits\HasRateLimits;
 
@@ -328,9 +327,12 @@ class SpotifyConnector extends Connector
 {
     use HasRateLimits;
     
-    protected bool $detectTooManyAttempts = false;
+    public function __construct()
+    {
+<strong>        $this->detectTooManyAttempts = false;
+</strong>    }
 }
-```
+</code></pre>
 
 ### Handling Rate Limits Being Exceeded
 
@@ -420,19 +422,21 @@ class CustomStore implements RateLimitStore
 
 Sometimes you might want to disable rate limiting by default or even disable it on a per-connector basis. You can either use a property to disable the rate-limiting functionality by default, or you can use the `useRateLimitPlugin()` method to disable it on a per-instance basis.
 
-```php
-use Saloon\Http\Connector;
+<pre class="language-php"><code class="lang-php">use Saloon\Http\Connector;
 use Saloon\RateLimitPlugin\Traits\HasRateLimits;
 
 class SpotifyConnector extends Connector
 {
     use HasRateLimits;
     
-    protected bool $rateLimitingEnabled = false;
+    public function __construct()
+    {
+<strong>        $this->rateLimitingEnabled = false;
+</strong>    }
 }
 
 // Or...
 
 $connector = new SpotifyConnector;
 $connector->useRateLimitPlugin(false);
-```
+</code></pre>
