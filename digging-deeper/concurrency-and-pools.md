@@ -8,7 +8,7 @@ One of Laravel's core members, Nuno Maduro [wrote a great blog post](https://nun
 Concurrency is only supported with the `GuzzleSender` and `HttpSender` senders for Saloon. The default sender out of the box with Saloon is the GuzzleSender.
 {% endhint %}
 
-We conducted our own benchmark. We made 1,000 API calls to our internal testing API, running on a virtual server with 2 vCPUs and 2GB of RAM. The results were impressive, as all 1,000 API calls were completed in just **2.5 seconds**, a significant improvement compared to 60 seconds when using synchronous requests.
+We conducted our own benchmark by making 1,000 API calls to our internal testing API, running on a virtual server with 2 vCPUs and 2GB of RAM. The results were impressive, as all 1,000 API calls were completed in just **2.5 seconds**, a significant improvement compared to 60 seconds when using synchronous requests.
 
 ```php
 <?php
