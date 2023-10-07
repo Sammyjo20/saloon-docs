@@ -1,12 +1,38 @@
 # 🏎 Concurrency & Pools
 
-Saloon supports request concurrency and requests pools out of the box. This allows you to make multiple API calls to the same service while keeping the CURL connection open. Under the hood, it uses curl's multi-handler to keep the connection open, this results in huge speed benefits when making lots of API calls. Saloon's concurrency is powered by [Guzzle's implementation](https://docs.guzzlephp.org/en/stable/quickstart.html?highlight=pool#concurrent-requests) behind the scenes.
+Saloon supports request concurrency and requests pools out of the box. This allows you to make multiple API calls to the same service while keeping the CURL connection open. Under the hood, it uses PHP's cURL multi-handler to keep the connection open, this results in huge speed benefits when making lots of API calls. Saloon's concurrency is powered by [Guzzle's implementation](https://docs.guzzlephp.org/en/stable/quickstart.html?highlight=pool#concurrent-requests) behind the scenes.
 
 One of Laravel's core members, Nuno Maduro [wrote a great blog post](https://nunomaduro.com/speed\_up\_your\_php\_http\_guzzle\_requests\_with\_concurrency) about request concurrency and its performance with Guzzle directly. The same performance can be shared with Saloon's implementation as Saloon uses Guzzle behind the scenes.
 
 {% hint style="info" %}
 Concurrency is only supported with the `GuzzleSender` and `HttpSender` senders for Saloon. The default sender out of the box with Saloon is the GuzzleSender.
 {% endhint %}
+
+We conducted our own benchmark. We made 1,000 API calls to our internal testing API, running on a virtual server with 2 vCPUs and 2GB of RAM. The results were impressive, as all 1,000 API calls were completed in just **2.5 seconds**, a significant improvement compared to 60 seconds when using synchronous requests.
+
+```php
+<?php
+
+$connector = new TestConnector;
+
+// ⬇️ Takes 60 seconds... 😪
+
+$requests = function () {
+    for ($i = 0; $i < 1000; $i++) {
+        $connector->send(new GetUserRequest);
+    }
+};
+
+// ⬇️ Takes 2.5 seconds! 🔥
+
+$requests = function () {
+    for ($i = 0; $i < 1000; $i++) {
+        yield new GetUserRequest;
+    }
+};
+
+$connector->pool($requests, concurrency: 10)->send()->wait();
+```
 
 ### Getting Started
 
