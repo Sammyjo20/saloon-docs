@@ -2,6 +2,12 @@
 
 ### Video Tutorials
 
+#### Consuming APIs in the Wild West using Saloon
+
+{% embed url="https://www.youtube.com/watch?v=ZV00ggpWfBU" %}
+Created by Sam Carré
+{% endembed %}
+
 #### Saloon - A PHP package to simplify API integrations
 
 {% embed url="https://www.youtube.com/watch?v=r3AU6uYQGt4" %}
