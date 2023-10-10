@@ -2,7 +2,7 @@
 
 ### Video Tutorials
 
-#### Consuming APIs in the Wild West using Saloon
+#### Wrangling APIs in the Wild West using Saloon
 
 {% embed url="https://www.youtube.com/watch?v=ZV00ggpWfBU" %}
 Created by Sam Carré
