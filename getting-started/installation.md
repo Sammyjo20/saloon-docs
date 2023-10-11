@@ -12,7 +12,7 @@ You can install an additional Laravel Plugin for Saloon which provides Artisan c
 
 ### Dependencies
 
-Saloon has just five dependencies, but two of them are used to provide Saloon with PSR interfaces.
+Saloon has five dependencies, but two of them are used to provide Saloon with PSR interfaces.
 
 * [Guzzle](https://github.com/guzzle/guzzle) (For the default GuzzleSender)
 * [Guzzle's Promise Library](https://github.com/guzzle/promises) (For asynchronous requests and concurrency)
