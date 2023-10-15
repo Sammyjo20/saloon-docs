@@ -16,7 +16,7 @@ use Saloon\Http\Connector;
 class SpotifyConnector extends Connector implements HasPagination
 {
     // ...
-    
+
     public function paginate(Request $request): Paginator
     {
         return new class(connector: $this, request: $request) extends Paginator
@@ -49,7 +49,7 @@ use Saloon\Http\Connector;
 class SpotifyConnector extends Connector implements HasPagination
 {
     // ...
-    
+
     public function paginate(Request $request): Paginator
     {
         return new class(connector: $this, request: $request) extends Paginator
@@ -58,17 +58,19 @@ class SpotifyConnector extends Connector implements HasPagination
             {
 <strong>                return is_null($response->json('next_page_url'));
 </strong>            }
-            
+
             protected function getPageItems(Response $response, Request $request): array
             {
 <strong>                return $response->json('items');
 </strong>            }
-            
+
             protected function applyPagination(Request $request): Request
             {
-<strong>                $request->header()->add('X-Page', $this->page);
-</strong><strong>                
-</strong><strong>                $request->header()->add('X-Per-Page', $this->perPageLimit);
+<strong>                $request->headers()->add('X-Page', $this->page);
+</strong><strong>
+</strong><strong>                $request->headers()->add('X-Per-Page', $this->perPageLimit);
+</strong><strong>
+</strong><strong>                return $request;
 </strong>            }
         };
     }
@@ -90,7 +92,7 @@ The third-party API you are integrating with may require you to define a page si
     return new class(connector: $this, request: $request) extends Paginator
     {
 <strong>        protected ?int $perPageLimit = 100;
-</strong>        
+</strong>
         // ...
     };
 }
