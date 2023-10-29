@@ -31,7 +31,7 @@ $connector->send(new GetTracksRequest);
 
 // 5. Refresh your access tokens...
 
-$newAuthenticator = $connector->refreshAccessTokens($authenticator);
+$newAuthenticator = $connector->refreshAccessToken($authenticator);
 ```
 
 ### Getting Started
