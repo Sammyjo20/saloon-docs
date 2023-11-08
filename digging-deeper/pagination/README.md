@@ -307,7 +307,9 @@ $pool->withResponseHandler(function (Response $response) {
     $data = $response->body(); 
 });
 
-<strong>$pool->wait();
+<strong>$promise = $pool->send();
+
+$promise->wait();
 </strong></code></pre>
 
 #### Custom Per-Request Pagination
