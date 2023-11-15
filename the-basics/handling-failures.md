@@ -216,7 +216,7 @@ class ErrorRequest extends Request
 
 ### Customising the request exception
 
-By default, Saloon will use the exceptions [listed above](handling-failures.md#default-exceptions), but you may choose to return your own exception if a request has failed. Just extend the `getRequestException` method on either your connector or request. You will receive an instance of the response and a sender exception, which may be nullable.
+By default, Saloon will use the exceptions [listed above](handling-failures.md#response-exceptions), but you may choose to return your own exception if a request has failed. Just extend the `getRequestException` method on either your connector or request. You will receive an instance of the response and a sender exception, which may be nullable.
 
 {% tabs %}
 {% tab title="Connector" %}
