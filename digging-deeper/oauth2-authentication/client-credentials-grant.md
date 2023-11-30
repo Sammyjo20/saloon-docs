@@ -36,7 +36,7 @@ Let's start with preparing our connector to support the client credentials grant
 use Saloon\Http\Connector;
 use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 
-class WarehouseConnector extends Connector;
+class WarehouseConnector extends Connector
 {
     use ClientCredentialsGrant;
 }
@@ -50,7 +50,7 @@ After you have added the trait, you will need to tell Saloon how to authenticate
 use Saloon\Http\Connector;
 use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 
-class WarehouseConnector extends Connector;
+class WarehouseConnector extends Connector
 {
     use ClientCredentialsGrant;
     
@@ -68,7 +68,7 @@ class WarehouseConnector extends Connector;
             ->setTokenEndpoint('/oauth/token')
             ->setRequestModifier(function (Request $request) {
                 // Optional: Modify the requests being sent.
-            })
+            });
     }
 }
 ```
