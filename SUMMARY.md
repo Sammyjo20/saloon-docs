@@ -26,15 +26,15 @@
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔐 Authentication](the-basics/authentication.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
-* [🔎 Debugging](the-basics/debugging.md)
+* [🔎 Debugging](digging-deeper/debugging.md)
 * [✅ Testing](the-basics/testing/README.md)
-  * [📸 Recording Responses](the-basics/testing/recording-requests.md)
   * [🚧 Mock Responses](the-basics/testing/manual-fake-responses.md)
+  * [📸 Recording Responses](the-basics/testing/recording-requests.md)
 
 ## Digging Deeper
 
-* [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
-* [🪝 Building SDKs](digging-deeper/building-sdks.md)
+* [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
+* [🪝 Building SDKs](the-basics/building-sdks.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
@@ -47,11 +47,11 @@
 
 ## Installable Plugins
 
-* [📚 Pagination](installable-plugins/pagination/README.md)
-  * [Paged Pagination](installable-plugins/pagination/paged-pagination.md)
-  * [Limit/Offset Pagination](installable-plugins/pagination/limit-offset-pagination.md)
-  * [Cursor Pagination](installable-plugins/pagination/cursor-pagination.md)
-  * [Custom Pagination](installable-plugins/pagination/custom-pagination.md)
+* [📚 Pagination](digging-deeper/pagination/README.md)
+  * [Paged Pagination](digging-deeper/pagination/paged-pagination.md)
+  * [Limit/Offset Pagination](digging-deeper/pagination/limit-offset-pagination.md)
+  * [Cursor Pagination](digging-deeper/pagination/cursor-pagination.md)
+  * [Custom Pagination](digging-deeper/pagination/custom-pagination.md)
 * [⛵ Laravel Plugin](installable-plugins/laravel-integration.md)
 * [🔁 Caching](installable-plugins/caching-responses.md)
 * [⛔ Rate Limit Handler](installable-plugins/handling-rate-limits.md)

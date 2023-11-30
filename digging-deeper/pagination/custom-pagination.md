@@ -67,17 +67,17 @@ class SpotifyConnector extends Connector implements HasPagination
             protected function applyPagination(Request $request): Request
             {
 <strong>                $request->headers()->add('X-Page', $this->page);
-</strong><strong>
-</strong><strong>                $request->headers()->add('X-Per-Page', $this->perPageLimit);
-</strong><strong>
-</strong><strong>                return $request;
+</strong>
+<strong>                $request->headers()->add('X-Per-Page', $this->perPageLimit);
+</strong>
+<strong>                return $request;
 </strong>            }
         };
     }
 }
 </code></pre>
 
-Let's assume in this hypothetical example that the API provides some useful information to see if we're on the last page. In this example, we know we're on the last page if the `next_page_url` JSON property on the body is null. There are various other ways of knowing if you are on the last page, so it's best to fully understand your API's pagination.&#x20;
+Let's assume in this hypothetical example that the API provides some useful information to see if we're on the last page. In this example, we know we're on the last page if the `next_page_url` JSON property on the body is null. There are various other ways of knowing if you are on the last page, so it's best to fully understand your API's pagination.
 
 To get the page items, we'll use the `json` method on the response to access the `items` array from the body.
 
@@ -85,7 +85,7 @@ After that, to apply the pagination, our API expects us to send a `X-Page` heade
 
 ### Specifying a default per-page on the paginator
 
-The third-party API you are integrating with may require you to define a page size (per page) on your requests, or you may want to set a default page size used for every request. You can set this default page size as a property on the paginator class.&#x20;
+The third-party API you are integrating with may require you to define a page size (per page) on your requests, or you may want to set a default page size used for every request. You can set this default page size as a property on the paginator class.
 
 <pre class="language-php"><code class="lang-php">public function paginate(Request $request): Paginator
 {
@@ -98,7 +98,7 @@ The third-party API you are integrating with may require you to define a page si
 }
 </code></pre>
 
-You may also use the `setPerPageLimit` method on an instantiated paginator if you want to configure it on the fly. **You must set this before iterating over the paginator.**&#x20;
+You may also use the `setPerPageLimit` method on an instantiated paginator if you want to configure it on the fly. **You must set this before iterating over the paginator.**
 
 ```php
 $spotifyConnector = new SpotifyConnector;

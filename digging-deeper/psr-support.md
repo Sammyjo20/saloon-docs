@@ -13,7 +13,7 @@ $psrRequest = $response->getPsrRequest();
 
 This design decision was made because the PSR-7 and 17 standards are very well-known and have been implemented by many popular HTTP clients. While Saloon uses Guzzle as the default way to send requests, if Guzzle suddenly becomes abandoned - Saloon can use one of many other HTTP clients without needing an entire rebuild from scratch. While Guzzle is amazing, and we'd never want it to go away - making Saloon independent of the HTTP client was a big step toward future-proofing the library.
 
-Another significant benefit to having PSR support is a better experience for you, the developer. With previous versions, Saloon heavily relied on Guzzle's config options to build the PSR-7 request internally, which meant that debugging was difficult because you never really knew what was sent to the third party. With version three, you can see the PSR request right before it is sent. If you want to learn more about debugging the PSR request, [click here](../the-basics/debugging.md).
+Another significant benefit to having PSR support is a better experience for you, the developer. With previous versions, Saloon heavily relied on Guzzle's config options to build the PSR-7 request internally, which meant that debugging was difficult because you never really knew what was sent to the third party. With version three, you can see the PSR request right before it is sent. If you want to learn more about debugging the PSR request, [click here](debugging.md).
 
 ### Modifying the PSR-7 Request
 
