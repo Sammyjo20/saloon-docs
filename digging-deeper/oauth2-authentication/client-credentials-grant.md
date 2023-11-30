@@ -68,7 +68,7 @@ class WarehouseConnector extends Connector
             ->setTokenEndpoint('/oauth/token')
             ->setRequestModifier(function (Request $request) {
                 // Optional: Modify the requests being sent.
-            })
+            });
     }
 }
 ```
