@@ -12,6 +12,8 @@
 * [👋 Installation](the-basics/installation.md)
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
+* [🚀 Sending Requests](the-basics/sending-requests.md)
+* [📡 Responses](the-basics/responses.md)
 * [🌵 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
 * [⚙ HTTP Client Config](the-basics/http-client-config.md)
@@ -23,24 +25,17 @@
   * [String / Plain Text Body](the-basics/request-body-data/string-plain-text-body.md)
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔐 Authentication](the-basics/authentication.md)
-* [🚀 Sending Requests](the-basics/sending-requests.md)
-* [📡 Responses](the-basics/responses.md)
-* [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
-* [🪝 Building SDKs](the-basics/building-sdks.md)
+* [🔎 Debugging](the-basics/debugging.md)
 * [✅ Testing](the-basics/testing/README.md)
   * [📸 Recording Responses](the-basics/testing/recording-requests.md)
   * [🚧 Mock Responses](the-basics/testing/manual-fake-responses.md)
 
 ## Digging Deeper
 
-* [🔎 Debugging](digging-deeper/debugging.md)
+* [🛤 Data Transfer Objects](digging-deeper/data-transfer-objects.md)
+* [🪝 Building SDKs](digging-deeper/building-sdks.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
-* [📚 Pagination](digging-deeper/pagination/README.md)
-  * [Paged Pagination](digging-deeper/pagination/paged-pagination.md)
-  * [Limit/Offset Pagination](digging-deeper/pagination/limit-offset-pagination.md)
-  * [Cursor Pagination](digging-deeper/pagination/cursor-pagination.md)
-  * [Custom Pagination](digging-deeper/pagination/custom-pagination.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [💫 Middleware](digging-deeper/middleware.md)
@@ -52,6 +47,11 @@
 
 ## Installable Plugins
 
+* [📚 Pagination](installable-plugins/pagination/README.md)
+  * [Paged Pagination](installable-plugins/pagination/paged-pagination.md)
+  * [Limit/Offset Pagination](installable-plugins/pagination/limit-offset-pagination.md)
+  * [Cursor Pagination](installable-plugins/pagination/cursor-pagination.md)
+  * [Custom Pagination](installable-plugins/pagination/custom-pagination.md)
 * [⛵ Laravel Plugin](installable-plugins/laravel-integration.md)
 * [🔁 Caching](installable-plugins/caching-responses.md)
 * [⛔ Rate Limit Handler](installable-plugins/handling-rate-limits.md)

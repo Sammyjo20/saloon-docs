@@ -156,4 +156,4 @@ With Saloon v3, promises are handled better. Previously, the `PendingRequest` cl
 
 #### SDK Helpers
 
-Last, but not least - Saloon v3 has shipped with a `BaseResource` class which is a class that was recommended in the [Building SDKs](../the-basics/building-sdks.md#request-resources) chapter of the documentation. Since this class is only small and provides value to the SDK developer, this class has now been bundled.
+Last, but not least - Saloon v3 has shipped with a `BaseResource` class which is a class that was recommended in the [Building SDKs](../digging-deeper/building-sdks.md#request-resources) chapter of the documentation. Since this class is only small and provides value to the SDK developer, this class has now been bundled.

@@ -195,7 +195,7 @@ Saloon's paginators are a fantastic way of iterating through many page-separated
 
 #### Casting Items Into DTOs
 
-Saloon has a great way of casting responses into DTOs, but what if instead of getting the raw array or string item for each item in the paginator you wanted to resolve your DTO? You can simply use your `dto` or `dtoOrFail` method inside of the `getPageItems` method of your paginator. By using this method, you already have configured your DTO building logic on your connector. If you're not sure how to do this, [click here](../../the-basics/data-transfer-objects.md).
+Saloon has a great way of casting responses into DTOs, but what if instead of getting the raw array or string item for each item in the paginator you wanted to resolve your DTO? You can simply use your `dto` or `dtoOrFail` method inside of the `getPageItems` method of your paginator. By using this method, you already have configured your DTO building logic on your connector. If you're not sure how to do this, [click here](../../digging-deeper/data-transfer-objects.md).
 
 {% tabs %}
 {% tab title="Paginator Config" %}
@@ -290,7 +290,7 @@ $paginator = $spotifyConnector->paginate(new GetLikedSongsRequest);
 }
 </code></pre>
 
-You can also use a paginator pool. If you are unfamiliar with how asynchronous request pools work, [check out this section of the documentation](../concurrency-and-pools.md) first.
+You can also use a paginator pool. If you are unfamiliar with how asynchronous request pools work, [check out this section of the documentation](../../digging-deeper/concurrency-and-pools.md) first.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -308,8 +308,8 @@ $pool->withResponseHandler(function (Response $response) {
 });
 
 <strong>$promise = $pool->send();
-
-$promise->wait();
+</strong>
+<strong>$promise->wait();
 </strong></code></pre>
 
 #### Custom Per-Request Pagination
@@ -373,7 +373,7 @@ $request = new GetLikedSongsRequest;
 
 #### Counting results
 
-You may wish to count the pages of the paginator. You can use the `count()` PHP method to get the total number of pages from a paginator.&#x20;
+You may wish to count the pages of the paginator. You can use the `count()` PHP method to get the total number of pages from a paginator.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -390,7 +390,7 @@ You should use the `count()` method and not `iterator_count()` on the paginator 
 
 #### Handling Infinite Loops
 
-While building your paginators, sometimes, you might run into a situation when the paginator is attempting to get the same page over and over again, causing an infinite loop. This is usually caused by mis-configuring the `isLastPage` method. To try to mitigate infinite loops, the paginator has a built-in safety feature that will throw an exception if the last five responses have exactly the same body.&#x20;
+While building your paginators, sometimes, you might run into a situation when the paginator is attempting to get the same page over and over again, causing an infinite loop. This is usually caused by mis-configuring the `isLastPage` method. To try to mitigate infinite loops, the paginator has a built-in safety feature that will throw an exception if the last five responses have exactly the same body.
 
 Saloon will throw a `PaginationException` with a message like:
 

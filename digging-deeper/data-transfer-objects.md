@@ -4,7 +4,7 @@ When building API integrations, sometimes dealing with a raw response or a JSON 
 
 ### Casting responses into DTOs
 
-Firstly, in your request or connector, extend the `createDtoFromResponse` method. Within this method, you get access to the `Response` object containing the response to cast into a data transfer object. In this example, I have created a `fromResponse` method so I can write all the logic&#x20;
+Firstly, in your request or connector, extend the `createDtoFromResponse` method. Within this method, you get access to the `Response` object containing the response to cast into a data transfer object. In this example, I have created a `fromResponse` method so I can write all the logic
 
 ```php
 <?php
@@ -66,7 +66,7 @@ $server = $response->dtoOrFail();
 ```
 
 {% hint style="warning" %}
-When using the `dto` method, Saloon will attempt to create a DTO from your response no matter the status of the response. This allows you to create "error" data transfer objects. If you don't want to use this functionality, you can use the `dtoOrFail` method which will throw a LogicException if the response was a failure. **You can customise what is considered a failed response** [**here**](handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)**.**
+When using the `dto` method, Saloon will attempt to create a DTO from your response no matter the status of the response. This allows you to create "error" data transfer objects. If you don't want to use this functionality, you can use the `dtoOrFail` method which will throw a LogicException if the response was a failure. **You can customise what is considered a failed response** [**here**](../the-basics/handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)**.**
 {% endhint %}
 
 ### Accessing the response from your DTO
