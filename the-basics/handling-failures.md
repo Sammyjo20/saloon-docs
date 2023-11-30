@@ -1,8 +1,8 @@
 # 🔥 Handling Failures
 
-Saloon has a powerful exception handler that has lots of exceptions you can use in your application. It can also be customised on a per-connector and per-request basis.
+Saloon has a powerful exception handler with many descriptive exceptions you can use in your application.
 
-When you send a request, Saloon will not do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not. The only exception to this is if Saloon cannot connect to an API, which will throw a `FatalRequestException`.
+When you send a request, Saloon won't do anything if the request fails, but by default, it will use the status code to determine if a request is successful or not. The only exception to this is if Saloon cannot connect to an API, which will throw a `FatalRequestException`.
 
 ```php
 <?php
