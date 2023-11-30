@@ -32,6 +32,6 @@ Saloon is a PHP library that gives you the tools to build beautifully simple API
 [Please consider giving Saloon a star on GitHub!](https://github.com/sammyjo20/saloon) (Over 1,000 stars already!)
 {% endhint %}
 
-{% content-ref url="getting-started/installation.md" %}
-[installation.md](getting-started/installation.md)
+{% content-ref url="the-basics/installation.md" %}
+[installation.md](the-basics/installation.md)
 {% endcontent-ref %}

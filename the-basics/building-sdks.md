@@ -217,4 +217,4 @@ Please read through the other sections of Saloon's documentation to see the othe
 
 ### Testing
 
-When building an SDK, it's important to write tests that ensure the SDK calls the correct requests from an API and returns the right response, especially if you're converting the response into a data-transfer-object. [Read through the testing section of the documentation](../testing/manual-fake-responses.md) to get familiar with mocking and recording requests.
+When building an SDK, it's important to write tests that ensure the SDK calls the correct requests from an API and returns the right response, especially if you're converting the response into a data-transfer-object. [Read through the testing section of the documentation](testing/manual-fake-responses.md) to get familiar with mocking and recording requests.

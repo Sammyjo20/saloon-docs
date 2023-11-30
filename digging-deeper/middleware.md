@@ -54,7 +54,7 @@ class GetServersRequest extends Request
 
 The `PendingRequest` class is an intermediary class that Saloon uses to populate everything when you send a request. Every time you send a request, a new `PendingRequest` instance is created which prevents your connector or request from being mutated every time a request is sent. The `PendingRequest` class has many of the methods that you are used to seeing on the request/connector for managing headers, query parameters, config, and request body.
 
-The `PendingRequest` class is used for boot methods, middleware and [plugins](../plugins/traits.md).
+The `PendingRequest` class is used for boot methods, middleware and [plugins](../installable-plugins/traits.md).
 
 ### Request Middleware
 
@@ -289,7 +289,7 @@ Be cautious using anonymous non-static closures inside the constructor/boot meth
 
 Plugins are another useful feature for Saloon that allows you to extend Saloon and tap into the middleware from traits. This is especially useful if you intend to use the trait on multiple requests or connectors.
 
-[Read through the plugins page for more information.](../plugins/traits.md)
+[Read through the plugins page for more information.](../installable-plugins/traits.md)
 
 ### Middleware Naming
 

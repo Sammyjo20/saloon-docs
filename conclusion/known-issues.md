@@ -1,4 +1,4 @@
-# 🐞 Known Issues
+# 💥 Known Issues
 
 ### Usage of anonymous functions with long-running processes like Laravel Queues
 

@@ -7,18 +7,15 @@
 * [🪄 What's new in v3](upgrade/whats-new-in-v3.md)
 * [🌳 Upgrading from v2](upgrade/upgrading-from-v2.md)
 
-## Getting Started
-
-* [👋 Installation](getting-started/installation.md)
-
 ## The Basics
 
+* [👋 Installation](the-basics/installation.md)
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
 * [🌵 Headers](the-basics/headers.md)
 * [❓ Query Parameters](the-basics/query-parameters.md)
 * [⚙ HTTP Client Config](the-basics/http-client-config.md)
-* [🎁 Attaching Body/Data](the-basics/request-body-data/README.md)
+* [🎁 Sending Body/Data](the-basics/request-body-data/README.md)
   * [JSON Body](the-basics/request-body-data/json-body.md)
   * [Multipart Form Body](the-basics/request-body-data/multipart-form-body.md)
   * [Form Body (URL Encoded)](the-basics/request-body-data/form-body-url-encoded.md)
@@ -31,6 +28,9 @@
 * [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🪝 Building SDKs](the-basics/building-sdks.md)
+* [✅ Testing](the-basics/testing/README.md)
+  * [📸 Recording Responses](the-basics/testing/recording-requests.md)
+  * [🚧 Mock Responses](the-basics/testing/manual-fake-responses.md)
 
 ## Digging Deeper
 
@@ -43,27 +43,20 @@
   * [Custom Pagination](digging-deeper/pagination/custom-pagination.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
-* [🔑 OAuth2 Authentication](digging-deeper/oauth2-authentication/README.md)
-  * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
-  * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
 * [💫 Middleware](digging-deeper/middleware.md)
 * [⏸ Delaying Requests](digging-deeper/delay.md)
 * [⛩ PSR Support](digging-deeper/psr-support.md)
-* [🛩 Senders](digging-deeper/senders.md)
+* [🔑 OAuth2](digging-deeper/oauth2-authentication/README.md)
+  * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
+  * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
 
-## Testing
+## Installable Plugins
 
-* [📸 Recording Responses](testing/recording-requests.md)
-* [🚧 Mock Responses](testing/manual-fake-responses.md)
-
-## Plugins
-
-* [🪐 Built-In Plugins](plugins/built-in-plugins.md)
-* [⛵ Laravel Plugin](plugins/laravel-integration.md)
-* [🔁 Caching Responses](plugins/caching-responses.md)
-* [⛔ Handling Rate Limits](plugins/handling-rate-limits.md)
-* [🏭 SDK Generator](plugins/sdk-generator.md)
-* [🏗 Building Your Own Plugins](plugins/traits.md)
+* [⛵ Laravel Plugin](installable-plugins/laravel-integration.md)
+* [🔁 Caching](installable-plugins/caching-responses.md)
+* [⛔ Rate Limit Handler](installable-plugins/handling-rate-limits.md)
+* [🏭 Auto SDK Generator](installable-plugins/sdk-generator.md)
+* [🏗 Building Your Own Plugins](installable-plugins/traits.md)
 
 ## Conclusion
 

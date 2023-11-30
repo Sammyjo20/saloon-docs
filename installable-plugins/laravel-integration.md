@@ -98,4 +98,4 @@ These events can be added to your `EventServiceProvider` and you can create list
 
 Typically when mocking requests in Saloon, you are only limited to the current test you are in, without having to pass your `MockClient` down into every call. With the Laravel plugin installed, you may use the `Saloon::fake` method to configure mocking globally across your application. This is super handy if you want to test your API requests nested deep in your application.
 
-[Click here](../testing/manual-fake-responses.md) to read more about mocking requests.
+[Click here](../the-basics/testing/manual-fake-responses.md) to read more about mocking requests.
