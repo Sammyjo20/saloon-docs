@@ -33,7 +33,7 @@
 
 ## Digging Deeper
 
-* [🛤 Data Transfer Objects](the-basics/data-transfer-objects.md)
+* [🛸 Data Transfer Objects](the-basics/data-transfer-objects.md)
 * [🪝 Building SDKs](the-basics/building-sdks.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
