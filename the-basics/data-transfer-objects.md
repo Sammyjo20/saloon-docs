@@ -34,8 +34,6 @@ This is what the `Server` DTO looks like:
 ```php
 <?php
 
-use Saloon\Http\Response;
-
 readonly class Server
 {
     public function __construct(
@@ -46,7 +44,7 @@ readonly class Server
 }
 ```
 
-### Retrieving your DTO
+### Retrieving your DTO from responses
 
 Now we have defined our DTO on our request or connector, we can use the build in `dto` or `dtoOrFail` methods on our response class.
 
@@ -60,12 +58,12 @@ $response = $connector->send(new GetServerRequest(id: 12345));
 // Create a DTO even if the response was a failure
 $server = $response->dto();
 
-// Create a DTO or throw an exception if the response was not successful
+// Create a DTO or throw an exception if the response is not successful
 $server = $response->dtoOrFail();
 ```
 
 {% hint style="warning" %}
-Saloon will attempt to create a DTO from your response no matter the status of the response. This allows you to create "error" data transfer objects. If you don't want to use this functionality, you can use the `dtoOrFail` method which will throw a LogicException if the response was a failure. **You can customise what is considered a failed response** [**here**](handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)**.**
+Saloon will attempt to create a DTO from your response no matter the status of the response. This allows you to create "error" data transfer objects. If you don't want to use this functionality, you can use the `dtoOrFail` method which will throw a LogicException if the response is a failure. **You can customise what is considered a failed response** [**here**](handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)**.**
 {% endhint %}
 
 ### Using a DTO to populate request data
@@ -107,7 +105,13 @@ class UpdateServerRequest extends Request implements HasBody
     
     public function createDtoFromResponse(Response $response): mixed
     {
-        return Server::fromResponse($response);
+        $data = $response->json();
+    
+        return new Server(
+            id: $data['id'],
+            name: $data['name'],
+            ipAddress: $data['ip'],
+        );
     }
 }
 </code></pre>
@@ -141,22 +145,15 @@ use Saloon\Http\Response;
 use Saloon\Traits\Responses\HasResponse;
 use Saloon\Contracts\DataObjects\WithResponse;
 
-<strong>class Server implements WithResponse
+<strong>readonly class Server implements WithResponse
 </strong>{
 <strong>    use HasResponse;
 </strong>
     public function __construct(
-        readonly public int $id,
-        readonly public string $name,
-        readonly public string $ipAddress,
+        public int $id,
+        public string $name,
+        public string $ipAddress,
     ){}
-
-    public static function fromResponse(Response $response): self
-    {
-        $data = $response->json();
-
-        return new static($data['id'], $data['name'], $data['ip']);
-    }
 }
 </code></pre>
 
