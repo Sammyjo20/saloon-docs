@@ -12,6 +12,8 @@ This guide will be using PokéAPI as an example API. [Click here to see a full S
 
 To start building an SDK with Saloon, we recommend that you create a connector as your SDK class. This class allows you to configure the base URL and any defaults you may need like default headers or authentication.
 
+#### Example SDK Connector
+
 This is an example SDK for the [PokéAPI](https://pokeapi.co/). As you can see, I have defined the API base URL, as well as used the constructor to provide an authentication token. I have also defined some default headers.
 
 ```php
