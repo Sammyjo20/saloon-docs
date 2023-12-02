@@ -30,7 +30,7 @@ $forge = new ForgeConnector('my-token');
 {% endtab %}
 {% endtabs %}
 
-### Basic Auth (base64)
+### Basic Auth (Base64 Encoded)
 
 The `withBasicAuth` method can be used when a `Authorization: Basic` header is required.
 
@@ -86,9 +86,37 @@ $forge = new ForgeConnector('my-token');
 {% endtab %}
 {% endtabs %}
 
+### Certificate Auth
+
+The `withCertificateAuth` method can be used to authenticate with a custom client-side certificate. An optional password can be provided.
+
+{% tabs %}
+{% tab title="Definition" %}
+```php
+class ForgeConnector extends Connector
+{
+    // ...
+    
+    public function __construct()
+    {
+        $this->withCertificateAuth('/path/certificate.pem', 'password');
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Result" %}
+```php
+$forge = new ForgeConnector();
+
+// Sends Certificate: "/path/certificate.pem"
+```
+{% endtab %}
+{% endtabs %}
+
 ### Custom Authentication
 
-If your API uses a different way to authenticate, the recommended way is to use the `defaultHeaders` method on your connector to define how the authentication is applied.
+If your API uses a different way to authenticate, the recommended way is to use the methods like`defaultHeaders` on your connector to define how the authentication is applied.
 
 ```php
 class ForgeConnector extends Connector
@@ -98,7 +126,7 @@ class ForgeConnector extends Connector
     protected function defaultHeaders(): array
     {
         return [
-            'Authorization' => 'Bearer ' . $this->token,
+            'X-API-Key' => $this->token,
         ];
     }
 }
