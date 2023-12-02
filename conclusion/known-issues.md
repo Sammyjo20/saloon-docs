@@ -35,3 +35,19 @@ class SDK extends Connector
     }
 }
 ```
+
+### Minimum TLS Version
+
+From version three, Saloon uses Guzzle `^7.6` which introduced a new option to configure a minimum TLS version. With Saloon v3, Saloon has set this default to **TLS 1.2.** If any of your API integrations require a lower level of TLS security, you can change the Saloon config while your application is loading.
+
+```php
+use Saloon\Config;
+
+Config::$defaultTlsMethod = STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT;
+```
+
+You can [visit this page on the PHP documentation](https://www.php.net/manual/en/function.stream-socket-enable-crypto.php) to see the different TLS options available.&#x20;
+
+{% hint style="info" %}
+**TLS 1.1** has been deprecated since 2021 so it is unlikely that APIs are still using it, but older systems may have not upgraded yet.
+{% endhint %}
