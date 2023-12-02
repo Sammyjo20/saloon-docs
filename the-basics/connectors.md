@@ -61,3 +61,25 @@ class ForgeConnector extends Connector
 ```
 
 [Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
+
+### Constructor Arguments
+
+Since connectors are just classes, you can define a constructor to populate its default properties. For example, if the URL changes per user of your application you can define this as a constructor argument.
+
+```php
+class ForgeConnector extends Connector
+{
+    public function __construct(protected readonly int $baseUrl) {
+        //
+    }
+
+    public function resolveBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+}
+```
+
+```php
+$connector = new ForgeConnector('https://forge.laravel.com/api/v1');
+```
