@@ -134,34 +134,4 @@ class ForgeConnector extends Connector
 
 ### APIs that require per-request authentication
 
-Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent.
-
-```php
-class ForgeConnector extends Connector
-{
-    // ...
-    
-    public function boot(PendingRequest $pendingRequest)
-    {
-        if ($pendingRequest->getRequest() instanceof ForgeTokenRequest) {
-	    return; // Prevent infinite loops!
-	}
-	
-	// Send a ForgeTokenRequest and authenticate the original $pendingRequest
-	// with a token from the response.
-	
-	$response = $pendingRequest->getConnector()->send(new ForgeTokenRequest);
-	
-	$pendingRequest->withTokenAuth($response->json('token')));
-    }
-}
-```
-
-Now when we send a request through our connector, it will make an API call to `ForgeTokenRequest` first and then send the real request.
-
-```php
-<?php
-
-$forge = new ForgeConnector;
-$response = $forge->send(new GetServersRequest);
-```
+Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent. [Click here to read more.](../conclusion/cookbook.md#authenticating-before-every-request)
