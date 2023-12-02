@@ -44,6 +44,14 @@ class GetServersRequest extends Request
 }
 ```
 
+You can also use the `headers` method on a request instance.
+
+```php
+$request = new GetServersRequest;
+
+$request->headers()->add('Content-Type', 'text/plain');
+```
+
 ### Query Parameters
 
 Some API requests require query parameters to be sent. You can extend the `defaultQuery` method to provide these query parameters.
@@ -61,6 +69,14 @@ class GetServersRequest extends Request
         ];
     }
 }
+```
+
+You can also use the `query` method on a request instance.
+
+```php
+$request = new GetServersRequest;
+
+$request->query()->add('sort', 'provider');
 ```
 
 ### Constructor Arguments

@@ -42,9 +42,19 @@ Most API integrations will have common headers used by all of its requests. You 
 }
 </code></pre>
 
+You can also use the `headers` method on a connector instance.
+
+```php
+$forge = new ForgeConnector;
+
+$forge->headers()->add('Content-Type', 'text/plain');
+```
+
 ### HTTP Client Config
 
 The connector uses a HTTP client to send the request. By default, this client is [Guzzle](https://github.com/guzzle/guzzle). If you would like to define config options like timeout then you can extend the `defaultConfig`  method.
+
+[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
 
 ```php
 class ForgeConnector extends Connector
@@ -60,7 +70,13 @@ class ForgeConnector extends Connector
 }
 ```
 
-[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
+You can also use the `config` method on a connector instance.
+
+```php
+$forge = new ForgeConnector;
+
+$forge->config()->add('timeout', 120);
+```
 
 ### Constructor Arguments
 
