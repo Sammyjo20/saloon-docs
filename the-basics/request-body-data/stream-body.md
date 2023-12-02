@@ -2,7 +2,7 @@
 
 Similar to the string / plain text body, the stream body allows you to send a stream or a file resource directly to the server. This is useful if the API accepts a plain-text style input but large files in the form of streams.
 
-To get started, make change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.&#x20;
+To get started, change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.&#x20;
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 

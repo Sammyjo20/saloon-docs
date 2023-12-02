@@ -1,6 +1,6 @@
 # XML Body
 
-To get started, make change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
+To get started, change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -51,9 +51,9 @@ class CreateServerRequest extends Request implements HasBody
     protected Method $method = Method::POST;
     
     public function __construct(
-        protected string $ubuntuVersion,
-        protected string $type,
-        protected string $provider
+        protected readonly string $ubuntuVersion,
+        protected readonly string $type,
+        protected readonly string $provider
     ){}
     
     protected function defaultBody(): string
@@ -71,7 +71,7 @@ class CreateServerRequest extends Request implements HasBody
 ```
 
 {% hint style="info" %}
-While you are expected to return a raw string for the XML body, it can be tedious writing XML as text. Saloon strongly recommends using [Spatie's "Array to XML"](https://github.com/spatie/array-to-xml) package which helps you convert a simple array into XML which is much more developer friendly. See [below](xml-body.md#using-spaties-array-to-xml-package) for an example using the package.
+While you are expected to return a raw string for the XML body, it can be tedious to write XML as text. We have built a library, XML Wrangler which allows you to write XML in a much more developer-friendly way. See [below](xml-body.md#using-spaties-array-to-xml-package) for an example using the package.
 {% endhint %}
 
 ### Interacting with the body() method
@@ -93,12 +93,17 @@ $request->body()->set('<?xml version="1.0"?><root></root>');
 $body = $request->body()->all();
 
 // string: 'plain-text-response-body'
-
 ```
 
-### Using Spatie's Array To XML Package
+### Writing XML With XML Wrangler
 
-Writing out XML body can be laborious and time-consuming. In some previous integrations, we have leaned on a library to help write out the XML request bodies. This library is [Spatie's "Array to XML"](https://github.com/spatie/array-to-xml) package. You can use this to provide a simple array of keys and values to build up XML data and then pass it through to Saloon.
+Writing out XML body as text can be laborious and time-consuming. We have built our own XML writer which makes writing XML easier. This library is called [XML Wrangler](https://github.com/saloonphp/xml-wrangler). You can install it via Composer.
+
+```bash
+composer require saloonphp/xml-wrangler
+```
+
+Once installed, you can use the `XmlWriter` class to write XML. You can use a simple array structure to define XML elements.
 
 {% tabs %}
 {% tab title="Default Body" %}
@@ -106,7 +111,7 @@ Writing out XML body can be laborious and time-consuming. In some previous integ
 <?php
 
 use Saloon\Http\Request;
-use Spatie\ArrayToXml\ArrayToXml;
+use Saloon\XmlWrangler\XmlWriter;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasXmlBody;
 
@@ -117,14 +122,14 @@ class CreateServerRequest extends Request implements HasBody
     protected Method $method = Method::POST;
     
     public function __construct(
-        protected string $ubuntuVersion,
-        protected string $type,
-        protected string $provider
+        protected readonly string $ubuntuVersion,
+        protected readonly string $type,
+        protected readonly string $provider
     ){}
     
     protected function defaultBody(): string
     {
-        return ArrayToXml::convert([
+        return XmlWriter::make()->write([
             'ubuntu-version' => $this->ubuntuVersion,
             'type' => $this->type,
             'provider' => $this->provider,
@@ -138,9 +143,11 @@ class CreateServerRequest extends Request implements HasBody
 ```php
 <?php
 
+use Saloon\XmlWrangler\XmlWriter;
+
 $request = new CreateServerRequest;
 
-$request->body()->set(ArrayToXml::convert([
+$request->body()->set(XmlWriter::make()->write([
    'ubuntu-version' => '22.04',
    'type' => 'web',
    'provider' => 'aws',
@@ -148,6 +155,8 @@ $request->body()->set(ArrayToXml::convert([
 ```
 {% endtab %}
 {% endtabs %}
+
+You can learn more and read the documentation for XML Wrangler by [clicking here](https://github.com/saloonphp/xml-wrangler).
 
 ### Connector Body
 

@@ -2,7 +2,7 @@
 
 Multipart body (multipart/form-data) is often used in modern APIs as a way to upload a mixture of files and data. Saloon makes handling multipart bodies easy by providing you with a standardised way of interacting with the values to be sent. You don't have to worry about calculating boundaries or properly encoding the multipart values, you can just use simple arrays and a value object to define the values.
 
-To get started, make change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
+To get started, change your method to **POST, PUT or PATCH** depending on the requirements of the API. After that, you will need to add the `HasBody` interface to your request. This interface is required as it tells Saloon to look for a `body()` method supplied by one of the body traits. Without this interface, Saloon will not send any request body to the HTTP client.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 

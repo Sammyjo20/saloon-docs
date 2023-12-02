@@ -84,7 +84,7 @@ $request->query()->add('sort', 'provider');
 Since requests are just classes, you can define a constructor to populate the request's properties. For example, if you are getting a specific resource you would need to pass its ID into the request class.
 
 ```php
-class GetServersRequest extends Request
+class GetServerRequest extends Request
 {
     protected Method $method = Method::GET;
     
