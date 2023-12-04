@@ -1,28 +1,20 @@
 # 🎯 Retrying Requests
 
-Sometimes you may deal with APIs that fail frequently or require you to retry multiple times before a request is successful. Saloon has a global retry system that allows you to send a request and retry multiple times.&#x20;
-
-There are a few ways in which you can configure the retry functionality. You can either configure it on a connector or request class, or you can use the `sendAndRetry` method as and when you need to. It's recommended to configure it on a class level as Saloon is all about keeping everything in one place.
+Sometimes you may use APIs that are unreliable or require you to retry multiple times before a request is successful. Saloon has a global retry system that can be configured to automatically retry failed requests.
 
 ### Configuring our connector
 
-Let's say that we have an API that no matter what requests we make, isn't reliable. We'll configure some retry functionality to work across every request. You can also configure the same properties on a request basis if it's just one particular request that isn't reliable.&#x20;
+Let's say that we have an API which isn't reliable. We can define a public `$tries` property on our connector which defines how many times a request will be sent if it fails.
 
-The only property we need to enable the retry functionality is the `$retry` property. Here you can define an integer denoting the number of times a request should be retried. We'll configure our connector to retry three times before failing.
-
-<pre class="language-php"><code class="lang-php">&#x3C;?php
-
-class ForgeConnector extends Connector
+<pre class="language-php"><code class="lang-php">class ForgeConnector extends Connector
 {
 <strong>    public ?int $tries = 3;
 </strong>}
 </code></pre>
 
-Now when we send any request through this connector, if it fails it will be retried. It's as simple as that! Continue reading to see some more advanced features of Saloon's global retry system.
+Now when we send any request through this connector, if it fails it will be retried.
 
 ```php
-<?php
-
 $forgeConnector = new ForgeConnector;
 
 $response = $forgeConnector->send(new UnreliableRequest);
@@ -36,29 +28,41 @@ The retry functionality will only work when sending requests synchronously. The 
 
 #### What does Saloon consider a failed request?
 
-So far we've mentioned that "when a request fails" it will be retried - but how does Saloon consider a request to be failed? By default, if the status code is either a 4xx or 5xx, then Saloon will consider it failed, however, you can configure this. Have a read through the [Handling Failures](../the-basics/handling-failures.md#customising-when-saloon-thinks-a-request-has-failed) section of the documentation for more.
+By default, if the API couldn't be connected to or if the response status code is either a 4xx or 5xx, then Saloon will consider it a failed request. You can change this by extending the `hasRequestFailed` method on your connector. [Click here to learn more.](../the-basics/handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)
 
-### Configuring Intervals
+### Intervals
 
-You can also configure an optional interval in milliseconds that Saloon should wait before requests. This is useful to avoid being rate-limited or overloading the server while it is already down. You can configure an interval with the `$retryInterval` property. For example, let's say I wanted to wait 500ms between each request.
+You can also configure an interval in **milliseconds** that Saloon should wait between retries. You can configure an interval with the `$retryInterval` property.
 
-<pre class="language-php"><code class="lang-php">&#x3C;?php
-
-class ForgeConnector extends Connector
+<pre class="language-php"><code class="lang-php">class ForgeConnector extends Connector
 {
     public ?int $tries = 3;
     
-<strong>    public ?int $retryInterval = 500;
+<strong>    public ?int $retryInterval = 1000;
 </strong>}
 </code></pre>
 
-### Customizing Exception Behaviour
+#### Exponential Backoff
 
-By default, when all attempts have been exceeded, Saloon will either throw a `FatalRequestException` or a `RequestException`. You can choose to disable this behaviour and instead return the last response that Saloon received. If the exception was `FatalRequestException` then the exception will still be thrown as we wouldn't have a response to return.&#x20;
+You can also use exponential backoff when retrying which will double the retry interval after each unsuccessful attempt. This is useful as it can be less strenuous on the API if it is experiencing issues.
 
-<pre class="language-php"><code class="lang-php">&#x3C;?php
+<pre class="language-php"><code class="lang-php">class ForgeConnector extends Connector
+{
+    public ?int $tries = 3;
+    
+    public ?int $retryInterval = 500;
+    
+<strong>    public ?bool $useExponentialBackoff = true;
+</strong>}
+</code></pre>
 
-class ForgeConnector extends Connector
+### Exceptions
+
+By default, when all attempts have been exceeded, Saloon will either throw a `FatalRequestException` or a `RequestException`. You can choose to disable this behaviour and return the last response that Saloon received instead.
+
+If the exception was `FatalRequestException` then the exception will still be thrown as we wouldn't have a response to return.&#x20;
+
+<pre class="language-php"><code class="lang-php">class ForgeConnector extends Connector
 {
     public ?int $tries = 3;
     
@@ -66,9 +70,9 @@ class ForgeConnector extends Connector
 </strong>}
 </code></pre>
 
-### Customising when the request before the next retry
+### Customising the request before the next retry
 
-There are situations when you might want to change the next request to improve the chances of the next retry being successful. You can overwrite the `handleRetry` method on the connector or request and use it to customise the `Request` class. You must also return a boolean in this method to tell Saloon if the retry should commence.
+In some situations, you might want to change the next request to improve the chances of the next retry being successful. You can overwrite the `handleRetry` method on the connector or request and use it to customise the `Request` class. You must also return a boolean in this method to tell Saloon if the retry should commence.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -92,7 +96,7 @@ class ForgeConnector extends Connector
 
 ### Using the sendAndRetry method
 
-Saloon also has a `sendAndRetry` method which can be used on the fly on any connector or request without needing to configure anything. This method has exactly the same functionality in the format of a method.
+Saloon also has a `sendAndRetry` method which can be used on the fly on any connector or request without needing to configure anything. This method has the same functionality in the format of a method.
 
 ```php
 <?php
@@ -107,9 +111,6 @@ $response = $forgeConnector->sendAndRetry(
         //
     },
     throw: true,
+    useExponentialBackoff: true,
 );
 ```
-
-{% hint style="info" %}
-While the above method is a little more convenient, it's recommended to configure your retry functionality inside of the request or connector.
-{% endhint %}
