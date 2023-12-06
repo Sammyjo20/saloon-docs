@@ -57,10 +57,11 @@
 
 ## Conclusion
 
-* [🍳 Cookbook](conclusion/cookbook.md)
+* [📔 How-to Guides](conclusion/how-to-guides/README.md)
+  * [Improving Speed With Laravel](conclusion/how-to-guides/improving-speed-with-laravel.md)
+  * [Per-request Authentication](conclusion/how-to-guides/per-request-authentication.md)
 * [📖 Tutorials & Blog Posts](conclusion/tutorials.md)
 * [🎖 Showcase](conclusion/showcase.md)
 * [💥 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
 * [❤ Support Saloon](https://github.com/saloonphp/saloon?sponsor=1)
-* [👋 About Me](https://github.com/Sammyjo20)

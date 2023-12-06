@@ -153,4 +153,4 @@ class ForgeConnector extends Connector
 
 ### APIs that require per-request authentication
 
-Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent. [Click here to read more.](../conclusion/cookbook.md#authenticating-before-every-request)
+Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent. [Click here to read more](../conclusion/how-to-guides/per-request-authentication.md).

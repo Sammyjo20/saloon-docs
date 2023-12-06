@@ -11,4 +11,4 @@
 
 This is my chance to thank you - the amazing PHP community for installing, using and contributing to Saloon's success. I absolutely love working on open source and working within the PHP community as it feels so rewarding. It's an absolute honour to build something that people enjoy and actively use. I hope it will be useful for many years ahead.
 
-**Sam Carré**
+[**Sam Carré**](https://github.com/sammyjo20)
