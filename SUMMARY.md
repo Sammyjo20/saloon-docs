@@ -57,6 +57,7 @@
 
 ## Conclusion
 
+* [📘 Official Book!](conclusion/official-book.md)
 * [📔 How-to Guides](conclusion/how-to-guides/README.md)
   * [Improving Speed With Laravel](conclusion/how-to-guides/improving-speed-with-laravel.md)
   * [Per-request Authentication](conclusion/how-to-guides/per-request-authentication.md)
