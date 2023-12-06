@@ -132,6 +132,25 @@ class ForgeConnector extends Connector
 }
 ```
 
+If your authentication requires further logic, you can also use the constructor of the connector to define these options.
+
+```php
+class ForgeConnector extends Connector
+{
+    public function __construct(
+        protected readonly string  $certificatePath,
+        protected readonly string  $certificatePassword,
+        protected readonly ?string $region = null,
+    ) {
+        $this->withCertificateAuth($certificatePath, $certificatePassword);
+
+        if (isset($region)) {
+            $this->headers()->add('X-Region', $region);
+        }
+    }
+}
+```
+
 ### APIs that require per-request authentication
 
 Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent. [Click here to read more.](../conclusion/cookbook.md#authenticating-before-every-request)
