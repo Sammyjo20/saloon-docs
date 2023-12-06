@@ -129,7 +129,7 @@ class CreateServerRequest extends Request implements HasBody
     
     protected function defaultBody(): string
     {
-        return XmlWriter::make()->write([
+        return XmlWriter::make()->write('root', [
             'ubuntu-version' => $this->ubuntuVersion,
             'type' => $this->type,
             'provider' => $this->provider,
@@ -147,7 +147,7 @@ use Saloon\XmlWrangler\XmlWriter;
 
 $request = new CreateServerRequest;
 
-$request->body()->set(XmlWriter::make()->write([
+$request->body()->set(XmlWriter::make()->write('root', [
    'ubuntu-version' => '22.04',
    'type' => 'web',
    'provider' => 'aws',
