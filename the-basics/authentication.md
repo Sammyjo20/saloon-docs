@@ -1,6 +1,6 @@
 # 🔐 Authentication
 
-Saloon has built-in "authenticators" for the most common authentication types. These are classes that can be used on your connector to quickly drop in common types of authentication.
+Saloon has pre-configured authenticator classes for the most common types of authentication. These are classes that can be used on your connector or request.
 
 [You can view all of the built-in authenticators on GitHub.](https://github.com/saloonphp/saloon/tree/v3/src/Http/Auth)
 
@@ -49,7 +49,7 @@ class ForgeConnector extends Connector
 
 ### Query Parameter
 
-The `QueryAuthenticator` can be used to add a query parameter to requests. Just extend the `defaultAuth` method and return the authenticator class.
+The `QueryAuthenticator` class can be used to add a query parameter to requests. Just extend the `defaultAuth` method and return the authenticator class.
 
 ```php
 <?php
@@ -128,12 +128,13 @@ class ForgeConnector extends Connector
 
 You may also use the `authenticate` method on your connector or request if you would like to use or overwrite an authenticator at runtime.
 
-<pre class="language-php"><code class="lang-php">$forge = new ForgeConnector;
+```php
+$forge = new ForgeConnector;
 
-<strong>$forge->authenticate(new TokenAuthenticator($user->forge_token));
-</strong>
+$forge->authenticate(new TokenAuthenticator($user->forge_token));
+
 // $forge->send(...)
-</code></pre>
+```
 
 {% hint style="info" %}
 Only one authenticator can be used at the same time.
