@@ -92,7 +92,7 @@ class ForgeConnector extends Connector
 
 ### Custom Authentication
 
-If your API requires a more complicated authentication process, you can create your own authenticator classes which can be used on your connector. This helps abstract any complicated logic away from the connector keeping it tidy.
+If your API integration requires a more complicated authentication process, you can create your own authenticator classes which can be used on your connector. This helps abstract any complicated logic away from the connector keeping it tidy.
 
 ```php
 <?php
