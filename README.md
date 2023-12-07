@@ -5,7 +5,7 @@ description: Build beautiful API integrations and SDKs with Saloon
 # 🤠 Saloon
 
 {% hint style="info" %}
-You are viewing the documentation for an **outdated version** of Saloon. If you would like to see the latest, [click here](https://docs.saloon.dev/v/3).
+You are viewing the documentation for an **outdated version** of Saloon. If you would like to see the latest, [click here](https://app.gitbook.com/o/cASkBOXfspBu84TFkYqQ/s/AnnOFZ5KwPjnXI3FPOQw/).
 {% endhint %}
 
 <figure><img src=".gitbook/assets/header.png" alt=""><figcaption></figcaption></figure>
