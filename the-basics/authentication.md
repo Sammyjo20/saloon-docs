@@ -1,6 +1,6 @@
 # 🔐 Authentication
 
-Saloon has pre-configured authenticator classes for the most common types of authentication. These are classes that can be used on your connector or request.
+Saloon has optional authenticator classes to help you with the most common types of authentication. These are classes that can be used on your connector or request.
 
 [You can view all of the built-in authenticators on GitHub.](https://github.com/saloonphp/saloon/tree/v3/src/Http/Auth)
 
