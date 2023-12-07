@@ -6,8 +6,8 @@ description: >-
 
 # 🚪 Saloon
 
-{% hint style="info" %}
-Saloon version two is officially out! [Click here to use version two instead.](http://127.0.0.1:5000/s/29ap30WDt824nN7WNz2U/)
+{% hint style="warning" %}
+You are viewing the documentation for a **very out-of-date** version of Saloon. [Click here to view the latest.](https://app.gitbook.com/o/cASkBOXfspBu84TFkYqQ/s/AnnOFZ5KwPjnXI3FPOQw/)
 {% endhint %}
 
 ![Making a request, sending it and retrieving the JSON data as an array.](.gitbook/assets/FJFXPeaXEAAihla.jpg)
