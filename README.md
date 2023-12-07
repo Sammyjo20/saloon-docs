@@ -22,9 +22,9 @@ Saloon is a PHP library that gives you the tools to build beautifully simple API
 * Framework agnostic
 * Lightweight and has few dependencies.
 
-{% hint style="info" %}
-[Please consider giving Saloon a star on GitHub!](https://github.com/sammyjo20/saloon)
-{% endhint %}
+{% embed url="https://github.com/saloonphp/saloon" fullWidth="false" %}
+Please consider giving Saloon a star on GitHub!
+{% endembed %}
 
 <figure><img src=".gitbook/assets/Introducing Saloon v3.png" alt=""><figcaption><p>Introducing Saloon v3</p></figcaption></figure>
 
