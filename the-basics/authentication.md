@@ -1,156 +1,140 @@
 # 🔐 Authentication
 
-Saloon has built-in authentication methods for the most common authentication types. You should use these on your connector if you would like the authentication to be used on all requests.
+Saloon has built-in "authenticators" for the most common authentication types. These are classes that can be used on your connector to quickly drop in common types of authentication.
+
+[You can view all of the built-in authenticators on GitHub.](https://github.com/saloonphp/saloon/tree/v3/src/Http/Auth)
 
 ### Authorization "Bearer" Tokens
 
-The `withTokenAuth` method can be used when a `Authorization: Bearer` header is required.
+The `TokenAuthenticator` class can be used to add a `Authorization: Bearer` header to the request. Just extend the `defaultAuth` method and return the authenticator class.
 
-{% tabs %}
-{% tab title="Definition" %}
 ```php
+<?php
+
+use Saloon\Http\Auth\TokenAuthenticator;
+
 class ForgeConnector extends Connector
 {
-    // ...
+    public function __construct(public readonly string $token) {}
     
-    public function __construct(string $token)
+    protected function defaultAuth(): TokenAuthenticator
     {
-        $this->withTokenAuth($token, 'Bearer');
+        return new TokenAuthenticator($this->token);
     }
 }
 ```
-{% endtab %}
-
-{% tab title="Result" %}
-```php
-$forge = new ForgeConnector('my-token');
-
-// Sends Header: "Authorization: Bearer my-token"
-```
-{% endtab %}
-{% endtabs %}
 
 ### Basic Auth (Base64 Encoded)
 
-The `withBasicAuth` method can be used when a `Authorization: Basic` header is required.
-
-{% tabs %}
-{% tab title="Definition" %}
-```php
-class ForgeConnector extends Connector
-{
-    // ...
-    
-    public function __construct(string $username, string $password)
-    {
-        $this->withBasicAuth($username, $password);
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Result" %}
-```php
-$forge = new ForgeConnector('username', 'password');
-
-// Sends Header: "Authorization: Basic ..."
-```
-{% endtab %}
-{% endtabs %}
-
-### Query Parameter
-
-The `withQueryAuth` method can be used to add a query parameter for authentication.&#x20;
-
-{% tabs %}
-{% tab title="Definition" %}
-```php
-class ForgeConnector extends Connector
-{
-    // ...
-    
-    public function __construct(string $token)
-    {
-        $this->withQueryAuth('api-token', $token);
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Result" %}
-```php
-$forge = new ForgeConnector('my-token');
-
-// Sends URL: "https://forge.laravel.com/api/v1?api-token=my-token"
-```
-{% endtab %}
-{% endtabs %}
-
-### Certificate Auth
-
-The `withCertificateAuth` method can be used to authenticate with a custom client-side certificate. An optional password can be provided.
-
-{% tabs %}
-{% tab title="Definition" %}
-```php
-class ForgeConnector extends Connector
-{
-    // ...
-    
-    public function __construct()
-    {
-        $this->withCertificateAuth('/path/certificate.pem', 'password');
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Result" %}
-```php
-$forge = new ForgeConnector();
-
-// Sends Certificate: "/path/certificate.pem"
-```
-{% endtab %}
-{% endtabs %}
-
-### Custom Authentication
-
-If your API uses a different way to authenticate, the recommended way is to use the methods like`defaultHeaders` on your connector to define how the authentication is applied.
+The `BasicAuthenticator` class can be used to add a `Authorization: Basic` header to the request. Just extend the `defaultAuth` method and return the authenticator class.
 
 ```php
-class ForgeConnector extends Connector
-{
-    // ...
+<?php
 
-    protected function defaultHeaders(): array
-    {
-        return [
-            'X-API-Key' => $this->token,
-        ];
-    }
-}
-```
+use Saloon\Http\Auth\BasicAuthenticator;
 
-If your authentication requires further logic, you can also use the constructor of the connector to define these options.
-
-```php
 class ForgeConnector extends Connector
 {
     public function __construct(
-        protected readonly string  $certificatePath,
-        protected readonly string  $certificatePassword,
-        protected readonly ?string $region = null,
-    ) {
-        $this->withCertificateAuth($certificatePath, $certificatePassword);
-
-        if (isset($region)) {
-            $this->headers()->add('X-Region', $region);
-        }
+        public readonly string $username,
+        public readonly string $password
+    ){}
+    
+    protected function defaultAuth(): BasicAuthenticator
+    {
+        return new BasicAuthenticator($this->username, $this->password);
     }
 }
 ```
 
-### APIs that require per-request authentication
+### Query Parameter
 
-Some APIs require an authentication token, such as a JWT, to be generated before each request. Usually, this is quite tricky to implement but with Saloon, you can use the `boot` method on your connector to make another request before the original was sent. [Click here to read more](../conclusion/how-to-guides/per-request-authentication.md).
+The `QueryAuthenticator` can be used to add a query parameter to requests. Just extend the `defaultAuth` method and return the authenticator class.
+
+```php
+<?php
+
+use Saloon\Http\Auth\QueryAuthenticator;
+
+class ForgeConnector extends Connector
+{
+    public function __construct(public readonly string $token) {}
+    
+    protected function defaultAuth(): QueryAuthenticator
+    {
+        return new QueryAuthenticator('api-key', $this->token);
+    }
+}
+```
+
+### Certificate Auth
+
+The `CertificateAuthenticator` class can be used to authenticate with a custom client-side certificate. An optional password can be provided.  Just extend the `defaultAuth` method and return the authenticator class.
+
+```php
+<?php
+
+use Saloon\Http\Auth\CertificateAuthenticator;
+
+class ForgeConnector extends Connector
+{
+    public function __construct(
+        public readonly string $path,
+        public readonly string $password
+    ){}
+    
+    protected function defaultAuth(): CertificateAuthenticator
+    {
+        return new CertificateAuthenticator($this->path, $this->password);
+    }
+}
+```
+
+### Custom Authentication
+
+If your API requires a more complicated authentication process, you can create your own authenticator classes which can be used on your connector. This helps abstract any complicated logic away from the connector keeping it tidy.
+
+```php
+<?php
+
+use Saloon\Http\PendingRequest;
+use Saloon\Contracts\Authenticator;
+
+class ForgeAuthenticator implements Authenticator
+{
+    public function __construct(public readonly string $token) {}
+
+    public function set(PendingRequest $pendingRequest): void
+    {
+        // $pendingRequest->headers()->add(...);
+        // $pendingRequest->config()->add(...);
+    }
+}
+```
+
+```php
+<?php
+
+class ForgeConnector extends Connector
+{
+    protected function defaultAuth(): ForgeAuthenticator
+    {
+        return new ForgeAuthenticator($this->token);
+    }
+}
+```
+
+### The authenticate method
+
+You may also use the `authenticate` method on your connector or request if you would like to use or overwrite an authenticator at runtime.
+
+<pre class="language-php"><code class="lang-php">$forge = new ForgeConnector;
+
+<strong>$forge->authenticate(new TokenAuthenticator($user->forge_token));
+</strong>
+// $forge->send(...)
+</code></pre>
+
+{% hint style="info" %}
+Only one authenticator can be used at the same time.
+{% endhint %}
