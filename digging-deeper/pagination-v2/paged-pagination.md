@@ -120,7 +120,7 @@ This assumption might not be the way your third-party API works. You can really 
         
         protected function applyPagination(Request $request): Request
         {
-<strong>            $request->query()->add('currentPage', $this->page);
+<strong>            $request->query()->add('currentPage', $this->currentPage);
 </strong>    
             if (isset($this->perPageLimit)) {
 <strong>                $request->query()->add('pageSize', $this->perPageLimit);
@@ -137,7 +137,7 @@ This assumption might not be the way your third-party API works. You can really 
 We previously mentioned that the PagedPaginator class provides a few methods that can be used to help with last-page calculation. These methods are:
 
 * **totalResults** - An integer which will return the total number of items returned. This can be used to check if it's equal to the number of total results in the list.
-* **page** - An integer which will return the current page that the paginator is currently on.
+* **currentPage** - An integer which will return the current page that the paginator is currently on.
 
 ### Next Steps
 

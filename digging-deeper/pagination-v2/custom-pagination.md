@@ -68,7 +68,7 @@ class SpotifyConnector extends Connector implements HasPagination
             
             protected function applyPagination(Request $request): Request
             {
-<strong>                $request->header()->add('X-Page', $this->page);
+<strong>                $request->header()->add('X-Page', $this->currentPage);
 </strong><strong>                
 </strong><strong>                $request->header()->add('X-Per-Page', $this->perPageLimit);
 </strong>            }
@@ -81,7 +81,7 @@ Let's assume in this hypothetical example that the API provides some useful info
 
 To get the page items, we'll use the `json` method on the response to access the `items` array from the body.
 
-After that, to apply the pagination, our API expects us to send a `X-Page` header with the current page on the paginator. We'll use the `$this->page` property on the paginator as it acts like an index for the current iteration of the paginator. We will also make sure to send the `perPageLimit` to our API with the `X-Per-Page` header. This header is optional depending on the third-party API you are integrating with.
+After that, to apply the pagination, our API expects us to send a `X-Page` header with the current page on the paginator. We'll use the `$this->currentPage` property on the paginator as it acts like an index for the current iteration of the paginator. We will also make sure to send the `perPageLimit` to our API with the `X-Per-Page` header. This header is optional depending on the third-party API you are integrating with.
 
 ### Specifying a default per-page on the paginator
 
