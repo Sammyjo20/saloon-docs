@@ -103,9 +103,37 @@ class ForgeConnector extends Connector
 {
     public function __construct(public readonly string $token) {}
     
-    protected function defaultAuth(): CertificateAuthenticator
+    protected function defaultAuth(): HeaderAuthenticator
     {
         return new HeaderAuthenticator($this->token, 'X-API-KEY');
+    }
+}
+```
+
+### Multiple Authenticators
+
+You may need to use multiple authenticator classes together, like a certificate and an authorization token. You can use the `MultiAuthenticator` class for this scenario.
+
+```php
+<?php
+
+use Saloon\Http\Auth\MultiAuthenticator;
+use Saloon\Http\Auth\TokenAuthenticator;
+use Saloon\Http\Auth\CertificateAuthenticator;
+
+class ForgeConnector extends Connector
+{
+    public function __construct(
+        public readonly string $certificate,
+        public readonly string $token
+    ){}
+    
+    protected function defaultAuth(): MultiAuthenticator
+    {
+        return new MultiAuthenticator(
+            new CertificateAuthenticator($this->certificate),
+            new TokenAuthenticator($this->token),
+        );
     }
 }
 ```
