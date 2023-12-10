@@ -90,6 +90,26 @@ class ForgeConnector extends Connector
 }
 ```
 
+### Header Auth
+
+The `HeaderAuthenticator` class can be used to authenticate with a custom header. Just extend the `defaultAuth` method and return the authenticator class.
+
+```php
+<?php
+
+use Saloon\Http\Auth\HeaderAuthenticator;
+
+class ForgeConnector extends Connector
+{
+    public function __construct(public readonly string $token) {}
+    
+    protected function defaultAuth(): CertificateAuthenticator
+    {
+        return new HeaderAuthenticator($this->token, 'X-API-KEY');
+    }
+}
+```
+
 ### Custom Authentication
 
 If your API integration requires a more complicated authentication process, you can create your own authenticator classes which can be used on your connector. This helps abstract any complicated logic away from the connector keeping it tidy.
