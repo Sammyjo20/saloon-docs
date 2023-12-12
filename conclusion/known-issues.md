@@ -18,7 +18,7 @@ class SDK extends Connector
 {
     protected Closure $callable;
 
-    public function __constuct()
+    public function __construct()
     {  
         // ❌ This will cause connection leaks
         $this->middleware()->onRequest(function () {
