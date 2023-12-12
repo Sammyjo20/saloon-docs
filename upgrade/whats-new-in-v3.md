@@ -4,9 +4,7 @@ We are excited to announce the release of Saloon version three, which is designe
 
 To begin it's worth mentioning that Saloon has become a lot more lightweight in version three!
 
-> **333 changed files** with <mark style="color:green;">**4,063 additions**</mark> and <mark style="color:red;">**7,576 deletions**</mark>.
-
-Although version three has modified almost every file, there have been very few external changes made that affect the developer.
+> **333 changed files** with <mark style="color:green;">**4,063 additions**</mark> and <mark style="color:red;">**7,576 deletions**</mark>
 
 ### Changes in version three
 
