@@ -85,7 +85,7 @@ Since connectors are just classes, you can define a constructor to populate its 
 ```php
 class ForgeConnector extends Connector
 {
-    public function __construct(protected readonly int $baseUrl) {
+    public function __construct(protected readonly string $baseUrl) {
         //
     }
 
