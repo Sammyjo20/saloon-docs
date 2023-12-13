@@ -6,6 +6,8 @@ We're super excited to partner with [Ash Allen](https://twitter.com/AshAllenDesi
 
 You'll also learn about the most common types of APIs, How OAuth2 works and how to handle webhooks securely.
 
-[Pick up your copy today at consuming-apis-in-laravel.com!](https://consuming-apis-in-laravel.com/?aff=DGMrX)
+{% hint style="info" %}
+Use code **SALOON** at checkout to get **20% off** the "Consuming APIs in Laravel" book or the book bundle with "Battle Ready Laravel"!
+{% endhint %}
 
-> The above link is an affiliate link. By using this link you directly support the development of Saloon.
+[Pick up your copy today at consuming-apis-in-laravel.com!](https://consuming-apis-in-laravel.com/?aff=DGMrX)
