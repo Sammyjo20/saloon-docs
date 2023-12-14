@@ -170,7 +170,7 @@ $giratina = $pokeapi->pokemon()->get(id: 'giratina');
 
 ### Custom Responses
 
-You may wish to customise the `Response` class that is returned by Saloon from your SDK connector. [Click here to read more about custom responses.](building-sdks.md#custom-responses)
+You may wish to customise the `Response` class that is returned by Saloon from your SDK connector. [Click here to read more about custom responses.](responses.md#custom-responses)
 
 ### Additional Features
 
