@@ -86,7 +86,7 @@ By default, Saloon will have a connection timeout of 10 seconds and a request ti
 ```php
 use Saloon\Traits\Plugins\HasTimeout;
 
-class GetServerRequest extends Request
+class GetServersRequest extends Request
 {
     use HasTimeout;
     
