@@ -50,34 +50,6 @@ $forge = new ForgeConnector;
 $forge->headers()->add('Content-Type', 'text/plain');
 ```
 
-### HTTP Client Config
-
-The connector uses a HTTP client to send the request. By default, this client is [Guzzle](https://github.com/guzzle/guzzle). If you would like to define config options like timeout then you can extend the `defaultConfig`  method.
-
-[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
-
-```php
-class ForgeConnector extends Connector
-{
-    // ...
-
-    public function defaultConfig(): array
-    {
-        return [
-            'timeout' => 60,
-        ];
-    }
-}
-```
-
-You can also use the `config` method on a connector instance.
-
-```php
-$forge = new ForgeConnector;
-
-$forge->config()->add('timeout', 120);
-```
-
 ### Timeout
 
 By default, Saloon will have a connection timeout of 10 seconds and a request timeout of 30 seconds. You can customise this by using the `HasTimeout` trait and specifying a `connectTimeout` and `requestTimeout` property.
@@ -115,4 +87,32 @@ class ForgeConnector extends Connector
 
 ```php
 $connector = new ForgeConnector('https://forge.laravel.com/api/v1');
+```
+
+### HTTP Client Config
+
+The connector uses a HTTP client to send the request. By default, this client is [Guzzle](https://github.com/guzzle/guzzle). If you would like to define Guzzle config options then you can extend the `defaultConfig`  method.
+
+[Click here to see a list of the available options Guzzle provide.](https://docs.guzzlephp.org/en/stable/request-options.html)
+
+```php
+class ForgeConnector extends Connector
+{
+    // ...
+
+    public function defaultConfig(): array
+    {
+        return [
+            'stream' => true,
+        ];
+    }
+}
+```
+
+You can also use the `config` method on a connector instance.
+
+```php
+$forge = new ForgeConnector;
+
+$forge->config()->add('stream', true);
 ```
