@@ -78,6 +78,25 @@ $forge = new ForgeConnector;
 $forge->config()->add('timeout', 120);
 ```
 
+### Timeout
+
+By default, Saloon will have a connection timeout of 10 seconds and a request timeout of 30 seconds. You can customise this by using the `HasTimeout` trait and specifying a `connectTimeout` and `requestTimeout` property.
+
+```php
+use Saloon\Traits\Plugins\HasTimeout;
+
+class ForgeConnector extends Connector
+{
+    use HasTimeout;
+    
+    protected int $connectTimeout = 60;
+    
+    protected int $requestTimeout = 120;
+}
+```
+
+### Constructor Arguments
+
 Since connectors are just classes, you can define a constructor to populate its default properties. For example, if the URL changes per user of your application you can define this as a constructor argument.
 
 ```php
