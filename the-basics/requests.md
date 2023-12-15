@@ -79,6 +79,23 @@ $request = new GetServersRequest;
 $request->query()->add('sort', 'provider');
 ```
 
+### Timeout
+
+By default, Saloon will have a connection timeout of 10 seconds and a request timeout of 30 seconds. You can customise this by using the `HasTimeout` trait and specifying a `connectTimeout` and `requestTimeout` property.
+
+```php
+use Saloon\Traits\Plugins\HasTimeout;
+
+class GetServerRequest extends Request
+{
+    use HasTimeout;
+    
+    protected int $connectTimeout = 60;
+    
+    protected int $requestTimeout = 120;
+}
+```
+
 ### Constructor Arguments
 
 Since requests are just classes, you can define a constructor to populate the request's properties. For example, if you are getting a specific resource you would need to pass its ID into the request class.

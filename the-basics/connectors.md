@@ -78,8 +78,6 @@ $forge = new ForgeConnector;
 $forge->config()->add('timeout', 120);
 ```
 
-### Constructor Arguments
-
 Since connectors are just classes, you can define a constructor to populate its default properties. For example, if the URL changes per user of your application you can define this as a constructor argument.
 
 ```php
