@@ -18,26 +18,11 @@ Next, publish the configuration file with the following Artisan command
 php artisan vendor:publish --tag=saloon-config
 ```
 
-#### Laravel Zero
-
-If you are using **Laravel Zero**, then the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware might not be registered. You can register Saloon's service provider in your `AppServiceProvider.php`'s `register()` method definition.
-
-```php
-<?php
-
-use Saloon\Laravel\SaloonServiceProvider;
-
-public function register()
-{
-    $this->app->register(SaloonServiceProvider::class);
-}
-```
-
 ### Available Laravel Commands
 
 Each of the commands will create files within the `App\Http\Integrations` namespace. Each integration name is required for its own namespace. For example: `App\Http\Integrations\Forge`.
 
-<table><thead><tr><th width="374">Command</th><th>Description</th></tr></thead><tbody><tr><td>saloon:connector &#x3C;Integration Name> &#x3C;Connector Name> <em>--oauth</em></td><td>Creates a new connector - You can provide an optional <code>--oauth</code> option if you would like to create an OAuth2 connector.</td></tr><tr><td>saloon:request &#x3C;Integration Name> &#x3C;Request Name></td><td>Creates a new request</td></tr><tr><td>saloon:response &#x3C;Integration Name> &#x3C;Response Name></td><td>Creates a custom response</td></tr><tr><td>saloon:plugin &#x3C;Integration Name> &#x3C;Plugin Name></td><td>Creates a plugin</td></tr><tr><td>saloon:auth &#x3C;Integration Name> &#x3C;Authenticator Name></td><td>Creates a custom authenticator</td></tr></tbody></table>
+<table><thead><tr><th width="364">Command</th><th>Description</th></tr></thead><tbody><tr><td>saloon:connector &#x3C;Integration Name> &#x3C;Connector Name> <em>--oauth</em></td><td>Creates a new connector - You can provide an optional <code>--oauth</code> option if you would like to create an OAuth2 connector.</td></tr><tr><td>saloon:request &#x3C;Integration Name> &#x3C;Request Name></td><td>Creates a new request</td></tr><tr><td>saloon:response &#x3C;Integration Name> &#x3C;Response Name></td><td>Creates a custom response</td></tr><tr><td>saloon:plugin &#x3C;Integration Name> &#x3C;Plugin Name></td><td>Creates a plugin</td></tr><tr><td>saloon:auth &#x3C;Integration Name> &#x3C;Authenticator Name></td><td>Creates a custom authenticator</td></tr></tbody></table>
 
 You can use the `saloon:list` command to get information about Saloon usage within your application. This includes details about your integrations, as well as associated requests, connectors, plugins, responses, and authenticators.
 
@@ -99,3 +84,18 @@ These events can be added to your `EventServiceProvider` and you can create list
 Typically when mocking requests in Saloon, you are only limited to the current test you are in, without having to pass your `MockClient` down into every call. With the Laravel plugin installed, you may use the `Saloon::fake` method to configure mocking globally across your application. This is super handy if you want to test your API requests nested deep in your application.
 
 [Click here](../the-basics/testing/manual-fake-responses.md) to read more about mocking requests.
+
+### Laravel Zero
+
+If you are using [Laravel Zero](https://github.com/laravel-zero/laravel-zero), the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware might not be registered. You can register Saloon's service provider in your `AppServiceProvider.php`'s `register()` method definition.
+
+```php
+<?php
+
+use Saloon\Laravel\SaloonServiceProvider;
+
+public function register()
+{
+    $this->app->register(SaloonServiceProvider::class);
+}
+```
