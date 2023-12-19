@@ -34,12 +34,12 @@ This is what the `Server` DTO looks like:
 ```php
 <?php
 
-readonly class Server
+class Server
 {
     public function __construct(
-        public int $id,
-        public string $name,
-        public string $ipAddress,
+        public readonly int $id,
+        public readonly string $name,
+        public readonly string $ipAddress,
     ){}
 }
 ```
@@ -145,14 +145,14 @@ use Saloon\Http\Response;
 use Saloon\Traits\Responses\HasResponse;
 use Saloon\Contracts\DataObjects\WithResponse;
 
-<strong>readonly class Server implements WithResponse
+<strong>class Server implements WithResponse
 </strong>{
 <strong>    use HasResponse;
 </strong>
     public function __construct(
-        public int $id,
-        public string $name,
-        public string $ipAddress,
+        public readonly int $id,
+        public readonly string $name,
+        public readonly string $ipAddress,
     ){}
 }
 </code></pre>
