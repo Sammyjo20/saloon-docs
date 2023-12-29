@@ -79,6 +79,10 @@ $request = new GetServersRequest;
 $request->query()->add('sort', 'provider');
 ```
 
+{% hint style="info" %}
+Different APIs sometimes require different query string formats. Saloon uses PHP's built-in [`http_build_query`](https://www.php.net/manual/en/function.http-build-query.php) function to create query strings, but if you need something different, you can reformat the query string in the `Connector::handlePsrRequest()` method (see [Modifying the PSR-7 Request](../digging-deeper/psr-support.md#modifying-the-psr-7-request).
+{% endhint %}
+
 ### Timeout
 
 By default, Saloon will have a connection timeout of 10 seconds and a request timeout of 30 seconds. You can customise this by using the `HasTimeout` trait and specifying a `connectTimeout` and `requestTimeout` property.
