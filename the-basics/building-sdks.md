@@ -2,13 +2,13 @@
 
 Saloon provides everything you need to build a great SDK or library for an API. It already offers the ability to mock responses, provide authentication, implement OAuth2 boilerplate and even record your API requests in your tests. With Saloon you won't need to write the same boilerplate code over and over again. Saloon comes with just three dependencies making your library or SDK lightweight.
 
-### Getting Started
-
 {% hint style="info" %}
-This guide assumes you know the basics of connectors, requests and sending requests.
+You can see some Saloon SDKs built by the PHP community by [visiting the showcase page!](../conclusion/showcase.md)
 {% endhint %}
 
-This guide will be using PokéAPI as an example API. [Click here to see a full SDK example repository](https://github.com/Sammyjo20/pokeapi-sdk/tree/v3).
+### Getting Started
+
+This guide will be using PokéAPI as an example API. [Click here to see a full SDK example repository](https://github.com/Sammyjo20/pokeapi-sdk/tree/v3). This guide assumes you know the basics of connectors, requests and sending requests.
 
 To start building an SDK with Saloon, we recommend that you create a connector as your SDK class. This class allows you to configure the base URL and any defaults you may need like default headers or authentication.
 
