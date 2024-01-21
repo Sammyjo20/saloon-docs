@@ -133,6 +133,8 @@ If you are using Laravel and have installed the [Laravel plugin](../../installab
 
 Let's say that your application has a controller which queries the Laravel Forge API and stores the list of servers in the database. We'll use the global mock client to return fake data so we don't send an API call to the external API.
 
+Saloon will detect the global mock client and will use the mock response which you have defined instead of sending a real API call. It's recommended to define your mock at the top of a test.
+
 {% tabs %}
 {% tab title="Test" %}
 ```php
