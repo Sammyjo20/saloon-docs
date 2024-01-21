@@ -79,12 +79,6 @@ With the Laravel plugin installed, Saloon will start sending events when request
 
 These events can be added to your `EventServiceProvider` and you can create listeners to handle when these happen.
 
-### Mocking Requests
-
-Typically when mocking requests in Saloon, you are only limited to the current test you are in, without having to pass your `MockClient` down into every call. With the Laravel plugin installed, you may use the `Saloon::fake` method to configure mocking globally across your application. This is super handy if you want to test your API requests nested deep in your application.
-
-[Click here](broken-reference) to read more about mocking requests.
-
 ### Laravel Zero
 
 If you are using [Laravel Zero](https://github.com/laravel-zero/laravel-zero), the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware might not be registered. You can register Saloon's service provider in your `AppServiceProvider.php`'s `register()` method definition.

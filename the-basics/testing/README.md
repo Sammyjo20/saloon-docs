@@ -126,7 +126,7 @@ class RequestTest extends TestCase
 {% endtabs %}
 
 {% hint style="info" %}
-If you are using Laravel and have installed the [Laravel plugin](../installable-plugins/laravel-integration.md), you do not need to destroy the global mock client before each test as the plugin will do this for you.
+If you are using Laravel and have installed the [Laravel plugin](../../installable-plugins/laravel-integration.md), you do not need to destroy the global mock client before each test as the plugin will do this for you.
 {% endhint %}
 
 #### Writing tests
@@ -213,7 +213,7 @@ So far we have covered testing where you have to write your mock response yourse
 This works by saving the response as a file in your application which can be committed in your project and used for later.
 
 {% hint style="warning" %}
-Make sure that you do not accidentally store sensitive information from the real API call. You can read more about redacting fixtures here.
+Make sure that you do not accidentally store sensitive information from the real API call. You can read more about redacting fixtures [here](./#redacting-recorded-responses-fixtures).
 {% endhint %}
 
 #### Example with fixtures

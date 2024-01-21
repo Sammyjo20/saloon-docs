@@ -24,12 +24,12 @@
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🔎 Debugging](digging-deeper/debugging.md)
-* [✅ Testing](the-basics/testing.md)
+* [✅ Testing](the-basics/testing/README.md)
 
 ## Digging Deeper
 
 * [🛸 Data Transfer Objects](the-basics/data-transfer-objects.md)
-* [🪝 Building SDKs](the-basics/building-sdks.md)
+* [✨ Building SDKs](the-basics/building-sdks.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
 * [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
