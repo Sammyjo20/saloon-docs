@@ -24,9 +24,7 @@
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [🔎 Debugging](digging-deeper/debugging.md)
-* [✅ Testing](the-basics/testing/README.md)
-  * [🚧 Mock Responses](the-basics/testing/manual-fake-responses.md)
-  * [📸 Recording Responses](the-basics/testing/recording-requests.md)
+* [✅ Testing](the-basics/testing.md)
 
 ## Digging Deeper
 
