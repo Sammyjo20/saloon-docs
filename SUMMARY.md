@@ -23,7 +23,6 @@
   * [String / Plain Text Body](the-basics/request-body-data/string-plain-text-body.md)
   * [Stream Body](the-basics/request-body-data/stream-body.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
-* [🔎 Debugging](digging-deeper/debugging.md)
 * [✅ Testing](the-basics/testing/README.md)
 
 ## Digging Deeper
@@ -32,13 +31,14 @@
 * [✨ Building SDKs](the-basics/building-sdks.md)
 * [☝ Solo Requests](digging-deeper/solo-requests.md)
 * [🎯 Retrying Requests](digging-deeper/retrying-requests.md)
-* [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
-* [💫 Middleware](digging-deeper/middleware.md)
 * [⏸ Delaying Requests](digging-deeper/delay.md)
-* [⛩ PSR Support](digging-deeper/psr-support.md)
+* [🏎 Concurrency & Pools](digging-deeper/concurrency-and-pools.md)
 * [🔑 OAuth2](digging-deeper/oauth2-authentication/README.md)
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
+* [🔎 Debugging](digging-deeper/debugging.md)
+* [💫 Middleware](digging-deeper/middleware.md)
+* [⛩ PSR Support](digging-deeper/psr-support.md)
 
 ## Installable Plugins
 
