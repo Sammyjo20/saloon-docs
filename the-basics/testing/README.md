@@ -274,6 +274,10 @@ MockClient::global([
 ]);
 ```
 
+#### Refreshing Fixtures
+
+If you need to refresh a fixture, all you have to do is delete the JSON file and re-run your test. Saloon will see the file is no longer there and will re-record the request.
+
 ### Testing individual requests and SDKs
 
 Occasionally, you might want to write unit tests for individual requests to ensure you are sending the right information to an API. If you are building an SDK, then you may wish to follow this guide for testing your SDK.
