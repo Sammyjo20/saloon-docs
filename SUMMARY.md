@@ -63,4 +63,4 @@
 * [🎖 Showcase](conclusion/showcase.md)
 * [💥 Known Issues](conclusion/known-issues.md)
 * [🤗 Credits](conclusion/credits.md)
-* [❤ Support Saloon](https://github.com/saloonphp/saloon?sponsor=1)
+* [❤ Support Saloon](https://github.com/sponsors/Sammyjo20)
