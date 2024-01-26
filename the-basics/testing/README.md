@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Writing tests for your API integrations is a super important part of ensuring your application remains stable over time. This section of the documentation will walk you through how to use Saloon's testing helpers to mock API requests and write assertions to prove they are working.
+Writing tests for your API integrations is an important part of ensuring your application remains stable over time. This section of the documentation will walk you through how to use Saloon's testing helpers to mock API requests and write assertions to prove your application is handling requests and responses properly.
 
 #### What should you test?
 
