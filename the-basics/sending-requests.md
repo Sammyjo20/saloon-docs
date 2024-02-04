@@ -28,6 +28,8 @@ $promise
    ->otherwise(function (RequestException $exception) {
       // Handle Exception
    });
+   
+$promise->wait(); // Force the promise to be resolved
 ```
 
 {% hint style="info" %}
