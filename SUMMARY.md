@@ -12,8 +12,6 @@
 * [👋 Installation](the-basics/installation.md)
 * [🔌 Connectors](the-basics/connectors.md)
 * [✉ Requests](the-basics/requests.md)
-* [🚀 Sending Requests](the-basics/sending-requests.md)
-* [📡 Responses](the-basics/responses.md)
 * [🔐 Authentication](the-basics/authentication.md)
 * [🎁 Sending Body/Data](the-basics/request-body-data/README.md)
   * [JSON Body](the-basics/request-body-data/json-body.md)
@@ -22,6 +20,8 @@
   * [URL Encoded Body (Form)](the-basics/request-body-data/form-body-url-encoded.md)
   * [String / Plain Text Body](the-basics/request-body-data/string-plain-text-body.md)
   * [Stream Body](the-basics/request-body-data/stream-body.md)
+* [🚀 Sending Requests](the-basics/sending-requests.md)
+* [📡 Responses](the-basics/responses.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [✅ Testing](the-basics/testing/README.md)
 
