@@ -26,10 +26,7 @@ use Saloon\Http\Request;
 
 class Pokeapi extends Connector
 {
-    public function __construct(string $token)
-    {
-        $this->withTokenAuth($token);
-    }
+    public function __construct(protected readonly string $token) {}
 
     public function resolveBaseUrl(): string
     {
@@ -42,6 +39,11 @@ class Pokeapi extends Connector
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
+    }
+    
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->token);
     }
 }
 ```
