@@ -21,8 +21,9 @@ This is an example SDK for the [PokéAPI](https://pokeapi.co/). As you can see, 
 
 namespace Pokeapi;
 
-use Saloon\Http\Connector;
 use Saloon\Http\Request;
+use Saloon\Http\Connector;
+use Saloon\Http\Auth\TokenAuthenticator;
 
 class Pokeapi extends Connector
 {

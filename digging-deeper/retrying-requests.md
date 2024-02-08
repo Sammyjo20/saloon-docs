@@ -76,8 +76,9 @@ In some situations, you might want to change the next request to improve the cha
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Exceptions\FatalRequestException;
 use Saloon\Exceptions\RequestException;
+use Saloon\Http\Auth\TokenAuthenticator;
+use Saloon\Exceptions\FatalRequestException;
 
 class ForgeConnector extends Connector
 {
@@ -86,7 +87,7 @@ class ForgeConnector extends Connector
     public function handleRetry(FatalRequestException|RequestException $exception, Request $request): bool
     {
         if ($exception instanceof RequestException &#x26;&#x26; $exception->getResponse()->status() === 401) {
-<strong>            $request->withTokenAuth($this->getNewToken());
+<strong>            $request->authenticate(new TokenAuthenticator($this->getNewToken()));
 </strong>        }
         
         return true;

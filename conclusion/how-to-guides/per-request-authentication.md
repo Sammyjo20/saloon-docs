@@ -28,6 +28,7 @@ In our connector, we'll extend the `boot()` method which is a method that runs b
 <?php
 
 use Saloon\Http\PendingRequest;
+use Saloon\Http\Auth\TokenAuthenticator;
 
 class MusicApi extends Connector
 {
@@ -61,7 +62,7 @@ class MusicApi extends Connector
         // Now we'll take the token from the auth response and then pass it
         // into the $pendingRequest which is the original GetSongsByArtistRequest.
         
-        $pendingRequest->withTokenAuth($authResponse->json()['token']);
+        $pendingRequest->authenticate(new TokenAuthenticator($authResponse->json()['token']));
     }
 }
 ```
