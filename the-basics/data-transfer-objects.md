@@ -62,9 +62,26 @@ $server = $response->dto();
 $server = $response->dtoOrFail();
 ```
 
-{% hint style="warning" %}
+{% hint style="info" %}
 Saloon will attempt to create a DTO from your response no matter the status of the response. This allows you to create "error" data transfer objects. If you don't want to use this functionality, you can use the `dtoOrFail` method which will throw a LogicException if the response is a failure. **You can customise what is considered a failed response** [**here**](handling-failures.md#customising-when-saloon-thinks-a-request-has-failed)**.**
 {% endhint %}
+
+### PHPStan / TypeHinting DTOs
+
+Due to the way DTOs are created in Saloon, you can lose the type of DTO. This can reduce the developer experience. There are two ways to get around this issue.
+
+You can use an inline-doc block above the `dto`/`dtoOrFail` method call.
+
+```php
+/** @var Server $server */
+$server = $response->dto();
+```
+
+Or you can use the `createDtoFromResponse` method directly on your connector or request - which will use the return type specified.
+
+```php
+$server = $request->createDtoFromResponse($response);
+```
 
 ### Using a DTO to populate request data
 
