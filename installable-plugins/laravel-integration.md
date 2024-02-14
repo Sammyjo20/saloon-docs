@@ -70,6 +70,10 @@ return [
 
 Now when you send requests, they will be sent through Laravel's HTTP client - if you have Laravel Telescope installed, you should see the requests appearing under the "HTTP Client" tab of Telescope.
 
+{% hint style="info" %}
+The Laravel HTTP sender plugin does not support the **Http::fake()** method.
+{% endhint %}
+
 ### Events
 
 With the Laravel plugin installed, Saloon will start sending events when requests are being sent. These events are:
