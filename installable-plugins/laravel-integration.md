@@ -10,8 +10,6 @@ You can install the separate package with Composer. You must already have`saloon
 composer require saloonphp/laravel-plugin "^3.0"
 ```
 
-> Requires Laravel 9+
-
 Next, publish the configuration file with the following Artisan command
 
 ```bash
