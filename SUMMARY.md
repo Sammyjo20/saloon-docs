@@ -51,6 +51,7 @@
 * [🔁 Caching](installable-plugins/caching-responses.md)
 * [⛔ Rate Limit Handler](installable-plugins/handling-rate-limits.md)
 * [🏭 Auto SDK Generator](installable-plugins/sdk-generator.md)
+* [🤠 Lawman](installable-plugins/lawman.md)
 * [🏗 Building Your Own Plugins](installable-plugins/traits.md)
 
 ## Conclusion
