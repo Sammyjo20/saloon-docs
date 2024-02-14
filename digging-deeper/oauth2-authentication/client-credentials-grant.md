@@ -74,7 +74,7 @@ class WarehouseConnector extends Connector
 ```
 
 {% hint style="info" %}
-The endpoint method, like `setTokenEndpoint` on the OAuthConfig class support full URLs if you need to overwrite the base URL on the connector however you may just use the endpoint if the base URL is the same.
+The endpoint method, like `setTokenEndpoint` on the OAuthConfig class supports full URLs if you need to overwrite the base URL on the connector however you may just use the endpoint if the base URL is the same.
 {% endhint %}
 
 #### Overwriting the OAuth2 config
@@ -111,7 +111,7 @@ You are now ready to create access tokens. You should use the `getAccessToken` m
 <?php
 
 $connector = new WarehouseConnector;
-$authenticator = $authConnector->getAccessToken();
+$authenticator = $connector->getAccessToken();
 
 // Use authenticator to authenticate your connector instance
 
@@ -135,7 +135,7 @@ Sometimes you may need to provide an additional "scope" to declare the level of 
 
 $connector = new WarehouseConnector;
 
-$authenticator = $authConnector->getAccessToken(
+$authenticator = $connector->getAccessToken(
     scopes: ['inventory.update', 'inventory.delete'],
     scopeSeparator: '+',
 );
@@ -150,7 +150,7 @@ If you prefer, you may request Saloon to return a `Saloon\Http\Resonse` instance
 
 $connector = new WarehouseConnector;
 
-$response = $authConnector->getAccessToken(
+$response = $connector->getAccessToken(
     returnResponse: true,
 );
 ```
