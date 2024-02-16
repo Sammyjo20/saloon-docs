@@ -471,3 +471,15 @@ $mockClient = new MockClient([
 <strong>    GetServerRequest::class => new SingleServerFixture;
 </strong>]);
 </code></pre>
+
+### Using Saloon's Laravel Facade
+
+If you have installed the [official Laravel plugin](../../installable-plugins/laravel-integration.md), then you can use the `Saloon::fake()` method as an alias of `MockClient::global()`.
+
+```php
+use Saloon\Laravel\Facades\Saloon;
+
+Saloon::fake([
+    GetServersRequest::class => MockResponse::make(body: '', status: 200),
+]);
+```
