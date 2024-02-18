@@ -25,8 +25,13 @@ Saloon's testing starts with the **MockClient** class. This class can be instant
 ```php
 use Saloon\Http\Faking\MockClient;
 
-$mockClient = new MockClient([
-    GetServersRequest::class => MockResponse::make(body: '', status: 200),
+test('my test', function () {
+    $mockClient = new MockClient([
+        GetServersRequest::class => MockResponse::make(body: '', status: 200),
+    ]);
+    
+    $connector = new ForgeConnector;
+    $connector->withMockClient($mockClient);
 ]);
 ```
 
@@ -85,11 +90,11 @@ $mockClient = new MockClient([
 
 ### Testing your application
 
+Now that you have an idea of how testing works in Saloon, let's put it into practice. This section of the documentation will teach you how to write a MockClient for your application. This guide assumes you have already set up a test suite for your application. If you are new to testing, we recommend [PEST](https://pestphp.com/).
+
 {% hint style="info" %}
 This section of the documentation uses the new **Global Mock Client** introduced in Saloon v3.5. Make sure that you are using this version of Saloon by running: `composer update "saloonphp/*"`
 {% endhint %}
-
-Now that you have an idea of how testing works in Saloon, let's put it into practice. This section of the documentation will teach you how to write a MockClient for your application. This guide assumes you have already set up a test suite for your application. If you are new to testing, we recommend [PEST](https://pestphp.com/).
 
 #### Setup
 
