@@ -98,7 +98,7 @@ class ForgeConnector extends Connector
 ### Using the sendAndRetry method
 
 {% hint style="warning" %}
-This method has been deprecated in Saloon v3.6.4
+This method has been deprecated since Saloon v3.6.4
 {% endhint %}
 
 Saloon also has a `sendAndRetry` method which can be used on the fly on any connector or request without needing to configure anything. This method has the same functionality in the format of a method.
