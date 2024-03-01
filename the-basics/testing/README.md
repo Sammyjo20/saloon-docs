@@ -261,6 +261,10 @@ test('can store servers in the database from laravel forge', function () {
 });
 </code></pre>
 
+{% hint style="warning" %}
+You should be cautious when naming fixtures - some operating systems like MacOS do not have case sensitivity for folders but some Unix-based systems like Linux do. This can result in fixtures not being found. It's recommended to use lowercase names.
+{% endhint %}
+
 #### Customising Fixture Location
 
 By default, fixtures will be stored in `tests/Fixtures/Saloon`. You can customise the fixture location by using the `setFixturePath` method on the `MockConfig` class.
@@ -394,7 +398,7 @@ If you are using PHPUnit, then you should add the following line inside of your 
 ```php
 use Saloon\Config;
 
-class RequestTest extends TestCase
+class TestCase extends BaseTestCase
 {
     protected function setUp(): void
     {
@@ -408,6 +412,38 @@ class RequestTest extends TestCase
 {% hint style="warning" %}
 Fixtures will still be recorded and not counted as stray requests.
 {% endhint %}
+
+### Preventing Fixtures Being Recorded
+
+While running tests, you may wish to prevent Saloon from attempting to record any further fixtures. This is useful for CI like GitHub actions where you shouldn't expect any fixtures to be recorded. You can use `MockConfig::throwOnMissingFixtures()` to prevent this from happening.
+
+{% tabs %}
+{% tab title="PEST" %}
+If you are using PEST, then you should add the following code to your `Pest.php` file.
+
+```php
+use Saloon\MockConfig;
+
+MockConfig::throwOnMissingFixtures();
+```
+{% endtab %}
+
+{% tab title="PHPUnit" %}
+If you are using PHPUnit, then you should add the following line inside of your `setUp` method in your test or application's `TestCase.php` file.
+
+```php
+use Saloon\MockConfig;
+
+class TestCase extends BaseTestCase
+{
+    protected function setUp(): void
+    {
+        MockConfig::throwOnMissingFixtures();
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
 
 ### Redacting Recorded Responses / Fixtures
 
