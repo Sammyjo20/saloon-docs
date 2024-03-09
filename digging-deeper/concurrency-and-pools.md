@@ -248,7 +248,7 @@ $pool->withExceptionHandler(function (FatalRequestException|RequestException $ex
 
 ### Named/Keyed Requests
 
-Saloon also supports keyed responses to help you easily track exact requests that have been sent. This is especially useful if you are sending requests to different endpoints. You may used keying with arrays or even with a generator.
+Saloon also supports keyed responses to help you easily track exact requests that have been sent. This is especially useful if you are sending requests to different endpoints. You may use keying with arrays or even with a generator.
 
 ```php
 <?php
