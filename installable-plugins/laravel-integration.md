@@ -34,9 +34,19 @@ The Laravel HTTP sender plugin does not support the **Http::fake()** method.
 
 The HTTP client sender comes in as a separate library. This is to keep its versioning separate from Saloon and the Laravel Integration. You can install it with Composer.
 
+{% tabs %}
+{% tab title="Laravel 11+" %}
+```bash
+composer require saloonphp/laravel-http-sender "^3.0"
+```
+{% endtab %}
+
+{% tab title="Laravel 9 or 10" %}
 ```bash
 composer require saloonphp/laravel-http-sender "^2.0"
 ```
+{% endtab %}
+{% endtabs %}
 
 #### Configuration
 
