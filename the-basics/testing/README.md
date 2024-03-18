@@ -502,8 +502,6 @@ class SingleServerFixture extends Fixture
 }
 </code></pre>
 
-#### Using your custom fixtures
-
 Once you have created your custom fixture class with the redaction configuration, you can simply use it instead of `MockResponse::fixture()` in your tests. All detection methods in the mock client work with this type of fixture too.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
