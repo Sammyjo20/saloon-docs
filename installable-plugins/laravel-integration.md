@@ -1,6 +1,6 @@
 # ⛵ Laravel Plugin
 
-Saloon has been built to integrate beautifully with [Laravel](https://laravel.com). The separate Laravel plugin comes with a facade that helps with mocking and recording requests, Artisan console commands to easily build your API integration, and even a separate default sender that uses Laravel's HTTP Client.
+Saloon has been built to integrate beautifully with [Laravel](https://laravel.com). The separate Laravel plugin comes with a facade that helps with mocking and recording requests, Artisan console commands to easily build your API integrations, and events which you can listen to and build further functionality from.
 
 ### Installation
 
@@ -18,16 +18,43 @@ php artisan vendor:publish --tag=saloon-config
 
 ### Artisan Console Commands
 
-The Saloon Laravel plugin provides a few useful Artisan commands that can help you build your API integrations.
+The Laravel plugin provides a few useful Artisan commands that can help you build your API integrations.
 
 <table><thead><tr><th width="364">Command</th><th>Description</th></tr></thead><tbody><tr><td>php artisan saloon:connector</td><td>Creates a new connector - You can provide an optional <code>--oauth</code> option if you would like to create an OAuth2 connector.</td></tr><tr><td>php artisan saloon:request</td><td>Creates a new request</td></tr><tr><td>php artisan saloon:response</td><td>Creates a custom response</td></tr><tr><td>php artisan saloon:plugin</td><td>Creates a plugin</td></tr><tr><td>php artisan saloon:auth</td><td>Creates a custom authenticator</td></tr><tr><td>php artisan saloon:list</td><td>List all your API integrations</td></tr></tbody></table>
 
-### Laravel HTTP Client Sender
+### Saloon Facade
+
+The Laravel plugin also provides a facade which can be used to feel more unified with the rest of Laravel. You can use the Facade in tests instead of the `MockClient::global()` method.
+
+```php
+use Saloon\Laravel\Facades\Saloon;
+
+Saloon::fake([
+    GetServersRequest::class => MockResponse::make(body: '', status: 200),
+]);
+```
+
+To learn more about testing API integrations, [click here](../the-basics/testing/).
+
+### Events
+
+With the Laravel plugin installed, Saloon will start sending events when requests are being sent. These events are:
+
+* SendingSaloonRequest
+* SentSaloonRequest
+
+These events can be added to your `EventServiceProvider` and you can create listeners to handle when these happen.
+
+### Laravel HTTP Client Sender (Sunset)
+
+{% hint style="warning" %}
+The **saloonphp/laravel-http-sender** library is no longer recommended unless you need Telescope support - in most cases, the default Guzzle sender for Saloon is faster and easier to maintain.
+{% endhint %}
 
 Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel's [HTTP client](https://laravel.com/docs/9.x/http-client#main-content) under the hood, which allows your requests to be handled by Laravel just like using the HTTP client directly. This means Saloon's requests can be recorded in Telescope and also picked up by Laravel's event system.
 
 {% hint style="info" %}
-The Laravel HTTP sender plugin does not support the **Http::fake()** method.
+The Laravel HTTP sender plugin does not support the **Http::fake()** method, however, Saloon has a suite of comprehensive testing utilities you can use. [Click here to learn more.](../the-basics/testing/)
 {% endhint %}
 
 #### Installation
@@ -80,15 +107,6 @@ return [
 
 Now when you send requests, they will be sent through Laravel's HTTP client - if you have Laravel Telescope installed, you should see the requests appearing under the "HTTP Client" tab of Telescope.
 
-### Events
-
-With the Laravel plugin installed, Saloon will start sending events when requests are being sent. These events are:
-
-* SendingSaloonRequest
-* SentSaloonRequest
-
-These events can be added to your `EventServiceProvider` and you can create listeners to handle when these happen.
-
 ### Laravel Zero
 
 If you are using [Laravel Zero](https://github.com/laravel-zero/laravel-zero), the `SaloonServiceProvider` that registers the `Saloon` facade as well as some default middleware might not be registered. You can register Saloon's service provider in your `AppServiceProvider.php`'s `register()` method definition.
@@ -103,17 +121,3 @@ public function register()
     $this->app->register(SaloonServiceProvider::class);
 }
 ```
-
-### Saloon Facade
-
-The Laravel plugin also provides a facade which can be used to feel more unified with the rest of Laravel. You can use the Facade in tests instead of the `MockClient::global()` method.
-
-```php
-use Saloon\Laravel\Facades\Saloon;
-
-Saloon::fake([
-    GetServersRequest::class => MockResponse::make(body: '', status: 200),
-]);
-```
-
-To learn more about testing API integrations, [click here](../the-basics/testing/).
