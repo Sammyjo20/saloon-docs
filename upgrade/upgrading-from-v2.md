@@ -117,9 +117,13 @@ With version three, some of the methods in the `Saloon\Config` class have been r
 
 Low-impact changes are changes that are unlikely to come up unless you have overwritten some of Saloon's functionality or used its interfaces. It's still worth looking through to make sure you haven't missed anything.
 
-#### Body Method Renamed On MockResponse
+#### Methods Renamed On MockResponse
 
-Previously, Saloon had a method `getBody()` on a `MockResponse` class. This has now been renamed to `body()` to be more consistent with the rest of Saloon. Additionally, the old `getBodyAsString()` method has been removed.
+On the `MockResponse` class Saloon had a few methods which have now been renamed to be more consistent with the rest of Saloon. These changes are:
+
+* `getBody()` has changed to `body()`
+* `getHeaders()` has changed to `headers()`
+* `getStatus()` has changed to `status()`
 
 #### Middleware Arguments Changed
 
