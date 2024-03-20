@@ -23,8 +23,8 @@
 * [🚀 Sending Requests](the-basics/sending-requests.md)
 * [📡 Responses](the-basics/responses.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
-* [✅ Testing](the-basics/testing/README.md)
 * [🔎 Debugging](the-basics/debugging.md)
+* [✅ Testing](the-basics/testing/README.md)
 
 ## Digging Deeper
 

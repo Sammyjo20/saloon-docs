@@ -16,7 +16,7 @@ Laravel already includes this library.
 
 ### Debugging Request & Response
 
-The simplest way to debug a request and response is to use the `debug()` method on your connector or request. This will output an easy-to-understand array of the request and the response.
+The simplest way to debug a request and response is to use the `debug()` method on your connector before sending a request. This will output an easy-to-understand array of the request and the response.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
