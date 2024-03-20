@@ -24,6 +24,7 @@
 * [📡 Responses](the-basics/responses.md)
 * [🔥 Handling Failures](the-basics/handling-failures.md)
 * [✅ Testing](the-basics/testing/README.md)
+* [🔎 Debugging](the-basics/debugging.md)
 
 ## Digging Deeper
 
@@ -36,7 +37,6 @@
 * [🔑 OAuth2](digging-deeper/oauth2-authentication/README.md)
   * [Authorization Code Grant](digging-deeper/oauth2-authentication/oauth2-authentication.md)
   * [Client Credentials Grant](digging-deeper/oauth2-authentication/client-credentials-grant.md)
-* [🔎 Debugging](digging-deeper/debugging.md)
 * [💫 Middleware](digging-deeper/middleware.md)
 * [⛩️ PSR Support](digging-deeper/psr-support.md)
 
