@@ -163,7 +163,7 @@ By default, the cache key is created from the full request URL, the headers that
 ```php
 <?php
 
-use Saloon\Enums\Method;
+use Saloon\Http\PendingRequest;
 
 class GetServersRequest extends Request implements Cacheable
 {
