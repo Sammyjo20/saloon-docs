@@ -4,7 +4,7 @@ While building API integrations, sometimes you will send a request and the API w
 
 ### Prerequisites
 
-Saloon's default debugging driver uses [Symfony's Var Dumper](https://github.com/symfony/var-dumper) library. If you do no have it installed, you can install it below.
+Saloon's default debugging driver uses [Symfony's Var Dumper](https://github.com/symfony/var-dumper) library. If you're not using Laravel and do not have it installed, you can install it below.
 
 ```
 composer require symfony/var-dumper
@@ -18,19 +18,28 @@ Laravel already includes this library.
 
 The simplest way to debug a request and response is to use the `debug()` method on your connector before sending a request. This will output an easy-to-understand array of the request and the response.
 
-<pre class="language-php"><code class="lang-php">&#x3C;?php
-
+{% tabs %}
+{% tab title="Connector" %}
+```php
 $connector = new ForgeConnector;
 
-<strong>$connector->debug();
-</strong>
-$connector->send($request);
-</code></pre>
+$connector->debug()->send($request);
+```
+{% endtab %}
+
+{% tab title="Request" %}
+```php
+$connector = new ForgeConnector;
+
+$connector->send($request->debug());
+```
+{% endtab %}
+{% endtabs %}
 
 You can provide the `die` argument if you would like to terminate the application after receiving the response.
 
 ```php
-$connector->debug(die: true);
+$connector->debug(die: true)->send($request);
 ```
 
 This will provide an output in your terminal/browser like this:
