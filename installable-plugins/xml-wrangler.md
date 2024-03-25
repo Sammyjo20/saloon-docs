@@ -12,8 +12,6 @@ XML Wrangler is a first-party library written by the maintainer of Saloon and is
 {% tabs %}
 {% tab title="Reader" %}
 ```php
-<?php
-
 use Saloon\XmlWrangler\XmlReader;
 
 $reader = XmlReader::fromString($xml);
@@ -25,14 +23,10 @@ $reader->values(); // ['breakfast_menu' => [['name' => '...'], ['name' => '...']
 // Query the XML
 
 $reader->value('food.0')->sole(); // ['name' => 'Belgian Waffles', 'price' => '$5.95', ...]
+
 $reader->xpathValue('//food[@bestSeller="true"]/name')->get(); // ['Belgian Waffles', 'Berry-Berry Belgian Waffles']
 
-// Use getAttributes() to get the attributes on the elements
-
 $reader->element('food.0')->sole()->getAttributes(); // ['soldOut' => false, 'bestSeller' => true]
-
-// Use getContent() to get the contents of the elements
-$reader->element('food.0')->sole()->getContent(); // ['name' => 'Belgian Waffles', 'price' => '$5.95', ...]
 ```
 {% endtab %}
 
