@@ -115,3 +115,11 @@ class ForgeConnector extends Connector implements HasBody
     }
 }
 ```
+
+### XML Wrangler
+
+You may be interested in a third-party library written by the maintainer of Saloon - XML Wrangler. It provides a modern syntax for reading and writing XML in PHP.
+
+{% content-ref url="../../installable-plugins/xml-wrangler.md" %}
+[xml-wrangler.md](../../installable-plugins/xml-wrangler.md)
+{% endcontent-ref %}
