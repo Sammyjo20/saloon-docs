@@ -66,6 +66,7 @@ class CreateServerRequest extends Request implements HasBody
                 <provider>' . $this->provider . '</provider>
             </root>
         XML;
+    }
 }
 ```
 

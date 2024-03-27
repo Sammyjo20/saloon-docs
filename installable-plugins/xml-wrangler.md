@@ -62,3 +62,60 @@ Click the card below to read the documentation
 
 {% embed url="https://github.com/saloonphp/xml-wrangler" %}
 
+### Saloon Integration
+
+XML Wrangler is also integrated with Saloon! Once installed, you'll be able to use the `xmlReader()` method on your responses to instantiate an XML Wrangler reader.
+
+```php
+$response = $connector->send($request);
+
+$reader = $response->xmlReader();
+
+// $reader->values();
+// etc...
+```
+
+#### Request Body
+
+You may also choose to use XML Wrangler to create the request body when sending XML requests in Saloon.
+
+```php
+<?php
+
+use Saloon\Http\Request;
+use Saloon\XmlWrangler\XmlWriter;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasXmlBody;
+use Saloon\XmlWrangler\Data\Element;
+
+class CreateServerRequest extends Request implements HasBody
+{
+    use HasXmlBody;
+
+    protected Method $method = Method::POST;
+    
+    public function __construct(
+        protected readonly string $ubuntuVersion,
+        protected readonly string $type,
+        protected readonly string $provider
+    ){}
+    
+    protected function defaultBody(): string
+    {
+        return XmlWriter::make()->write('root', [
+            'ubuntu-version' => $this->ubuntuVersion,
+            'type' => $this->type,
+            'provider' => $this->provider,
+        ]);
+        
+        // Same as...
+        
+        // <?xml version="1.0" encoding="utf-8"?>
+        // <root>
+        //   <ubuntu-version>ubuntuVersion</ubuntu-version>
+        //   <type>type</type>
+        //   <provider>provider</provider>
+        // </root>
+    }
+}
+```
