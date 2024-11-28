@@ -43,6 +43,8 @@ $promise
     ->otherwise(function (Exception $exception) {
         // Handle failed request
     });
+
+$promise->wait(); // Force the promise to be resolved
 ```
 
 ### Custom Responses
