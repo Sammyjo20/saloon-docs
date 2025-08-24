@@ -234,7 +234,7 @@ The authenticator returned by Saloon when using the `getAccessToken` or `refresh
 
 $authenticator->getAccessToken();
 $authenticator->getRefreshToken();
-$authenticator->getExpiry();
+$authenticator->getExpiresAt();
 
 $authenticator->hasExpired();
 $authenticator->hasNotExpired();
