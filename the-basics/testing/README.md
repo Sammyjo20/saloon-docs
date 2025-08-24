@@ -32,7 +32,7 @@ test('my test', function () {
     
     $connector = new ForgeConnector;
     $connector->withMockClient($mockClient);
-]);
+});
 ```
 
 You use the key of the MockClient to define a request that should be mocked. You can also use a URL pattern. You can use an asterisk (**\***) to act as a wild card.
