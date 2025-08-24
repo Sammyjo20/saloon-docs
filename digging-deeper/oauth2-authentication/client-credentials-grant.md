@@ -49,6 +49,7 @@ After you have added the trait, you will need to tell Saloon how to authenticate
 
 use Saloon\Http\Connector;
 use Saloon\Traits\OAuth2\ClientCredentialsGrant;
+use Saloon\Helpers\OAuth2\OAuthConfig;
 
 class WarehouseConnector extends Connector
 {
