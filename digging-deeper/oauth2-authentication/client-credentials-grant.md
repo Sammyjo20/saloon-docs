@@ -163,7 +163,7 @@ The authenticator returned by Saloon when using the `getAccessToken`  method wil
 <?php
 
 $authenticator->getAccessToken();
-$authenticator->getExpiry();
+$authenticator->getExpiresAt();
 
 $authenticator->hasExpired();
 $authenticator->hasNotExpired();
