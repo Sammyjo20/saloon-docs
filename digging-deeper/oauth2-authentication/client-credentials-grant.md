@@ -229,7 +229,7 @@ protected function defaultOauthConfig(): OAuthConfig
         ->setClientSecret('my-client-secret')
 <strong>        ->setRequestModifier(function (GetClientCredentialsTokenRequest $request) {
 </strong><strong>            //
-</strong><strong>        )},
+</strong><strong>        }),
 </strong>}
 </code></pre>
 {% endtab %}
