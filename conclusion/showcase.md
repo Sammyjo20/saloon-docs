@@ -144,5 +144,13 @@ Want to add your application or SDK to Saloon's showcase page? Edit this page on
          <td></td>
          <td><a href="https://github.com/njoguamos/laravel-pesapal">https://github.com/njoguamos/laravel-pesapal</a></td>
        </tr>
+       <tr>
+         <td>🔖</td>
+         <td>oneduo/github-sdk-php</td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td><a href="https://github.com/oneduo/github-sdk-php">https://github.com/oneduo/github-sdk-php</a></td>
+       </tr>
    </tbody>
 </table>
