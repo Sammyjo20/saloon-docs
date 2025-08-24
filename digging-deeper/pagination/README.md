@@ -343,7 +343,7 @@ class GetLikedSongsRequest extends Request implements HasRequestPagination
 {
     // {...}
     
-    public function paginate(Connector $connector): Paginator;
+    public function paginate(Connector $connector): Paginator
     {
         return new class(connector: $connector, request: $this) extends PagedPaginator
         {
@@ -356,7 +356,7 @@ class GetLikedSongsRequest extends Request implements HasRequestPagination
             {
                 return $response->json('items');
             }
-        }
+        };
     }
 }
 ```
