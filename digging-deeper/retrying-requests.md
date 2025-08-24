@@ -79,7 +79,8 @@ In some situations, you might want to change the next request to improve the cha
 use Saloon\Exceptions\RequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Exceptions\FatalRequestException;
-
+use Saloon\Http\Request;
+    
 class ForgeConnector extends Connector
 {
     public ?int $tries = 3;
