@@ -17,6 +17,14 @@ Want to add your application or SDK to Saloon's showcase page? Edit this page on
    </thead>
    <tbody>
       <tr>
+         <td>🚨</td>
+         <td>ohdearapp/ohdear-php-sdk</td>
+         <td>1</td>
+         <td></td>
+         <td></td>
+         <td><a href="https://github.com/ohdearapp/ohdear-php-sdk">https://github.com/ohdearapp/ohdear-php-sdk</a></td>
+      </tr>
+      <tr>
          <td>🌲</td>
          <td>astrotomic/ecologi-sdk</td>
          <td>1</td>
