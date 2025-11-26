@@ -15,7 +15,7 @@ use Saloon\Contracts\Body\HasBody;
 }
 </code></pre>
 
-Next, you will need to add the `HasBody` trait to your request. This trait will implement the `body()` method that the `HasBody` interface requires. It also provides a method `defaultBody()` which you can extend to provide a default body on your request.
+Next, you will need to add the `HasStreamBody` trait to your request. This trait will implement the `body()` method that the `HasBody` interface requires. It also provides a method `defaultBody()` which you can extend to provide a default body on your request.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
