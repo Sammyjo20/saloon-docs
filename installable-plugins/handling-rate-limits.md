@@ -1,4 +1,4 @@
-# ⛔ Handling Rate Limits
+# ⛔ Rate Limit Handler
 
 Handling rate limits with API integrations can be hard. Saloon has a first-party plugin that provides you with the tools you need to prevent rate limits and handle what happens if a rate limit is exceeded.
 
@@ -231,9 +231,11 @@ use Saloon\RateLimitPlugin\Limit;
 
 Limit::allow(60)->everySeconds(seconds: 5);
 Limit::allow(60)->everyMinute();
+Limit::allow(60)->untilEndOfMinute();
 Limit::allow(60)->everyFiveMinutes();
 Limit::allow(60)->everyThirtyMinutes();
 Limit::allow(60)->everyHour();
+Limit::allow(60)->untilEndOfHour();
 Limit::allow(60)->everySixHours();
 Limit::allow(60)->everyTwelveHours();
 Limit::allow(60)->everyDay();
@@ -333,6 +335,27 @@ class SpotifyConnector extends Connector
 </strong>    }
 }
 </code></pre>
+
+When Saloon detects a rate limit has been exceeded, Saloon will throw a `RateLimitReachedException` . If you would like your application to sleep instead of throwing an exception you can extend the `getTooManyAttemptsLimiter` method and apply the `sleep` modifier
+
+<pre class="language-php"><code class="lang-php">use Saloon\Http\Connector;
+use Saloon\RateLimitPlugin\Stores\MemoryStore;
+use Saloon\RateLimitPlugin\Traits\HasRateLimits;
+
+class SpotifyConnector extends Connector
+{
+    use HasRateLimits;
+    
+    protected function getTooManyAttemptsLimiter(): ?Limit
+    {
+<strong>        return Limit::custom($this->handleTooManyAttempts(...))->sleep();
+</strong>    }
+}
+</code></pre>
+
+{% hint style="warning" %}
+When using the `sleep` modifier, Saloon will automatically attempt to make another request after detecting a rate limit being reached in the response. This does not affect the retry definition you may have defined on your connector or request.
+{% endhint %}
 
 ### Handling Rate Limits Being Exceeded
 
