@@ -206,6 +206,10 @@ protected function resolveRateLimitStore(): RateLimitStore
 
 While this plugin can detect if a 429 status occurs from a response, it's better to prevent your application from hitting rate limits than let them happen. This plugin provides an expressive `Limit` class which can be used to define different limits. You can define as many limits as you like, with various intervals.
 
+#### What limit type should I be using?
+
+The rate limit plugin supports two types of limits, time-based limiters, for example 100 requests every 60 seconds and a "Leaky Bucket" limiter. Please continue reading if you need to use time-based limiters or you can [click here for leaky bucket limiters](handling-rate-limits.md#leaky-bucket-limiter).
+
 #### Configuring Limits
 
 Here is a simple example of a limit for an API which only allows 60 requests per minute, but has a daily limit of 1,000 API calls. There are many different limit intervals, as well as different ways you can instruct Saloon to handle the limit. There is no restriction on the number of limits you can have.
@@ -356,6 +360,32 @@ class SpotifyConnector extends Connector
 {% hint style="warning" %}
 When using the `sleep` modifier, Saloon will automatically attempt to make another request after detecting a rate limit being reached in the response. This does not affect the retry definition you may have defined on your connector or request.
 {% endhint %}
+
+### Leaky Bucket Limiter
+
+Some applications may implement a "Leaky Bucket" algorithm for their rate limits, essentially this means that while you are making requests, within a given time frame (usually every second) you "gain" additional requests you can make. For example if an API integration allowed 60 requests per minute but had a leak rate of 1 per second, you could in theory be constantly communicating with the API as long as you stay within the 60 request limit.
+
+The plugin implementation is really straight forward. In order to implement the above example you would write something like this.
+
+```php
+use Saloon\RateLimitPlugin\Bucket;
+
+protected function resolveLimits(): array
+{
+    return [
+        Bucket::capacity(60)
+            ->leak(1)
+            ->everySeconds(1)
+            ->sleep()
+    ];
+}
+```
+
+{% hint style="info" %}
+The `Bucket` class extends the `Limit` class so you may use all of the limit intervals as defined above.
+{% endhint %}
+
+You'll notice that it does an initial burst of 60 requests, then the bucket fills back up and the next second does 1 request, then the next second does 1 request, which adheres to our "leak 1 every 1 second" specification.
 
 ### Handling Rate Limits Being Exceeded
 
