@@ -36,6 +36,14 @@ Saloon::fake([
 
 To learn more about testing API integrations, [click here](../the-basics/testing/).
 
+### Laravel Nightwatch Support
+
+From v3.6.0 the Saloon Laravel plugin natively supports Laravel Nightwatch. The plugin will automatically register a Nightwatch middleware on all of your connectors.
+
+### Laravel Telescope Support
+
+From v3.8.0 the Saloon Laravel plugin natively supports Laravel Telescope. The plugin will automatically register a Telescope middleware on all of your connectors.
+
 ### Events
 
 With the Laravel plugin installed, Saloon will start sending events when requests are being sent. These events are:
@@ -44,68 +52,6 @@ With the Laravel plugin installed, Saloon will start sending events when request
 * SentSaloonRequest
 
 These events can be added to your `EventServiceProvider` and you can create listeners to handle when these happen.
-
-### Laravel HTTP Client Sender (Sunset)
-
-{% hint style="warning" %}
-The **saloonphp/laravel-http-sender** library is no longer recommended unless you need Telescope support - in most cases, the default Guzzle sender for Saloon is faster and easier to maintain.
-{% endhint %}
-
-Saloon comes with a sender built just for Laravel. The HTTP sender uses Laravel's [HTTP client](https://laravel.com/docs/9.x/http-client#main-content) under the hood, which allows your requests to be handled by Laravel just like using the HTTP client directly. This means Saloon's requests can be recorded in Telescope and also picked up by Laravel's event system.
-
-{% hint style="info" %}
-The Laravel HTTP sender plugin does not support the **Http::fake()** method, however, Saloon has a suite of comprehensive testing utilities you can use. [Click here to learn more.](../the-basics/testing/)
-{% endhint %}
-
-#### Installation
-
-The HTTP client sender comes in as a separate library. This is to keep its versioning separate from Saloon and the Laravel Integration. You can install it with Composer.
-
-{% tabs %}
-{% tab title="Laravel 11+" %}
-```bash
-composer require saloonphp/laravel-http-sender "^3.0"
-```
-{% endtab %}
-
-{% tab title="Laravel 9 or 10" %}
-```bash
-composer require saloonphp/laravel-http-sender "^2.0"
-```
-{% endtab %}
-{% endtabs %}
-
-#### Configuration
-
-Next, in your `config/saloon.php` file, change the default sender to `HttpSender::class`. Now every connector in your Laravel app will automatically use the HTTP sender. No more configuration is required, Saloon will work the same as before, just now using the HTTP client.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Saloon\HttpSender\HttpSender;
-
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Saloon Sender
-    |--------------------------------------------------------------------------
-    |
-    | This value specifies the "sender" class that Saloon should use by
-    | default on all connectors. You can change this sender if you
-    | would like to use your own. You may also specify your own
-    | sender on a per-connector basis.
-    |
-    */
-
-    'default_sender' => HttpSender::class,
-
-];
-```
-
-Now when you send requests, they will be sent through Laravel's HTTP client - if you have Laravel Telescope installed, you should see the requests appearing under the "HTTP Client" tab of Telescope.
 
 ### Laravel Zero
 
