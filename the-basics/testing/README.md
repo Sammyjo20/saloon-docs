@@ -24,6 +24,7 @@ Saloon's testing starts with the **MockClient** class. This class can be instant
 
 ```php
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 
 test('my test', function () {
     $mockClient = new MockClient([
