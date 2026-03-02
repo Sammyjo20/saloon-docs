@@ -53,7 +53,7 @@
 * [🏭 Auto SDK Generator](installable-plugins/sdk-generator.md)
 * [🤠 Lawman](installable-plugins/lawman.md)
 * [🏇 XML Wrangler](installable-plugins/xml-wrangler.md)
-* [🏗️ Building Your Own Plugins](installable-plugins/traits.md)
+* [🏗️ Building Your Own Plugins](installable-plugins/building-your-own-plugins.md)
 
 ## Conclusion
 
