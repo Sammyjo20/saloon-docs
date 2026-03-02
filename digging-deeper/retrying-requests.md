@@ -76,9 +76,9 @@ In some situations, you might want to change the next request to improve the cha
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
-use Saloon\Exceptions\RequestException;
+use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
-use Saloon\Exceptions\FatalRequestException;
+use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\Request;
     
 class ForgeConnector extends Connector
