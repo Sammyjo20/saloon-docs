@@ -168,5 +168,13 @@ Want to add your application or SDK to Saloon's showcase page? Edit this page on
          <td></td>
          <td><a href="https://github.com/lloricode/paymaya-sdk-php">https://github.com/lloricode/paymaya-sdk-php</a></td>
       </tr>
+      <tr>
+         <td>🌐</td>
+         <td>laravel/cloud-cli</td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td><a href="https://github.com/laravel/cloud-cli">https://github.com/laravel/cloud-cli</a></td>
+      </tr>
    </tbody>
 </table>
