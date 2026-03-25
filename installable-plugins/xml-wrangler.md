@@ -1,6 +1,6 @@
 # 🏇 XML Wrangler
 
-XML Wrangler is a first-party library written by the maintainer of Saloon and is designed to modernise reading and writing XML in PHP. XML Wrangler can detect errors in XML, read gigabytes of XML files and convert XML results into Laravel Collections. Its powerful reader supports dot notation and XPath queries.
+XML Wrangler is a first-party library written by the Saloon team and is designed to modernise reading and writing XML in PHP. XML Wrangler can detect errors in XML, read gigabytes of XML files and convert XML results into Laravel Collections. Its powerful reader supports dot notation and XPath queries.
 
 ### Key Features
 

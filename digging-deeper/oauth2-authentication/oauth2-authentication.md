@@ -171,7 +171,7 @@ $authorizationUrl = $connector->getAuthorizationUrl();
 
 ### Creating Access Tokens
 
-After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`. The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate your connector/requests. It acts like a DTO that can be easily serialized and transported around your application.
+After the user has approved your application, the API provider will redirect you back to your application with an authorization code and state. This data usually sent in the form of query parameters should be passed into your `getAccessToken` method on your connector. If successful, the method will return an `AccessTokenAuthenticator`. The access token, refresh token and expiry are wrapped up in a [Saloon Authenticator](../../the-basics/authentication.md#custom-authenticators) class that can be used to authenticate your connector/requests.
 
 <pre class="language-php"><code class="lang-php">&#x3C;?php
 
@@ -187,10 +187,6 @@ $connector->authenticate($authenticator);
 $connector->send(new GetTracksRequest);
 </code></pre>
 
-{% hint style="info" %}
-Once you have received the authenticator instance, you should cache it securely in your application for future use. Read further to see how you can do this.
-{% endhint %}
-
 #### Verifying State
 
 If you stored the state that was generated during creating an authorization URL, you should pass this expected state alongside the state sent back by the API provider's OAuth2 server. This will be used to verify the state provided back by the application is valid. If the state does not match the expected state, Saloon will throw an exception.
@@ -204,25 +200,6 @@ $authConnector = new SpotifyConnector;
 // however both must be present
 
 $authenticator = $authConnector->getAccessToken($code, $state, $expectedState);
-```
-
-### Storing Authentication For Later
-
-You will likely need to store the authenticator securely so you can use it for future requests. You may serialize and unserialize the authenticator class using the helper methods below, then you can store the string wherever you like, usually encrypted in the database if it's against a user. Then, you can retrieve this authenticator and use it to authenticate your connector.
-
-```php
-<?php
-
-$connector = new SpotifyConnector;
-$authenticator = $connector->getAccessToken($code);
-
-// Securely store this against your user.
-
-$serialized = $authenticator->serialize();
-
-// Unserialize the authenticator when retrieving it
-
-$authenticator = AccessTokenAuthenticator::unserialize($serialized);
 ```
 
 ### Authenticator Methods
@@ -268,10 +245,6 @@ $connector->authenticate($authenticator);
 
 $response = $connector->send(new GetTracksRequest);
 ```
-
-{% hint style="info" %}
-If you are using Laravel and the Saloon Laravel library, you can use built-in `EncryptedOAuthAuthenticatorCast` **/** `OAuthAuthenticatorCast` Eloquent casts to automatically cast the authenticator for storing in your database.
-{% endhint %}
 
 ### Customising The Authenticator
 

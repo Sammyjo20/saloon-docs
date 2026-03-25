@@ -1,4 +1,4 @@
-# ☝ Solo Requests
+# ☝️ Solo Requests
 
 While Saloon's typical setup of a connector and requests is great, sometimes all you need is to make a single request to a service. For scenarios like these, you may create a "SoloRequest" instead of making a connector and a single request. This saves you from having to create additional classes.
 
@@ -22,6 +22,10 @@ class GetAllPokemonRequest extends SoloRequest
     }
 }
 ```
+
+{% hint style="danger" %}
+Be careful with providing user generated input as the URL in the `resolveEndpoint` method as this could result in an attacker attempting SSRF and stealing your credentials.
+{% endhint %}
 
 ### Defaults
 

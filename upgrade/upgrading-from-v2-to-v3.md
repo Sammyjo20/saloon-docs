@@ -1,6 +1,6 @@
-# 🌳 Upgrading from v2
+# 🌳 Upgrading from v2 to v3
 
-Saloon version three comes with many improvements over version two, but most of the improvements were internal changes, so the upgrade to v3 from v2 shouldn't be too cumbersome. If you haven't already, it's recommended to read through ["What's new in v3"](whats-new-in-v3.md) to get an idea of what has changed before making the upgrade.
+Saloon version three comes with many improvements over version two, but most of the improvements were internal changes, so the upgrade to v3 from v2 shouldn't be too cumbersome. If you haven't already, it's recommended to read through ["What's new in v3"](../conclusion/whats-new-in-v3.md) to get an idea of what has changed before making the upgrade.
 
 ### Upgrade Saloon's Packages
 

@@ -4,8 +4,9 @@
 
 ## Upgrade
 
-* [🪄 What's new in v3](upgrade/whats-new-in-v3.md)
-* [🌳 Upgrading from v2](upgrade/upgrading-from-v2.md)
+* [⚠️ Upgrading from v3 to v4](upgrade/upgrading-from-v3-to-v4.md)
+* [🌳 Upgrading from v2 to v3](upgrade/upgrading-from-v2-to-v3.md)
+* [💛 Supported Versions](upgrade/supported-versions.md)
 
 ## The Basics
 
@@ -50,8 +51,8 @@
 * [⛵ Laravel Plugin](installable-plugins/laravel-integration.md)
 * [🔁 Caching](installable-plugins/caching-responses.md)
 * [⛔ Rate Limit Handler](installable-plugins/handling-rate-limits.md)
-* [🏭 Auto SDK Generator](installable-plugins/sdk-generator.md)
 * [🤠 Lawman](installable-plugins/lawman.md)
+* [🏭 Auto SDK Generator](installable-plugins/sdk-generator.md)
 * [🏇 XML Wrangler](installable-plugins/xml-wrangler.md)
 * [🏗️ Building Your Own Plugins](installable-plugins/building-your-own-plugins.md)
 
@@ -64,5 +65,6 @@
 * [📖 Tutorials & Blog Posts](conclusion/tutorials.md)
 * [🎖️ Showcase](conclusion/showcase.md)
 * [💥 Known Issues](conclusion/known-issues.md)
+* [🪄 What's new in v3](conclusion/whats-new-in-v3.md)
 * [🤗 Credits](conclusion/credits.md)
 * [❤️ Support Saloon](https://github.com/sponsors/Sammyjo20)

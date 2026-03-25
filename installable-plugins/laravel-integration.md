@@ -7,7 +7,7 @@ Saloon has been built to integrate beautifully with [Laravel](https://laravel.co
 You can install the separate package with Composer. You must already have `saloonphp/saloon` as a required dependency in your `composer.json` file.
 
 ```bash
-composer require saloonphp/laravel-plugin "^3.0"
+composer require saloonphp/laravel-plugin "^4.0"
 ```
 
 Next, publish the configuration file with the following Artisan command

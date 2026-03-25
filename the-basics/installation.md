@@ -3,7 +3,7 @@
 To get started with Saloon, you will need to install it through [Composer](https://getcomposer.org/).&#x20;
 
 ```bash
-composer require saloonphp/saloon "^3.0"
+composer require saloonphp/saloon "^4.0"
 ```
 
 ### Using Laravel?

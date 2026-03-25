@@ -1,10 +1,16 @@
 # 💥 Known Issues
 
+### CVE Issues Resolved
+
+* [Insecure deserialisation in AccessTokenAuthenticator (object injection / RCE)](https://github.com/saloonphp/saloon/security/advisories/GHSA-vf4h-q838-76mr)
+* [Absolute URL in endpoint overrides base URL (SSRF / credential leakage)](https://github.com/saloonphp/saloon/security/advisories/GHSA-c83f-3xp6-hfcp)
+* [Fixture name path traversal (out-of-bounds file read/write)](https://github.com/saloonphp/saloon/security/advisories/GHSA-f7xc-5852-fj99)
+
 ### Usage of anonymous functions with long-running processes like Laravel Queues
 
 There appears to be an issue with PHP which means any object that has an anonymous function inside of one of its properties will result in it not properly being destructed or running the `__destruct()` method. With Saloon, take care when using anonymous functions inside your connector or solo request because we have found that if you have an anonymous function/closure inside of the connector and when running it from within a long-running process like Laravel Queues, it won't close connections.
 
-This is because as mentioned above, the connector isn't able to be appropriately destructed which results in the sender and the sender's HTTP client like Guzzle not being able to be destructed and finally resulting in a "leak" of connections. This can cause further issues like the operating system running out of file handles and causing errors like "Too many files open".&#x20;
+This is because as mentioned above, the connector isn't able to be appropriately destructed which results in the sender and the sender's HTTP client like Guzzle not being able to be destructed and finally resulting in a "leak" of connections. This can cause further issues like the operating system running out of file handles and causing errors like "Too many files open".
 
 You can workaround this by changing the way you define your anonymous closure. You can:
 
@@ -46,7 +52,7 @@ use Saloon\Config;
 Config::$defaultTlsMethod = STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT;
 ```
 
-You can [visit this page on the PHP documentation](https://www.php.net/manual/en/function.stream-socket-enable-crypto.php) to see the different TLS options available.&#x20;
+You can [visit this page on the PHP documentation](https://www.php.net/manual/en/function.stream-socket-enable-crypto.php) to see the different TLS options available.
 
 {% hint style="info" %}
 **TLS 1.1** has been deprecated since 2021 so it is unlikely that APIs are still using it, but older systems may have not upgraded yet.
