@@ -2,7 +2,7 @@
 
 Lawman is a [PestPHP](https://pestphp.com/) Plugin for SaloonPHP which allows you to easily write architecture tests for your API integrations with a focus on them being easy to write and easy to read. After all, if SaloonPHP makes our API integrations beautiful, the tests for them should be beautiful too, right?
 
-Lawman is a third-party plugin written and maintained by [Jon Purvis](https://twitter.com/JonPurvis\_) and gives you access to Expectations for your Connectors, Requests, Plugins and more, to ensure they stick to whichever architecture rules your application has.
+Lawman is a third-party plugin written and maintained by [Jon Purvis](https://jonathanpurvis.co.uk) and gives you access to Expectations for your Connectors, Requests, Plugins, Authenticators, DTOs, Middleware and more, to ensure they stick to whichever architecture rules your application has.
 
 One of the great things about Lawman is because it's a Pest plugin, it will work with regular PestPHP Expectations, just chain them up and you're good to go!
 
@@ -30,7 +30,7 @@ test('connector')
     ->toUse('Saloon\Traits\Plugins\AlwaysThrowOnErrors');
 ```
 
-So that test is ensuring our class extends the base Connector and uses the `AcceptJson` and `AlwaysThrowOnErrors` traits. Whilst that test works, we could perhaps make it quicker to write and easier to read, so with Lawman, you can do:
+So that test is ensuring our class extends the base Connector and uses the `AcceptsJson` and `AlwaysThrowOnErrors` traits. Whilst that test works, we could perhaps make it quicker to write and easier to read, so with Lawman, you can do:
 
 ```php
 test('connector')
@@ -62,14 +62,19 @@ test('request')
     ->toUseAcceptsJsonTrait();
 ```
 
-What about if we want to test our Connector has an Authentication method? Lawman makes this easy to do, it even works with multi auth:
+What about if we want to test our Connector has an Authentication method? Lawman makes this easy to do, including dedicated helpers for multi auth and custom authenticators:
 
 ```php
 test('connector')
     ->expect('App\Http\Integrations\Integration\Connector')
     ->toBeSaloonConnector()
+    ->toUseMultipleAuthenticators()
     ->toUseCertificateAuthentication()
     ->toUseTokenAuthentication();
+
+test('authenticator')
+    ->expect('App\Http\Integrations\Integration\Auth\ForgeAuthenticator')
+    ->toBeSaloonAuthenticator();
 ```
 
 Lawman also has Expectations for the Pagination, Cache and Rate Limit Plugins:
@@ -78,10 +83,14 @@ Lawman also has Expectations for the Pagination, Cache and Rate Limit Plugins:
 test('request')
     ->expect('App\Http\Integrations\Integration\Requests\Request')
     ->toBeSaloonRequest()
-    ->toSendPostRequest()
-    ->toUsePagedPagination()
+    ->toBePaginatable()
     ->toHaveCaching()
-    ->toHaveRateLimits()
+    ->toHaveRateLimits();
+
+test('connector')
+    ->expect('App\Http\Integrations\Integration\Connector')
+    ->toBeSaloonConnector()
+    ->toUsePagedPagination();
 ```
 
 Maybe our Connector has some Retry instructions that we want to test. Again, with Lawman, it's as simple as:
@@ -90,36 +99,109 @@ Maybe our Connector has some Retry instructions that we want to test. Again, wit
 test('connector')
     ->expect('App\Http\Integrations\Integration\Connector')
     ->toBeSaloonConnector()
-    ->toBeTriedAgainOnFailure()
-    ->toHaveRetryInterval()
-    ->toUseExponentialBackoff()
+    ->toBeTriedAgainOnFailure(tries: 3)
+    ->toHaveRetryInterval(retryInterval: 1500)
+    ->toUseExponentialBackoff();
+```
+
+Maybe our Connector is for an API that tends to be quite slow, so we increased some timeouts:
+
+```php
+test('connector')
+    ->expect('App\Http\Integrations\Integration\Connector')
+    ->toBeSaloonConnector()
+    ->toSetConnectTimeout(connectTimeout: 30)
+    ->toSetRequestTimeout(requestTimeout: 60);
+```
+
+You can also assert DTOs, Solo Requests, SDK resources, middleware, and Saloon plugins:
+
+```php
+test('dto')
+    ->expect('App\Http\Integrations\Integration\Data\Server')
+    ->toBeSaloonDto();
+
+test('solo request')
+    ->expect('App\Http\Integrations\Integration\Requests\GetPokemonRequest')
+    ->toBeSoloRequest()
+    ->toHaveEndpoint();
+
+test('resource')
+    ->expect('App\Http\Integrations\Integration\Resources\PokemonResource')
+    ->toBeSaloonResource();
+
+test('middleware')
+    ->expect('App\Http\Integrations\Integration\Middleware\LogResponse')
+    ->toBeResponseMiddleware();
+
+test('plugin')
+    ->expect('App\Http\Integrations\Integration\Plugins\HasLogging')
+    ->toBeSaloonPlugin();
+```
+
+#### PHPStan Support
+
+Lawman ships with a PHPStan extension so expectations like `toBeSaloonConnector()` and `toSendPostRequest()` are recognised when you analyse your test suite. If your project uses [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer), the extension is registered automatically. Otherwise, add the following to your `phpstan.neon` file:
+
+```neon
+includes:
+    - vendor/jonpurvis/lawman/extension.neon
 ```
 
 ### Available Expectations
 
-#### Authentication
+Lawman currently provides **78** Expectations.
+
+#### **Authentication**
 
 * `toUseTokenAuthentication`
 * `toUseBasicAuthentication`
 * `toUseCertificateAuthentication`
 * `toUseHeaderAuthentication`
+* `toUseQueryAuthentication`
+* `toUseDigestAuthentication`
+* `toUseMultipleAuthenticators`
+* `toUseAccessTokenAuthentication`
+* `toUseNullAuthentication`
+* `toBeSaloonAuthenticator`
+* `toBeOAuthAuthenticator`
 
-#### Cache
+#### **Cache**
 
 * `toHaveCaching`
 
-#### Connector
+#### **Connector**
 
 * `toBeSaloonConnector`
+* `toHaveDefaultHeaders`
+* `toHaveDefaultConfig`
+* `toHaveBaseUrl`
+* `toUseCustomResponse`
+* `toHaveCustomFailureDetection`
+* `toHaveCustomException`
+* `toHaveDefaultAuth`
+* `toHaveDefaultOauthConfig`
+* `toBeSaloonResource`
+* `toHaveBootMethod`
+* `toHandlePsrRequest`
+* `toHaveDefaultSender`
 
-#### Pagination
+#### **Pagination**
 
 * `toUsePagedPagination`
 * `toUseOffsetPagination`
 * `toUseCursorPagination`
 * `toUseCustomPagination`
+* `toUseRequestPagination`
+* `toBePaginatable`
+* `toUseAsyncPagination`
+* `toMapPaginatedResponseItems`
 
-#### Properties
+#### **Plugin**
+
+* `toBeSaloonPlugin`
+
+#### **Properties**
 
 * `toSetConnectTimeout`
 * `toSetRequestTimeout`
@@ -127,12 +209,14 @@ test('connector')
 * `toHaveRetryInterval`
 * `toUseExponentialBackoff`
 * `toThrowOnMaxTries`
+* `toHaveDefaultDelay`
+* `toHaveCustomRetryHandling`
 
-#### Rate Limit
+#### **Rate Limit**
 
 * `toHaveRateLimits`
 
-#### Request
+#### **Request**
 
 * `toBeSaloonRequest`
 * `toHaveRequestMethod`
@@ -145,34 +229,54 @@ test('connector')
 * `toSendOptionsRequest`
 * `toSendConnectRequest`
 * `toSendTraceRequest`
+* `toSendQueryRequest`
 * `toHaveJsonBody`
 * `toHaveMultipartBody`
 * `toHaveXmlBody`
 * `toHaveFormBody`
 * `toHaveStringBody`
 * `toHaveStreamBody`
+* `toHaveDefaultQuery`
+* `toHaveDefaultBody`
+* `toBeSoloRequest`
+* `toHaveEndpoint`
+* `toCreateDtoFromResponse`
 
-#### Response
+#### **Response**
 
 * `toBeSaloonResponse`
 
-#### Trait
+#### **DTO**
+
+* `toBeSaloonDto`
+
+#### **Middleware**
+
+* `toBeRequestMiddleware`
+* `toBeResponseMiddleware`
+
+#### **Trait**
 
 * `toUseAcceptsJsonTrait`
 * `toUseAlwaysThrowOnErrorsTrait`
 * `toUseTimeoutTrait`
 * `toUseAuthorisationCodeGrantTrait`
 * `toUseClientCredentialsGrantTrait`
+* `toUseClientCredentialsBasicAuthGrantTrait`
+* `toUseRequiresAuthTrait`
+* `toUseApiVersionTrait`
 
 ### Contributing
 
-Contributions to Lawman are welcome! If you can think of an Expectation that would be useful for others to utilise in their tests, please submit a PR on GitHub. The only real rules are:
+Contributions to Lawman are welcome! If you can think of an Expectation that would be useful for others to utilise in their tests, please submit a PR on GitHub. Please see [CONTRIBUTING.md](https://github.com/JonPurvis/lawman/blob/master/CONTRIBUTING.md). The only real rules are:
 
 * All Expectations must have a test to cover it
 * A new Fixture class should be added for every new Expectation
 
 If you just follow how previous Expectations are done, then you should be good.
 
-### Reporting an Issue
+To report a security vulnerability, please see [SECURITY.md](https://github.com/JonPurvis/lawman/blob/master/SECURITY.md).
 
-If you do spot an issue with Lawman, please [open an issue](https://github.com/JonPurvis/lawman/issues) on GitHub.
+#### Reporting an Issue
+
+If you do spot an issue with Lawman, please open an issue on GitHub: [JonPurvis/lawman](https://github.com/JonPurvis/lawman).
